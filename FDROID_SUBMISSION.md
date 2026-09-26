@@ -1,16 +1,56 @@
-# F-Droid RFP submission — Hush
+# F-Droid submission — Hush
 
-File at: **https://gitlab.com/fdroid/fdroiddata/-/issues/new**
-(needs a gitlab.com account; you can sign in with GitHub)
+Two ways in. The merge request is the route F-Droid maintainers prefer and the
+one apps actually get added through (a stream of "New app:" MRs merges every
+week, while RFP issues can sit for a long time). Do the MR.
 
-Title the issue:
+Both need a gitlab.com account (sign in with GitHub works):
+https://gitlab.com/users/sign_in
 
-```
-RFP: Hush (com.vidsagar.hush)
-```
+## Route A (recommended): direct merge request
 
-Then paste this body (matches the format of current RFPs, including a draft
-build recipe so maintainers only have to verify, not write):
+1. Open https://gitlab.com/fdroid/fdroiddata and press **Fork** (top right).
+   Keep defaults, create the fork under your account.
+2. In your fork, open the **metadata** folder, then:
+   **( + ) > This directory > New file**.
+3. Name the file exactly `com.vidsagar.hush.yml` and paste the entire contents
+   of [fdroid/com.vidsagar.hush.yml](fdroid/com.vidsagar.hush.yml) from this repo.
+4. Commit to a new branch, suggested name: `hush`.
+5. Open a merge request from the banner GitLab shows after committing.
+   Title:
+   ```
+   New app: Hush (com.vidsagar.hush)
+   ```
+   Description (paste as-is):
+   ```
+   Adds Hush, a calm YouTube client (breathing/meditation breaks, offline
+   mini games, gesture-driven player), a substantially diverged fork of
+   PipePipe/NewPipe under a new application ID.
+
+   Build notes:
+   - Four per-ABI splits produced by Gradle (version codes 100 * base + ABI:
+     101 v7a, 102 x86, 103 x86_64, 104 arm64), matching F-Droid's vercode
+     ordering; base versionCode lives in app/build.gradle.
+   - The only binary dependency is ffmpeg-kit, downloaded during the build
+     from the project's GitHub release and pinned by SHA-256 in
+     ffmpeg/build.gradle.kts (the NewPipe-family approach). The repository
+     tree contains no prebuilt blobs.
+   - Fastlane metadata (descriptions, icon, screenshots, per-versionCode
+     changelogs) is at fastlane/metadata/android/en-US/.
+   - NonFreeNet applies (interfaces with YouTube), declared in the metadata.
+   - Development was AI-assisted with human review, on-device testing and
+     unit tests (also disclosed in our IzzyOnDroid request #622).
+   ```
+6. Submit, and answer maintainer questions promptly in the MR.
+
+Expect review iterations (reviewers may tweak the recipe, e.g. output paths or
+update-check settings); once merged, the app appears in the main repo about
+24-48 hours later.
+
+## Route B (fallback): RFP issue
+
+Open https://gitlab.com/fdroid/fdroiddata/-/issues/new titled
+`RFP: Hush (com.vidsagar.hush)`, and paste the sections below.
 
 ---
 
@@ -45,84 +85,32 @@ scrubbing, pinch zoom, Fit/Zoom geometry) with background and popup playback,
 downloads, and local playlists. No account needed, no tracking; data stays on
 the device with per-profile storage and an incognito mode.
 
-It is a substantially diverged fork of PipePipe/NewPipe (a different application
-ID and a redesigned experience: no feed on Home, break sessions, offline games,
-unified player geometry), maintained independently at the URL above.
+It is a substantially diverged fork of PipePipe/NewPipe (different application
+ID, redesigned experience), maintained independently. Expected anti-feature:
+NonFreeNet (interfaces with YouTube).
 
-Anti-Features expected: NonFreeNet (interfaces with YouTube).
-
-### Build Recipe (com.vidsagar.hush.yml)
-
-```yaml
-Categories:
-  - Internet
-  - Multimedia
-  - Games
-License: GPL-3.0-or-later
-AuthorName: vidya-hub
-SourceCode: https://github.com/vidya-hub/Hush
-IssueTracker: https://github.com/vidya-hub/Hush/issues
-Changelog: https://github.com/vidya-hub/Hush/releases
-
-AutoName: Hush
-Summary: A calm YouTube client with breathing breaks, meditation and offline mini games
-Description: |-
-  Hush is a calm, private YouTube client for Android. Instead of an endless
-  feed, the Home screen offers a break: guided breathing and meditation
-  sessions, quick offline games (2048, Snake, Sudoku, Make 24), and your own
-  library of History, Saved and Downloads. The player is fully gesture driven
-  with background and popup playback, downloads, and local playlists. No
-  account needed, no tracking; data stays on the device.
-
-RepoType: git
-Repo: https://github.com/vidya-hub/Hush.git
-
-Builds:
-  - versionName: '1.0.0'
-    versionCode: 104
-    commit: v1.0.0
-    subdir: app
-    gradle:
-      - yes
-    prebuild: |
-      # first build downloads the ffmpeg-kit AAR pinned by SHA-256
-      # from the v1.0.0 GitHub release (see ffmpeg/build.gradle.kts);
-      # no binary blobs are committed to the repository
-      :
-
-AutoUpdateMode: Version v%v
-UpdateCheckMode: Tags
-CurrentVersion: '1.0.0'
-CurrentVersionCode: 104
-```
+A draft build recipe is available at fdroid/com.vidsagar.hush.yml in the
+repository (commit 6333dd9b91b1a895ae45c6d4d6807ed208bb98e2 is the v1.0.0 tag).
 
 ### Build notes
 
-* Per-ABI APKs via Gradle splits (arm64-v8a, armeabi-v7a, x86, x86_64), version
-  codes follow 100 * base + ABI (101, 102, 103, 104 for base 1); the draft above
-  uses the arm64 output, maintainers may prefer one Builds entry per ABI.
-* versionName and the base versionCode live in app/build.gradle
-  (`def appVersionName`, `def baseVersionCode`).
+* Per-ABI APKs via Gradle splits, version codes 100 * base + ABI (101, 102,
+  103, 104); the draft uses one Builds entry per ABI.
+* versionName and base versionCode live in app/build.gradle.
 * The only binary dependency is ffmpeg-kit, fetched at build time from the
-  project's GitHub release and pinned by SHA-256 in ffmpeg/build.gradle.kts
-  (same approach the NewPipe family uses). The repository tree itself contains
-  no prebuilt blobs.
-* Fastlane metadata (descriptions, icon, screenshots, changelogs per
-  versionCode) is at fastlane/metadata/android/en-US/.
+  project's GitHub release and pinned by SHA-256 in ffmpeg/build.gradle.kts.
+  The repository tree contains no prebuilt blobs.
+* Fastlane metadata is at fastlane/metadata/android/en-US/.
 * Development was assisted by AI tools with human review, on-device testing and
-  unit tests for the game and breathing engines (also disclosed in our
-  IzzyOnDroid request).
+  unit tests for the game and breathing engines.
 
 ---
 
-Notes for you (not part of the submission):
+Notes (not part of the submission):
 
-* Timeline: expect weeks. A maintainer verifies the recipe, builds the tag in
-  their infra, and merges; the app appears in the main repo about 24-48h after
-  the build cycle.
-* F-Droid signs with its own key. Users moving between your GitHub/IzzyOnDroid
-  builds and the F-Droid build will need a reinstall (unless reproducible
-  builds with signature sharing are set up later, as PipePipe did).
-* Answer maintainer questions in the issue promptly; they may patch the recipe
-  (e.g. per-ABI Builds entries) and will check for blobs, trackers and license
-  compliance.
+* F-Droid signs with its own key; users switching between the GitHub/IzzyOnDroid
+  builds and the F-Droid build will need a one-time reinstall. Reproducible
+  builds with AllowedAPKSigningKeys (as PipePipe does) can unify signatures
+  later.
+* Do not move the v1.0.0 tag while reviews are open; ship fixes as new tags
+  with bumped versionCode.
