@@ -15,8 +15,8 @@ def keyPath = System.getenv("KEY_PATH") ?: keystoreProperties.getProperty("store
 def keyStorePassword = System.getenv("KEY_STORE_PASSWORD") ?: keystoreProperties.getProperty("storePassword")
 def signingKeyAlias = System.getenv("KEY_ALIAS") ?: keystoreProperties.getProperty("keyAlias")
 def signingKeyPassword = System.getenv("KEY_PASSWORD") ?: keystoreProperties.getProperty("keyPassword")
-def baseVersionCode = 1
-def appVersionName = "1.0.0"
+def baseVersionCode = 2
+def appVersionName = "1.0.1"
 def abiCodes = ['armeabi-v7a': 1, 'x86': 2, 'x86_64': 3, 'arm64-v8a': 4]
 def stableBuildConfigVersionCode =
         (100 * baseVersionCode) + abiCodes['armeabi-v7a']
@@ -47,6 +47,7 @@ android {
             reset()
             enable true
             include "armeabi-v7a", "arm64-v8a", "x86_64", "x86"
+            universalApk true
         }
     }
 
@@ -148,6 +149,8 @@ androidComponents.onVariants(androidComponents.selector().all()) { variant ->
         def versionCode = 100 * baseVersionCode
         if (abi != null) {
             versionCode += abiCodes[abi]
+        } else {
+            versionCode += abiCodes.values().max()
         }
         output.versionCode.set(versionCode)
         output.outputFileName.set(
@@ -287,9 +290,9 @@ dependencies {
 
 /** Instrumented integration tests **/
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20260522'
     androidTestImplementation 'androidx.test:runner:1.7.0'
     androidTestImplementation 'androidx.test.ext:junit:1.3.0'
     androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'org.bouncycastle:bcprov-jdk18on:1.85'
 }
-

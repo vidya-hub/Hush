@@ -42,41 +42,56 @@ public final class GameModels {
             spawn();
         }
 
-        public boolean move(final int direction) {
-            final int[] before = board.clone();
-            final int oldScore = score;
-            for (int line = 0; line < 4; line++) {
-                final int[] compact = new int[4];
-                int count = 0;
-                for (int pos = 0; pos < 4; pos++) {
-                    final int value = board[index(line, pos, direction)];
-                    if (value != 0) compact[count++] = value;
+        public static final class TileMotion {
+            public final int from, to, value;
+            public final boolean merged;
+            TileMotion(int from, int to, int value, boolean merged) {
+                this.from=from; this.to=to; this.value=value; this.merged=merged;
+            }
+        }
+        public static final class MoveResult {
+            public final boolean changed;
+            public final List<TileMotion> motions;
+            private final int[] before, after;
+            public final int spawnIndex, scoreDelta;
+            MoveResult(boolean changed, List<TileMotion> motions, int[] before, int[] after, int spawnIndex, int delta) {
+                this.changed=changed; this.motions=Collections.unmodifiableList(new ArrayList<>(motions));
+                this.before=before.clone(); this.after=after.clone(); this.spawnIndex=spawnIndex; scoreDelta=delta;
+            }
+            public int[] before() { return before.clone(); }
+            public int[] after() { return after.clone(); }
+        }
+        public boolean move(final int direction) { return moveDetailed(direction).changed; }
+        public MoveResult moveDetailed(final int direction) {
+            final int[] before=board.clone(); final int oldScore=score;
+            if (direction < 0 || direction > 3 || gameOver) return new MoveResult(false,Collections.emptyList(),before,before,-1,0);
+            final List<TileMotion> motions=new ArrayList<>();
+            for(int line=0;line<4;line++) {
+                int[] values=new int[4], sources=new int[4]; int count=0;
+                for(int pos=0;pos<4;pos++) {
+                    int source=index(line,pos,direction);
+                    if(board[source]!=0) {values[count]=board[source];sources[count++]=source;}
                 }
-                final int[] merged = new int[4];
-                int out = 0;
-                for (int i = 0; i < count; i++) {
-                    int value = compact[i];
-                    if (i + 1 < count && value == compact[i + 1]) {
-                        value *= 2;
-                        score += value;
-                        if (value >= 2048) won = true;
-                        i++;
+                int[] merged=new int[4]; int out=0;
+                for(int i=0;i<count;i++) {
+                    int value=values[i]; int to=index(line,out,direction);
+                    boolean combines=i+1<count && value==values[i+1];
+                    motions.add(new TileMotion(sources[i],to,value,combines));
+                    if(combines) {
+                        motions.add(new TileMotion(sources[i+1],to,value,true));value*=2;score+=value;
+                        if(value>=2048)won=true;i++;
                     }
-                    merged[out++] = value;
+                    merged[out++]=value;
                 }
-                for (int pos = 0; pos < 4; pos++) {
-                    board[index(line, pos, direction)] = merged[pos];
-                }
+                for(int pos=0;pos<4;pos++)board[index(line,pos,direction)]=merged[pos];
             }
-            if (Arrays.equals(before, board)) {
-                return false;
+            if(Arrays.equals(before,board)) {
+                gameOver=!canMove(); return new MoveResult(false,Collections.emptyList(),before,before,-1,0);
             }
-            undoBoard = before;
-            undoScore = oldScore;
-            best = Math.max(best, score);
-            spawn();
-            gameOver = !canMove();
-            return true;
+            undoBoard=before;undoScore=oldScore;best=Math.max(best,score);
+            int[] settled=board.clone();spawn();int spawnIndex=-1;
+            for(int i=0;i<16;i++)if(settled[i]!=board[i])spawnIndex=i;
+            gameOver=!canMove();return new MoveResult(true,motions,before,board,spawnIndex,score-oldScore);
         }
 
         private int index(final int line, final int pos, final int direction) {
@@ -109,8 +124,9 @@ public final class GameModels {
             System.arraycopy(undoBoard, 0, board, 0, 16);
             score = undoScore;
             undoBoard = null;
-            won = false;
-            gameOver = false;
+            won = Arrays.stream(board).anyMatch(value -> value >= 2048);
+            acknowledged = won && acknowledged;
+            gameOver = !canMove();
             return true;
         }
 
@@ -153,6 +169,7 @@ public final class GameModels {
         public static final int SIZE = 18;
         public final ArrayDeque<Integer> body = new ArrayDeque<>();
         public int direction = 1; // 0 up, 1 right, 2 down, 3 left
+        private boolean turnQueued;
         public int nextDirection = 1;
         public int food;
         public int score;
@@ -173,6 +190,7 @@ public final class GameModels {
             body.add(9 * SIZE + 9);
             direction = 1;
             nextDirection = 1;
+            turnQueued = false;
             score = 0;
             alive = true;
             paused = true;
@@ -180,13 +198,16 @@ public final class GameModels {
         }
 
         public void turn(final int chosen) {
-            if (chosen < 0 || chosen > 3 || (chosen + 2) % 4 == direction) return;
+            if (turnQueued || chosen < 0 || chosen > 3 || chosen == direction
+                    || (chosen + 2) % 4 == direction) return;
             nextDirection = chosen;
+            turnQueued = true;
         }
 
         public boolean tick() {
             if (!alive || paused) return false;
             direction = nextDirection;
+            turnQueued = false;
             final int head = body.peekLast();
             final int row = head / SIZE + (direction == 0 ? -1 : direction == 2 ? 1 : 0);
             final int col = head % SIZE + (direction == 1 ? 1 : direction == 3 ? -1 : 0);
@@ -270,6 +291,7 @@ public final class GameModels {
         public final int[] solution = new int[81];
         public final int[] notes = new int[81];
         public int difficulty;
+        public String puzzleId;
         public int selected = -1;
         public long elapsedMs;
         public boolean paused = true;
@@ -283,7 +305,7 @@ public final class GameModels {
 
         public void newPuzzle(final int level) {
             difficulty = level == 1 ? 1 : 0;
-            final int base = difficulty;
+            final int base = difficulty == 0 ? 1 : 0;
             final int[] digits = {1,2,3,4,5,6,7,8,9};
             for (int i = digits.length - 1; i > 0; i--) {
                 final int j = random.nextInt(i + 1);
@@ -291,16 +313,30 @@ public final class GameModels {
             }
             final String puzzle = PUZZLES[base];
             final String solved = SOLUTIONS[base];
+            final int[] rows = shuffledGroups(random);
+            final int[] columns = shuffledGroups(random);
             for (int i = 0; i < 81; i++) {
-                final int given = puzzle.charAt(i) - '0';
+                final int source = rows[i / 9] * 9 + columns[i % 9];
+                final int given = puzzle.charAt(source) - '0';
                 clues[i] = given == 0 ? 0 : digits[given - 1];
-                solution[i] = digits[solved.charAt(i) - '1'];
+                solution[i] = digits[solved.charAt(source) - '1'];
                 cells[i] = clues[i];
                 notes[i] = 0;
             }
+            puzzleId = "v1-" + difficulty + "-" + Integer.toHexString(Arrays.hashCode(clues));
             selected = -1;
             elapsedMs = 0;
             paused = true;
+        }
+
+        private static int[] shuffledGroups(Random random) {
+            List<Integer> bands=new ArrayList<>(Arrays.asList(0,1,2));Collections.shuffle(bands,random);
+            int[] order=new int[9];int offset=0;
+            for(int band:bands) {
+                List<Integer> within=new ArrayList<>(Arrays.asList(0,1,2));Collections.shuffle(within,random);
+                for(int item:within)order[offset++]=band*3+item;
+            }
+            return order;
         }
 
         public void set(final int index, final int value, final boolean pencil) {
@@ -376,6 +412,8 @@ public final class GameModels {
                 state.put("solution", array(solution));
                 state.put("notes", array(notes));
                 state.put("difficulty", difficulty);
+                state.put("puzzleId", puzzleId);
+                state.put("selected", selected);
                 state.put("elapsed", elapsed(now));
             } catch (final JSONException ignored) { }
             return state;
@@ -395,9 +433,11 @@ public final class GameModels {
                 notes[i] = savedNotes == null ? 0 : savedNotes.optInt(i);
             }
             difficulty = state.optInt("difficulty");
+            puzzleId = state.optString("puzzleId", "v1-" + difficulty + "-" + Integer.toHexString(Arrays.hashCode(clues)));
             elapsedMs = state.optLong("elapsed");
             paused = true;
-            selected = -1;
+            selected = state.optInt("selected", -1);
+            if (selected < -1 || selected >= 81) selected = -1;
         }
     }
 

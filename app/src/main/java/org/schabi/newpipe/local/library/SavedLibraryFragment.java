@@ -46,6 +46,7 @@ public final class SavedLibraryFragment extends BaseFragment {
 
     @Override
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(rootView);
         list = rootView.findViewById(R.id.library_list);
         empty = rootView.findViewById(R.id.library_empty);
         empty.setText(R.string.library_saved_empty);

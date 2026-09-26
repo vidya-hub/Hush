@@ -209,8 +209,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
     /** Centered search field instead of the activity toolbar. */
     private boolean centeredSearch;
     private boolean showingResults;
-    private ViewTreeObserver.OnGlobalLayoutListener searchSafeAreaListener;
-    private int searchBaseBottomMargin;
     private String photoProfileId;
     private final androidx.activity.result.ActivityResultLauncher<String> profilePhotoPicker =
             registerForActivityResult(
@@ -460,12 +458,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         }
         unsetSearchListeners();
 
-        if (searchSafeAreaListener != null) {
-            searchBinding.getRoot().getViewTreeObserver()
-                    .removeOnGlobalLayoutListener(searchSafeAreaListener);
-            searchSafeAreaListener = null;
-        }
-
         if (centeredSearch) {
             searchBinding = null;
             super.onDestroyView();
@@ -544,29 +536,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
 
         searchToolbarContainer = activity.findViewById(R.id.toolbar_search_container);
         if (centeredSearch) {
-            searchBaseBottomMargin = ((LinearLayout.LayoutParams)
-                    searchBinding.homeSearchGroup.getLayoutParams()).bottomMargin;
-            searchSafeAreaListener = () -> {
-                if (searchBinding == null) {
-                    return;
-                }
-                final View view = searchBinding.getRoot();
-                final Rect visible = new Rect();
-                view.getWindowVisibleDisplayFrame(visible);
-                final int[] location = new int[2];
-                view.getLocationOnScreen(location);
-                final int overlap = Math.max(0,
-                        location[1] + view.getHeight() - visible.bottom);
-                final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
-                        searchBinding.homeSearchGroup.getLayoutParams();
-                final int bottomMargin = searchBaseBottomMargin + overlap;
-                if (params.bottomMargin != bottomMargin) {
-                    params.bottomMargin = bottomMargin;
-                    searchBinding.homeSearchGroup.setLayoutParams(params);
-                }
-            };
-            searchBinding.getRoot().getViewTreeObserver()
-                    .addOnGlobalLayoutListener(searchSafeAreaListener);
             searchEditText = searchBinding.homeSearchEditText;
             searchClear = searchBinding.homeSearchClear;
             searchSubmit = null;
@@ -574,14 +543,16 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             searchToolbarContainer.setVisibility(View.GONE);
             searchFilter.setVisibility(View.GONE);
             searchBinding.profileButton.setOnClickListener(v -> showProfileDialog());
+            searchBinding.homeIncognito.setOnClickListener(v -> toggleIncognito());
+            searchBinding.homeSuggestionsRetry.setOnClickListener(v -> initSuggestionObserver());
             searchBinding.homeMenu.setOnClickListener(this::showHomeMenu);
             searchBinding.homeContent.removeAllViews();
             searchBinding.homeContent.setPadding(0, 0, 0, 0);
             searchBinding.homeContent.setGravity(android.view.Gravity.TOP);
             searchBinding.homeContent.addView(HomeDashboard.build(activity,
                     new HomeDashboard.Actions() {
-                        @Override public void breathe() { openBreakSheet(false); }
-                        @Override public void meditate() { openBreakSheet(true); }
+                        @Override public void breathe() { openBreakScreen(false); }
+                        @Override public void meditate() { openBreakScreen(true); }
                         @Override public void game(final String game) { openGame(game); }
                         @Override public void allGames() { openGame(null); }
                         @Override public void history() { openLibrary(
@@ -593,6 +564,10 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                         }
                     }));
             HomeDashboard.styleSearch(searchBinding, activity);
+            searchBinding.getRoot().addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
+                if (r-l != or-ol) updateAdaptiveSearchWidth(r-l);
+            });
+            searchBinding.getRoot().post(() -> { if(searchBinding!=null)updateAdaptiveSearchWidth(searchBinding.getRoot().getWidth()); });
             searchBinding.homeSpacer.setAlpha(0f);
             searchBinding.homeSpacer.animate().alpha(1f).setDuration(200).start();
             searchBinding.homeViewToggle.setOnClickListener(v -> toggleResultsLayout());
@@ -613,7 +588,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 if (activity != null) {
                     activity.sendBroadcast(new Intent(PlayerService.ACTION_CLOSE));
                     searchBinding.nowPlayingBar.setVisibility(View.GONE);
-                    searchBinding.homeColumn.setPadding(0, 0, 0, 0);
                 }
             });
             updateProfileLabel();
@@ -855,14 +829,15 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             if (DEBUG) {
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
             }
-            searchBinding.correctSuggestion.setVisibility(View.GONE);
-            searchEditText.setText("");
-            searchString = "";
-            suggestionListAdapter.setItems(new ArrayList<>());
             if (centeredSearch) {
-                applySearchChrome(false);
+                restoreHome(false);
+            } else {
+                searchBinding.correctSuggestion.setVisibility(View.GONE);
+                searchEditText.setText("");
+                searchString = "";
+                suggestionListAdapter.setItems(new ArrayList<>());
+                showKeyboardSearch();
             }
-            showKeyboardSearch();
         });
 
         TooltipCompat.setTooltipText(searchClear, getString(R.string.clear));
@@ -949,6 +924,8 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 if (centeredSearch && !showingResults && searchBinding != null) {
                     updateHomeContentVisibility();
                 }
+                if (suggestionListAdapter != null) suggestionListAdapter.setItems(Collections.emptyList());
+                if (centeredSearch && searchBinding != null) searchBinding.homeSuggestionsRetry.setVisibility(View.GONE);
                 suggestionPublisher.onNext(newText);
             }
         };
@@ -1040,7 +1017,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         showingResults = results;
-        searchBinding.homeHeader.setVisibility(results ? View.GONE : View.VISIBLE);
+        searchBinding.homeHeader.setVisibility(View.VISIBLE);
         searchBinding.homeViewToggle.setVisibility(results ? View.VISIBLE : View.GONE);
         updateViewToggleIcon();
         final ViewGroup.MarginLayoutParams clearLp =
@@ -1073,21 +1050,42 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 !showingResults && hasQuery ? View.VISIBLE : View.GONE);
         searchBinding.homeSpacer.setVisibility(
                 !showingResults && !hasQuery ? View.VISIBLE : View.GONE);
+        final ViewGroup.MarginLayoutParams field = (ViewGroup.MarginLayoutParams)
+                searchBinding.homeSearchEditText.getLayoutParams();
+        field.setMarginEnd(org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),
+                showingResults ? 96 : hasQuery ? 48 : 12));
+        searchBinding.homeSearchEditText.setLayoutParams(field);
         suggestionsPanelVisible = !showingResults && hasQuery;
+        if (!suggestionsPanelVisible) searchBinding.homeSuggestionsRetry.setVisibility(View.GONE);
     }
 
     private void returnToHome() {
+        restoreHome(true);
+    }
+
+    /** Restores Home and its scroll position. Clear keeps the keyboard; Back dismisses it. */
+    private void restoreHome(final boolean dismissKeyboard) {
         searchString = "";
         lastSearchedString = "";
+        if (searchBinding != null) {
+            searchBinding.correctSuggestion.setVisibility(View.GONE);
+        }
         if (searchEditText != null) {
             searchEditText.setText("");
+        }
+        if (suggestionListAdapter != null) {
+            suggestionListAdapter.setItems(new ArrayList<>());
         }
         if (infoListAdapter != null) {
             infoListAdapter.clearStreamItemList();
         }
         applySearchChrome(false);
         suggestionPublisher.onNext("");
-        hideKeyboardSearch();
+        if (dismissKeyboard) {
+            hideKeyboardSearch();
+        } else {
+            showKeyboardSearch();
+        }
     }
 
     private void updateProfileLabel() {
@@ -1247,14 +1245,9 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         final PlayerHolder holder = PlayerHolder.getInstance();
         if (!holder.isBackgroundAudio() || isMiniPlayerShowing()) {
             searchBinding.nowPlayingBar.setVisibility(View.GONE);
-            searchBinding.homeColumn.setPadding(0, 0, 0, 0);
             return;
         }
         searchBinding.nowPlayingBar.setVisibility(View.VISIBLE);
-        if (activity != null) {
-            final int pad = (int) (72 * activity.getResources().getDisplayMetrics().density);
-            searchBinding.homeColumn.setPadding(0, 0, 0, pad);
-        }
         final PlayQueue queue = holder.getPlayQueue();
         final PlayQueueItem item = queue == null ? null : queue.getItem();
         if (item != null) {
@@ -1323,20 +1316,15 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
                 R.drawable.ic_info_outline, getString(R.string.tab_about), null, false,
                 () -> NavigationHelper.openAbout(activity)));
-        actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
-                incognito ? R.drawable.ic_visibility_off : R.drawable.ic_visibility_on,
-                getString(R.string.history_incognito),
-                getString(incognito ? R.string.home_incognito_on : R.string.home_incognito_off),
-                incognito, () -> toggleIncognito()));
         org.schabi.newpipe.util.HushActionSheet.show(activity, getString(R.string.more_options),
                 null, actions);
     }
 
-    private void openBreakSheet(final boolean meditation) {
+    private void openBreakScreen(final boolean meditation) {
         if (activity == null) {
             return;
         }
-        BreakSheet.newInstance(meditation).show(getParentFragmentManager(), "hush_break");
+        openLibrary(BreakSessionFragment.newInstance(meditation));
     }
 
     private void openGame(@Nullable final String game) {
@@ -1350,7 +1338,21 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         if (centeredSearch && searchEditText != null && activity != null) {
             final boolean incognito = HistoryRecordManager.isIncognito(activity);
             searchEditText.setHint(incognito
-                    ? R.string.history_incognito_search_hint : R.string.hush_search_videos);
+                    ? R.string.history_incognito_search_hint : R.string.search_youtube);
+            if (searchBinding != null) {
+                searchBinding.homeIncognito.setSelected(incognito);
+                searchBinding.homeIncognito.setBackground(org.schabi.newpipe.hush.ui.HushUi.shape(activity,
+                        org.schabi.newpipe.hush.ui.HushUi.color(activity, incognito
+                        ? com.google.android.material.R.attr.colorPrimaryContainer
+                        : com.google.android.material.R.attr.colorSurfaceContainer), 24, 0));
+                searchBinding.homeIncognito.setImageTintList(
+                        android.content.res.ColorStateList.valueOf(
+                                org.schabi.newpipe.hush.ui.HushUi.color(activity, incognito
+                                        ? R.attr.colorPrimary
+                                        : com.google.android.material.R.attr.colorOnSurfaceVariant)));
+                searchBinding.homeIncognito.setContentDescription(getString(incognito
+                        ? R.string.home_incognito_on : R.string.home_incognito_off));
+            }
         }
     }
 
@@ -1365,6 +1367,12 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         PreferenceManager.getDefaultSharedPreferences(activity).edit()
                 .putBoolean(HistoryRecordManager.INCOGNITO_KEY, enabled).apply();
         updateIncognitoHint();
+        PlayerHolder.getInstance().rebindHistory();
+        initSuggestionObserver();
+        if (searchBinding != null && org.schabi.newpipe.hush.ui.HushUi.motion(activity)) {
+            searchBinding.homeIncognito.setAlpha(0.65f);
+            searchBinding.homeIncognito.animate().alpha(1f).setDuration(120).start();
+        }
     }
 
     private void openLibrary(final androidx.fragment.app.Fragment fragment) {
@@ -1393,6 +1401,36 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         prefs.edit().putBoolean(key, !prefs.getBoolean(key, true)).apply();
         refreshItemViewMode();
         updateViewToggleIcon();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull final android.content.res.Configuration config) {
+        super.onConfigurationChanged(config);
+        if (searchBinding != null) {
+            searchBinding.getRoot().post(() -> {
+                if (searchBinding != null) updateAdaptiveSearchWidth(searchBinding.getRoot().getWidth());
+            });
+        }
+    }
+
+    private void updateAdaptiveSearchWidth(final int width) {
+        if(searchBinding==null || width<=0)return;
+        final int gutter=org.schabi.newpipe.hush.ui.HushUi.dp(activity,
+                width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,840)?32:width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,600)?24:20);
+        final int content=Math.min(width-2*gutter,org.schabi.newpipe.hush.ui.HushUi.dp(activity,1120));
+        final int dockSide=Math.max(gutter,(width-org.schabi.newpipe.hush.ui.HushUi.dp(activity,720))/2);
+        final View dockView=searchBinding.homeSearchDock;
+        if (dockView.getPaddingLeft()!=dockSide || dockView.getPaddingRight()!=dockSide) {
+            dockView.setPadding(dockSide, dockView.getPaddingTop(), dockSide, dockView.getPaddingBottom());
+        }
+        searchBinding.resultsContainer.setPadding((width-content)/2,0,(width-content)/2,0);
+        searchBinding.homeSuggestionsList.setPadding((width-content)/2,0,(width-content)/2,0);
+        if (itemsList!=null && itemsList.getLayoutManager() instanceof androidx.recyclerview.widget.GridLayoutManager) {
+            final androidx.recyclerview.widget.GridLayoutManager manager=(androidx.recyclerview.widget.GridLayoutManager)itemsList.getLayoutManager();
+            int count=content>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,560)
+                    && getResources().getConfiguration().fontScale<=1.3f?2:1;
+            if(manager.getSpanCount()!=count){manager.setSpanCount(count);manager.setSpanSizeLookup(infoListAdapter.getSpanSizeLookup(count));}
+        }
     }
 
     private void updateViewToggleIcon() {
@@ -1525,79 +1563,54 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 });
     }
 
+    private static final class SuggestionResult {
+        final String query;
+        final List<SuggestionItem> items;
+        final boolean failed;
+        SuggestionResult(String query, List<SuggestionItem> items, boolean failed) {
+            this.query=query; this.items=items; this.failed=failed;
+        }
+    }
+
     private void initSuggestionObserver() {
-        if (DEBUG) {
-            Log.d(TAG, "initSuggestionObserver() called");
-        }
-        if (suggestionDisposable != null) {
-            suggestionDisposable.dispose();
-        }
-
-        suggestionDisposable = suggestionPublisher
-                .debounce(SUGGESTIONS_DEBOUNCE, TimeUnit.MILLISECONDS)
-                .startWithItem(searchString == null ? "" : searchString)
+        if (suggestionDisposable != null) suggestionDisposable.dispose();
+        final String initial = searchEditText == null ? searchString : searchEditText.getText().toString();
+        suggestionDisposable = suggestionPublisher.startWithItem(initial == null ? "" : initial)
                 .distinctUntilChanged()
-                .switchMap(query -> {
-                    // Only show remote suggestions if they are enabled in settings and
-                    // the query length is at least THRESHOLD_NETWORK_SUGGESTION
-                    final boolean shallShowRemoteSuggestionsNow = !channelSearchMode
-                            && showRemoteSuggestions
-                            && query.length() >= THRESHOLD_NETWORK_SUGGESTION;
-
-                    final Observable<List<SuggestionItem>> source;
-                    if (showLocalSuggestions && shallShowRemoteSuggestionsNow) {
-                        source = Observable.combineLatest(
-                                getLocalSuggestionsObservable(query, 3)
-                                        .subscribeOn(Schedulers.io())
-                                        .onErrorReturnItem(Collections.emptyList())
-                                        .startWithItem(Collections.emptyList()),
-                                getRemoteSuggestionsObservable(query)
-                                        .onErrorReturnItem(Collections.emptyList())
-                                        .startWithItem(Collections.emptyList()),
-                                (local, remote) -> {
-                                    final List<SuggestionItem> merged = new ArrayList<>(local);
-                                    for (final SuggestionItem item : remote) {
-                                        if (!merged.contains(item)) {
-                                            merged.add(item);
-                                        }
-                                    }
-                                    return merged;
-                                });
-                    } else if (showLocalSuggestions) {
-                        source = getLocalSuggestionsObservable(query, 25)
-                                .subscribeOn(Schedulers.io())
-                                .onErrorReturnItem(Collections.emptyList());
-                    } else if (shallShowRemoteSuggestionsNow) {
-                        source = getRemoteSuggestionsObservable(query)
-                                .onErrorReturnItem(Collections.emptyList());
-                    } else {
-                        source = Observable.just(Collections.emptyList());
-                    }
-                    return source.map(items -> {
-                        if (!items.isEmpty() || query.trim().isEmpty()
-                                || (!showLocalSuggestions && !shallShowRemoteSuggestionsNow)) {
-                            return items;
-                        }
-                        return Collections.singletonList(new SuggestionItem(false, query));
-                    }).materialize();
-                })
-                .subscribeOn(Schedulers.io())
+                // Switch immediately so the debounce window cannot deliver an older request.
+                .switchMap(raw -> Observable.timer(SUGGESTIONS_DEBOUNCE, TimeUnit.MILLISECONDS)
+                        .flatMap(ignored -> {
+                            final String query=raw.trim();
+                            final boolean local=showLocalSuggestions && !HistoryRecordManager.isIncognito(requireContext());
+                            final boolean remote=!channelSearchMode && showRemoteSuggestions
+                                    && query.length()>=THRESHOLD_NETWORK_SUGGESTION;
+                            final java.util.concurrent.atomic.AtomicBoolean failed=new java.util.concurrent.atomic.AtomicBoolean();
+                            Observable<List<SuggestionItem>> localSource=local && !query.isEmpty()
+                                    ? getLocalSuggestionsObservable(query,3).subscribeOn(Schedulers.io()).onErrorReturnItem(Collections.emptyList())
+                                    : Observable.just(Collections.emptyList());
+                            Observable<List<SuggestionItem>> remoteSource=remote
+                                    ? getRemoteSuggestionsObservable(query).subscribeOn(Schedulers.io())
+                                        .doOnError(error -> failed.set(true)).onErrorReturnItem(Collections.emptyList())
+                                        .startWithItem(Collections.emptyList())
+                                    : Observable.just(Collections.emptyList());
+                            return Observable.combineLatest(localSource,remoteSource,(history,network) -> {
+                                final List<SuggestionItem> merged=new ArrayList<>(history);
+                                for(SuggestionItem item:network)if(!merged.contains(item))merged.add(item);
+                                return new SuggestionResult(query,merged,failed.get());
+                            });
+                        }))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        listNotification -> {
-                            if (listNotification.isOnNext()) {
-                                if (listNotification.getValue() != null) {
-                                    handleSuggestions(listNotification.getValue());
-                                }
-                            } else if (listNotification.isOnError()
-                                    && listNotification.getError() != null
-                                    && !ExceptionUtils.isInterruptedCaused(
-                                            listNotification.getError())) {
-                                showSnackBarError(new ErrorInfo(listNotification.getError(),
-                                        UserAction.GET_SUGGESTIONS, searchString, serviceId));
-                            }
-                        }, throwable -> showSnackBarError(new ErrorInfo(
-                            throwable, UserAction.GET_SUGGESTIONS, searchString, serviceId)));
+                .subscribe(result -> {
+                    if (searchBinding==null || searchEditText==null || !isResumed()
+                            || !result.query.equals(searchEditText.getText().toString().trim())) return;
+                    if (centeredSearch && showingResults && !suggestionsPanelVisible) return;
+                    handleSuggestions(result.items);
+                    if (centeredSearch) searchBinding.homeSuggestionsRetry.setVisibility(
+                            result.failed && !result.query.isEmpty() ? View.VISIBLE : View.GONE);
+                }, error -> {
+                    if (searchBinding!=null && centeredSearch && isResumed())
+                        searchBinding.homeSuggestionsRetry.setVisibility(View.VISIBLE);
+                });
     }
 
     @Override

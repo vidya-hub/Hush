@@ -14,6 +14,7 @@ final class BreathingSound {
     private final int hold;
     private final java.util.Set<Integer> loaded = new java.util.HashSet<>();
     private int pending;
+    private int stream;
 
     BreathingSound(final Context context) {
         pool = new SoundPool.Builder().setMaxStreams(1)
@@ -46,11 +47,13 @@ final class BreathingSound {
     }
 
     private void playLoaded(final int sound) {
-        pool.play(sound, 0.35f, 0.35f, 1, 0, 1f);
+        if (stream != 0) pool.stop(stream);
+        stream = pool.play(sound, 0.20f, 0.20f, 1, 0, 1f);
     }
 
     void cancelPending() {
         pending = 0;
+        if (stream != 0) { pool.stop(stream); stream = 0; }
     }
 
     void release() {

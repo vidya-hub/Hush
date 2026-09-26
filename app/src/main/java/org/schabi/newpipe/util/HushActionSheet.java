@@ -142,5 +142,25 @@ public final class HushActionSheet {
                         .build());
         background.setFillColor(ColorStateList.valueOf(value.data));
         sheet.setBackground(background);
+        final com.google.android.material.bottomsheet.BottomSheetBehavior<View> behavior =
+                com.google.android.material.bottomsheet.BottomSheetBehavior.from(sheet);
+        behavior.setFitToContents(true);
+        behavior.setSkipCollapsed(true);
+        // The default 16:9 peek calculation leaves only a title visible in wide windows.
+        // Expand choice lists immediately and bound their scroll viewport by actual insets.
+        sheet.post(() -> {
+            if (!dialog.isShowing() || dialog.getWindow() == null) return;
+            final View decor = dialog.getWindow().getDecorView();
+            final androidx.core.view.WindowInsetsCompat insets =
+                    androidx.core.view.ViewCompat.getRootWindowInsets(decor);
+            final androidx.core.graphics.Insets safe = insets == null
+                    ? androidx.core.graphics.Insets.NONE : insets.getInsets(
+                    androidx.core.view.WindowInsetsCompat.Type.systemBars()
+                            | androidx.core.view.WindowInsetsCompat.Type.displayCutout());
+            final int height = decor.getHeight() - safe.top - safe.bottom
+                    - org.schabi.newpipe.hush.ui.HushUi.dp(context, 16);
+            if (height > 0) behavior.setMaxHeight(height);
+            behavior.setState(com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED);
+        });
     }
 }

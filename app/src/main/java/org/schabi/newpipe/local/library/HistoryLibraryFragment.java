@@ -51,6 +51,7 @@ public final class HistoryLibraryFragment extends BaseFragment {
 
     @Override
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(rootView);
         list = rootView.findViewById(R.id.library_list);
         empty = rootView.findViewById(R.id.library_empty);
         list.setLayoutManager(new LinearLayoutManager(activity));

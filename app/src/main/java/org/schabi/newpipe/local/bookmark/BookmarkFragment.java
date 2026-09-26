@@ -103,7 +103,9 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
         if (!useAsFrontPage) {
             setTitle(activity.getString(R.string.tab_bookmarks));
         }
-        return inflater.inflate(R.layout.fragment_bookmarks, container, false);
+        final View bookmarks = inflater.inflate(R.layout.fragment_bookmarks, container, false);
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(bookmarks);
+        return bookmarks;
     }
 
     @Override

@@ -652,9 +652,8 @@ public final class Player implements
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.itemsListPanel, (view, windowInsets) -> {
             final Insets cutout = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout());
-            if (!cutout.equals(Insets.NONE)) {
-                view.setPadding(cutout.left, cutout.top, cutout.right, cutout.bottom);
-            }
+            // Side and bottom cutouts are already applied as sheet margins.
+            view.setPadding(0, cutout.top, 0, 0);
             return windowInsets;
         });
 
@@ -667,16 +666,8 @@ public final class Player implements
                             v.getPaddingTop(),
                             v.getPaddingRight(),
                             v.getPaddingBottom());
-                    if(v.getPaddingLeft() != 0 || v.getPaddingTop() != 0
-                            || v.getPaddingRight() != 0 || v.getPaddingBottom() != 0){
-                        binding.playButtons.setPadding(
-                                -v.getPaddingLeft(), -v.getPaddingTop(),-v.getPaddingRight(),-v.getPaddingBottom());
-                        binding.loadingPanelWrapper.setPadding(
-                                -v.getPaddingLeft(), -v.getPaddingTop(),-v.getPaddingRight(),-v.getPaddingBottom());
-                    } else {
-                        binding.playButtons.setPadding(0, 0, 0, 0);
-                        binding.loadingPanelWrapper.setPadding(0, 0, 0, 0);
-                    }
+                    binding.playButtons.setPadding(0, 0, 0, 0);
+                    binding.loadingPanelWrapper.setPadding(0, 0, 0, 0);
 
                     // If we added padding to the fast seek overlay, too, it would not go under the
                     // system ui. Instead we apply negative margins equal to the window insets of
@@ -1275,11 +1266,10 @@ public final class Player implements
             return insets;
         });
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomControls, (view, insets) -> {
-            final Insets safeArea = videoPlayerSelected()
-                    ? insets.getInsets(WindowInsetsCompat.Type.displayCutout()
-                            | WindowInsetsCompat.Type.navigationBars()) : Insets.NONE;
-            view.setPaddingRelative(controlsPad + safeArea.left, 0,
-                    controlsPad + safeArea.right, safeArea.bottom);
+            // Non-fullscreen pages pad the detail root. Fullscreen controls pad themselves.
+            final int extra = isFullscreen()
+                    ? org.schabi.newpipe.hush.ui.HushUi.bottomSafeInset(view) : 0;
+            view.setPaddingRelative(controlsPad, 0, controlsPad, extra);
             return insets;
         });
         ViewCompat.requestApplyInsets(binding.topControls);
@@ -5113,15 +5103,9 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         final float videoRatio = videoNaturalAspectRatio;
         final boolean crop = binding.surfaceView.getResizeMode()
                 == AspectRatioFrameLayout.RESIZE_MODE_ZOOM;
-        final float targetWidth;
-        final float targetHeight;
-        if ((videoRatio > viewportRatio) == crop) {
-            targetHeight = height;
-            targetWidth = height * videoRatio;
-        } else {
-            targetWidth = width;
-            targetHeight = width / videoRatio;
-        }
+        final float[] fitted = org.schabi.newpipe.player.geometry.VideoGeometry.size(width,height,videoRatio,crop);
+        final float targetWidth = fitted[0];
+        final float targetHeight = fitted[1];
         final boolean quarterTurn = videoUnappliedRotation % 180 != 0;
         final Matrix transform = new Matrix();
         transform.setRotate(videoUnappliedRotation, width / 2f, height / 2f);
@@ -5273,13 +5257,10 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         }
 
         videoUnappliedRotation = videoSize.unappliedRotationDegrees;
+        binding.surfaceView.setVideoRotation(videoUnappliedRotation);
         if (videoSize.width > 0 && videoSize.height > 0) {
-            final float pixelRatio = Float.isFinite(videoSize.pixelWidthHeightRatio)
-                    && videoSize.pixelWidthHeightRatio > 0
-                    ? videoSize.pixelWidthHeightRatio : 1f;
-            final float frameRatio = videoSize.width * pixelRatio / videoSize.height;
-            videoNaturalAspectRatio = videoUnappliedRotation % 180 == 0
-                    ? frameRatio : 1f / frameRatio;
+            videoNaturalAspectRatio = org.schabi.newpipe.player.geometry.VideoGeometry.aspect(
+                    videoSize.width, videoSize.height, videoSize.pixelWidthHeightRatio, videoUnappliedRotation);
             binding.surfaceView.setAspectRatio(videoNaturalAspectRatio);
             updateTextureTransform();
             isVerticalVideo = videoNaturalAspectRatio < 1f;

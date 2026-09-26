@@ -44,7 +44,7 @@ abstract class EnsureFfmpegKitTask : DefaultTask() {
 
 val ensureFfmpegKit = tasks.register<EnsureFfmpegKitTask>("ensureFfmpegKit") {
     sha256.set("19d064dd952a51dd3015007007bf7740c66ce65c09812abbe573a3ec6858f968")
-    downloadUrl.set("https://github.com/vidya-hub/Hush/releases/download/v1.0.0/ffmpeg-kit.aar")
+    downloadUrl.set("https://github.com/vidya-hub/Hush/releases/download/v1.0.1/ffmpeg-kit.aar")
     aar.set(layout.projectDirectory.file("ffmpeg-kit.aar"))
 }
 

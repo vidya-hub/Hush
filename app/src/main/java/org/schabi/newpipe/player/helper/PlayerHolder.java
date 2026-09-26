@@ -41,6 +41,15 @@ public final class PlayerHolder {
 
     @Nullable private PlayerServiceExtendedEventListener listener;
 
+    private final java.util.Set<Runnable> uiObservers = new java.util.LinkedHashSet<>();
+
+    /** Presentation observers coexist with the detail fragment's service listener. */
+    public void addUiObserver(final Runnable observer) { uiObservers.add(observer); observer.run(); }
+    public void removeUiObserver(final Runnable observer) { uiObservers.remove(observer); }
+    private void notifyUiObservers() {
+        for (final Runnable observer : new java.util.ArrayList<>(uiObservers)) observer.run();
+    }
+
     private final PlayerServiceConnection serviceConnection = new PlayerServiceConnection();
     private boolean bound;
     @Nullable private PlayerServiceInterface playerService;
@@ -189,6 +198,7 @@ public final class PlayerHolder {
                 listener.onServiceConnected(player, playerService, playAfterConnect);
             }
             startPlayerListener();
+            notifyUiObservers();
         }
     }
 
@@ -228,6 +238,7 @@ public final class PlayerHolder {
             stopPlayerListener();
             playerService = null;
             player = null;
+            notifyUiObservers();
             if (listener != null) {
                 listener.onServiceDisconnected();
             }
@@ -279,6 +290,7 @@ public final class PlayerHolder {
 
                 @Override
                 public void onQueueUpdate(final PlayQueue queue) {
+                    notifyUiObservers();
                     if (listener != null) {
                         listener.onQueueUpdate(queue);
                     }
@@ -289,6 +301,7 @@ public final class PlayerHolder {
                                              final int repeatMode,
                                              final boolean shuffled,
                                              final PlaybackParameters parameters) {
+                    notifyUiObservers();
                     if (listener != null) {
                         listener.onPlaybackUpdate(state, repeatMode, shuffled, parameters);
                     }
@@ -305,6 +318,7 @@ public final class PlayerHolder {
 
                 @Override
                 public void onMetadataUpdate(final StreamInfo info, final PlayQueue queue) {
+                    notifyUiObservers();
                     if (listener != null) {
                         listener.onMetadataUpdate(info, queue);
                     }

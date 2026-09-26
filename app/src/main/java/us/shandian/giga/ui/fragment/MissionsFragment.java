@@ -99,6 +99,7 @@ public class MissionsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.missions, container, false);
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(v);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         mLinear = true;

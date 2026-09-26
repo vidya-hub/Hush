@@ -337,7 +337,7 @@ public final class VideoDetailFragment
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        binding = FragmentVideoDetailBinding.inflate(inflater, container, false);
+        binding = FragmentVideoDetailBinding.bind(inflater.inflate(R.layout.hush_fragment_video_detail, container, false));
         return binding.getRoot();
     }
 
@@ -803,6 +803,11 @@ public final class VideoDetailFragment
     protected void initListeners() {
         super.initListeners();
 
+        if (binding.detailSearchEditText != null) {
+            binding.detailSearchEditText.setHint(HistoryRecordManager.isIncognito(requireContext())
+                    ? R.string.history_incognito_search_hint : R.string.hush_search_videos);
+        }
+
         binding.detailTitleRootLayout.setOnClickListener(this);
         binding.detailTitleRootLayout.setOnLongClickListener(this);
         binding.detailToggleSecondaryControlsView.setOnClickListener(this);
@@ -866,6 +871,11 @@ public final class VideoDetailFragment
                     applyPlayerTopInset();
                     return insets;
                 });
+        binding.getRoot().addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> {
+            if (r-l != or-ol || b-t != ob-ot) view.post(() -> {
+                if(binding!=null){updateStickyPlayerMode();setHeightThumbnail();}
+            });
+        });
         binding.getRoot().post(() -> {
             applyPlayerTopInset();
             refreshOverlayLook();
@@ -916,6 +926,16 @@ public final class VideoDetailFragment
         }
         final boolean insetChanged = playerTopInset != top;
         playerTopInset = top;
+        final int bottom = fullscreen ? 0
+                : org.schabi.newpipe.hush.ui.HushUi.bottomSafeInset(binding.getRoot());
+        if (binding.getRoot().getPaddingBottom() != bottom) {
+            binding.getRoot().setPadding(binding.getRoot().getPaddingLeft(),
+                    binding.getRoot().getPaddingTop(), binding.getRoot().getPaddingRight(), bottom);
+        }
+        if (bottomSheetBehavior != null
+                && bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheetBehavior.setPeekHeight(miniPlayerPeekHeight());
+        }
         final int contentPadding = stickyPlayerEnabled ? 0 : top;
         final View content = binding.detailMainContent;
         if (content.getPaddingTop() != contentPadding) {
@@ -1006,9 +1026,6 @@ public final class VideoDetailFragment
 
         // If we are in fullscreen mode just exit from it via first back press
         if (isPlayerAvailable() && player.isFullscreen()) {
-            if (!DeviceUtils.isTablet(activity)) {
-                player.pause();
-            }
             PlayerUiModeHelper.setFullscreen(player, false);
             setAutoPlay(false);
             return true;
@@ -1703,9 +1720,11 @@ public final class VideoDetailFragment
                 requireView().getViewTreeObserver().addOnPreDrawListener(preDrawListener);
             }
         } else {
-            final int height = (int) (isPortrait
-                    ? metrics.widthPixels / (16.0f / 9.0f)
-                    : metrics.heightPixels / 2.0f);
+            final int windowWidth = binding.getRoot().getWidth() > 0 ? binding.getRoot().getWidth() : metrics.widthPixels;
+            // tablets in landscape keep the player pane at 75% of the screen (layout weights 3:1)
+            final int paneWidth = isExpandedWatch() ? Math.round(windowWidth * 0.75f) : windowWidth;
+            final int windowHeight = binding.getRoot().getHeight() > 0 ? binding.getRoot().getHeight() : metrics.heightPixels;
+            final int height = Math.min(Math.round(paneWidth / (16f/9f)), Math.round(windowHeight * 0.65f));
             setHeightThumbnail(height, metrics);
         }
     }
@@ -1723,6 +1742,14 @@ public final class VideoDetailFragment
         }
     }
 
+    private boolean isExpandedWatch() {
+        if(binding==null || isPlayerAvailable() && player.isFullscreen())return false;
+        final float density=getResources().getDisplayMetrics().density;
+        final int width=binding.getRoot().getWidth();
+        return (width>0?width/density:getResources().getConfiguration().screenWidthDp)>=840
+                && getResources().getConfiguration().fontScale<=1.3f;
+    }
+
     private void updateStickyPlayerMode() {
         if (binding == null || activity == null) {
             return;
@@ -1730,7 +1757,7 @@ public final class VideoDetailFragment
 
         final SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(requireContext());
-        final boolean enableStickyPlayer = preferences.getBoolean(
+        final boolean enableStickyPlayer = isExpandedWatch() || preferences.getBoolean(
                 getString(R.string.pin_video_to_top_key), true)
                 && !DeviceUtils.isLandscape(requireContext());
 
@@ -1767,7 +1794,9 @@ public final class VideoDetailFragment
         if (stickyParams != null) {
             final int stickyHeight = stickyPlayerEnabled ? height : 0;
             final int stickyTop = stickyPlayerEnabled ? playerTopInset : 0;
-            boolean changed = stickyParams.height != stickyHeight;
+            final int stickyWidth = isExpandedWatch() ? Math.round(binding.getRoot().getWidth()*.75f) : ViewGroup.LayoutParams.MATCH_PARENT;
+            boolean changed = stickyParams.width != stickyWidth || stickyParams.height != stickyHeight;
+            stickyParams.width = stickyWidth;
             stickyParams.height = stickyHeight;
             if (stickyParams instanceof FrameLayout.LayoutParams
                     && ((FrameLayout.LayoutParams) stickyParams).topMargin != stickyTop) {
@@ -1782,8 +1811,17 @@ public final class VideoDetailFragment
         final ViewGroup.LayoutParams mainContentParams = binding.detailMainContent.getLayoutParams();
         if (mainContentParams instanceof FrameLayout.LayoutParams) {
             final FrameLayout.LayoutParams frameLayoutParams = (FrameLayout.LayoutParams) mainContentParams;
-            final int topMargin = stickyPlayerEnabled ? height + playerTopInset : 0;
-            if (frameLayoutParams.topMargin != topMargin) {
+            final int topMargin = isExpandedWatch() ? playerTopInset : stickyPlayerEnabled ? height + playerTopInset : 0;
+            final int start = isExpandedWatch() ? Math.round(binding.getRoot().getWidth()*.75f)
+                    + Math.round(24*getResources().getDisplayMetrics().density) : 0;
+            final int width = isExpandedWatch() ? Math.max(1, binding.getRoot().getWidth() - start)
+                    : ViewGroup.LayoutParams.MATCH_PARENT;
+            if (frameLayoutParams.getMarginStart() != start || frameLayoutParams.width != width
+                    || frameLayoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT
+                    || frameLayoutParams.topMargin != topMargin) {
+                frameLayoutParams.setMarginStart(start);
+                frameLayoutParams.width = width;
+                frameLayoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
                 frameLayoutParams.topMargin = topMargin;
                 binding.detailMainContent.setLayoutParams(frameLayoutParams);
             }
@@ -2433,6 +2471,7 @@ public final class VideoDetailFragment
         }
         scrollToTop();
 
+        updateStickyPlayerMode();
         applyPlayerTopInset();
         refreshOverlayLook();
         updateTabLayoutVisibility();
@@ -2677,8 +2716,14 @@ public final class VideoDetailFragment
      *
      * @param showMore whether main fragment should be expanded or not
      */
+    private int miniPlayerPeekHeight() {
+        final int base = getResources().getDimensionPixelSize(R.dimen.mini_player_height);
+        final View root = getView();
+        return base + (root == null ? 0 : org.schabi.newpipe.hush.ui.HushUi.bottomSafeInset(root));
+    }
+
     private void manageSpaceAtTheBottom(final boolean showMore) {
-        final int peekHeight = getResources().getDimensionPixelSize(R.dimen.mini_player_height);
+        final int peekHeight = miniPlayerPeekHeight();
         final ViewGroup holder = requireActivity().findViewById(R.id.fragment_holder);
         final int newBottomPadding;
         if (showMore) {
@@ -2724,7 +2769,7 @@ public final class VideoDetailFragment
         // The player may already be in fullscreen when this view is (re)created
         // (e.g. after a rotation while playing fullscreen): keep the drag disabled in that case.
         updateBottomSheetDraggableForFullscreen();
-        final int peekHeight = getResources().getDimensionPixelSize(R.dimen.mini_player_height);
+        final int peekHeight = miniPlayerPeekHeight();
         if (bottomSheetState != BottomSheetBehavior.STATE_HIDDEN) {
             manageSpaceAtTheBottom(false);
             bottomSheetBehavior.setPeekHeight(peekHeight);

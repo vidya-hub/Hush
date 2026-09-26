@@ -1205,4 +1205,15 @@
     <string name="player_sheet_more">More options  ▾</string>
     <string name="player_sheet_less">Fewer options  ▴</string>
     <string name="player_option_unavailable">Unavailable</string>
+    <string name="hush_home_subtitle">YouTube, with room to pause.</string>
+    <string name="hush_search_retry">Couldn’t load suggestions. Tap to retry.</string>
+    <string name="hush_swipe_start">Swipe to start</string>
+    <string name="hush_snake_running">Swipe to steer · Tap to pause</string>
+    <string name="hush_snake_paused">Tap to resume · Hold to restart</string>
+    <string name="hush_session_done">Session complete</string>
+    <string name="hush_again">Again</string>
+    <string name="hush_done">Done</string>
+    <string name="hush_sound_cues">Sound cues</string>
+    <string name="hush_choose_terms">Choose two numbers, then an operation</string>
+    <string name="hush_use_numbers">Use every number once</string>
 </resources>

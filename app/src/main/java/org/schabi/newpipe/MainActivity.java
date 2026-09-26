@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int BACK_PRESS_TIMEOUT = 2000;
     private int systemTopInset;
     private int systemBottomInset;
+    private int systemLeftInset;
+    private int systemRightInset;
+    private int imeBottomInset;
     private boolean searchChrome;
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -161,9 +164,18 @@ public class MainActivity extends AppCompatActivity {
         toolbarLayoutBinding = mainBinding.toolbarLayout;
         setContentView(mainBinding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(mainBinding.getRoot(), (view, insets) -> {
-            final Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            final Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
+                    | WindowInsetsCompat.Type.displayCutout());
+            final Insets gestures = insets.getInsets(
+                    WindowInsetsCompat.Type.mandatorySystemGestures());
+            final Insets tappable = insets.getInsets(WindowInsetsCompat.Type.tappableElement());
+            final Insets ime = insets.getInsets(WindowInsetsCompat.Type.ime());
             systemTopInset = bars.top;
-            systemBottomInset = bars.bottom;
+            systemBottomInset = Math.max(bars.bottom, Math.max(gestures.bottom, tappable.bottom));
+            systemLeftInset = Math.max(bars.left, tappable.left);
+            systemRightInset = Math.max(bars.right, tappable.right);
+            // The keyboard replaces the navigation inset. Adding both leaves a dead band.
+            imeBottomInset = ime.bottom;
             final View toolbar = toolbarLayoutBinding.getRoot();
             toolbar.setPadding(toolbar.getPaddingLeft(), systemTopInset,
                     toolbar.getPaddingRight(), toolbar.getPaddingBottom());
@@ -436,14 +448,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void applySearchChromeInsets() {
-        final View holder = findViewById(R.id.fragment_holder);
+        final int pageBottom = imeBottomInset > 0 ? imeBottomInset : systemBottomInset;
+        applyHolderInsets(R.id.fragment_holder,
+                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()), pageBottom);
+        // BottomSheetBehavior ignores holder margins. The player applies this inset itself.
+        applyHolderInsets(R.id.fragment_player_holder, 0, 0);
+    }
+
+    private void applyHolderInsets(final int viewId, final int top, final int bottom) {
+        final View holder = findViewById(viewId);
         if (holder != null && holder.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             final ViewGroup.MarginLayoutParams params =
                     (ViewGroup.MarginLayoutParams) holder.getLayoutParams();
-            final int top = systemTopInset + (searchChrome ? 0 : resolveActionBarSize());
-            if (params.topMargin != top || params.bottomMargin != systemBottomInset) {
+            if (params.topMargin != top || params.bottomMargin != bottom
+                    || params.leftMargin != systemLeftInset
+                    || params.rightMargin != systemRightInset) {
                 params.topMargin = top;
-                params.bottomMargin = systemBottomInset;
+                params.bottomMargin = bottom;
+                params.leftMargin = systemLeftInset;
+                params.rightMargin = systemRightInset;
                 holder.setLayoutParams(params);
             }
         }

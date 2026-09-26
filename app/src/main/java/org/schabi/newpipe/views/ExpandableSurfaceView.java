@@ -11,6 +11,8 @@ import static com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MOD
 import static com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_ZOOM;
 
 public class ExpandableSurfaceView extends SurfaceView {
+    private int videoRotation;
+    public void setVideoRotation(int rotation) { videoRotation=Math.floorMod(rotation,360); requestLayout(); }
     private int resizeMode = RESIZE_MODE_FIT;
     private int baseHeight = 0;
     private int maxHeight = 0;
@@ -45,27 +47,12 @@ public class ExpandableSurfaceView extends SurfaceView {
             return;
         }
 
-        final float viewAspectRatio = width / ((float) height);
-        final float aspectDeformation = videoAspectRatio / viewAspectRatio - 1;
         scaleX = 1.0f;
         scaleY = 1.0f;
-
-        // KitKat doesn't work well when a view has a scale like needed for ZOOM
-        if (resizeMode == RESIZE_MODE_FIT) {
-            if (aspectDeformation > 0) {
-                height = (int) (width / videoAspectRatio);
-            } else {
-                width = (int) (height * videoAspectRatio);
-            }
-        } else if (resizeMode == RESIZE_MODE_ZOOM) {
-            // Enlarge the correctly proportioned surface and clip it at the viewport edge.
-            // Scaling just one axis of a viewport-sized surface distorts the picture.
-            if (aspectDeformation > 0) {
-                width = (int) Math.ceil(height * videoAspectRatio);
-            } else {
-                height = (int) Math.ceil(width / videoAspectRatio);
-            }
-        }
+        final float[] fitted = org.schabi.newpipe.player.geometry.VideoGeometry.size(
+                width, height, videoAspectRatio, resizeMode == RESIZE_MODE_ZOOM);
+        width = Math.round(fitted[videoRotation % 180 == 0 ? 0 : 1]);
+        height = Math.round(fitted[videoRotation % 180 == 0 ? 1 : 0]);
 
         super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
@@ -81,6 +68,7 @@ public class ExpandableSurfaceView extends SurfaceView {
     }
 
     private void applyScaleAndTranslation() {
+        setRotation(videoRotation);
         final float safePinchScale = Float.isFinite(pinchScale) ? pinchScale : 1.0f;
         final boolean pinchActive = safePinchScale > 1.0f;
         setPivotX(pinchActive ? 0.0f : getWidth() / 2.0f);

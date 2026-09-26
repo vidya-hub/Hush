@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.button.MaterialButton;
 
 import org.schabi.newpipe.R;
+import org.schabi.newpipe.hush.ui.HushUi;
+import org.schabi.newpipe.hush.ui.GamePreview;
 import org.schabi.newpipe.databinding.FragmentSearchBinding;
 
 /** The resting Home content. Search and playback remain outside this scrolling view. */
@@ -51,8 +53,8 @@ final class HomeDashboard {
                 & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
         ink = color(com.google.android.material.R.attr.colorOnSurface);
         muted = color(com.google.android.material.R.attr.colorOnSurfaceVariant);
-        card = dark ? 0xFF203D30 : 0xFFF1F6F2;
-        border = dark ? 0xFF496858 : 0xFFD8E3DA;
+        card = color(com.google.android.material.R.attr.colorSurfaceContainer);
+        border = color(com.google.android.material.R.attr.colorOutlineVariant);
         pine = ContextCompat.getColor(context, R.color.m3_light_primary);
     }
 
@@ -75,93 +77,137 @@ final class HomeDashboard {
     private View create() {
         final LinearLayout root = vertical();
         root.setPadding(dp(20), dp(20), dp(20), dp(28));
-        root.addView(heading(R.string.hush_take_break, 0));
-        root.addView(breakCard(), fullTop(12));
+        final LinearLayout games = vertical();
+        final LinearLayout personal = vertical();
+        personal.addView(heading(R.string.hush_take_break, 0));
+        personal.addView(breakCard(), fullTop(12));
 
-        final LinearLayout gameHeading = horizontal();
+        final boolean largeText = context.getResources().getConfiguration().fontScale > 1.3f;
+        final LinearLayout gameHeading = largeText ? vertical() : horizontal();
         gameHeading.setGravity(Gravity.CENTER_VERTICAL);
         gameHeading.addView(heading(R.string.hush_quick_games, 0),
-                new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                new LinearLayout.LayoutParams(largeText ? -1 : 0, ViewGroup.LayoutParams.WRAP_CONTENT,
+                        largeText ? 0 : 1));
         final TextView all = text(R.string.hush_all_games, 14, dark ? 0xFFCBE3D4 : pine, true);
         all.setGravity(Gravity.CENTER);
         all.setMinHeight(dp(48));
         all.setOnClickListener(v -> actions.allGames());
         gameHeading.addView(all);
-        root.addView(gameHeading, fullTop(24));
+        games.addView(gameHeading, fullTop(0));
 
         final boolean stacked = context.getResources().getConfiguration().screenWidthDp < 360
                 || context.getResources().getConfiguration().fontScale > 1.2f;
         if (stacked) {
-            root.addView(gameCard(R.string.hush_game_2048, R.string.hush_game_2048_hint,
+            games.addView(gameCard(R.string.hush_game_2048, R.string.hush_game_2048_hint,
                     "2  4\n  2  8", "2048"), fullTop(8));
-            root.addView(gameCard(R.string.hush_game_snake, R.string.hush_game_snake_hint,
+            games.addView(gameCard(R.string.hush_game_snake, R.string.hush_game_snake_hint,
                     "· · ●\n■ ■ ■", "snake"), fullTop(12));
         } else {
             final LinearLayout row = horizontal();
-            final LinearLayout.LayoutParams first = new LinearLayout.LayoutParams(0, dp(126), 1);
+            final LinearLayout.LayoutParams first = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             first.setMarginEnd(dp(6));
             row.addView(gameCard(R.string.hush_game_2048, R.string.hush_game_2048_hint,
                     "2  4\n2  8", "2048"), first);
-            final LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, dp(126), 1);
+            final LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             second.setMarginStart(dp(6));
             row.addView(gameCard(R.string.hush_game_snake, R.string.hush_game_snake_hint,
                     "· ●\n■■■", "snake"), second);
-            root.addView(row, fullTop(8));
+            games.addView(row, fullTop(8));
         }
-        root.addView(gameCard(R.string.hush_game_sudoku, R.string.hush_game_sudoku_hint,
+        games.addView(gameCard(R.string.hush_game_sudoku, R.string.hush_game_sudoku_hint,
                 "1 2 3\n4 5 6\n7 8 9", "sudoku"), fullTop(12));
 
-        root.addView(heading(R.string.hush_your_library, 0), fullTop(24));
-        final LinearLayout library = horizontal();
-        library.setGravity(Gravity.CENTER_VERTICAL);
+        final LinearLayout librarySection = vertical();
+        librarySection.addView(heading(R.string.hush_your_library, 0));
+        final LinearLayout library = vertical();
         library.setBackground(shape(card, 20, border));
-        library.addView(libraryCell(R.drawable.ic_history, R.string.action_history,
-                R.string.hush_library_history_hint, actions::history), weighted());
-        library.addView(divider(), new LinearLayout.LayoutParams(dp(1), dp(70)));
-        library.addView(libraryCell(R.drawable.ic_bookmark, R.string.library_saved,
-                R.string.hush_library_saved_hint, actions::saved), weighted());
-        library.addView(divider(), new LinearLayout.LayoutParams(dp(1), dp(70)));
-        library.addView(libraryCell(R.drawable.ic_file_download, R.string.downloads,
-                R.string.hush_library_downloads_hint, actions::downloads), weighted());
-        root.addView(library, fullTop(12));
-        return root;
+        library.addView(libraryCell(R.drawable.ic_hush_history, R.string.action_history,
+                R.string.hush_library_history_hint, actions::history));
+        library.addView(divider(), new LinearLayout.LayoutParams(-1, dp(1)));
+        library.addView(libraryCell(R.drawable.ic_hush_saved, R.string.library_saved,
+                R.string.hush_library_saved_hint, actions::saved));
+        library.addView(divider(), new LinearLayout.LayoutParams(-1, dp(1)));
+        library.addView(libraryCell(R.drawable.ic_hush_download, R.string.downloads,
+                R.string.hush_library_downloads_hint, actions::downloads));
+        librarySection.addView(library, fullTop(12));
+        // Same children, reparented only when the measured window crosses a breakpoint.
+        final android.widget.FrameLayout adaptive = new android.widget.FrameLayout(context) {
+            boolean wide;
+            int previous = -1;
+            @Override protected void onMeasure(int w, int h) {
+                int width = MeasureSpec.getSize(w);
+                boolean next = width >= dp(840) && getResources().getConfiguration().fontScale <= 1.3f;
+                if (previous != width || next != wide) {
+                    previous = width; wide = next;
+                    detach(personal); detach(games); detach(librarySection);
+                    removeAllViews(); detach(root); root.removeAllViews();
+                    int gutter = width >= dp(840) ? 32 : width >= dp(600) ? 24 : 20;
+                    root.setPadding(dp(gutter), dp(20), dp(gutter), dp(28));
+                    if (wide) {
+                        personal.addView(librarySection, fullTop(24));
+                        root.addView(new HushUi.Panes(context, personal, games), fullTop(0));
+                    } else {
+                        root.addView(personal, fullTop(0)); root.addView(games, fullTop(24));
+                        root.addView(librarySection, fullTop(24));
+                    }
+                    addView(new HushUi.Bounded(context, root, 1120), new android.widget.FrameLayout.LayoutParams(-1,-2));
+                }
+                super.onMeasure(w,h);
+            }
+        };
+        return adaptive;
+    }
+
+    private static void detach(View view) {
+        if (view.getParent() instanceof ViewGroup) ((ViewGroup)view.getParent()).removeView(view);
     }
 
     private View breakCard() {
-        final boolean roomyActions = context.getResources().getConfiguration().fontScale > 1.2f
-                || context.getResources().getConfiguration().screenWidthDp < 360;
-        final LinearLayout hero = roomyActions ? vertical() : horizontal();
-        hero.setGravity(Gravity.CENTER_VERTICAL);
-        hero.setPadding(dp(20), dp(20), dp(20), dp(20));
-        hero.setBackground(shape(dark ? 0xFF254537 : pine, 24, 0));
-        final LinearLayout introduction = roomyActions ? horizontal() : hero;
+        final LinearLayout introduction = horizontal();
         introduction.setGravity(Gravity.CENTER_VERTICAL);
-        if (roomyActions) hero.addView(introduction);
         final Ring ring = new Ring(context);
-        introduction.addView(ring, new LinearLayout.LayoutParams(dp(78), dp(78)));
+        introduction.addView(ring, new LinearLayout.LayoutParams(dp(64), dp(64)));
         final LinearLayout words = vertical();
-        final LinearLayout.LayoutParams wordsLp = new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        wordsLp.setMarginStart(dp(16));
-        introduction.addView(words, wordsLp);
+        introduction.addView(words);
         words.addView(text(R.string.hush_moment_yourself, 19, 0xFFF6F5F2, true));
         words.addView(text(R.string.hush_breathe_or_meditate, 13, 0xFFD4E4D8, false));
         final LinearLayout actionsRow = horizontal();
         final MaterialButton breathe = pill(R.string.hush_breathe, 0xFFF6F5F2, pine);
         breathe.setOnClickListener(v -> actions.breathe());
         final MaterialButton meditate = pill(R.string.hush_meditate, 0xFF597768, 0xFFFFFFFF);
-        final LinearLayout.LayoutParams breatheLp = roomyActions
-                ? new LinearLayout.LayoutParams(0, dp(48), 1)
-                : new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(48));
-        actionsRow.addView(breathe, breatheLp);
-        final LinearLayout.LayoutParams meditateLp = new LinearLayout.LayoutParams(roomyActions
-                ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT, dp(48), roomyActions ? 1 : 0);
-        meditateLp.setMarginStart(dp(8));
         meditate.setOnClickListener(v -> actions.meditate());
-        actionsRow.addView(meditate, meditateLp);
-        if (roomyActions) hero.addView(actionsRow, fullTop(12));
-        else words.addView(actionsRow, fullTop(10));
-        hero.setMinimumHeight(dp(142));
+        actionsRow.addView(breathe); actionsRow.addView(meditate);
+        final LinearLayout hero = new LinearLayout(context) {
+            int previousWidth = -1;
+            boolean previousLarge;
+            @Override protected void onMeasure(int widthSpec, int heightSpec) {
+                int available = MeasureSpec.getSize(widthSpec) - dp(40);
+                boolean large = getResources().getConfiguration().fontScale > 1.3f;
+                if (available != previousWidth || large != previousLarge) {
+                    previousWidth = available; previousLarge = large;
+                    boolean stackIntro = large || available < dp(250);
+                    introduction.setOrientation(stackIntro ? VERTICAL : HORIZONTAL);
+                    introduction.setGravity(stackIntro ? Gravity.CENTER_HORIZONTAL : Gravity.CENTER_VERTICAL);
+                    LinearLayout.LayoutParams wordsLp = new LinearLayout.LayoutParams(
+                            stackIntro ? -1 : 0, -2, stackIntro ? 0 : 1);
+                    if (stackIntro) wordsLp.topMargin=dp(12); else wordsLp.setMarginStart(dp(16));
+                    words.setLayoutParams(wordsLp);
+                    boolean stackActions = large && available < dp(420);
+                    actionsRow.setOrientation(stackActions ? VERTICAL : HORIZONTAL);
+                    for (int i=0; i<2; i++) {
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                stackActions ? -1 : 0, -2, stackActions ? 0 : 1);
+                        if(i==1) { if(stackActions)lp.topMargin=dp(12); else lp.setMarginStart(dp(8)); }
+                        actionsRow.getChildAt(i).setLayoutParams(lp);
+                    }
+                }
+                super.onMeasure(widthSpec, heightSpec);
+            }
+        };
+        hero.setOrientation(LinearLayout.VERTICAL);
+        hero.setPadding(dp(16),dp(12),dp(16),dp(12));
+        hero.setBackground(shape(dark ? 0xFF254537 : pine,24,0));
+        hero.addView(introduction,fullTop(0));hero.addView(actionsRow,fullTop(16));
         return hero;
     }
 
@@ -169,9 +215,9 @@ final class HomeDashboard {
                           final String preview, final String game) {
         final LinearLayout item = horizontal();
         item.setGravity(Gravity.CENTER_VERTICAL);
-        item.setPadding(dp(16), dp(14), dp(14), dp(14));
+        item.setPadding(dp(16), dp(10), dp(14), dp(10));
         item.setBackground(shape(card, game.equals("sudoku") ? 18 : 20, border));
-        item.setMinimumHeight(game.equals("sudoku") ? dp(80) : dp(126));
+        item.setMinimumHeight(dp(72));
         item.setClickable(true);
         item.setFocusable(true);
         item.setContentDescription(context.getString(name) + ", " + context.getString(hint));
@@ -181,45 +227,36 @@ final class HomeDashboard {
         labels.addView(text(hint, 12, muted, false));
         item.addView(labels, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        final TextView grid = new TextView(context);
-        grid.setText(preview);
-        grid.setTextColor(dark ? 0xFFD1E4D6 : pine);
-        grid.setTextSize(TypedValue.COMPLEX_UNIT_SP, game.equals("sudoku") ? 12 : 17);
-        grid.setTypeface(android.graphics.Typeface.MONOSPACE);
-        grid.setGravity(Gravity.CENTER);
-        grid.setMinWidth(dp(game.equals("sudoku") ? 64 : 72));
-        grid.setMinHeight(dp(game.equals("sudoku") ? 56 : 72));
-        grid.setPadding(dp(7), dp(5), dp(7), dp(5));
-        grid.setBackground(shape(dark ? 0xFF29483A : 0xFFE9F0EB, 10, 0));
-        grid.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        item.addView(grid);
+        final GamePreview grid = new GamePreview(context, game);
+        final LinearLayout.LayoutParams previewLp = new LinearLayout.LayoutParams(dp(64), dp(64));
+        previewLp.setMarginStart(dp(8)); item.addView(grid, previewLp);
+        HushUi.clickable(item, card, game.equals("sudoku") ? 18 : 20, border);
         return item;
     }
 
     private View libraryCell(final int iconRes, @StringRes final int title,
                              @StringRes final int subtitle, final Runnable click) {
-        final LinearLayout cell = vertical();
-        cell.setGravity(Gravity.CENTER);
-        cell.setPadding(dp(3), dp(12), dp(3), dp(12));
-        cell.setMinimumHeight(dp(104));
+        final LinearLayout cell = horizontal();
+        cell.setGravity(Gravity.CENTER_VERTICAL);
+        cell.setPadding(dp(16), dp(8), dp(16), dp(8));
+        cell.setMinimumHeight(dp(56));
         final android.widget.ImageView icon = new android.widget.ImageView(context);
-        icon.setImageResource(iconRes);
-        icon.setImageTintList(ColorStateList.valueOf(ink));
+        icon.setImageResource(iconRes); icon.setImageTintList(ColorStateList.valueOf(ink));
         icon.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        final LinearLayout.LayoutParams iconLp = new LinearLayout.LayoutParams(dp(26), dp(26));
-        iconLp.gravity = Gravity.CENTER_HORIZONTAL;
-        cell.addView(icon, iconLp);
-        final TextView label = text(title, 13, ink, true);
-        label.setGravity(Gravity.CENTER);
-        cell.addView(label);
-        final TextView sub = text(subtitle, 10, muted, false);
-        sub.setGravity(Gravity.CENTER);
-        sub.setMaxLines(2);
-        cell.addView(sub);
-        cell.setContentDescription(context.getString(title) + ", " + context.getString(subtitle));
+        cell.addView(icon, new LinearLayout.LayoutParams(dp(24), dp(24)));
+        final LinearLayout labels = vertical();
+        labels.addView(text(title, 15, ink, true));
+        labels.addView(text(subtitle, 12, muted, false));
+        LinearLayout.LayoutParams labelLp = new LinearLayout.LayoutParams(0, -2, 1);
+        labelLp.setMarginStart(dp(12)); cell.addView(labels, labelLp);
+        final android.widget.ImageView arrow = new android.widget.ImageView(context);
+        arrow.setImageResource(R.drawable.ic_hush_chevron);
+        arrow.setImageTintList(ColorStateList.valueOf(muted));
+        arrow.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        cell.addView(arrow,new LinearLayout.LayoutParams(dp(20),dp(20)));
+        cell.setContentDescription(context.getString(title));
         cell.setOnClickListener(v -> click.run());
-        cell.setClickable(true);
-        cell.setFocusable(true);
+        HushUi.clickable(cell, card, 20, 0);
         return cell;
     }
 
@@ -229,6 +266,7 @@ final class HomeDashboard {
         button.setTextColor(textColor);
         button.setBackgroundTintList(ColorStateList.valueOf(fill));
         button.setCornerRadius(dp(24));
+        button.setMaxLines(3); button.setSingleLine(false);
         button.setInsetTop(0);
         button.setInsetBottom(0);
         button.setMinHeight(dp(48));

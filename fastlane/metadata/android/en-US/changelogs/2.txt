@@ -1,0 +1,5 @@
+• Tablet landscape: video plays on the left 75% of the screen, one tap to fullscreen
+• Incognito is now a clean pill aligned with the search bar, and the search hint switches to "Search privately" while it is on
+• Smoother break sessions, game previews and the compact playback bar
+• Universal APK added alongside the per-ABI builds
+• Fixes a crash when opening the watch page on some layouts
