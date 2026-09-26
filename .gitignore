@@ -1,0 +1,33 @@
+.gradle/
+local.properties
+keystore.properties
+*.jks
+keystore/
+.DS_Store
+build/
+captures/
+.idea/
+*.iml
+*~
+.weblate
+*.class
+app/debug/
+app/release/
+.kotlin/
+log/
+/local-pr-desc/
+
+# vscode / eclipse files
+*.classpath
+*.project
+*.settings
+bin/
+.vscode/
+*.code-workspace
+/config.py
+__pycache__
+
+# ffmpeg-kit AAR is downloaded and checksum-verified at build time
+ffmpeg/ffmpeg-kit.aar
+ffmpeg/*.part
+*.aar.bk

@@ -1,0 +1,16 @@
+Hush is a calm, private YouTube client for Android.
+
+Instead of an endless feed, the Home screen offers a break: a Breathe and Meditate card with guided breathing (Calm 4/6, Box, 4-7-8) and a quiet meditation timer, quick offline games (2048, Snake, Sudoku, Make 24), and your own library of History, Saved and Downloads. Search stays front and center — and nothing else tries to steal your attention.
+
+The player is fully gesture driven: single tap for controls, side double-tap to skip 10 seconds, swipe to seek with previews, swipe to fullscreen, pinch to zoom. Video always keeps its true proportions with Fit and Zoom display modes, and Quality, Speed, Captions and Display live together in one Playback sheet.
+
+Hush needs no Google account and phones home to nobody: subscriptions, history and profiles stay on your device, with per-profile data and an incognito mode that writes nothing.
+
+Features:
+• Quiet home with breathing and meditation breaks
+• Four offline games: 2048, Snake, Sudoku and Make 24
+• Gesture-first player with correct video geometry on every surface
+• Background and popup playback, downloads, local playlists
+• Warm paper and dark pine themes that follow the system
+• Multiple local profiles and an incognito mode
+• Free and open source (GPL-3.0), fork of NewPipe and PipePipe

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".error.ErrorActivity">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:id="@+id/toolbar_layout"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/errorSorryView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sorry_string"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/what_happened_headline"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/errorMessageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_labels"
+                android:textColor="?attr/colorAccent" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/what_device_headline"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <org.schabi.newpipe.views.NewPipeTextView
+                    android:id="@+id/errorInfoLabelsView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_labels"
+                    android:textColor="?attr/colorAccent" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp">
+
+                    <org.schabi.newpipe.views.NewPipeTextView
+                        android:id="@+id/errorInfosView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/errorDetailsHeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/error_details_headline"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+            <HorizontalScrollView
+                android:id="@+id/errorDetailsScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <org.schabi.newpipe.views.NewPipeTextView
+                    android:id="@+id/errorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
+                    android:typeface="monospace" />
+            </HorizontalScrollView>
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/your_comment"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <org.schabi.newpipe.views.NewPipeEditText
+                android:id="@+id/errorCommentBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="" />
+
+            <Button
+                android:id="@+id/errorReportCopyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/copy_for_github" />
+
+            <Button
+                android:id="@+id/errorReportShareButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/share_error_report" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

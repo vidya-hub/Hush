@@ -1,0 +1,10 @@
+// Root build file: makes every app build fetch/verify the pinned ffmpeg-kit AAR first.
+subprojects { sub ->
+    sub.plugins.withId('com.android.application') {
+        sub.tasks.configureEach { task ->
+            if (task.name == 'preBuild') {
+                task.dependsOn ':ffmpeg:ensureFfmpegKit'
+            }
+        }
+    }
+}

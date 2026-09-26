@@ -1,0 +1,8 @@
+Initial release.
+
+• Quiet home: Take a break card with Breathe and Meditate, quick offline games, and a grouped library — no feed, no recommendations
+• Guided breathing (Calm 4 in/6 out, Box, 4·7·8) and a quiet meditation timer with soft cues and a mute toggle
+• Offline games: 2048, Snake, Sudoku and Make 24 — touch-first controls, per-profile saves, nothing written in incognito
+• Gesture-driven player with unified Fit/Zoom geometry, ±10s double-tap seeking, preview scrubbing, pinch zoom, and a single Playback settings sheet
+• Background and popup playback, downloads, local playlists and history
+• Warm paper / dark pine themes, Manrope type, large-font and narrow-screen friendly

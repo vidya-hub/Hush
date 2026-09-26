@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="contrastColor">@color/black</color>
+    <color name="defaultIconTint">?android:attr/textColorPrimary</color>
+
+    <color name="ic_launcher_background">#3D5A4C</color>
+    <color name="placeholder_background">#999999</color>
+    <color name="placeholder_foreground">#6C6C6C</color>
+
+    <!-- Light Theme -->
+    <color name="light_background_color">#FAF9F5</color>
+    <color name="light_dialog_background_color">#FAF9F5</color>
+    <color name="light_settings_accent_color">#24483D</color>
+    <color name="light_separator_color">#32000000</color>
+    <color name="light_ripple_color">#48868686</color>
+    <color name="light_selected_color">#2a868686</color>
+    <color name="light_contrast_background_color">#1fa6a6a6</color>
+    <color name="light_shadow_start_color">#5a000000</color>
+    <color name="light_license_background_color">#ffffff</color>
+    <color name="light_license_text_color">#212121</color>
+    <color name="light_card_item_background_color">#FFFFFF</color>
+    <color name="light_card_item_contrast_color">#F0EFE9</color>
+    <color name="light_border_color">#33000000</color>
+
+    <!-- Dark Theme -->
+    <color name="dark_background_color">#151E19</color>
+    <color name="dark_dialog_background_color">#202A23</color>
+    <color name="dark_settings_accent_color">#C4D8CB</color>
+    <color name="dark_separator_color">#0affffff</color>
+    <color name="dark_ripple_color">#48ffffff</color>
+    <color name="dark_selected_color">#2affffff</color>
+    <color name="dark_contrast_background_color">#1f717171</color>
+    <color name="dark_shadow_start_color">#82000000</color>
+    <color name="dark_license_background_color">#424242</color>
+    <color name="dark_license_text_color">#ffffff</color>
+    <color name="dark_queue_background_color">#af000000</color>
+    <color name="dark_card_item_background_color">#202A23</color>
+    <color name="dark_card_item_contrast_color">#2B382F</color>
+    <color name="dark_border_color">#33FFFFFF</color>
+    <color name="dark_bottom_sheet_color">#202A23</color>
+
+    <!-- Black Theme -->
+    <color name="black_background_color">#000000</color>
+    <color name="black_settings_accent_color">@color/dark_settings_accent_color</color>
+    <color name="black_separator_color">#1effffff</color>
+    <color name="black_contrast_background_color">#23454545</color>
+    <color name="black_card_item_background_color">#0F0F0F</color>
+    <color name="black_card_item_contrast_color">#202020</color>
+    <color name="black_border_color">#25FFFFFF</color>
+    <color name="black_bottom_sheet_color">#121212</color>
+
+    <!-- Miscellaneous -->
+    <color name="queue_background_color">@color/dark_queue_background_color</color>
+    <color name="drawer_header_font_color">#F2FFFFFF</color>
+    <color name="duration_background_color">#aa000000</color>
+    <color name="live_duration_background_color">#c8E53935</color>
+    <color name="paid_video_background_color">#c90</color>
+    <color name="playlist_stream_count_background_color">#e6000000</color>
+    <color name="duration_text_color">#EEFFFFFF</color>
+    <color name="video_overlay_color">#64000000</color>
+
+    <color name="subscribe_text_color">#fff</color>
+    <color name="subscribed_background_color">#d6d6d6</color>
+    <color name="subscribed_text_color">#717171</color>
+
+    <color name="show_replies_button_text_color">#0276aa</color>
+
+    <color name="transparent_background_color">#00000000</color>
+    <color name="selected_background_color">#96717171</color>
+
+    <!-- GigaGet theme -->
+    <color name="bluegray">#607D8B</color>
+
+    <!-- GigaGet download Theme colors -->
+    <color name="audio_left_to_load_color">#555555</color>
+    <color name="audio_already_load_color">#000000</color>
+    <color name="video_left_to_load_color">#9AB7A6</color>
+    <color name="video_already_load_color">#3D755B</color>
+    <color name="subtitle_left_to_load_color">#008ea4</color>
+    <color name="subtitle_already_load_color">#005a71</color>
+
+    <!-- GigaGet Component colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_secondary">#C9CACB</color>
+
+    <color name="gray">#616161</color>
+
+    <color name="black">#000</color>
+
+    <!-- default SponsorBlock segment colors -->
+    <color name="sponsor_segment">#00d400</color>
+    <color name="intro_segment">#00ffff</color>
+    <color name="outro_segment">#0202ed</color>
+    <color name="interaction_segment">#cc00ff</color>
+    <color name="highlight_segment">#ff1983</color>
+    <color name="self_promo_segment">#ffff00</color>
+    <color name="non_music_segment">#ff9900</color>
+    <color name="preview_segment">#008fd6</color>
+    <color name="filler_segment">#7300ff</color>
+    <color name="pending_segment">#ffffff</color>
+
+    <!-- Material 3 palette, seed #3D5A4C. Dynamic color replaces these on Android 12+. -->
+    <color name="m3_light_primary">#24483D</color>
+    <color name="m3_light_on_primary">#FFFFFF</color>
+    <color name="m3_light_primary_container">#DCECE1</color>
+    <color name="m3_light_on_primary_container">#15382C</color>
+    <color name="m3_light_secondary">#596D60</color>
+    <color name="m3_light_on_secondary">#FFFFFF</color>
+    <color name="m3_light_secondary_container">#E7EEE5</color>
+    <color name="m3_light_on_secondary_container">#1C1C19</color>
+    <color name="m3_light_background">#FAF9F5</color>
+    <color name="m3_light_on_background">#1C2922</color>
+    <color name="m3_light_surface">#FAF9F5</color>
+    <color name="m3_light_on_surface">#1C2922</color>
+    <color name="m3_light_surface_variant">#EAEDE6</color>
+    <color name="m3_light_on_surface_variant">#536257</color>
+    <color name="m3_light_outline">#76867A</color>
+    <color name="m3_light_outline_variant">#C7D1C7</color>
+    <color name="m3_light_surface_container_lowest">#FFFFFF</color>
+    <color name="m3_light_surface_container_low">#FFFFFF</color>
+    <color name="m3_light_surface_container">#F3F4EF</color>
+    <color name="m3_light_surface_container_high">#ECEFE9</color>
+    <color name="m3_light_surface_container_highest">#E4EAE2</color>
+    <color name="m3_light_inverse_surface">#29352C</color>
+    <color name="m3_light_inverse_on_surface">#F1F5F0</color>
+    <color name="m3_light_inverse_primary">#C4D8CB</color>
+    <color name="m3_light_error">#BA1A1A</color>
+    <color name="m3_light_on_error">#FFFFFF</color>
+    <color name="m3_light_error_container">#FFDAD6</color>
+    <color name="m3_light_on_error_container">#410002</color>
+
+    <color name="m3_dark_primary">#C4D8CB</color>
+    <color name="m3_dark_on_primary">#1C3C2D</color>
+    <color name="m3_dark_primary_container">#2B4939</color>
+    <color name="m3_dark_on_primary_container">#DCECE1</color>
+    <color name="m3_dark_secondary">#BED0C1</color>
+    <color name="m3_dark_on_secondary">#293A2D</color>
+    <color name="m3_dark_secondary_container">#36483A</color>
+    <color name="m3_dark_on_secondary_container">#DEEBDD</color>
+    <color name="m3_dark_background">#151E19</color>
+    <color name="m3_dark_on_background">#EDF3EC</color>
+    <color name="m3_dark_surface">#151E19</color>
+    <color name="m3_dark_on_surface">#EDF3EC</color>
+    <color name="m3_dark_surface_variant">#2B382F</color>
+    <color name="m3_dark_on_surface_variant">#B3C3B6</color>
+    <color name="m3_dark_outline">#8FA293</color>
+    <color name="m3_dark_outline_variant">#415247</color>
+    <color name="m3_dark_surface_container_lowest">#101813</color>
+    <color name="m3_dark_surface_container_low">#1A241D</color>
+    <color name="m3_dark_surface_container">#202B23</color>
+    <color name="m3_dark_surface_container_high">#29352C</color>
+    <color name="m3_dark_surface_container_highest">#344239</color>
+    <color name="m3_dark_inverse_surface">#DEEBDD</color>
+    <color name="m3_dark_inverse_on_surface">#26352A</color>
+    <color name="m3_dark_inverse_primary">#24483D</color>
+    <color name="m3_dark_error">#FFB4AB</color>
+    <color name="m3_dark_on_error">#690005</color>
+    <color name="m3_dark_error_container">#93000A</color>
+    <color name="m3_dark_on_error_container">#FFDAD6</color>
+
+</resources>

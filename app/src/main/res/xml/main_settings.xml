@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="general_preferences"
+    android:title="@string/settings">
+
+    <PreferenceCategory
+        android:title="@string/settings_category_playback_title"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.VideoAudioSettingsFragment"
+            android:icon="@drawable/ic_headset"
+            android:title="@string/settings_category_player_title"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.GestureSettingsFragment"
+            android:icon="@drawable/ic_button_pointer"
+            android:title="@string/settings_category_gestures_summary"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.DownloadSettingsFragment"
+            android:icon="@drawable/ic_file_download"
+            android:title="@string/settings_category_downloads_title"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_category_library_title"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.HistorySettingsFragment"
+            android:icon="@drawable/ic_history"
+            android:title="@string/settings_category_history_title"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.NotificationsSettingsFragment"
+            android:icon="@drawable/ic_notifications"
+            android:title="@string/settings_category_feed_title"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.BackupSettingsFragment"
+            android:icon="@drawable/ic_content_save"
+            android:title="@string/settings_category_backup_title"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_category_appearance_title"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.AppearanceSettingsFragment"
+            android:icon="@drawable/ic_palette"
+            android:title="@string/settings_category_appearance_title"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/account"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.AccountSettingsFragment"
+            android:icon="@drawable/ic_account"
+            android:title="@string/account"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.ContentSettingsFragment"
+            android:icon="@drawable/ic_language"
+            android:title="@string/content"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_category_advanced_title"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.FilterSettingsFragment"
+            android:icon="@drawable/ic_blocking"
+            android:title="@string/settings_category_filter_title"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:fragment="org.schabi.newpipe.settings.AdvancedSettingsFragment"
+            android:icon="@drawable/ic_advanced"
+            android:title="@string/settings_category_advanced_title"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

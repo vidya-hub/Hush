@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+    android:id="@+id/player_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="12dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="8dp"
+        android:text="@string/player_sheet_playback"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:textColor="?attr/colorOnSurface" />
+
+    <TextView
+        android:id="@+id/player_sheet_quality"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_speed"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_captions"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_resize"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_more_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/more_options"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="?attr/colorOnSurfaceVariant" />
+
+    <LinearLayout
+        android:id="@+id/player_sheet_more_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    <TextView
+        android:id="@+id/player_sheet_custom_speed"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_audio"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_repeat"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_shuffle"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_queue"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_background"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_chapters"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_sleep"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_share"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_browser"
+        style="@style/PlayerSheetRow" />
+
+    <TextView
+        android:id="@+id/player_sheet_mute"
+        style="@style/PlayerSheetRow" />
+    </LinearLayout>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>
