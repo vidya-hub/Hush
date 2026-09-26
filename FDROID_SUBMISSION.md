@@ -19,28 +19,14 @@ https://gitlab.com/users/sign_in
 5. Open a merge request from the banner GitLab shows after committing.
    Title:
    ```
-   New app: Hush (com.vidsagar.hush)
+   New app: Hush
    ```
-   Description (paste as-is):
-   ```
-   Adds Hush, a calm YouTube client (breathing/meditation breaks, offline
-   mini games, gesture-driven player), a substantially diverged fork of
-   PipePipe/NewPipe under a new application ID.
-
-   Build notes:
-   - Four per-ABI splits produced by Gradle (version codes 100 * base + ABI:
-     101 v7a, 102 x86, 103 x86_64, 104 arm64), matching F-Droid's vercode
-     ordering; base versionCode lives in app/build.gradle.
-   - The only binary dependency is ffmpeg-kit, downloaded during the build
-     from the project's GitHub release and pinned by SHA-256 in
-     ffmpeg/build.gradle.kts (the NewPipe-family approach). The repository
-     tree contains no prebuilt blobs.
-   - Fastlane metadata (descriptions, icon, screenshots, per-versionCode
-     changelogs) is at fastlane/metadata/android/en-US/.
-   - NonFreeNet applies (interfaces with YouTube), declared in the metadata.
-   - Development was AI-assisted with human review, on-device testing and
-     unit tests (also disclosed in our IzzyOnDroid request #622).
-   ```
+   IMPORTANT: GitLab will offer MR templates. Pick **"App inclusion"** and
+   fill its checklist. A custom description gets the MR closed by maintainers
+   ("Merge Request template is not followed"). Tick what applies; for items
+   you cannot tick, add the reason inline (e.g. reproducible builds pending
+   verification; fork pipelines cannot run without runners, ask maintainers
+   to trigger CI). See MR !50203 for the filled example.
 6. Submit, and answer maintainer questions promptly in the MR.
 
 Expect review iterations (reviewers may tweak the recipe, e.g. output paths or
