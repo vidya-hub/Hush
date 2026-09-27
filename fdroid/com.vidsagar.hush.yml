@@ -1,27 +1,17 @@
+AntiFeatures:
+  NonFreeNet:
+    en-US: Depends on YouTube for videos.
 Categories:
   - Internet
   - Multimedia
+  - Online Media Player
 License: GPL-3.0-or-later
 AuthorName: vidya-hub
 SourceCode: https://github.com/vidya-hub/Hush
 IssueTracker: https://github.com/vidya-hub/Hush/issues
 Changelog: https://github.com/vidya-hub/Hush/releases
-AntiFeatures:
-  - NonFreeNet
 
 AutoName: Hush
-Summary: A calm YouTube client with breathing breaks, meditation and offline mini games
-Description: |-
-  Hush is a calm, private YouTube client for Android. Instead of an endless
-  feed, the Home screen offers a break: guided breathing and meditation
-  sessions, quick offline games (2048, Snake, Sudoku, Make 24), and your own
-  library of History, Saved and Downloads. The player is fully gesture driven
-  with background and popup playback, downloads, and local playlists. No
-  account needed, no tracking; data stays on the device with per-profile
-  storage and an incognito mode.
-
-  It is a substantially diverged fork of PipePipe/NewPipe under a different
-  application ID, maintained independently.
 
 RepoType: git
 Repo: https://github.com/vidya-hub/Hush.git
