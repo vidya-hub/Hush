@@ -1,0 +1,29 @@
+# Deterministic checkouts: F-Droid verifies its rebuild against our release
+# binaries byte-for-byte, so text files must be LF on every machine.
+* text=auto eol=lf
+
+# Windows batch files keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Known binary formats must never be normalized
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.webp -text
+*.gif -text
+*.ico -text
+*.ttf -text
+*.otf -text
+*.woff -text
+*.woff2 -text
+*.aar -text
+*.jar -text
+*.apk -text
+*.wav -text
+*.mp3 -text
+*.ogg -text
+*.jks -text
+*.keystore -text
+*.so -text
+*.zip -text

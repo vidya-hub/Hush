@@ -1,0 +1,3 @@
+Packaging and reproducibility maintenance release.
+
+Deterministic LF line endings via .gitattributes, version-code metadata for the F-Droid repository, and developer-signed per-ABI binaries published for verification. No app-behavior changes.
