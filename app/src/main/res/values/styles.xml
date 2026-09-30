@@ -288,4 +288,8 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+
+    <style name="Hush.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorSecondaryContainer</item>
+    </style>
 </resources>

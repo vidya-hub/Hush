@@ -7,9 +7,9 @@
     <item
         android:id="@+id/tab_games"
         android:icon="@drawable/ic_hush_games"
-        android:title="@string/hush_quick_games" />
+        android:title="@string/nav_games" />
     <item
         android:id="@+id/tab_breathe"
         android:icon="@drawable/ic_hush_mark"
-        android:title="@string/hush_breathe" />
+        android:title="@string/nav_breathe" />
 </menu>

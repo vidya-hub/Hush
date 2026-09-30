@@ -66,7 +66,7 @@ final class HomeDashboard {
         final HomeDashboard palette = new HomeDashboard(context, null);
         final int fill = palette.dark ? 0xFFF6F5F2 : palette.pine;
         final int foreground = palette.dark ? palette.pine : 0xFFF6F5F2;
-        binding.homeSearchGroup.setBackground(palette.shape(fill, 28, 0));
+        binding.homeSearchGroup.setBackground(palette.shape(fill, 32, 0));
         binding.homeSearchEditText.setTextColor(foreground);
         binding.homeSearchEditText.setHintTextColor(foreground);
         binding.homeSearchLeading.setImageTintList(ColorStateList.valueOf(foreground));

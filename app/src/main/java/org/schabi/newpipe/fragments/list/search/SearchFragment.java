@@ -426,7 +426,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
 
         if (centeredSearch && activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(true);
-            updateProfileLabel();
             updateIncognitoHint();
             refreshNowPlaying();
             searchBinding.homeSpacer.post(() -> {
@@ -1031,6 +1030,10 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 !showingResults && hasQuery ? View.VISIBLE : View.GONE);
         searchBinding.homeSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
         searchBinding.homeCenterSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
+        searchBinding.homeRecentRow.setVisibility(bareHome
+                && !HistoryRecordManager.isIncognito(requireContext())
+                && searchBinding.homeRecentChips.getChildCount() > 0
+                ? View.VISIBLE : View.GONE);
         final ViewGroup.MarginLayoutParams field = (ViewGroup.MarginLayoutParams)
                 searchBinding.homeSearchEditText.getLayoutParams();
         field.setMarginEnd(org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),
@@ -1311,6 +1314,64 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         openLibrary(GamesFragment.newInstance(game));
     }
 
+    /** Tappable recent searches under the hero field; the standard search-first pattern. */
+    private void renderRecentChips() {
+        if (searchBinding == null || activity == null) {
+            return;
+        }
+        final LinearLayout chips = searchBinding.homeRecentChips;
+        chips.removeAllViews();
+        historyRecordManager.getCompleteSearchHistory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(searches -> {
+                            if (searchBinding == null) {
+                                return;
+                            }
+                            int added = 0;
+                            final java.util.Set<String> seen = new java.util.HashSet<>();
+                            for (final String query : searches) {
+                                if (TextUtils.isEmpty(query) || added >= 6) {
+                                    continue;
+                                }
+                                if (!seen.add(query.trim().toLowerCase(Locale.getDefault()))) {
+                                    continue;
+                                }
+                                chips.addView(recentChip(query), new LinearLayout.LayoutParams(
+                                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                                added++;
+                            }
+                            updateHomeContentVisibility();
+                        },
+                        error -> Log.w(TAG, "Could not load recent searches", error));
+    }
+
+    private TextView recentChip(final String query) {
+        final TextView chip = new TextView(activity);
+        chip.setText(query);
+        chip.setMaxLines(1);
+        chip.setEllipsize(TextUtils.TruncateAt.END);
+        chip.setTextSize(15);
+        chip.setTextColor(org.schabi.newpipe.hush.ui.HushUi.color(activity,
+                com.google.android.material.R.attr.colorOnSurface));
+        chip.setBackgroundResource(R.drawable.bg_recent_chip);
+        chip.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                R.drawable.ic_history, 0, 0, 0);
+        chip.setCompoundDrawablePadding(org.schabi.newpipe.hush.ui.HushUi.dp(activity, 6));
+        final int pad = org.schabi.newpipe.hush.ui.HushUi.dp(activity, 12);
+        chip.setPadding(pad + org.schabi.newpipe.hush.ui.HushUi.dp(activity, 4), pad / 2,
+                pad, pad / 2);
+        chip.setClickable(true);
+        chip.setFocusable(true);
+        chip.setContentDescription(getString(R.string.search));
+        chip.setOnClickListener(v -> {
+            searchEditText.setText(query);
+            submitSearch(query);
+        });
+        return chip;
+    }
+
     private void updateIncognitoHint() {
         if (centeredSearch && searchEditText != null && activity != null) {
             final boolean incognito = HistoryRecordManager.isIncognito(activity);
@@ -1318,10 +1379,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                     ? R.string.history_incognito_search_hint : R.string.search_youtube);
             if (searchBinding != null) {
                 searchBinding.homeIncognito.setSelected(incognito);
-                searchBinding.homeIncognito.setBackground(org.schabi.newpipe.hush.ui.HushUi.shape(activity,
-                        org.schabi.newpipe.hush.ui.HushUi.color(activity, incognito
-                        ? com.google.android.material.R.attr.colorPrimaryContainer
-                        : com.google.android.material.R.attr.colorSurfaceContainer), 24, 0));
                 searchBinding.homeIncognito.setImageTintList(
                         android.content.res.ColorStateList.valueOf(
                                 org.schabi.newpipe.hush.ui.HushUi.color(activity, incognito
@@ -1329,6 +1386,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                                         : com.google.android.material.R.attr.colorOnSurfaceVariant)));
                 searchBinding.homeIncognito.setContentDescription(getString(incognito
                         ? R.string.home_incognito_on : R.string.home_incognito_off));
+                renderRecentChips();
             }
         }
     }

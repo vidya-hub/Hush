@@ -1158,6 +1158,8 @@
     <string name="hush_breathe_or_meditate">Breathe or meditate</string>
     <string name="hush_breathe">Breathe</string>
     <string name="hush_meditate">Meditate</string>
+    <string name="nav_games">Games</string>
+    <string name="nav_breathe">Breathe</string>
     <string name="hush_quick_games">Quick games</string>
     <string name="hush_all_games">All games</string>
     <string name="hush_your_library">Your library</string>

@@ -38,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?attr/colorSurfaceContainer"
-            app:elevation="8dp"
+            app:elevation="0dp"
+            app:itemActiveIndicatorStyle="@style/Hush.NavIndicator"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav" />
 
