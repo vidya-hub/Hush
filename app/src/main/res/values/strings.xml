@@ -137,6 +137,7 @@
 <string name="remote_search_suggestions">Remote search suggestions</string>
 <string name="search_suggestions_count_title">Search suggestions count</string>
 <string name="search_suggestions_count_summary">Number of past search suggestions to display</string>
+    <string name="profile_dialog_title">Profiles</string>
 <string name="profile_default_name">Personal</string>
 <string name="profile_switch_title">Profiles</string>
 <string name="profile_new">New profile</string>

@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
@@ -49,6 +50,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import android.widget.FrameLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 
@@ -70,6 +72,7 @@ import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.search.SearchFragment;
 import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
 import org.schabi.newpipe.player.Player;
+import org.schabi.newpipe.player.PlayerService;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
@@ -125,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
     private int systemRightInset;
     private int imeBottomInset;
     private boolean searchChrome;
+    private com.google.android.material.bottomnavigation.BottomNavigationView bottomNav;
+    private FrameLayout tabsHolder;
+    private boolean bottomNavVisible;
+    @IdRes private int currentTab = R.id.tab_search;
+    private boolean tabsAttached;
 
     /*//////////////////////////////////////////////////////////////////////////
     // Activity's LifeCycle
@@ -186,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             initFragments();
         }
+
+        setupBottomNav();
 
         setSupportActionBar(toolbarLayoutBinding.toolbar);
         try {
@@ -447,10 +457,153 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.getRoot().setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
+    /*//////////////////////////////////////////////////////////////////////////
+    // Bottom navigation: Search / Games / Breathe top-level tabs
+    //////////////////////////////////////////////////////////////////////////*/
+
+    private void setupBottomNav() {
+        bottomNav = findViewById(R.id.home_bottom_nav);
+        tabsHolder = findViewById(R.id.fragment_tabs_holder);
+        if (bottomNav == null || tabsHolder == null) {
+            return;
+        }
+        bottomNav.setOnItemSelectedListener(item -> {
+            final int id = item.getItemId();
+            if (id != currentTab) {
+                switchTab(id);
+            }
+            return true;
+        });
+        bottomNav.setSelectedItemId(R.id.tab_search);
+        setBottomNavVisible(true);
+    }
+
+    /*//////////////////////////////////////////////////////////////////////////
+    // Picture-in-picture: video keeps playing in a floating window
+    //////////////////////////////////////////////////////////////////////////*/
+
+    @Override
+    public void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && shouldEnterPip()) {
+            enterPictureInPictureMode(buildPipParams());
+        }
+    }
+
+    private boolean shouldEnterPip() {
+        if (!isInPictureInPictureMode() && PlayerHolder.getInstance().isPlaying()
+                && !PlayerHolder.getInstance().isBackgroundAudio()) {
+            // never enter PiP from a tab other than the watch screen
+            return tabsHolder == null || tabsHolder.getVisibility() != View.VISIBLE;
+        }
+        return false;
+    }
+
+    private android.app.PictureInPictureParams buildPipParams() {
+        final Player player = PlayerService.getRunningService() == null ? null
+                : PlayerService.getRunningService().getPlayer();
+        float ratio = player != null && player.getVideoNaturalAspectRatio() > 0
+                ? player.getVideoNaturalAspectRatio() : 16f / 9f;
+        ratio = Math.min(2.35f, Math.max(0.42f, ratio));
+        final android.app.PictureInPictureParams.Builder builder =
+                new android.app.PictureInPictureParams.Builder()
+                        .setAspectRatio(new android.util.Rational(
+                                Math.round(ratio * 1000000), 1000000));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && player != null
+                && player.getSurfaceView() != null) {
+            builder.setSourceRectHint(new android.graphics.Rect());
+        }
+        return builder.build();
+    }
+
+    @Override
+    public void onPictureInPictureModeChanged(final boolean isInPictureInPictureMode,
+                                              final android.content.res.Configuration newConfig) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
+        final Player player = PlayerService.getRunningService() == null ? null
+                : PlayerService.getRunningService().getPlayer();
+        if (player != null) {
+            player.setPipMode(isInPictureInPictureMode);
+        }
+        if (!isInPictureInPictureMode && bottomNav != null) {
+            applySearchChromeInsets();
+        }
+    }
+
+    /**
+     * Switches between the three top-level tabs. Games and Breathe live in their
+     * own containers inside {@code fragment_tabs_holder}, so switching is a pure
+     * visibility change and every tab keeps its state.
+     */
+    public void switchTab(@IdRes final int tabId) {
+        if (tabId != R.id.tab_search && tabId != R.id.tab_games
+                && tabId != R.id.tab_breathe) {
+            return;
+        }
+        currentTab = tabId;
+        final FragmentManager fm = getSupportFragmentManager();
+        // drop any detail screens stacked above home (watch page, library, single game)
+        if (fm.getBackStackEntryCount() > 1) {
+            fm.popBackStackImmediate(NavigationHelper.SEARCH_FRAGMENT_TAG, 0);
+        }
+        final boolean search = tabId == R.id.tab_search;
+        if (!search && !tabsAttached) {
+            tabsAttached = true;
+            fm.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.tabs_games_container,
+                            org.schabi.newpipe.hush.games.GamesFragment.newTabInstance())
+                    .add(R.id.tabs_breathe_container,
+                            org.schabi.newpipe.fragments.list.search.BreakSessionFragment
+                                    .newTabInstance())
+                    .commitNow();
+        }
+        if (tabsAttached) {
+            final View games = findViewById(R.id.tabs_games_container);
+            final View breathe = findViewById(R.id.tabs_breathe_container);
+            if (games != null) {
+                games.setVisibility(tabId == R.id.tab_games ? View.VISIBLE : View.GONE);
+            }
+            if (breathe != null) {
+                breathe.setVisibility(tabId == R.id.tab_breathe ? View.VISIBLE : View.GONE);
+            }
+        }
+        tabsHolder.setVisibility(search ? View.GONE : View.VISIBLE);
+        setBottomNavVisible(true);
+    }
+
+    /** The bar only appears on the three top-level tabs. */
+    public void setBottomNavVisible(final boolean visible) {
+        bottomNavVisible = visible;
+        if (bottomNav != null) {
+            bottomNav.setVisibility(visible ? View.VISIBLE : View.GONE);
+            bottomNav.setPadding(0, 0, 0, visible ? systemBottomInset : 0);
+        }
+        applySearchChromeInsets();
+    }
+
+    public boolean isBottomNavVisible() {
+        return bottomNavVisible;
+    }
+
+    private int bottomNavHeight() {
+        if (bottomNav == null || !bottomNavVisible) {
+            return 0;
+        }
+        return bottomNav.getHeight() > 0
+                ? bottomNav.getHeight() + systemBottomInset
+                : (int) (64 * getResources().getDisplayMetrics().density) + systemBottomInset;
+    }
+
     private void applySearchChromeInsets() {
         final int pageBottom = imeBottomInset > 0 ? imeBottomInset : systemBottomInset;
+        final int bar = bottomNavHeight();
         applyHolderInsets(R.id.fragment_holder,
-                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()), pageBottom);
+                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()),
+                Math.max(pageBottom, bar));
+        applyHolderInsets(R.id.fragment_tabs_holder,
+                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()),
+                Math.max(pageBottom, bar));
         // BottomSheetBehavior ignores holder margins. The player applies this inset itself.
         applyHolderInsets(R.id.fragment_player_holder, 0, 0);
     }
@@ -592,6 +745,19 @@ public class MainActivity extends AppCompatActivity {
         // In case bottomSheet is not visible on the screen or collapsed we can assume that the user
         // interacts with a fragment inside fragment_holder so all back presses should be
         // handled by it
+        // On the Games/Breathe tabs, back first closes any open game screen,
+        // then returns to the Search tab instead of leaving the app.
+        if (bottomNavVisible && currentTab != R.id.tab_search) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                super.onBackPressed();
+                return;
+            }
+            if (bottomNav != null) {
+                bottomNav.setSelectedItemId(R.id.tab_search);
+            }
+            return;
+        }
+
         if (bottomSheetHiddenOrCollapsed()) {
             final Fragment fragment = getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_holder);

@@ -19,19 +19,30 @@ import org.schabi.newpipe.hush.ui.HushUi;
 
 /** Navigation and chrome; each game has its own controller and independent engine. */
 public final class GamesFragment extends BaseFragment {
+    public static final String TAB_TAG = "hush_games_tab";
     private GameScreens.Screen screen;
     private String game;
+    private boolean tabMode;
     public static GamesFragment newInstance(@Nullable String selectedGame){
         GamesFragment result=new GamesFragment();Bundle args=new Bundle();args.putString("game",selectedGame);result.setArguments(args);return result;
     }
-    @Override public void onCreate(@Nullable Bundle state){super.onCreate(state);game=getArguments()==null?null:getArguments().getString("game");}
+    /** Hub instance hosted by the bottom navigation's Games tab. */
+    public static GamesFragment newTabInstance(){
+        GamesFragment result=new GamesFragment();Bundle args=new Bundle();args.putString("game",null);
+        args.putBoolean("tab",true);result.setArguments(args);return result;
+    }
+    @Override public void onCreate(@Nullable Bundle state){super.onCreate(state);
+        game=getArguments()==null?null:getArguments().getString("game");
+        tabMode=getArguments()!=null&&getArguments().getBoolean("tab",false);}
     @Override public View onCreateView(@NonNull android.view.LayoutInflater inflater,@Nullable ViewGroup parent,@Nullable Bundle saved){
         LinearLayout root=column();root.setBackgroundColor(HushUi.color(requireContext(),com.google.android.material.R.attr.colorSurface));
         LinearLayout header=new LinearLayout(requireContext());header.setGravity(Gravity.CENTER_VERTICAL);header.setPadding(dp(12),0,dp(12),0);
         ImageButton back=new ImageButton(requireContext());back.setImageResource(R.drawable.ic_hush_back);
         back.setImageTintList(android.content.res.ColorStateList.valueOf(HushUi.color(requireContext(),com.google.android.material.R.attr.colorOnSurface)));
         back.setBackgroundResource(android.R.drawable.list_selector_background);back.setContentDescription(getString(R.string.back));
-        back.setOnClickListener(v->requireActivity().getSupportFragmentManager().popBackStack());header.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));
+        back.setOnClickListener(v->requireActivity().getSupportFragmentManager().popBackStack());
+        if(tabMode&&game==null){back.setVisibility(View.GONE);} // the bottom bar navigates the hub
+        header.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));
         int title=game==null?R.string.hush_all_games:"2048".equals(game)?R.string.hush_game_2048:"snake".equals(game)?R.string.hush_game_snake:
                 "sudoku".equals(game)?R.string.hush_game_sudoku:R.string.hush_game_make24;
         TextView name=new TextView(requireContext());name.setText(title);name.setTextSize(25);name.setTypeface(name.getTypeface(),1);
@@ -53,14 +64,22 @@ public final class GamesFragment extends BaseFragment {
             TextView hint=new TextView(requireContext());hint.setText(hints[i]);hint.setTextSize(14);card.addView(hint);
             card.addView(new GamePreview(requireContext(),id),new LinearLayout.LayoutParams(dp(80),dp(80)));
             card.setOnClickListener(v->requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
-                    .replace(R.id.fragment_holder,newInstance(id)).addToBackStack(null).commit());
+                    .replace(tabMode?R.id.tabs_games_container:R.id.fragment_holder,tabInstance(id)).addToBackStack(null).commit());
             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.bottomMargin=dp(16);(i%2==0?left:right).addView(card,lp);
         }
         // Two columns on ordinary screens, one column with large text or narrow windows.
         HushUi.Panes panes=new HushUi.Panes(requireContext(),left,right);
         panes.setBreakpointDp(360);content.addView(panes);return new HushUi.Bounded(requireContext(),content,1120);
     }
-    @Override public void onResume(){super.onResume();if(requireActivity() instanceof MainActivity)((MainActivity)requireActivity()).setSearchChrome(true);if(screen!=null)screen.resume();}
+    private GamesFragment tabInstance(String id){
+        GamesFragment result=new GamesFragment();Bundle args=new Bundle();args.putString("game",id);
+        args.putBoolean("tab",true);result.setArguments(args);return result;
+    }
+    @Override public void onResume(){super.onResume();
+        if(requireActivity() instanceof MainActivity){MainActivity activity=(MainActivity)requireActivity();
+            activity.setSearchChrome(true);
+            if(tabMode)activity.setBottomNavVisible(game==null);}
+        if(screen!=null)screen.resume();}
     @Override public void onPause(){if(screen!=null)screen.pause();super.onPause();}
     @Override public void onSaveInstanceState(@NonNull Bundle out){if(screen!=null)screen.save();super.onSaveInstanceState(out);}
     @Override public void onDestroyView(){if(screen!=null)screen.pause();screen=null;super.onDestroyView();}

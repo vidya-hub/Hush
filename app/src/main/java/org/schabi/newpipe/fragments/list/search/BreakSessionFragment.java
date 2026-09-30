@@ -28,7 +28,9 @@ import org.schabi.newpipe.hush.ui.HushUi;
 
 /** A full screen for an intentional pause, independent of video search. */
 public final class BreakSessionFragment extends BaseFragment {
+    public static final String TAB_TAG = "hush_breathe_tab";
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private boolean tabMode;
     private BreakController state;
     private BreathingSound cues;
     private LinearLayout options;
@@ -50,8 +52,15 @@ public final class BreakSessionFragment extends BaseFragment {
         BreakSessionFragment result = new BreakSessionFragment();
         Bundle args = new Bundle(); args.putBoolean("meditate",meditation); result.setArguments(args); return result;
     }
+    /** Instance hosted by the bottom navigation's Breathe tab. */
+    public static BreakSessionFragment newTabInstance() {
+        BreakSessionFragment result = new BreakSessionFragment();
+        Bundle args = new Bundle(); args.putBoolean("meditate",false);
+        args.putBoolean("tab",true); result.setArguments(args); return result;
+    }
     @Override public void onCreate(@Nullable Bundle saved) {
         super.onCreate(saved); state = new ViewModelProvider(this).get(BreakController.class);
+        tabMode = getArguments()!=null && getArguments().getBoolean("tab",false);
         if (!state.initialized) {
             state.initialized=true; state.meditation=getArguments()!=null && getArguments().getBoolean("meditate");
             SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(requireContext());
@@ -67,6 +76,7 @@ public final class BreakSessionFragment extends BaseFragment {
         Context c=requireContext(); LinearLayout root=column(); root.setBackgroundColor(color(com.google.android.material.R.attr.colorSurface));
         LinearLayout header=new LinearLayout(c); header.setGravity(Gravity.CENTER_VERTICAL); header.setPadding(dp(12),0,dp(12),0);
         ImageButton back=icon(R.drawable.ic_hush_back,R.string.back); back.setOnClickListener(v -> exit());
+        if(tabMode){back.setVisibility(View.GONE);} // the bottom bar navigates the tab
         header.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));
         TextView title=label(getString(state.meditation?R.string.hush_meditate:R.string.hush_breathe),25,true);
         header.addView(title,new LinearLayout.LayoutParams(0,-2,1));
@@ -124,6 +134,7 @@ public final class BreakSessionFragment extends BaseFragment {
     }
     private void exit() {
         state.stop();handler.removeCallbacks(tick);if(cues!=null)cues.cancelPending();
+        if(tabMode){render();return;} // tab stays; just end the session
         requireActivity().getSupportFragmentManager().popBackStack();
     }
     /** Full refresh after a discrete state change (mode, start, pause, resume, finish). */

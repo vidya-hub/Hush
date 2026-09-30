@@ -342,6 +342,28 @@ public final class Player implements
     private PopupMenu displayModePopupMenu;
 
     private float videoNaturalAspectRatio;
+    // True while the activity hosts this player inside an Android PiP window.
+    private boolean pipMode;
+
+    public void setPipMode(final boolean pip) {
+        if (pipMode == pip) {
+            return;
+        }
+        pipMode = pip;
+        if (pip) {
+            hideControls(0, 0);
+        } else if (isControlsVisible()) {
+            showControlsThenHide();
+        }
+    }
+
+    public boolean isInPipMode() {
+        return pipMode;
+    }
+
+    public float getVideoNaturalAspectRatio() {
+        return videoNaturalAspectRatio;
+    }
     private int videoUnappliedRotation;
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -2291,6 +2313,9 @@ public final class Player implements
     }
 
     private void showSystemUIPartially() {
+        if (pipMode) {
+            return; // system UI calls are not allowed inside a PiP window
+        }
         final AppCompatActivity activity = getParentActivity();
         if (isFullscreen && activity != null) {
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);

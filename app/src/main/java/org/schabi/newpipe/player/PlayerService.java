@@ -54,6 +54,16 @@ public class PlayerService extends Service implements PlayerServiceInterface {
     private static final boolean DEBUG = Player.DEBUG;
 
     private Player player;
+    private static PlayerService runningService;
+
+    /** The running service, or null; used for PiP coordination from MainActivity. */
+    public static PlayerService getRunningService() {
+        return runningService;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
     private WindowManager windowManager;
 
     private final IBinder mBinder = new PlayerService.LocalBinder();
@@ -107,6 +117,7 @@ public class PlayerService extends Service implements PlayerServiceInterface {
             Log.d(TAG, "onCreate() called");
         }
         assureCorrectAppLanguage(this);
+        runningService = this;
         windowManager = ContextCompat.getSystemService(this, WindowManager.class);
 
         ThemeHelper.setTheme(this);
@@ -186,6 +197,7 @@ public class PlayerService extends Service implements PlayerServiceInterface {
 
     @Override
     public void onDestroy() {
+        runningService = null;
         if (DEBUG) {
             Log.d(TAG, "destroy() called");
         }

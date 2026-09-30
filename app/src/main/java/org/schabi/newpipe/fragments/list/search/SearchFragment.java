@@ -542,27 +542,9 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             searchFilter = searchToolbarContainer.findViewById(R.id.toolbar_search_filter);
             searchToolbarContainer.setVisibility(View.GONE);
             searchFilter.setVisibility(View.GONE);
-            searchBinding.profileButton.setOnClickListener(v -> showProfileDialog());
             searchBinding.homeIncognito.setOnClickListener(v -> toggleIncognito());
             searchBinding.homeSuggestionsRetry.setOnClickListener(v -> initSuggestionObserver());
             searchBinding.homeMenu.setOnClickListener(this::showHomeMenu);
-            searchBinding.homeContent.removeAllViews();
-            searchBinding.homeContent.setPadding(0, 0, 0, 0);
-            searchBinding.homeContent.setGravity(android.view.Gravity.TOP);
-            searchBinding.homeContent.addView(HomeDashboard.build(activity,
-                    new HomeDashboard.Actions() {
-                        @Override public void breathe() { openBreakScreen(false); }
-                        @Override public void meditate() { openBreakScreen(true); }
-                        @Override public void game(final String game) { openGame(game); }
-                        @Override public void allGames() { openGame(null); }
-                        @Override public void history() { openLibrary(
-                                new org.schabi.newpipe.local.library.HistoryLibraryFragment()); }
-                        @Override public void saved() { openLibrary(
-                                new org.schabi.newpipe.local.library.SavedLibraryFragment()); }
-                        @Override public void downloads() {
-                            NavigationHelper.openDownloads(activity);
-                        }
-                    }));
             HomeDashboard.styleSearch(searchBinding, activity);
             searchBinding.getRoot().addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
                 if (r-l != or-ol) updateAdaptiveSearchWidth(r-l);
@@ -590,11 +572,9 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                     searchBinding.nowPlayingBar.setVisibility(View.GONE);
                 }
             });
-            updateProfileLabel();
             applySearchChrome(false);
             return;
         }
-        searchBinding.profileButton.setVisibility(View.GONE);
         searchEditText = searchToolbarContainer.findViewById(R.id.toolbar_search_edit_text);
         searchClear = searchToolbarContainer.findViewById(R.id.toolbar_search_clear);
         searchFilter = searchToolbarContainer.findViewById(R.id.toolbar_search_filter);
@@ -1017,7 +997,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         showingResults = results;
-        searchBinding.homeHeader.setVisibility(View.VISIBLE);
         searchBinding.homeViewToggle.setVisibility(results ? View.VISIBLE : View.GONE);
         updateViewToggleIcon();
         final ViewGroup.MarginLayoutParams clearLp =
@@ -1037,6 +1016,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 getString(results ? R.string.back : R.string.search));
         if (activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(true);
+            ((org.schabi.newpipe.MainActivity) activity).setBottomNavVisible(!results);
         }
         refreshNowPlaying();
     }
@@ -1046,10 +1026,11 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         final boolean hasQuery = !TextUtils.isEmpty(searchEditText.getText().toString().trim());
+        final boolean bareHome = !showingResults && !hasQuery;
         searchBinding.homeSuggestionsList.setVisibility(
                 !showingResults && hasQuery ? View.VISIBLE : View.GONE);
-        searchBinding.homeSpacer.setVisibility(
-                !showingResults && !hasQuery ? View.VISIBLE : View.GONE);
+        searchBinding.homeSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
+        searchBinding.homeCenterSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
         final ViewGroup.MarginLayoutParams field = (ViewGroup.MarginLayoutParams)
                 searchBinding.homeSearchEditText.getLayoutParams();
         field.setMarginEnd(org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),
@@ -1089,14 +1070,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
     }
 
     private void updateProfileLabel() {
-        if (searchBinding == null || activity == null) {
-            return;
-        }
-        final ProfileStore.Profile active = ProfileStore.getActive(activity);
-        searchBinding.profileName.setText(active.name);
-        searchBinding.profileButton.setContentDescription(active.name);
-        searchBinding.profileMonogram.setText(monogram(active.name));
-        showProfilePhoto(searchBinding.profilePhoto, searchBinding.profileMonogram, active.id);
+        // profile views left the home header; the sheet keeps its own photo/monogram
     }
 
     private static String monogram(final String name) {
@@ -1301,6 +1275,9 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         final boolean incognito = HistoryRecordManager.isIncognito(activity);
         final java.util.ArrayList<org.schabi.newpipe.util.HushActionSheet.Action> actions =
                 new java.util.ArrayList<>();
+        actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
+                R.drawable.ic_hush_profile, getString(R.string.profile_dialog_title),
+                ProfileStore.getActive(activity).name, false, this::showProfileDialog));
         actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
                 R.drawable.ic_history, getString(R.string.action_history), null, false,
                 () -> openLibrary(new org.schabi.newpipe.local.library.HistoryLibraryFragment())));

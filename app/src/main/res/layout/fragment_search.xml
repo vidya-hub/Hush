@@ -13,98 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/home_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="12dp"
-                android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/ic_hush_mark"
-                app:tint="?attr/colorOnSurface" />
-
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:orientation="vertical">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="@string/app_name" android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="@string/hush_home_subtitle" android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
-            </LinearLayout>
-        <LinearLayout
-            android:id="@+id/profile_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="@string/profile_default_name"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp">
-
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp">
-
-                <TextView
-                    android:id="@+id/profile_monogram"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_profile_monogram"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    android:textColor="?attr/colorOnPrimaryContainer"
-                    tools:text="P" />
-
-                <ImageView
-                    android:id="@+id/profile_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    tools:ignore="ContentDescription" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="@string/profile_default_name"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                android:textColor="?attr/colorOnSurface"
-                android:visibility="gone" />
-
-            <ImageView
-                android:id="@+id/profile_expand"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="2dp"
-                android:importantForAccessibility="no"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_expand_more"
-                app:tint="?attr/colorOnSurfaceVariant" />
-        </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/home_menu"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/more_options"
-                app:srcCompat="@drawable/ic_more_vert"
-                app:tint="?attr/colorOnSurface" />
-        </LinearLayout>
-
         <TextView android:id="@+id/home_suggestions_retry" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:minHeight="48dp" android:padding="16dp"
             android:text="@string/hush_search_retry" android:textColor="?attr/colorOnSurface"
@@ -329,7 +237,25 @@
             android:contentDescription="@string/history_incognito"
             app:srcCompat="@drawable/ic_hush_incognito"
             app:tint="?attr/colorOnSurfaceVariant" />
+
+        <ImageButton
+            android:id="@+id/home_menu"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:padding="14dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/more_options"
+            app:srcCompat="@drawable/ic_more_vert"
+            app:tint="?attr/colorOnSurfaceVariant" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/home_center_spacer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone" />
 
         <LinearLayout
         android:id="@+id/now_playing_bar"
