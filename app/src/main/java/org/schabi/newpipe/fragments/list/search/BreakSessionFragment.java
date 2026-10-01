@@ -118,6 +118,7 @@ public final class BreakSessionFragment extends BaseFragment {
             if (!state.active) { state.start(SystemClock.elapsedRealtime()); if(state.meditation && state.sound)cue(BreathingSession.Phase.HOLD); }
             else if(state.paused)state.resume(SystemClock.elapsedRealtime());
             else {state.pause(SystemClock.elapsedRealtime());if(cues!=null)cues.cancelPending();}
+            renderChrome();
             handler.removeCallbacks(tick); handler.post(tick);
         });
         secondary=button(R.string.breath_end,false); controls.addView(secondary,top(12)); secondary.setOnClickListener(v -> exit());

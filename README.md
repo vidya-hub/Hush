@@ -27,6 +27,40 @@ These screenshots are fresh captures from the app on a headless Android emulator
 
 Home's header, headline, search and shortcuts share one scrolling page. Collapsed video floats above browsing content and never reserves an empty section underneath the results. Landscape tablets use a navigation rail; portrait and compact windows use bottom navigation with equal side margins.
 
+## Games and Breathe
+
+These are actual in-app captures of isolated demonstration rounds and a running breathing session. The capture flow restores existing game saves and privacy settings. Active breathing exposes Pause/Resume and End controls while hiding the setup options.
+
+### Mobile gameplay
+
+| 2048 | Snake | Sudoku |
+| :---: | :---: | :---: |
+| ![2048 gameplay](screenshots/latest/mobile-game-2048.png) | ![Snake gameplay](screenshots/latest/mobile-game-snake.png) | ![Sudoku gameplay](screenshots/latest/mobile-game-sudoku.png) |
+
+| Make 24 | Breathe setup | Active breathing |
+| :---: | :---: | :---: |
+| ![Make 24 gameplay](screenshots/latest/mobile-game-make24.png) | ![Breathe setup](screenshots/latest/mobile-breathe-setup.png) | ![Active breathing](screenshots/latest/mobile-breathe-active.png) |
+
+### Landscape tablet gameplay
+
+| 2048 | Snake | Sudoku |
+| :---: | :---: | :---: |
+| ![2048 gameplay](screenshots/latest/tablet-landscape-game-2048.png) | ![Snake gameplay](screenshots/latest/tablet-landscape-game-snake.png) | ![Sudoku gameplay](screenshots/latest/tablet-landscape-game-sudoku.png) |
+
+| Make 24 | Breathe setup | Active breathing |
+| :---: | :---: | :---: |
+| ![Make 24 gameplay](screenshots/latest/tablet-landscape-game-make24.png) | ![Breathe setup](screenshots/latest/tablet-landscape-breathe-setup.png) | ![Active breathing](screenshots/latest/tablet-landscape-breathe-active.png) |
+
+### Portrait tablet gameplay
+
+| 2048 | Snake | Sudoku |
+| :---: | :---: | :---: |
+| ![2048 gameplay](screenshots/latest/tablet-portrait-game-2048.png) | ![Snake gameplay](screenshots/latest/tablet-portrait-game-snake.png) | ![Sudoku gameplay](screenshots/latest/tablet-portrait-game-sudoku.png) |
+
+| Make 24 | Breathe setup | Active breathing |
+| :---: | :---: | :---: |
+| ![Make 24 gameplay](screenshots/latest/tablet-portrait-game-make24.png) | ![Breathe setup](screenshots/latest/tablet-portrait-breathe-setup.png) | ![Active breathing](screenshots/latest/tablet-portrait-breathe-active.png) |
+
 ## What's inside
 
 **A quiet Home**

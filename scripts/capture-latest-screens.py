@@ -6,7 +6,8 @@ adb=os.environ.get('ADB',str(Path.home()/'Library/Android/sdk/platform-tools/adb
 serial=os.environ.get('ANDROID_SERIAL','emulator-5558')
 pkg='com.vidsagar.hush.debug'
 real=os.environ.get('HUSH_REAL_VIDEO')=='1'
-output=repo/('assets/hush-live-overlay-proof' if real else 'assets/hush-overlay-proof');output.mkdir(parents=True,exist_ok=True)
+showcase=os.environ.get('HUSH_GAMEPLAY')=='1'
+output=repo/('assets/hush-gameplay-proof' if showcase else 'assets/hush-live-overlay-proof' if real else 'assets/hush-overlay-proof');output.mkdir(parents=True,exist_ok=True)
 def cmd(*args):return subprocess.check_output([adb,'-s',serial,*args],text=True)
 size=cmd('shell','wm','size');density=cmd('shell','wm','density');font=cmd('shell','settings','get','system','font_scale').strip()
 results=[]
@@ -15,15 +16,18 @@ try:
  cmd('install','-r',str(repo/'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'))
  for name,pixels,dpi in [('tablet-landscape','2560x1600','320'),('tablet-portrait','1600x2560','320'),('mobile','1080x2400','420')]:
   cmd('shell','am','force-stop',pkg);cmd('shell','wm','size',pixels);cmd('shell','wm','density',dpi);cmd('shell','settings','put','system','font_scale','1.0')
-  cmd('shell','run-as',pkg,'rm','-rf','files/redesign-proof');folder=output/name;folder.mkdir(exist_ok=True)
+  capture_dir='files/game-showcase' if showcase else 'files/redesign-proof'
+  cmd('shell','run-as',pkg,'rm','-rf',capture_dir);folder=output/name;folder.mkdir(exist_ok=True)
   tests='org.schabi.newpipe.hush.TabletWindowTest,org.schabi.newpipe.hush.RedesignNavigationTest#homeRoutesAndLibraryTitles,org.schabi.newpipe.hush.TabletLocalPlaybackTest'
   if real:tests='org.schabi.newpipe.hush.RedesignPlaybackTest'
+  if showcase:tests='org.schabi.newpipe.hush.games.GameShowcaseCaptureTest'
+  tests=os.environ.get('HUSH_CAPTURE_TESTS',tests)
   print('Testing '+name,flush=True)
   with (folder/'tests.log').open('w') as log:
    subprocess.run([adb,'-s',serial,'shell','am','instrument','-w','-r','-e','class',tests,pkg+'.test/androidx.test.runner.AndroidJUnitRunner'],stdout=log,stderr=subprocess.STDOUT,timeout=300,check=True)
   passed='\nOK (' in (folder/'tests.log').read_text()
-  for filename in cmd('shell','run-as',pkg,'ls','files/redesign-proof').split():
-   if filename.endswith('.png'):(folder/filename).write_bytes(subprocess.check_output([adb,'-s',serial,'exec-out','run-as',pkg,'cat','files/redesign-proof/'+filename]))
+  for filename in cmd('shell','run-as',pkg,'ls',capture_dir).split():
+   if filename.endswith('.png'):(folder/filename).write_bytes(subprocess.check_output([adb,'-s',serial,'exec-out','run-as',pkg,'cat',capture_dir+'/'+filename]))
   results.append({'configuration':name,'passed':passed,'captures':len(list(folder.glob('*.png')))})
   (output/'results.json').write_text(json.dumps(results,indent=2)+'\n');print(results[-1],flush=True)
 finally:
