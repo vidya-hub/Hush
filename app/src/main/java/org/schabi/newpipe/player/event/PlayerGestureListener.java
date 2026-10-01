@@ -98,13 +98,9 @@ public class PlayerGestureListener
             Log.d(TAG, "onSingleTap called with playerType = [" + player.getPlayerType() + "]");
         }
 
-        // The PiP window is too small for the full control set: a tap toggles playback.
         if (player.isInPipMode()) {
-            if (player.getCurrentState() == Player.STATE_COMPLETED) {
-                player.showControls(0);
-            } else {
-                player.playPause();
-            }
+            if (player.getCurrentState() == Player.STATE_COMPLETED) player.showControls(0);
+            else player.playPause();
             return;
         }
 

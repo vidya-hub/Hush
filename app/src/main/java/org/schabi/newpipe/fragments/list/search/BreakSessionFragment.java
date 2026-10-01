@@ -28,9 +28,7 @@ import org.schabi.newpipe.hush.ui.HushUi;
 
 /** A full screen for an intentional pause, independent of video search. */
 public final class BreakSessionFragment extends BaseFragment {
-    public static final String TAB_TAG = "hush_breathe_tab";
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private boolean tabMode;
     private BreakController state;
     private BreathingSound cues;
     private LinearLayout options;
@@ -42,6 +40,7 @@ public final class BreakSessionFragment extends BaseFragment {
     private MaterialButton secondary;
     private MaterialButton technique;
     private MaterialButton[] durations;
+    private final MaterialButton[] modeButtons = new MaterialButton[2];
     private final Runnable tick = new Runnable() {
         @Override public void run() {
             if (getView() == null) return;
@@ -52,15 +51,8 @@ public final class BreakSessionFragment extends BaseFragment {
         BreakSessionFragment result = new BreakSessionFragment();
         Bundle args = new Bundle(); args.putBoolean("meditate",meditation); result.setArguments(args); return result;
     }
-    /** Instance hosted by the bottom navigation's Breathe tab. */
-    public static BreakSessionFragment newTabInstance() {
-        BreakSessionFragment result = new BreakSessionFragment();
-        Bundle args = new Bundle(); args.putBoolean("meditate",false);
-        args.putBoolean("tab",true); result.setArguments(args); return result;
-    }
     @Override public void onCreate(@Nullable Bundle saved) {
         super.onCreate(saved); state = new ViewModelProvider(this).get(BreakController.class);
-        tabMode = getArguments()!=null && getArguments().getBoolean("tab",false);
         if (!state.initialized) {
             state.initialized=true; state.meditation=getArguments()!=null && getArguments().getBoolean("meditate");
             SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(requireContext());
@@ -74,16 +66,30 @@ public final class BreakSessionFragment extends BaseFragment {
     @Override public View onCreateView(@NonNull android.view.LayoutInflater inflater,
             @Nullable ViewGroup parent,@Nullable Bundle saved) {
         Context c=requireContext(); LinearLayout root=column(); root.setBackgroundColor(color(com.google.android.material.R.attr.colorSurface));
-        LinearLayout header=new LinearLayout(c); header.setGravity(Gravity.CENTER_VERTICAL); header.setPadding(dp(12),0,dp(12),0);
+        LinearLayout header=new LinearLayout(c); header.setGravity(Gravity.CENTER_VERTICAL); header.setPadding(dp(22),0,dp(22),0);
         ImageButton back=icon(R.drawable.ic_hush_back,R.string.back); back.setOnClickListener(v -> exit());
-        if(tabMode){back.setVisibility(View.GONE);} // the bottom bar navigates the tab
-        header.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));
+        header.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));back.setVisibility(View.GONE);
         TextView title=label(getString(state.meditation?R.string.hush_meditate:R.string.hush_breathe),25,true);
         header.addView(title,new LinearLayout.LayoutParams(0,-2,1));
+        header.setMinimumHeight(dp(56));
         root.addView(header,new LinearLayout.LayoutParams(-1,-2));
+        LinearLayout modes=new LinearLayout(c);
+        boolean stackModes=getResources().getConfiguration().fontScale>1.3f;
+        modes.setOrientation(stackModes?LinearLayout.VERTICAL:LinearLayout.HORIZONTAL);
+        for(boolean meditation:new boolean[]{false,true}) {
+            MaterialButton mode=button(meditation?R.string.hush_meditate:R.string.hush_breathe,false);
+            modeButtons[meditation ? 1 : 0] = mode;
+            LinearLayout.LayoutParams modeLayout = new LinearLayout.LayoutParams(stackModes?-1:0,-2,stackModes?0:1);
+            if (meditation) { if(stackModes)modeLayout.topMargin=dp(8);else modeLayout.setMarginStart(dp(8)); }
+            modes.addView(mode,modeLayout);
+            mode.setOnClickListener(v->{if(state.active) return;state.meditation=meditation;
+                title.setText(meditation?R.string.hush_meditate:R.string.hush_breathe);render();});
+        }
+        modes.setPadding(dp(22),dp(8),dp(22),dp(8));root.addView(modes);
+
         LinearLayout visual=column(); visual.setGravity(Gravity.CENTER);
-        orb=new BreathingOrbView(c,null); visual.addView(orb,new LinearLayout.LayoutParams(-1,dp(280)));
-        ring=new MeditationRing(c); visual.addView(ring,new LinearLayout.LayoutParams(-1,dp(280)));
+        orb=new BreathingOrbView(c,null); visual.addView(orb,new LinearLayout.LayoutParams(-1,dp(160)));
+        ring=new MeditationRing(c); visual.addView(ring,new LinearLayout.LayoutParams(-1,dp(160)));
         phase=label("",24,true); phase.setGravity(Gravity.CENTER); visual.addView(phase);
         clock=label("",17,false); clock.setGravity(Gravity.CENTER); visual.addView(clock,top(12));
         LinearLayout controls=column(); options=column();
@@ -115,15 +121,17 @@ public final class BreakSessionFragment extends BaseFragment {
             handler.removeCallbacks(tick); handler.post(tick);
         });
         secondary=button(R.string.breath_end,false); controls.addView(secondary,top(12)); secondary.setOnClickListener(v -> exit());
-        LinearLayout content=column(); content.setPadding(dp(24),dp(24),dp(24),dp(24));
-        content.addView(new HushUi.Panes(c,new HushUi.Bounded(c,visual,320),new HushUi.Bounded(c,controls,360)));
+        LinearLayout content=column(); content.setPadding(dp(22),dp(12),dp(22),dp(24));
+        HushUi.bindContentWidth(header,480,784); HushUi.bindContentWidth(modes,480,784); HushUi.bindContentWidth(content,480,784);
+        HushUi.Panes panes=new HushUi.Panes(c,new HushUi.Bounded(c,visual,400),new HushUi.Bounded(c,controls,360));
+        panes.setBreakpointDp(784); panes.setTag("hush-content-panes");content.addView(panes);
         ScrollView scroll=new ScrollView(c);scroll.setFillViewport(false);scroll.setVerticalScrollBarEnabled(false);
-        scroll.addView(new HushUi.Bounded(c,content,1120));root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
+        scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
         root.addView(new CompactPlaybackBar(c),new LinearLayout.LayoutParams(-1,-2)); return root;
     }
     @Override public void onViewCreated(@NonNull View view,@Nullable Bundle saved) {super.onViewCreated(view,saved);render();}
     @Override public void onResume() {
-        super.onResume(); if(requireActivity() instanceof MainActivity)((MainActivity)requireActivity()).setSearchChrome(true);
+        super.onResume(); if(requireActivity() instanceof MainActivity){ ((MainActivity)requireActivity()).setSearchChrome(true); ((MainActivity)requireActivity()).setHomeNavigation("Breathe"); }
         handler.removeCallbacks(tick); handler.post(tick);
     }
     @Override public void onPause() {
@@ -134,7 +142,6 @@ public final class BreakSessionFragment extends BaseFragment {
     }
     private void exit() {
         state.stop();handler.removeCallbacks(tick);if(cues!=null)cues.cancelPending();
-        if(tabMode){render();return;} // tab stays; just end the session
         requireActivity().getSupportFragmentManager().popBackStack();
     }
     /** Full refresh after a discrete state change (mode, start, pause, resume, finish). */
@@ -146,6 +153,10 @@ public final class BreakSessionFragment extends BaseFragment {
     /** Structural updates only; safe to call on state changes, too heavy for the tick loop. */
     private void renderChrome() {
         if (primary == null) return;
+        for (int i=0;i<modeButtons.length;i++) {
+            HushUi.style(modeButtons[i], state.meditation == (i==1));
+            modeButtons[i].setEnabled(!state.active);
+        }
         orb.setVisibility(state.meditation ? View.GONE : View.VISIBLE);
         ring.setVisibility(state.meditation ? View.VISIBLE : View.GONE);
         options.setVisibility(state.active || state.completed ? View.GONE : View.VISIBLE);
@@ -165,6 +176,10 @@ public final class BreakSessionFragment extends BaseFragment {
     /** Light per-tick update; only touches views whose visible value actually changed. */
     private void renderTick() {
         if (primary == null) return;
+        for (int i=0;i<modeButtons.length;i++) {
+            HushUi.style(modeButtons[i], state.meditation == (i==1));
+            modeButtons[i].setEnabled(!state.active);
+        }
         long now = SystemClock.elapsedRealtime();
         long remaining = Math.max(0, state.minutes * 60_000L - state.elapsed(now));
         if (state.active && remaining == 0) {

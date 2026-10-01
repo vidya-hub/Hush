@@ -1,0 +1,11 @@
+{
+  "individual_icons": 70,
+  "individual_prompts": 70,
+  "mapped_icons": 70,
+  "mockup_pages_checked": 14,
+  "alpha_channels_valid": true,
+  "documentation_local_links_valid": true,
+  "pending_preview_glyphs": 0,
+  "review": "actual PNG masks at 24/32px and home component placements",
+  "android_implemented": false
+}

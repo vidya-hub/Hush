@@ -288,9 +288,10 @@ public final class BulletCommentsView extends ConstraintLayout {
                 case "sans-serif":
                     fontToBeUsed = Typeface.SANS_SERIF;
                     break;
+                case "LXGW WenKai Screen":
+                    fontToBeUsed = ResourcesCompat.getFont(context, R.font.lxgw_wenkai);
+                    break;
                 default:
-                    // The bundled LXGW WenKai font was removed with the non-YouTube
-                    // services; comment text falls back to the system typeface.
                     fontToBeUsed = Typeface.DEFAULT;
                     break;
             }

@@ -10,10 +10,19 @@
         android:id="@+id/settings_toolbar_layout"
         layout="@layout/toolbar_layout" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/settings_fragment_holder"
+    <org.schabi.newpipe.hush.ui.SettingsPanes
+        android:id="@+id/settings_panes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
-
+        android:layout_marginTop="?attr/actionBarSize">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/settings_categories"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/settings_fragment_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </org.schabi.newpipe.hush.ui.SettingsPanes>
 </RelativeLayout>

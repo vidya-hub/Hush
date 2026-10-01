@@ -3,9 +3,9 @@
     android:id="@+id/library_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:paddingTop="20dp"
-    android:paddingEnd="20dp"
+    android:paddingStart="0dp" android:drawablePadding="20dp" android:minHeight="56dp" android:gravity="center_vertical"
+    android:paddingTop="12dp"
+    android:paddingEnd="0dp"
     android:paddingBottom="8dp"
     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
     android:textColor="?attr/colorOnSurface" />

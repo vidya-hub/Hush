@@ -1,0 +1,1 @@
+Use case: ui-mockup. Edittarget Gameshub. Preserveallcompositionandlabels4cards/rail. Correct ONLY Sudoku miniature: exact9x9grid withbold3x3separators andVALIDsparseclues. Firstrow5,3,blank,blank,7,blank,blank,blank,blank. Secondrow6,blank,blank,1,9,5,blank,blank,blank. AllremainingrowsBLANK. No duplicatednumbers. KeepSudokutitle/description/Play unchanged. Nootherchanges.

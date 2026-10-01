@@ -1,0 +1,68 @@
+{
+  "unit_tests": {
+    "passed": 27,
+    "failed": 0
+  },
+  "navigation_alignment": [
+    {
+      "configuration": "landscape",
+      "navigation_scenarios": {
+        "homeRoutesAndLibraryTitles": true,
+        "darkScreensAndSecondaryRoutes": true,
+        "temporaryPlaylistRendersRealRowsAndLongTitle": true,
+        "alignmentAndSecondaryScreens": true
+      }
+    },
+    {
+      "configuration": "portrait",
+      "navigation_scenarios": {
+        "homeRoutesAndLibraryTitles": true,
+        "darkScreensAndSecondaryRoutes": true,
+        "temporaryPlaylistRendersRealRowsAndLongTitle": true,
+        "alignmentAndSecondaryScreens": true
+      }
+    },
+    {
+      "configuration": "narrow",
+      "navigation_scenarios": {
+        "homeRoutesAndLibraryTitles": true,
+        "darkScreensAndSecondaryRoutes": true,
+        "temporaryPlaylistRendersRealRowsAndLongTitle": true,
+        "alignmentAndSecondaryScreens": true
+      }
+    },
+    {
+      "configuration": "large-text",
+      "navigation_scenarios": {
+        "homeRoutesAndLibraryTitles": true,
+        "darkScreensAndSecondaryRoutes": true,
+        "temporaryPlaylistRendersRealRowsAndLongTitle": true,
+        "alignmentAndSecondaryScreens": true
+      }
+    }
+  ],
+  "final_checks": [
+    {
+      "configuration": "landscape",
+      "passed": true,
+      "screenshots": 10
+    },
+    {
+      "configuration": "portrait",
+      "passed": true,
+      "screenshots": 10
+    },
+    {
+      "configuration": "narrow",
+      "passed": true,
+      "screenshots": 10
+    },
+    {
+      "configuration": "large-text",
+      "passed": true,
+      "screenshots": 10
+    }
+  ],
+  "selected_captures": 313,
+  "initial_landscape_close_timing_failure": "Retained in spacing-review/landscape/tests.log; final event-based waiting checks passed."
+}

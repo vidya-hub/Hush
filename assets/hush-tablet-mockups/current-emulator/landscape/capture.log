@@ -1,0 +1,22 @@
+
+org.schabi.newpipe.hush.RedesignNavigationTest:....
+org.schabi.newpipe.hush.RedesignPlaybackTest:
+Error in samePlayerSurvivesFloatingAndExpansion(org.schabi.newpipe.hush.RedesignPlaybackTest):
+java.lang.AssertionError: A real YouTube stream must start before the floating playback assertions
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at org.schabi.newpipe.hush.RedesignPlaybackTest.samePlayerSurvivesFloatingAndExpansion(RedesignPlaybackTest.java:58)
+
+
+Time: 226.912
+There was 1 failure:
+1) samePlayerSurvivesFloatingAndExpansion(org.schabi.newpipe.hush.RedesignPlaybackTest)
+java.lang.AssertionError: A real YouTube stream must start before the floating playback assertions
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at org.schabi.newpipe.hush.RedesignPlaybackTest.samePlayerSurvivesFloatingAndExpansion(RedesignPlaybackTest.java:58)
+
+FAILURES!!!
+Tests run: 5,  Failures: 1

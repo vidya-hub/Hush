@@ -1,0 +1,7 @@
+Use case: logo-brand
+Asset type: ONE standalone transparent raster UI icon for Hush Android app.
+Style: precise flat minimalist geometric glyph, calm contemporary outline family. Nominal 24-unit grid, consistent 1.8-unit stroke, rounded caps and joins; only explicitly solid subjects are filled. Uniform solid black #000000 ink, no shading. This is an alpha-mask asset that will be tinted sage in the app. Black high-contrast strokes must be completely opaque; holes and exterior completely transparent; clean boundaries without stray flecks.
+Composition: square canvas, single glyph centered inside 70% width and height with generous equal transparent padding. Crisp high-resolution antialiased edges readable at 24dp.
+Constraints: genuinely transparent alpha background. ONE icon only. No icon sheet, grid, variants, text labels, background tile, button circle, border, shadow, glow, gradients, texture, watermark or additional objects. Do not add an enclosing circle unless subject requests it.
+Subject: Horizontal arrow pointing left, straight shaft and simple two-line arrowhead
+Usage: Subpage toolbars; search results

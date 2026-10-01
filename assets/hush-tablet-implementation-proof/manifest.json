@@ -1,0 +1,2506 @@
+[
+  {
+    "configuration": "landscape",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe-controls",
+    "path": "spacing-review/landscape/breathe-controls.png",
+    "sha256": "9d1359d476ec9ec8f5a8db17adfe3c82ffa1fb6e994c80bac907021b385dfe45"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe",
+    "path": "spacing-review/landscape/breathe.png",
+    "sha256": "b05f3e9493c077fb17d5fe86bfff2faa84e7bae117b4fe15d73c683dca991939"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe-controls",
+    "path": "spacing-review/landscape/dark-breathe-controls.png",
+    "sha256": "2c536a2590775a92a00c181ee0996a5403f6cb1ebb0a84a1b764d2fa8fba6867"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe",
+    "path": "spacing-review/landscape/dark-breathe.png",
+    "sha256": "d65a6949ad52214f50661396e1488f7e11309755a804f93abe627fd49daeb8aa"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Downloads",
+    "theme": "dark",
+    "name": "dark-downloads",
+    "path": "spacing-final-check/landscape/dark-downloads.png",
+    "sha256": "aff6dd661ee19edb30748f4fe0315d607cabbfae6716ccef19e54983aa45bca0"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "dark-games",
+    "path": "spacing-review/landscape/dark-games.png",
+    "sha256": "d9dcae7e9f1e3fe9c28c53f38f326e4e9eee0ef55ba59b5a437025d5fea027d2"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-scrolled",
+    "path": "spacing-review/landscape/dark-history-scrolled.png",
+    "sha256": "d2f91c8f22aa8fd5089ad15d88b88434d231d5f7b577c77fb5da7c8798efa27a"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-search",
+    "path": "spacing-review/landscape/dark-history-search.png",
+    "sha256": "7ec0d8e53dd2216a883c7b37c7f2e5440e2a34ad02460b5d16010e20e71694e6"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history",
+    "path": "spacing-review/landscape/dark-history.png",
+    "sha256": "d2f91c8f22aa8fd5089ad15d88b88434d231d5f7b577c77fb5da7c8798efa27a"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-scrolled",
+    "path": "spacing-review/landscape/dark-home-scrolled.png",
+    "sha256": "79489d48a1e01f33e466bf51c5d8aeb7498175c13a09fbe928664b52a09ebb1a"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-search-accessible",
+    "path": "spacing-review/landscape/dark-home-search-accessible.png",
+    "sha256": "79489d48a1e01f33e466bf51c5d8aeb7498175c13a09fbe928664b52a09ebb1a"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home",
+    "path": "spacing-review/landscape/dark-home.png",
+    "sha256": "79489d48a1e01f33e466bf51c5d8aeb7498175c13a09fbe928664b52a09ebb1a"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "dark-profiles",
+    "path": "spacing-review/landscape/dark-profiles.png",
+    "sha256": "db77c6b7ae8cc2c4c9f6892fd9ce1cfe5f97f5de6d8600465ddcd2c8f49d7746"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "dark-saved",
+    "path": "spacing-review/landscape/dark-saved.png",
+    "sha256": "44246b3383d5363eb53e613fe791503a69478caf064ee346cfef80f9c18f4aed"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "dark-settings",
+    "path": "spacing-review/landscape/dark-settings.png",
+    "sha256": "afe45d428f1935588d3e67e409686cd5a66f3882c171b3e65f9dd81cc4ddb5fb"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-game",
+    "path": "spacing-final-check/landscape/floating-game.png",
+    "sha256": "54ae8c005966799ca5a255de9fb59e33e2d7f2a2f104ca959d6dfbb2776cd87f"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-layout",
+    "path": "spacing-final-check/landscape/floating-layout.png",
+    "sha256": "7491869c90fee26faa50520b2d5584637cf38fba98113636d5aa776ad11d474f"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-results",
+    "path": "spacing-review/landscape/floating-results.png",
+    "sha256": "25fc19fc1d60299fe140baf5e15c49e402889445fc89384ecaed557d5ffdb3e0"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating",
+    "path": "spacing-final-check/landscape/floating.png",
+    "sha256": "17f08ab947e3175dc5e7f9aee39fb3c1a1c65461e51271c84188b70a168df2b4"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048-controls",
+    "path": "spacing-review/landscape/game-2048-controls.png",
+    "sha256": "10fab4d12e15a5920ee4588c8fab0271108c5855141a563d936ea261b8414067"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048",
+    "path": "spacing-review/landscape/game-2048.png",
+    "sha256": "10fab4d12e15a5920ee4588c8fab0271108c5855141a563d936ea261b8414067"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24-controls",
+    "path": "spacing-review/landscape/game-make24-controls.png",
+    "sha256": "1addcec0af94dc91252ab63a11d85dfdf527731c7a6d030df854f8a4beefc6b6"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24",
+    "path": "spacing-review/landscape/game-make24.png",
+    "sha256": "1addcec0af94dc91252ab63a11d85dfdf527731c7a6d030df854f8a4beefc6b6"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake-controls",
+    "path": "spacing-review/landscape/game-snake-controls.png",
+    "sha256": "912f0fb4f737f13d3c85b12d5001c5d0d902ea538465526752418c48dff64eff"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake",
+    "path": "spacing-review/landscape/game-snake.png",
+    "sha256": "912f0fb4f737f13d3c85b12d5001c5d0d902ea538465526752418c48dff64eff"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku-controls",
+    "path": "spacing-review/landscape/game-sudoku-controls.png",
+    "sha256": "3ce7843f3a06970670e5af1c4eeb54cab2294657bc7d92dca065c2464566258e"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku",
+    "path": "spacing-review/landscape/game-sudoku.png",
+    "sha256": "3ce7843f3a06970670e5af1c4eeb54cab2294657bc7d92dca065c2464566258e"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "games",
+    "path": "spacing-review/landscape/games.png",
+    "sha256": "d9dcae7e9f1e3fe9c28c53f38f326e4e9eee0ef55ba59b5a437025d5fea027d2"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-scrolled",
+    "path": "spacing-review/landscape/history-scrolled.png",
+    "sha256": "eb5cc66e664fcfc2bd134920793688559fdf1099954b26ecc8eef81debe8d94b"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-search",
+    "path": "spacing-review/landscape/history-search.png",
+    "sha256": "e7e8e0b8df7e014b257736d3bf9ecd112edcf44e8437d8052def8d26436f65aa"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history",
+    "path": "spacing-review/landscape/history.png",
+    "sha256": "eb5cc66e664fcfc2bd134920793688559fdf1099954b26ecc8eef81debe8d94b"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-scrolled",
+    "path": "spacing-review/landscape/home-scrolled.png",
+    "sha256": "92b91a71978d0b8c5ca34eaae575bb627d0756d1256c76e29dd2a55d7fb8b343"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-search-accessible",
+    "path": "spacing-review/landscape/home-search-accessible.png",
+    "sha256": "92b91a71978d0b8c5ca34eaae575bb627d0756d1256c76e29dd2a55d7fb8b343"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home",
+    "path": "spacing-review/landscape/home.png",
+    "sha256": "92b91a71978d0b8c5ca34eaae575bb627d0756d1256c76e29dd2a55d7fb8b343"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "meditate",
+    "path": "spacing-review/landscape/meditate.png",
+    "sha256": "2c74a606f93d687c90001bbeb23b95d3cbda4d51b3d786006ae139f6d92062d8"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-detail-qa",
+    "path": "spacing-review/landscape/playlist-detail-qa.png",
+    "sha256": "8fd35fae6f4dcb6ac0f17b90e726bda122d06ce5935757ff0d911e9bd966f1cf"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-rows-qa",
+    "path": "spacing-review/landscape/playlist-rows-qa.png",
+    "sha256": "8fd35fae6f4dcb6ac0f17b90e726bda122d06ce5935757ff0d911e9bd966f1cf"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profile-create",
+    "path": "spacing-review/landscape/profile-create.png",
+    "sha256": "34c4a2fa859c5f66691b87c1db1a7aa9403bd53a443f8b5663d51b62663c0af7"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profiles",
+    "path": "spacing-review/landscape/profiles.png",
+    "sha256": "c080ec4c4128ce65113621f3685545842330880f745d040f35c7f34bd5d8d69c"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved-populated-qa",
+    "path": "spacing-review/landscape/saved-populated-qa.png",
+    "sha256": "d16b9241c4a1735187232b6700eb5a64a7711ae5b3d01eb84acf8873b75f3491"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved",
+    "path": "spacing-review/landscape/saved.png",
+    "sha256": "0a261a51f21df7a824f4e2d8fe960129488ee711090f7b6660912a12d6b1df3c"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-AccountSettingsFragment-bottom.png",
+    "sha256": "7215f5a026a6e6a94850af723e92130d0be2d3402f0603879eb33d37ef2469a3"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment",
+    "path": "spacing-review/landscape/settings-AccountSettingsFragment.png",
+    "sha256": "7215f5a026a6e6a94850af723e92130d0be2d3402f0603879eb33d37ef2469a3"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-AdvancedSettingsFragment-bottom.png",
+    "sha256": "cb9599eade53d3027b01c0964f33c1450012f8603bc0db0a02dc74a19e13752c"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment",
+    "path": "spacing-review/landscape/settings-AdvancedSettingsFragment.png",
+    "sha256": "e8c6d9b9194b87a923ce1e1e8d1d851ec3c29cce6317699fca228576cd283069"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-AppearanceSettingsFragment-bottom.png",
+    "sha256": "7dddb19115f079052af7db6ed316e3c5020f05cf3158f39f586a6022401cd6b2"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment",
+    "path": "spacing-review/landscape/settings-AppearanceSettingsFragment.png",
+    "sha256": "7dddb19115f079052af7db6ed316e3c5020f05cf3158f39f586a6022401cd6b2"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-BackupSettingsFragment-bottom.png",
+    "sha256": "7cd4cd3cf38493db73708489426e3f92b4198a9eadc5f7ce5ad101d1b168c010"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment",
+    "path": "spacing-review/landscape/settings-BackupSettingsFragment.png",
+    "sha256": "7cd4cd3cf38493db73708489426e3f92b4198a9eadc5f7ce5ad101d1b168c010"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment-bottom",
+    "path": "spacing-review/landscape/settings-ChooseTabsFragment-bottom.png",
+    "sha256": "104f0c4a43ba9f50dd4a88349831ffc483544445f89433e2eab1d97b12f00e56"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment",
+    "path": "spacing-review/landscape/settings-ChooseTabsFragment.png",
+    "sha256": "104f0c4a43ba9f50dd4a88349831ffc483544445f89433e2eab1d97b12f00e56"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-ContentSettingsFragment-bottom.png",
+    "sha256": "0d949f544a9babab907362f26357084a697025a60c15b4343ba479ed9382a200"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment",
+    "path": "spacing-review/landscape/settings-ContentSettingsFragment.png",
+    "sha256": "0d949f544a9babab907362f26357084a697025a60c15b4343ba479ed9382a200"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-DownloadSettingsFragment-bottom.png",
+    "sha256": "5161c6fc14100b3228321a2d8dfb3a211e6949d4e4f59f76ce9bd9bd052448de"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment",
+    "path": "spacing-review/landscape/settings-DownloadSettingsFragment.png",
+    "sha256": "5161c6fc14100b3228321a2d8dfb3a211e6949d4e4f59f76ce9bd9bd052448de"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-ExoPlayerSettingsFragment-bottom.png",
+    "sha256": "14690bc3606197602f9b690d151cc723ffeba6012f8da5a1c117f7d93ec76e56"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment",
+    "path": "spacing-review/landscape/settings-ExoPlayerSettingsFragment.png",
+    "sha256": "14690bc3606197602f9b690d151cc723ffeba6012f8da5a1c117f7d93ec76e56"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-FilterSettingsFragment-bottom.png",
+    "sha256": "014c4cdadd8b1e41c386b861def05692b8a2a903b07052477fd937d386a91ebf"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment",
+    "path": "spacing-review/landscape/settings-FilterSettingsFragment.png",
+    "sha256": "014c4cdadd8b1e41c386b861def05692b8a2a903b07052477fd937d386a91ebf"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-GestureSettingsFragment-bottom.png",
+    "sha256": "94f6ff56c87f3537216ea41773cad0474be2185a70f874d93936b0a232c87be7"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment",
+    "path": "spacing-review/landscape/settings-GestureSettingsFragment.png",
+    "sha256": "625b56f9f18e9a47218665336fa6b004f5b772b4eafb2513a11a6854d1fd99da"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-HistorySettingsFragment-bottom.png",
+    "sha256": "9389d9727e1711747bcb2e59b5c20fa1f70d5960c0b625c8d467e975dddbce36"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment",
+    "path": "spacing-review/landscape/settings-HistorySettingsFragment.png",
+    "sha256": "9389d9727e1711747bcb2e59b5c20fa1f70d5960c0b625c8d467e975dddbce36"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment-bottom",
+    "path": "spacing-review/landscape/settings-NotificationModeConfigFragment-bottom.png",
+    "sha256": "dfecbad251c7cae101ff21f9a7e80121fc4829706de7ff18621280c717c960ed"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment",
+    "path": "spacing-review/landscape/settings-NotificationModeConfigFragment.png",
+    "sha256": "dfecbad251c7cae101ff21f9a7e80121fc4829706de7ff18621280c717c960ed"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-NotificationsSettingsFragment-bottom.png",
+    "sha256": "68b5dd897ec690300e3aa16695c18d146a1a9f214a93069f458ed9da585c1d9f"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment",
+    "path": "spacing-review/landscape/settings-NotificationsSettingsFragment.png",
+    "sha256": "40c3f7343b217995533406cbfd301ccb9fb21bcbba8525a10a88dcf86dd7bdbf"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-VideoAudioSettingsFragment-bottom.png",
+    "sha256": "d23091803d50239bae69c9359cc7c3c62597ab4fa4e0dc53189b533cd917a65d"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment",
+    "path": "spacing-review/landscape/settings-VideoAudioSettingsFragment.png",
+    "sha256": "30a12dc6cb74a18d812d1c2cabb9466df33fd43a939d7a2d89dea037dfa01e16"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment-bottom",
+    "path": "spacing-review/landscape/settings-YouTubeAccountSettingsFragment-bottom.png",
+    "sha256": "06ac11f50286a8e03890f5bf2a2602ee8f7af0c828a3af4cbc7bf78e791a18bb"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment",
+    "path": "spacing-review/landscape/settings-YouTubeAccountSettingsFragment.png",
+    "sha256": "06ac11f50286a8e03890f5bf2a2602ee8f7af0c828a3af4cbc7bf78e791a18bb"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings",
+    "path": "spacing-review/landscape/settings.png",
+    "sha256": "94f139bf9faaa1c1419bb4ef89a60203625d51cdc1d58a2776f250edb5ccf205"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-expanded",
+    "path": "spacing-final-check/landscape/watch-expanded.png",
+    "sha256": "9c1f32976babf4d175cd7019318d3eb576b2d33d064fe7620b66f6370676a9be"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-fullscreen",
+    "path": "spacing-final-check/landscape/watch-fullscreen.png",
+    "sha256": "77da2dd38719d494c2a070a77155fa3b98cd869e7749fd5060417f9e825281cd"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-layout",
+    "path": "spacing-final-check/landscape/watch-layout.png",
+    "sha256": "2c90b996774f9793df6a9ecdc3327b91e91ab26c43e222930aae3fd42202b77e"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-queue",
+    "path": "spacing-final-check/landscape/watch-queue.png",
+    "sha256": "1c1f641e6051a26497e590bc7a25d1f86192f2a72c76e0b6787cbed8faa63440"
+  },
+  {
+    "configuration": "landscape",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch",
+    "path": "spacing-final-check/landscape/watch.png",
+    "sha256": "4d78785b100da4fd9420de43150272aa7dfd677e93954aaa4ae7e091f60e47e8"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe-controls",
+    "path": "spacing-review/portrait/breathe-controls.png",
+    "sha256": "de3f70802e41805217f95ae05cf99b51ff0a84903b409fb4dfa0290a3880a213"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe",
+    "path": "spacing-review/portrait/breathe.png",
+    "sha256": "2c4c0c70c4c6881e74a6b1c5bdeeb1728e297e35ce5c5361b1dff672072afaaf"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe-controls",
+    "path": "spacing-review/portrait/dark-breathe-controls.png",
+    "sha256": "d1614bd612c326f8b93cd075a9c8606eb9b222658ced1b472d1f2ed46f5dd589"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe",
+    "path": "spacing-review/portrait/dark-breathe.png",
+    "sha256": "0d7841e785ec326f0d0819f553e205b0701e7a3d95067b6f33644ce5fc5575eb"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Downloads",
+    "theme": "dark",
+    "name": "dark-downloads",
+    "path": "spacing-final-check/portrait/dark-downloads.png",
+    "sha256": "4b4906a7b1d259d910c0e924e7fc530576919432ba0a9a1e247f392622f8d5ab"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "dark-games",
+    "path": "spacing-review/portrait/dark-games.png",
+    "sha256": "a92fe17b640cd451c57afb87dd81e8a5cfcb526522ef8b44c12ece4ab48eda3a"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-scrolled",
+    "path": "spacing-review/portrait/dark-history-scrolled.png",
+    "sha256": "9c864b7cb60db3fa77b70b69e7d3844b2cfcd32bd7fe4d35edce84a6ba5a5375"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-search",
+    "path": "spacing-review/portrait/dark-history-search.png",
+    "sha256": "2d40b726121786ba2e57fefe3c483a1f454a9541bb2e4e1aebf060b0b9fe53b5"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history",
+    "path": "spacing-review/portrait/dark-history.png",
+    "sha256": "9c864b7cb60db3fa77b70b69e7d3844b2cfcd32bd7fe4d35edce84a6ba5a5375"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-scrolled",
+    "path": "spacing-review/portrait/dark-home-scrolled.png",
+    "sha256": "c596127c283f8ce964238d63bbb72d246f95bdeb1a59d9d6da2719f509130ba2"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-search-accessible",
+    "path": "spacing-review/portrait/dark-home-search-accessible.png",
+    "sha256": "230a1d350520fac35b0831f0f53ae70b657701299a56a2461018210054026e6b"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home",
+    "path": "spacing-review/portrait/dark-home.png",
+    "sha256": "c596127c283f8ce964238d63bbb72d246f95bdeb1a59d9d6da2719f509130ba2"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "dark-profiles",
+    "path": "spacing-review/portrait/dark-profiles.png",
+    "sha256": "6b5d45279dd9c3153e367045a5a4cfaad7f14b72731aa65823a13ef46e83eb34"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "dark-saved",
+    "path": "spacing-review/portrait/dark-saved.png",
+    "sha256": "afe7e3b08261764ee1efe2e3641210cfe6e0253bc28f6382ba59feeb164ef50a"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "dark-settings",
+    "path": "spacing-review/portrait/dark-settings.png",
+    "sha256": "b256488bbbd320035e716ca2866d1c6c1cfaa0f32940d5d21a917917fe9b4a93"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-game",
+    "path": "spacing-final-check/portrait/floating-game.png",
+    "sha256": "7eafa2d8a1a82cda5bd08515ee320e0fd45081e24d5db6dfb11200e9ae9bf8f0"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-layout",
+    "path": "spacing-final-check/portrait/floating-layout.png",
+    "sha256": "50a78aa7a5b4594233083b0999d1e5845d4cafdba6e0d8bba30f3bcd7bf4bc83"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-results",
+    "path": "spacing-review/portrait/floating-results.png",
+    "sha256": "4a5324162b27084f6bf4a67f99fdca24bed973a38b5a911557728768d73fcb89"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating",
+    "path": "spacing-final-check/portrait/floating.png",
+    "sha256": "fb4630a9373440bb0f0884b9671a42be8f2c14af0ee4e5e37de148ba98279aab"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048-controls",
+    "path": "spacing-review/portrait/game-2048-controls.png",
+    "sha256": "07e243a96a6df24d0531f5cf60010ca57a5a26271e45dff187fc82a92a8b3ad0"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048",
+    "path": "spacing-review/portrait/game-2048.png",
+    "sha256": "07e243a96a6df24d0531f5cf60010ca57a5a26271e45dff187fc82a92a8b3ad0"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24-controls",
+    "path": "spacing-review/portrait/game-make24-controls.png",
+    "sha256": "7a7cf39dc3b7d783ce8e592b4f26f2654abeb656c227f85e5304f536d324d497"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24",
+    "path": "spacing-review/portrait/game-make24.png",
+    "sha256": "7a7cf39dc3b7d783ce8e592b4f26f2654abeb656c227f85e5304f536d324d497"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake-controls",
+    "path": "spacing-review/portrait/game-snake-controls.png",
+    "sha256": "ea299e538ec4584bf7b600b9d8aab66ae0bca905ae629bcb81fac5715e948ac4"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake",
+    "path": "spacing-review/portrait/game-snake.png",
+    "sha256": "ea299e538ec4584bf7b600b9d8aab66ae0bca905ae629bcb81fac5715e948ac4"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku-controls",
+    "path": "spacing-review/portrait/game-sudoku-controls.png",
+    "sha256": "c48dad22afc2d219e802541599173918f7c3645c955ace2858a3946d085eeec5"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku",
+    "path": "spacing-review/portrait/game-sudoku.png",
+    "sha256": "c48dad22afc2d219e802541599173918f7c3645c955ace2858a3946d085eeec5"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "games",
+    "path": "spacing-review/portrait/games.png",
+    "sha256": "40d913028dfc1c28e8e0893d862104905ee9b975f8e60af61285a08496e4b4b5"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-scrolled",
+    "path": "spacing-review/portrait/history-scrolled.png",
+    "sha256": "c43a26c98cd462ff0a5b45982d873737446aa7145329744dec23bfb3c354fc47"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-search",
+    "path": "spacing-review/portrait/history-search.png",
+    "sha256": "e5f99983e4f4c5818683ecccf45cbde7bf8e4e93941b24ac02faab6667f1825e"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history",
+    "path": "spacing-review/portrait/history.png",
+    "sha256": "c43a26c98cd462ff0a5b45982d873737446aa7145329744dec23bfb3c354fc47"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-scrolled",
+    "path": "spacing-review/portrait/home-scrolled.png",
+    "sha256": "c596127c283f8ce964238d63bbb72d246f95bdeb1a59d9d6da2719f509130ba2"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-search-accessible",
+    "path": "spacing-review/portrait/home-search-accessible.png",
+    "sha256": "c596127c283f8ce964238d63bbb72d246f95bdeb1a59d9d6da2719f509130ba2"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home",
+    "path": "spacing-review/portrait/home.png",
+    "sha256": "c596127c283f8ce964238d63bbb72d246f95bdeb1a59d9d6da2719f509130ba2"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "meditate",
+    "path": "spacing-review/portrait/meditate.png",
+    "sha256": "9dd8890b34f68b93a3972958b675528a243c3d0baff92edf9024724a41bf1a5e"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-detail-qa",
+    "path": "spacing-review/portrait/playlist-detail-qa.png",
+    "sha256": "66cc4d6a1dcbd24afb97c59afadab5a2790274288683f2bc1f78317c85cf67f3"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-rows-qa",
+    "path": "spacing-review/portrait/playlist-rows-qa.png",
+    "sha256": "66cc4d6a1dcbd24afb97c59afadab5a2790274288683f2bc1f78317c85cf67f3"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profile-create",
+    "path": "spacing-review/portrait/profile-create.png",
+    "sha256": "81eb6422d13eb53f0abf8e0f6cba1cde5d7059b105ae16bf809f2404b9a60b9f"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profiles",
+    "path": "spacing-review/portrait/profiles.png",
+    "sha256": "afbfaeb0ecac3f60480c3b1f5817ce00681dc281077978553ea430c225480600"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved-populated-qa",
+    "path": "spacing-review/portrait/saved-populated-qa.png",
+    "sha256": "cfa91b7627443a78862aea99dfa979b8b0afd5e46576999406506d1e1db9a934"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved",
+    "path": "spacing-review/portrait/saved.png",
+    "sha256": "20ec8d7f71f758caec9332ca0d73b87c6237b9cff297296d8a67ed25a13fcdae"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-AccountSettingsFragment-bottom.png",
+    "sha256": "44752c8a474161b58e0483a2bc7ae7550365e83057444f14c92d232162811a4c"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment",
+    "path": "spacing-review/portrait/settings-AccountSettingsFragment.png",
+    "sha256": "44752c8a474161b58e0483a2bc7ae7550365e83057444f14c92d232162811a4c"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-AdvancedSettingsFragment-bottom.png",
+    "sha256": "976f82db627818f055f079cab03a636dbd02ec7770ca8f7361e745ae3ce4e334"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment",
+    "path": "spacing-review/portrait/settings-AdvancedSettingsFragment.png",
+    "sha256": "790b883e9e49d2b486106fb45f6c3b2af0483cfa51eeb5792743c6e284672bc9"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-AppearanceSettingsFragment-bottom.png",
+    "sha256": "faf5b6f2d2bd0e969db6cd6d0aeecde747172fe4ca69441a3590948d17003a32"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment",
+    "path": "spacing-review/portrait/settings-AppearanceSettingsFragment.png",
+    "sha256": "faf5b6f2d2bd0e969db6cd6d0aeecde747172fe4ca69441a3590948d17003a32"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-BackupSettingsFragment-bottom.png",
+    "sha256": "2ae5f1f6b0daa79a07b272b12b65293f5a3d41de9633cf5f34382f48d9c89a46"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment",
+    "path": "spacing-review/portrait/settings-BackupSettingsFragment.png",
+    "sha256": "2ae5f1f6b0daa79a07b272b12b65293f5a3d41de9633cf5f34382f48d9c89a46"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment-bottom",
+    "path": "spacing-review/portrait/settings-ChooseTabsFragment-bottom.png",
+    "sha256": "80e1298529b54857f499d2055e4cb738531d72f8bac12579f9c58cb3c444a4a3"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment",
+    "path": "spacing-review/portrait/settings-ChooseTabsFragment.png",
+    "sha256": "80e1298529b54857f499d2055e4cb738531d72f8bac12579f9c58cb3c444a4a3"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-ContentSettingsFragment-bottom.png",
+    "sha256": "bca1d1067a38a568d29f8f2357b584f6299f7ff438561f01c326076dfbf4ac42"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment",
+    "path": "spacing-review/portrait/settings-ContentSettingsFragment.png",
+    "sha256": "bca1d1067a38a568d29f8f2357b584f6299f7ff438561f01c326076dfbf4ac42"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-DownloadSettingsFragment-bottom.png",
+    "sha256": "ba7299ae59b545424d2a1c3e5ab7fb0effda9cf3bc42e1ff94fb977fed268630"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment",
+    "path": "spacing-review/portrait/settings-DownloadSettingsFragment.png",
+    "sha256": "ba7299ae59b545424d2a1c3e5ab7fb0effda9cf3bc42e1ff94fb977fed268630"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-ExoPlayerSettingsFragment-bottom.png",
+    "sha256": "b07620310551dcd5521347c543ed747272af2e7e3c7d2d0905096a18e98b11e6"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment",
+    "path": "spacing-review/portrait/settings-ExoPlayerSettingsFragment.png",
+    "sha256": "b07620310551dcd5521347c543ed747272af2e7e3c7d2d0905096a18e98b11e6"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-FilterSettingsFragment-bottom.png",
+    "sha256": "d8dee8a85b4a29b50e5e6eccca5d1e413e75d05aa5ad894a7ec7e767828aeae8"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment",
+    "path": "spacing-review/portrait/settings-FilterSettingsFragment.png",
+    "sha256": "d8dee8a85b4a29b50e5e6eccca5d1e413e75d05aa5ad894a7ec7e767828aeae8"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-GestureSettingsFragment-bottom.png",
+    "sha256": "bbec0cede6cb06602ae07e7bdefe755a52f4f0ae41a8c2cf94824bbe4270ce84"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment",
+    "path": "spacing-review/portrait/settings-GestureSettingsFragment.png",
+    "sha256": "bbec0cede6cb06602ae07e7bdefe755a52f4f0ae41a8c2cf94824bbe4270ce84"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-HistorySettingsFragment-bottom.png",
+    "sha256": "a06c847389ca9445c7b48a144f72907939ff4c7a41634207868fb9bcb25563ac"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment",
+    "path": "spacing-review/portrait/settings-HistorySettingsFragment.png",
+    "sha256": "a06c847389ca9445c7b48a144f72907939ff4c7a41634207868fb9bcb25563ac"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment-bottom",
+    "path": "spacing-review/portrait/settings-NotificationModeConfigFragment-bottom.png",
+    "sha256": "b8d5ecbdb462a8d96cf734bd50ef20f7a72e3cfbaeeb3e9e5072684ea408b577"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment",
+    "path": "spacing-review/portrait/settings-NotificationModeConfigFragment.png",
+    "sha256": "b8d5ecbdb462a8d96cf734bd50ef20f7a72e3cfbaeeb3e9e5072684ea408b577"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-NotificationsSettingsFragment-bottom.png",
+    "sha256": "c1e350fe4100237451eea38d0f2deb6faf5b4d59e4bf5b04149ece6edab2aade"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment",
+    "path": "spacing-review/portrait/settings-NotificationsSettingsFragment.png",
+    "sha256": "c1e350fe4100237451eea38d0f2deb6faf5b4d59e4bf5b04149ece6edab2aade"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-VideoAudioSettingsFragment-bottom.png",
+    "sha256": "d0b7e0a33c1428d6e54b52a203e62bdad786c6598f56e3c36d6ffecad7ba4717"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment",
+    "path": "spacing-review/portrait/settings-VideoAudioSettingsFragment.png",
+    "sha256": "24d072d01d43db2fd2e78ee4f7a186a619b9bd894748a0b8a1d7a2640f387899"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment-bottom",
+    "path": "spacing-review/portrait/settings-YouTubeAccountSettingsFragment-bottom.png",
+    "sha256": "b9d16da4a54c0bb9a868f548c27971a0d410b507fdc31ca0892492df9be79be1"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment",
+    "path": "spacing-review/portrait/settings-YouTubeAccountSettingsFragment.png",
+    "sha256": "b9d16da4a54c0bb9a868f548c27971a0d410b507fdc31ca0892492df9be79be1"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings",
+    "path": "spacing-review/portrait/settings.png",
+    "sha256": "802e41389644f57676c1d2524fa97832eb0f504cfa81ba9f09e420b4f1c97a2e"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-expanded",
+    "path": "spacing-final-check/portrait/watch-expanded.png",
+    "sha256": "97f361620c1a539ec283cb1174cb7eba65893a11a138e6a93ef74dc2ca9af2fa"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-fullscreen",
+    "path": "spacing-final-check/portrait/watch-fullscreen.png",
+    "sha256": "bcac62fec9087d27f0ead391c7d3077d716669cb0345e32c01eb7c83b8006d74"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-layout",
+    "path": "spacing-final-check/portrait/watch-layout.png",
+    "sha256": "4bad680700effac53b616d802a9167a2630d8e538d7f19b7e7506de0032f835a"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-queue",
+    "path": "spacing-final-check/portrait/watch-queue.png",
+    "sha256": "005953dd86d22945308b75adb5357afd1a6e2899ea41722422b2a716c96f46b5"
+  },
+  {
+    "configuration": "portrait",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch",
+    "path": "spacing-final-check/portrait/watch.png",
+    "sha256": "1529cdf71f6ae5b2c9de60f4d99671787fee615e6e5218222a50ab3b6189494b"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe-controls",
+    "path": "spacing-review/narrow/breathe-controls.png",
+    "sha256": "a75b78503197051cd2fabc6a1b750470a8e13739a2d7bded53fd0b6bcc9b4bd1"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe",
+    "path": "spacing-review/narrow/breathe.png",
+    "sha256": "8b030ecbf5c9cac3f354e4fca5087d9d422c964897d45be089d12ec96d496f05"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe-controls",
+    "path": "spacing-review/narrow/dark-breathe-controls.png",
+    "sha256": "07dce756cef01f44e6814c0bdf41632b8db5fe52b718f33ca6fe22e3162ebb73"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe",
+    "path": "spacing-review/narrow/dark-breathe.png",
+    "sha256": "665be7046f4c5aed8c4f620c5df9959f920f6c006d8300b174a014a3c4af203e"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Downloads",
+    "theme": "dark",
+    "name": "dark-downloads",
+    "path": "spacing-final-check/narrow/dark-downloads.png",
+    "sha256": "45d42259cb110f842eb59dbbc04396a55ef4b7113ce636f7725ee266c6bf87ea"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "dark-games",
+    "path": "spacing-review/narrow/dark-games.png",
+    "sha256": "94f4e5bc5e0387d90300c626c960f4c8e55d855375b0bf297a4201bbe953173a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-scrolled",
+    "path": "spacing-review/narrow/dark-history-scrolled.png",
+    "sha256": "1b196b7c5bb6659a40ed07917a098b8c12ba4c3756e42ea786c1ffc2723a2db7"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-search",
+    "path": "spacing-review/narrow/dark-history-search.png",
+    "sha256": "b399e2ef808d05039ea7590a35f4bb0e013a473256f7b23c1d0d7be716d389cc"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history",
+    "path": "spacing-review/narrow/dark-history.png",
+    "sha256": "1b196b7c5bb6659a40ed07917a098b8c12ba4c3756e42ea786c1ffc2723a2db7"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-scrolled",
+    "path": "spacing-review/narrow/dark-home-scrolled.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-search-accessible",
+    "path": "spacing-review/narrow/dark-home-search-accessible.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home",
+    "path": "spacing-review/narrow/dark-home.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "dark-profiles",
+    "path": "spacing-review/narrow/dark-profiles.png",
+    "sha256": "69d73e88997f13f86ddbae4106cfe82bc6bfcb41c958c17a813d82b56a0158cf"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "dark-saved",
+    "path": "spacing-review/narrow/dark-saved.png",
+    "sha256": "fe32ee5a2507a7950aee373e1e55e23e4f97c185594b2d6f6b9caa4a4d4184ec"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "dark-settings",
+    "path": "spacing-review/narrow/dark-settings.png",
+    "sha256": "8fac53afb07a628d44bea3ebecce603d2d60edde81b659ba5f63f2687c5a5354"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-game",
+    "path": "spacing-final-check/narrow/floating-game.png",
+    "sha256": "25ff02f9c58a24265b03cfe080e5effb2b126a4909e9b898e8bd677ba5e88a32"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-layout",
+    "path": "spacing-final-check/narrow/floating-layout.png",
+    "sha256": "2c7d828c7cff236d19894d9a4774ca7fcc71ca75061c341e05c609bbe218db5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-results",
+    "path": "spacing-review/narrow/floating-results.png",
+    "sha256": "dc0503148d02ed3cc951a8c7483e5ef788a04d387da4d89f46b28332e90d99d3"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating",
+    "path": "spacing-final-check/narrow/floating.png",
+    "sha256": "0efbb0b2b3df1245a76e1ce92dc64b93f575f3a421921b0578278fae35dfcc98"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048-controls",
+    "path": "spacing-review/narrow/game-2048-controls.png",
+    "sha256": "c74e0ffa6b57dbb4757a1732763446c339495e5765665032752a8cfc232eda83"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048",
+    "path": "spacing-review/narrow/game-2048.png",
+    "sha256": "364b280494c2459662d13412e084e1ef35941d7de867aa8ec200488acd3e8c72"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24-controls",
+    "path": "spacing-review/narrow/game-make24-controls.png",
+    "sha256": "d051a72e51c99f4ab477aba78371e1c893812a1c65919f03c26afe170ce7a8ee"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24",
+    "path": "spacing-review/narrow/game-make24.png",
+    "sha256": "d051a72e51c99f4ab477aba78371e1c893812a1c65919f03c26afe170ce7a8ee"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake-controls",
+    "path": "spacing-review/narrow/game-snake-controls.png",
+    "sha256": "15cd31b79720e8c43bed2f254878e9ecab3d397ba7f2789a0f01f305f8da85c9"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake",
+    "path": "spacing-review/narrow/game-snake.png",
+    "sha256": "15cd31b79720e8c43bed2f254878e9ecab3d397ba7f2789a0f01f305f8da85c9"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku-controls",
+    "path": "spacing-review/narrow/game-sudoku-controls.png",
+    "sha256": "8f6f8077e69f3928ff2e0b53be77b0f166a137f9d9a88eb2b27c517b2945859e"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku",
+    "path": "spacing-review/narrow/game-sudoku.png",
+    "sha256": "ebcdc5431a0afd7afecfb16f3ffecc048e1962b69b7b731ebf1c2dc0debff996"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "games",
+    "path": "spacing-review/narrow/games.png",
+    "sha256": "94f4e5bc5e0387d90300c626c960f4c8e55d855375b0bf297a4201bbe953173a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-scrolled",
+    "path": "spacing-review/narrow/history-scrolled.png",
+    "sha256": "1b196b7c5bb6659a40ed07917a098b8c12ba4c3756e42ea786c1ffc2723a2db7"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-search",
+    "path": "spacing-review/narrow/history-search.png",
+    "sha256": "b399e2ef808d05039ea7590a35f4bb0e013a473256f7b23c1d0d7be716d389cc"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history",
+    "path": "spacing-review/narrow/history.png",
+    "sha256": "1b196b7c5bb6659a40ed07917a098b8c12ba4c3756e42ea786c1ffc2723a2db7"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-scrolled",
+    "path": "spacing-review/narrow/home-scrolled.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-search-accessible",
+    "path": "spacing-review/narrow/home-search-accessible.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home",
+    "path": "spacing-review/narrow/home.png",
+    "sha256": "5c1e0d9a5f9c9b391289e9a7fa4fe35062859ff16164de5ce8c0238ac1834f5a"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "meditate",
+    "path": "spacing-review/narrow/meditate.png",
+    "sha256": "bf876f74aebee47b1c49325b3d8ddbb736cd402e77bc5d0509f21864d1b4c520"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-detail-qa",
+    "path": "spacing-review/narrow/playlist-detail-qa.png",
+    "sha256": "573fac2897a0719e979791780e5a77cb8e1005d1e07d0826cc22798298926399"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-rows-qa",
+    "path": "spacing-review/narrow/playlist-rows-qa.png",
+    "sha256": "573fac2897a0719e979791780e5a77cb8e1005d1e07d0826cc22798298926399"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profile-create",
+    "path": "spacing-review/narrow/profile-create.png",
+    "sha256": "eb21b7148f1e1613286f06a8f5f425ff07edb44c7218a0d1b08b64fe944603da"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profiles",
+    "path": "spacing-review/narrow/profiles.png",
+    "sha256": "95bdb55d8e78b67d00c19c2d1b128404556dbffe5a855b49675928a9938ed209"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved-populated-qa",
+    "path": "spacing-review/narrow/saved-populated-qa.png",
+    "sha256": "4b6a0e2c4e1d0c9794049f6dd10b16e43b27f3e804879cb337ba7241b88f6456"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved",
+    "path": "spacing-review/narrow/saved.png",
+    "sha256": "fe32ee5a2507a7950aee373e1e55e23e4f97c185594b2d6f6b9caa4a4d4184ec"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-AccountSettingsFragment-bottom.png",
+    "sha256": "27c7c3a04f16968c9322dbe93a55656fe6a06df5dfc0e7255c15eab61aaa75aa"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment",
+    "path": "spacing-review/narrow/settings-AccountSettingsFragment.png",
+    "sha256": "27c7c3a04f16968c9322dbe93a55656fe6a06df5dfc0e7255c15eab61aaa75aa"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-AdvancedSettingsFragment-bottom.png",
+    "sha256": "60b7f7d24fb8dbdb63c55d223678754ff1dca8573ada5d51295dacb464279117"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment",
+    "path": "spacing-review/narrow/settings-AdvancedSettingsFragment.png",
+    "sha256": "fbfa43a706dec247d6ef2e5ebdffc3dee1a87b14ea57b80e9817ee55e396da1f"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-AppearanceSettingsFragment-bottom.png",
+    "sha256": "cfb9a1205ec97115a8135857c71e2d66db6ad9a90ae6c38446f4f3a7c7934e5f"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment",
+    "path": "spacing-review/narrow/settings-AppearanceSettingsFragment.png",
+    "sha256": "cfb9a1205ec97115a8135857c71e2d66db6ad9a90ae6c38446f4f3a7c7934e5f"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-BackupSettingsFragment-bottom.png",
+    "sha256": "e5b99d1b29069eca0622af444e0dec5e6dda1ac0390edbedc15a0861cece50c8"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment",
+    "path": "spacing-review/narrow/settings-BackupSettingsFragment.png",
+    "sha256": "e5b99d1b29069eca0622af444e0dec5e6dda1ac0390edbedc15a0861cece50c8"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment-bottom",
+    "path": "spacing-review/narrow/settings-ChooseTabsFragment-bottom.png",
+    "sha256": "14679714e6ce5963c99e318664e393d3d9e26cc237b76ee8e88e96cf280caeb4"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment",
+    "path": "spacing-review/narrow/settings-ChooseTabsFragment.png",
+    "sha256": "7aa8502d8229a10813d0ae9675858646e1cc32030858e661d5b579b46c2c5c84"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-ContentSettingsFragment-bottom.png",
+    "sha256": "c6b5e36154fb06f22bdcc28fbb2a5c986b00f5f6edcc336ba1c034164e4cbb10"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment",
+    "path": "spacing-review/narrow/settings-ContentSettingsFragment.png",
+    "sha256": "c6b5e36154fb06f22bdcc28fbb2a5c986b00f5f6edcc336ba1c034164e4cbb10"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-DownloadSettingsFragment-bottom.png",
+    "sha256": "f0b6b75a1fcc334cad4d643329a248a3cd1d89180f18e8be64906567863ef955"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment",
+    "path": "spacing-review/narrow/settings-DownloadSettingsFragment.png",
+    "sha256": "f0b6b75a1fcc334cad4d643329a248a3cd1d89180f18e8be64906567863ef955"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-ExoPlayerSettingsFragment-bottom.png",
+    "sha256": "5d133f4385c2776d15d90080b3aa689b849b181afe4f099eff9cd2e0e9a11c26"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment",
+    "path": "spacing-review/narrow/settings-ExoPlayerSettingsFragment.png",
+    "sha256": "5d133f4385c2776d15d90080b3aa689b849b181afe4f099eff9cd2e0e9a11c26"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-FilterSettingsFragment-bottom.png",
+    "sha256": "6c8123fba9a89ec35116e90eca81503f67e9e8b9b4bcb18aec72ce03a1ee5591"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment",
+    "path": "spacing-review/narrow/settings-FilterSettingsFragment.png",
+    "sha256": "6c8123fba9a89ec35116e90eca81503f67e9e8b9b4bcb18aec72ce03a1ee5591"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-GestureSettingsFragment-bottom.png",
+    "sha256": "8ef43c7e82c16e837f78260478506e66fb833d4fea4acf3891e4535831946508"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment",
+    "path": "spacing-review/narrow/settings-GestureSettingsFragment.png",
+    "sha256": "8ef43c7e82c16e837f78260478506e66fb833d4fea4acf3891e4535831946508"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-HistorySettingsFragment-bottom.png",
+    "sha256": "6c22bdf23ebaad4960dcc74495ff45e0ff10186bd3a124590f00e851fcddc1fb"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment",
+    "path": "spacing-review/narrow/settings-HistorySettingsFragment.png",
+    "sha256": "6c22bdf23ebaad4960dcc74495ff45e0ff10186bd3a124590f00e851fcddc1fb"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment-bottom",
+    "path": "spacing-review/narrow/settings-NotificationModeConfigFragment-bottom.png",
+    "sha256": "f48d22f64b352a942ec5439af5aa6b48de84d33532304cab86b1dabe283f9303"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment",
+    "path": "spacing-review/narrow/settings-NotificationModeConfigFragment.png",
+    "sha256": "f48d22f64b352a942ec5439af5aa6b48de84d33532304cab86b1dabe283f9303"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-NotificationsSettingsFragment-bottom.png",
+    "sha256": "3d9fedc39d96c6aa6b378e9f705bb01ffde0c2b644ff2df630619ddd0915ac6e"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment",
+    "path": "spacing-review/narrow/settings-NotificationsSettingsFragment.png",
+    "sha256": "3d9fedc39d96c6aa6b378e9f705bb01ffde0c2b644ff2df630619ddd0915ac6e"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-VideoAudioSettingsFragment-bottom.png",
+    "sha256": "f33f58d07ae1f82b96efed82adc863abb9139f3c80c5b8eae0eaef0fc0d2974d"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment",
+    "path": "spacing-review/narrow/settings-VideoAudioSettingsFragment.png",
+    "sha256": "e05211681268a6ed8f771f4835e25e2123b15a9d3041dffd9ee9d26fdd8030ff"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment-bottom",
+    "path": "spacing-review/narrow/settings-YouTubeAccountSettingsFragment-bottom.png",
+    "sha256": "820886fef1050e3e5b98b0688834cd02b2d0ef77139cda74a164326369738b62"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment",
+    "path": "spacing-review/narrow/settings-YouTubeAccountSettingsFragment.png",
+    "sha256": "820886fef1050e3e5b98b0688834cd02b2d0ef77139cda74a164326369738b62"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings",
+    "path": "spacing-review/narrow/settings.png",
+    "sha256": "4012a6393ac8f9cc9f26f8f55a02f199fea55416110f2c78642d085c62e37c8c"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-expanded",
+    "path": "spacing-final-check/narrow/watch-expanded.png",
+    "sha256": "bb4a6b5894405743706f7cd75f8f2715ae43139be6c3cc5df1244894d54bc2c7"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-fullscreen",
+    "path": "spacing-final-check/narrow/watch-fullscreen.png",
+    "sha256": "510b8b05c842817251529eea610722b646143869d149afde44a0e121523797b5"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-layout",
+    "path": "spacing-final-check/narrow/watch-layout.png",
+    "sha256": "a089e950a134e3282e84e3d3316bc29a01a74291ad7603afc57f60b1c23b8de4"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-queue",
+    "path": "spacing-final-check/narrow/watch-queue.png",
+    "sha256": "b0ec7f993c299e0b83df6f27f30917bebe2b04c1903a63e15c3fbdf245271dce"
+  },
+  {
+    "configuration": "narrow",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch",
+    "path": "spacing-final-check/narrow/watch.png",
+    "sha256": "afc01a112dbfb584585c0619fc85344ac230c770b80475707733f78ae78007c2"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe-controls",
+    "path": "spacing-review/large-text/breathe-controls.png",
+    "sha256": "204fd50ed4bff7c10fdd76dfcd26e4315907c49d63508bdaf0f57e3933b5fa24"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "breathe",
+    "path": "spacing-review/large-text/breathe.png",
+    "sha256": "68b56e709392ed73b8ba4bb119830cd61e551fe162f2ebd324bb351013a1528e"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe-controls",
+    "path": "spacing-review/large-text/dark-breathe-controls.png",
+    "sha256": "46ec34884ede0059180f9318d693174cae75fcce14ed4bdc274a78e367455411"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "dark-breathe",
+    "path": "spacing-review/large-text/dark-breathe.png",
+    "sha256": "99aec06afcc9314c98884d86ab1ce607a102d931385242bc395d32c6270f2324"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Downloads",
+    "theme": "dark",
+    "name": "dark-downloads",
+    "path": "spacing-final-check/large-text/dark-downloads.png",
+    "sha256": "9e323a143f0c6113db0b27ee7186e0000737b72bba1408a6f0dd373f3b1693f2"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "dark-games",
+    "path": "spacing-review/large-text/dark-games.png",
+    "sha256": "370bdf2d8cbe14c3763248373bb1158cf6bb4ae2d67f43a193cfed844fbfbe8b"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-scrolled",
+    "path": "spacing-review/large-text/dark-history-scrolled.png",
+    "sha256": "84ff3b89990df9e418178eb28db0713fc1b1d22321c76f070c7db939d170f9db"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history-search",
+    "path": "spacing-review/large-text/dark-history-search.png",
+    "sha256": "3409aca7776bedd99444f8a47bb4642ff7d89e16df4eedcff103695e8b15f105"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "dark-history",
+    "path": "spacing-review/large-text/dark-history.png",
+    "sha256": "84ff3b89990df9e418178eb28db0713fc1b1d22321c76f070c7db939d170f9db"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-scrolled",
+    "path": "spacing-review/large-text/dark-home-scrolled.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home-search-accessible",
+    "path": "spacing-review/large-text/dark-home-search-accessible.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "dark-home",
+    "path": "spacing-review/large-text/dark-home.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "dark-profiles",
+    "path": "spacing-review/large-text/dark-profiles.png",
+    "sha256": "e6a67d01ad0aa66c15768dcbee639294fa3a87b3b66dc23840a1659d625481e5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "dark-saved",
+    "path": "spacing-review/large-text/dark-saved.png",
+    "sha256": "7d68f6f96e01da7a8607bf7c6caf2fa8b449fedb985f78fab3c1f7861af9d65e"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "dark-settings",
+    "path": "spacing-review/large-text/dark-settings.png",
+    "sha256": "4f22c475ab63cbcd13466a51989f63516681124382fdb60659302470b8cd32be"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-game",
+    "path": "spacing-final-check/large-text/floating-game.png",
+    "sha256": "f021b6daacd289f58d2ecce57b2162fac9d928ff7cdf386f61dd998e6578639f"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-layout",
+    "path": "spacing-final-check/large-text/floating-layout.png",
+    "sha256": "abfcd281d56a6ed7076c833ecd7c86a0ceefd47859f9a13e87c71011d8af09b2"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating-results",
+    "path": "spacing-review/large-text/floating-results.png",
+    "sha256": "4e94b1593b4fd8f4cf6e9f59791438dee126698dde9b7aa249e0d223fa65b95a"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "floating",
+    "path": "spacing-final-check/large-text/floating.png",
+    "sha256": "66f80a2d75c9a5de7fc5811931bc46d73a1b6388dbcd876515d74f62290988b5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048-controls",
+    "path": "spacing-review/large-text/game-2048-controls.png",
+    "sha256": "d69a634c0186337baf2bd4c793d743f0c8513f6b7f2449812865310a421dd0b9"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-2048",
+    "path": "spacing-review/large-text/game-2048.png",
+    "sha256": "d69a634c0186337baf2bd4c793d743f0c8513f6b7f2449812865310a421dd0b9"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24-controls",
+    "path": "spacing-review/large-text/game-make24-controls.png",
+    "sha256": "8da503be592a3023242f77511437d8e1ccd0ec4017530edae776748f09b72d22"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-make24",
+    "path": "spacing-review/large-text/game-make24.png",
+    "sha256": "8da503be592a3023242f77511437d8e1ccd0ec4017530edae776748f09b72d22"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake-controls",
+    "path": "spacing-review/large-text/game-snake-controls.png",
+    "sha256": "0fbe09662d670d58ab7b3fa5bb43fc9ab17abfac6d32b80c036dbbb625d717b9"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-snake",
+    "path": "spacing-review/large-text/game-snake.png",
+    "sha256": "0fbe09662d670d58ab7b3fa5bb43fc9ab17abfac6d32b80c036dbbb625d717b9"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku-controls",
+    "path": "spacing-review/large-text/game-sudoku-controls.png",
+    "sha256": "f3f16eba00ac2125a090fdacf765fcb50c802ebf42c3b44d6e3f8efcabc33af5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "game-sudoku",
+    "path": "spacing-review/large-text/game-sudoku.png",
+    "sha256": "f3f16eba00ac2125a090fdacf765fcb50c802ebf42c3b44d6e3f8efcabc33af5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Games",
+    "theme": "dark",
+    "name": "games",
+    "path": "spacing-review/large-text/games.png",
+    "sha256": "6e568258c37914612739743e8299249d855079d41cb94b5cbd116e0617c93915"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-scrolled",
+    "path": "spacing-review/large-text/history-scrolled.png",
+    "sha256": "84ff3b89990df9e418178eb28db0713fc1b1d22321c76f070c7db939d170f9db"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history-search",
+    "path": "spacing-review/large-text/history-search.png",
+    "sha256": "3409aca7776bedd99444f8a47bb4642ff7d89e16df4eedcff103695e8b15f105"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "History",
+    "theme": "dark",
+    "name": "history",
+    "path": "spacing-review/large-text/history.png",
+    "sha256": "84ff3b89990df9e418178eb28db0713fc1b1d22321c76f070c7db939d170f9db"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-scrolled",
+    "path": "spacing-review/large-text/home-scrolled.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home-search-accessible",
+    "path": "spacing-review/large-text/home-search-accessible.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Home and Search",
+    "theme": "dark",
+    "name": "home",
+    "path": "spacing-review/large-text/home.png",
+    "sha256": "000201cd898f4be1c636a514527d2e27ad655bf8a1a897b3b047bc3c25de577c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Breathe and Meditate",
+    "theme": "dark",
+    "name": "meditate",
+    "path": "spacing-review/large-text/meditate.png",
+    "sha256": "561f1e1d348796a480d071f2dbf335f5769238338335c81d98766b1b9f6e8bc6"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-detail-qa",
+    "path": "spacing-review/large-text/playlist-detail-qa.png",
+    "sha256": "c97e67601ff1e5543d92ecc0362f2e3aef804752a80b6cba0fdecd25f5fa0b16"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "playlist-rows-qa",
+    "path": "spacing-review/large-text/playlist-rows-qa.png",
+    "sha256": "4b6441ae1d5f80d66b040b1eacdf55f61480b46804a160357ad7571fc2107c32"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profile-create",
+    "path": "spacing-review/large-text/profile-create.png",
+    "sha256": "ee0ec803086165b33f251072e1bf34c7e2849e3d619195c9c8b39f8677a21174"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Profiles",
+    "theme": "dark",
+    "name": "profiles",
+    "path": "spacing-review/large-text/profiles.png",
+    "sha256": "f00c87c863dc8e750870d1c8865b1197a160ccafefedbf881f9f61d08779210a"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved-populated-qa",
+    "path": "spacing-review/large-text/saved-populated-qa.png",
+    "sha256": "0ae3044b9d3921e9dc1627e0ba5c230cd43fa77ec503b3001933592a25f1efad"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Saved and playlists",
+    "theme": "dark",
+    "name": "saved",
+    "path": "spacing-review/large-text/saved.png",
+    "sha256": "7d68f6f96e01da7a8607bf7c6caf2fa8b449fedb985f78fab3c1f7861af9d65e"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-AccountSettingsFragment-bottom.png",
+    "sha256": "699c923d54f0425c4e5b97ecdeeb89c2aa56f5dc135c30c2932a2097ddae7371"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AccountSettingsFragment",
+    "path": "spacing-review/large-text/settings-AccountSettingsFragment.png",
+    "sha256": "699c923d54f0425c4e5b97ecdeeb89c2aa56f5dc135c30c2932a2097ddae7371"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-AdvancedSettingsFragment-bottom.png",
+    "sha256": "cf2f6e9e07a10ce58263d959643c420fca9ec5f3ccf7dace022eaa51a6c42693"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AdvancedSettingsFragment",
+    "path": "spacing-review/large-text/settings-AdvancedSettingsFragment.png",
+    "sha256": "f99e999d8d80eee60870c001c668fc665657106647ba4fc5a26f5983807dcd50"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-AppearanceSettingsFragment-bottom.png",
+    "sha256": "5f8f6e75796e7cd5911dc43aea7d82b84a94b4adf06c94c123c036ab547e87bf"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-AppearanceSettingsFragment",
+    "path": "spacing-review/large-text/settings-AppearanceSettingsFragment.png",
+    "sha256": "5f8f6e75796e7cd5911dc43aea7d82b84a94b4adf06c94c123c036ab547e87bf"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-BackupSettingsFragment-bottom.png",
+    "sha256": "3c5fd178b566afbfb68ee7def9539ebaedd87b197b98cfc6a3ea417615218817"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-BackupSettingsFragment",
+    "path": "spacing-review/large-text/settings-BackupSettingsFragment.png",
+    "sha256": "3c5fd178b566afbfb68ee7def9539ebaedd87b197b98cfc6a3ea417615218817"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment-bottom",
+    "path": "spacing-review/large-text/settings-ChooseTabsFragment-bottom.png",
+    "sha256": "df688e7a3510d3ad831675c99607dd62698120d8fc51b537fe394879b4dda785"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ChooseTabsFragment",
+    "path": "spacing-review/large-text/settings-ChooseTabsFragment.png",
+    "sha256": "df688e7a3510d3ad831675c99607dd62698120d8fc51b537fe394879b4dda785"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-ContentSettingsFragment-bottom.png",
+    "sha256": "185d71776f50a7237aa83f79eee09cb342e48deefad9991c954baf41a734ca32"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ContentSettingsFragment",
+    "path": "spacing-review/large-text/settings-ContentSettingsFragment.png",
+    "sha256": "185d71776f50a7237aa83f79eee09cb342e48deefad9991c954baf41a734ca32"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-DownloadSettingsFragment-bottom.png",
+    "sha256": "5c655f0d0ad71188b5502177e782b0aead9aecc190150186c23caf01c30f0147"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-DownloadSettingsFragment",
+    "path": "spacing-review/large-text/settings-DownloadSettingsFragment.png",
+    "sha256": "5c655f0d0ad71188b5502177e782b0aead9aecc190150186c23caf01c30f0147"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-ExoPlayerSettingsFragment-bottom.png",
+    "sha256": "0de23d43a313e9b30ec7294859b389e5f5dc08ab586dcf0d6681b6352cd5af8c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-ExoPlayerSettingsFragment",
+    "path": "spacing-review/large-text/settings-ExoPlayerSettingsFragment.png",
+    "sha256": "0de23d43a313e9b30ec7294859b389e5f5dc08ab586dcf0d6681b6352cd5af8c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-FilterSettingsFragment-bottom.png",
+    "sha256": "29bf573868f15e218deedb482e35fd1b67344b615dec992d27a0bfd1bf263dc4"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-FilterSettingsFragment",
+    "path": "spacing-review/large-text/settings-FilterSettingsFragment.png",
+    "sha256": "29bf573868f15e218deedb482e35fd1b67344b615dec992d27a0bfd1bf263dc4"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-GestureSettingsFragment-bottom.png",
+    "sha256": "d0deef588a607a521c5c17b7a3fef271919bf5a3e545f28614a6a83466a49de5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-GestureSettingsFragment",
+    "path": "spacing-review/large-text/settings-GestureSettingsFragment.png",
+    "sha256": "d0deef588a607a521c5c17b7a3fef271919bf5a3e545f28614a6a83466a49de5"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-HistorySettingsFragment-bottom.png",
+    "sha256": "48e8aa0c71759cb988b66d1a46bfdce0e6389640f1165a32577e1222215852e1"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-HistorySettingsFragment",
+    "path": "spacing-review/large-text/settings-HistorySettingsFragment.png",
+    "sha256": "48e8aa0c71759cb988b66d1a46bfdce0e6389640f1165a32577e1222215852e1"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment-bottom",
+    "path": "spacing-review/large-text/settings-NotificationModeConfigFragment-bottom.png",
+    "sha256": "a9359e55c1b8cd2e9be25e7f64d57ead54914bf757f6c0d0c339b2df9f9fbbe6"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationModeConfigFragment",
+    "path": "spacing-review/large-text/settings-NotificationModeConfigFragment.png",
+    "sha256": "a9359e55c1b8cd2e9be25e7f64d57ead54914bf757f6c0d0c339b2df9f9fbbe6"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-NotificationsSettingsFragment-bottom.png",
+    "sha256": "6ba12e4f0af13c6da253130849d7991b5c975a4f98821977ba27f17edb66c38c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-NotificationsSettingsFragment",
+    "path": "spacing-review/large-text/settings-NotificationsSettingsFragment.png",
+    "sha256": "6ba12e4f0af13c6da253130849d7991b5c975a4f98821977ba27f17edb66c38c"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-VideoAudioSettingsFragment-bottom.png",
+    "sha256": "52f00627fb18969aa7c491df4148dcfaf7651a102ccad8921acbbb854fe40ec3"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-VideoAudioSettingsFragment",
+    "path": "spacing-review/large-text/settings-VideoAudioSettingsFragment.png",
+    "sha256": "e9b47342767f345535dfcf3542bfb80c4635a949288bda4060b764aaeb738e1a"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment-bottom",
+    "path": "spacing-review/large-text/settings-YouTubeAccountSettingsFragment-bottom.png",
+    "sha256": "83a2ccb72d8d7e62462e43615fd8adf8300497a130126b944b91bfd07197a72f"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings-YouTubeAccountSettingsFragment",
+    "path": "spacing-review/large-text/settings-YouTubeAccountSettingsFragment.png",
+    "sha256": "83a2ccb72d8d7e62462e43615fd8adf8300497a130126b944b91bfd07197a72f"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Settings",
+    "theme": "dark",
+    "name": "settings",
+    "path": "spacing-review/large-text/settings.png",
+    "sha256": "55263f966a647fb8eef08f390b72a194cf47234d303ceff3a48af964b7199c12"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-expanded",
+    "path": "spacing-final-check/large-text/watch-expanded.png",
+    "sha256": "bd912e77222ed0c449b8c229c49e98e0de74818a2add872fb4b68d98dff37023"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-fullscreen",
+    "path": "spacing-final-check/large-text/watch-fullscreen.png",
+    "sha256": "a78bdc0b7486be2d22ae1214769e6b682e27017a2d87b2c7b475727d2746bb56"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-layout",
+    "path": "spacing-final-check/large-text/watch-layout.png",
+    "sha256": "ad23982db1229aa2ae79531b1c3de0a1267eba1dfd32f63ba99183f144d25c61"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch-queue",
+    "path": "spacing-final-check/large-text/watch-queue.png",
+    "sha256": "e68f3ca8bcb368bcceedc421fffedc1a5318134065843da2e7d1879e603024b7"
+  },
+  {
+    "configuration": "large-text",
+    "screen": "Playback",
+    "theme": "dark",
+    "name": "watch",
+    "path": "spacing-final-check/large-text/watch.png",
+    "sha256": "85df3901bdb3caaa958d29a39a39e771cc5606dfbf6d4ac70ebe05a8ad994411"
+  },
+  {
+    "configuration": "youtube-playback",
+    "screen": "Playback",
+    "theme": "light",
+    "name": "floating-game",
+    "path": "youtube-playback/floating-game.png",
+    "sha256": "2e2c40d6f2fcebefcf0498a8124b208e20728d5214b63ef074f6f8ec603f5da0"
+  },
+  {
+    "configuration": "youtube-playback",
+    "screen": "Playback",
+    "theme": "light",
+    "name": "floating-results",
+    "path": "youtube-playback/floating-results.png",
+    "sha256": "1057e786b5c051474cb115e41a10b7735771281cff5e65b731a52a3c1d465f79"
+  },
+  {
+    "configuration": "youtube-playback",
+    "screen": "Playback",
+    "theme": "light",
+    "name": "floating",
+    "path": "youtube-playback/floating.png",
+    "sha256": "9158fb63bcea56af2150616abeac5c2fba2d7a6f61f4f3c1fa91efeec25c57e7"
+  },
+  {
+    "configuration": "youtube-playback",
+    "screen": "Playback",
+    "theme": "light",
+    "name": "watch-expanded",
+    "path": "youtube-playback/watch-expanded.png",
+    "sha256": "a6a8ebbc438a6e863e9b5c31f97703c0d2c4e25d583b1855cdabc2ea7739098e"
+  },
+  {
+    "configuration": "youtube-playback",
+    "screen": "Playback",
+    "theme": "light",
+    "name": "watch",
+    "path": "youtube-playback/watch.png",
+    "sha256": "0c6bb1ad4b33441398154db1bb58fa7dc37a7bfab99d3a6054e56ae59f7a3bba"
+  }
+]

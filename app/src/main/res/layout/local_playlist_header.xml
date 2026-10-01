@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/contrast_background_color">
+    android:paddingHorizontal="0dp" android:paddingTop="16dp" android:background="?attr/colorSurface">
 
     <org.schabi.newpipe.views.NewPipeTextView
         android:id="@+id/playlist_title_view"
@@ -13,25 +13,25 @@
         android:clickable="true"
         android:ellipsize="end"
         android:focusable="true"
-        android:maxLines="2"
-        android:paddingHorizontal="@dimen/video_item_search_padding"
-        android:paddingTop="@dimen/video_item_search_padding"
+        android:maxLines="3"
+        android:paddingHorizontal="0dp"
+        android:paddingTop="0dp"
         android:paddingBottom="6dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/playlist_detail_title_text_size"
+        android:textSize="26sp" android:textColor="?attr/colorOnSurface"
         tools:text="Mix musics #23 title Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique vitae sem vitae blanditLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum" />
 
     <org.schabi.newpipe.views.NewPipeTextView
         android:id="@+id/playlist_stream_count"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/playlist_title_view"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:ellipsize="end"
-        android:gravity="right|center_vertical"
-        android:maxLines="1"
-        android:paddingHorizontal="@dimen/video_item_search_padding"
-        android:textSize="@dimen/playlist_detail_subtext_size"
+        android:gravity="start|center_vertical"
+        android:maxLines="2"
+        android:paddingHorizontal="0dp"
+        android:textSize="14sp" android:textColor="?attr/colorOnSurfaceVariant"
         tools:ignore="RtlHardcoded"
         tools:text="234 videos" />
 

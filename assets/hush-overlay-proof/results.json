@@ -1,0 +1,17 @@
+[
+  {
+    "configuration": "tablet-landscape",
+    "passed": true,
+    "captures": 19
+  },
+  {
+    "configuration": "tablet-portrait",
+    "passed": true,
+    "captures": 19
+  },
+  {
+    "configuration": "mobile",
+    "passed": true,
+    "captures": 19
+  }
+]

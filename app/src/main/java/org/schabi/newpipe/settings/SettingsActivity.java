@@ -71,6 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements
     private static final int FRAGMENT_HOLDER_ID = R.id.settings_fragment_holder;
 
     private PreferenceSearchFragment searchFragment;
+    private boolean tabletPanes;
 
     @Nullable
     private MenuItem menuSearchItem;
@@ -98,6 +99,16 @@ public class SettingsActivity extends AppCompatActivity implements
                 SettingsLayoutBinding.inflate(getLayoutInflater());
         setContentView(settingsLayoutBinding.getRoot());
         initSearch(settingsLayoutBinding, restored);
+        settingsLayoutBinding.settingsPanes.setOnModeChanged(expanded -> {
+            tabletPanes=expanded;
+            final FragmentManager manager=getSupportFragmentManager();
+            if(manager.isStateSaved())return;
+            Fragment category=manager.findFragmentById(R.id.settings_categories);
+            if(expanded && category==null)manager.beginTransaction()
+                    .replace(R.id.settings_categories,new MainSettingsFragment(),"tablet-categories").commit();
+            if(expanded && manager.findFragmentById(FRAGMENT_HOLDER_ID) instanceof MainSettingsFragment)
+                manager.beginTransaction().replace(FRAGMENT_HOLDER_ID,new VideoAudioSettingsFragment()).commit();
+        });
 
         setSupportActionBar(settingsLayoutBinding.settingsToolbarLayout.toolbar);
 
@@ -144,6 +155,10 @@ public class SettingsActivity extends AppCompatActivity implements
             setSearchActive(false);
             return;
         }
+        Fragment current=getSupportFragmentManager().findFragmentById(FRAGMENT_HOLDER_ID);
+        if(!tabletPanes && getSupportFragmentManager().getBackStackEntryCount()==0 && !(current instanceof MainSettingsFragment)){
+            getSupportFragmentManager().beginTransaction().replace(FRAGMENT_HOLDER_ID,new MainSettingsFragment()).commit();return;
+        }
         super.onBackPressed();
     }
 
@@ -157,11 +172,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 return true;
             }
 
-            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                finish();
-            } else {
-                getSupportFragmentManager().popBackStack();
-            }
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
@@ -170,7 +181,14 @@ public class SettingsActivity extends AppCompatActivity implements
     @Override
     public boolean onPreferenceStartFragment(@NonNull final PreferenceFragmentCompat caller,
                                              final Preference preference) {
-        showSettingsFragment(instantiateFragment(preference.getFragment()));
+        if(tabletPanes && caller.getId()==R.id.settings_categories){
+            getSupportFragmentManager().beginTransaction()
+                     .replace(FRAGMENT_HOLDER_ID,instantiateFragment(preference.getFragment()))
+                    .runOnCommit(()->{
+                        Fragment category=getSupportFragmentManager().findFragmentById(R.id.settings_categories);
+                        if(category instanceof PreferenceFragmentCompat)((PreferenceFragmentCompat)category).getListView().invalidate();
+                    }).commit();
+        }else showSettingsFragment(instantiateFragment(preference.getFragment()));
         return true;
     }
 

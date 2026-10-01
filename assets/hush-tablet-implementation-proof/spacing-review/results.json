@@ -1,0 +1,22 @@
+[
+  {
+    "configuration": "landscape",
+    "passed": false,
+    "screenshots": 77
+  },
+  {
+    "configuration": "portrait",
+    "passed": true,
+    "screenshots": 77
+  },
+  {
+    "configuration": "narrow",
+    "passed": true,
+    "screenshots": 77
+  },
+  {
+    "configuration": "large-text",
+    "passed": true,
+    "screenshots": 77
+  }
+]

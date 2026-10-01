@@ -1,0 +1,35 @@
+[
+  {
+    "configuration": "landscape",
+    "passed": true,
+    "snakeMetrics": {
+      "layoutPassesDuringMovement": 0,
+      "frames": 48,
+      "p95TotalMs": 230.796534,
+      "maxTotalMs": 305.560894,
+      "p95DrawMs": 0.387584
+    }
+  },
+  {
+    "configuration": "portrait",
+    "passed": true,
+    "snakeMetrics": {
+      "layoutPassesDuringMovement": 0,
+      "frames": 46,
+      "p95TotalMs": 300.810871,
+      "maxTotalMs": 492.928171,
+      "p95DrawMs": 0.556167
+    }
+  },
+  {
+    "configuration": "narrow",
+    "passed": true,
+    "snakeMetrics": {
+      "layoutPassesDuringMovement": 0,
+      "frames": 81,
+      "p95TotalMs": 172.709249,
+      "maxTotalMs": 238.51841,
+      "p95DrawMs": 0.4595
+    }
+  }
+]

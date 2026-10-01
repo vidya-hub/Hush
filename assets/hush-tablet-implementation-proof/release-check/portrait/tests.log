@@ -1,0 +1,38 @@
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.hush.TabletWindowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+org.schabi.newpipe.hush.TabletWindowTest:
+INSTRUMENTATION_STATUS: test=navigationFloatingAndExpandedWatch
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.hush.TabletWindowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=navigationFloatingAndExpandedWatch
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.hush.TabletLocalPlaybackTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+org.schabi.newpipe.hush.TabletLocalPlaybackTest:
+INSTRUMENTATION_STATUS: test=samePlayerSurvivesFloatingAndExpansion
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.hush.TabletLocalPlaybackTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=samePlayerSurvivesFloatingAndExpansion
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 28.443
+
+OK (2 tests)
+
+
+INSTRUMENTATION_CODE: -1

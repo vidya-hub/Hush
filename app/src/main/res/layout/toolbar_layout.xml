@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
-        android:elevation="0dp"
+        android:elevation="0dp" android:paddingHorizontal="6dp"
         android:gravity="center_vertical"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ToolbarTheme">

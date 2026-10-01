@@ -7,18 +7,25 @@ your video app shouldn't be a slot machine. The Home screen offers a break inste
 feed, quick offline games instead of shorts, and your library instead of recommendations — while
 a full-featured, gesture-driven player stays one tap away.
 
-All screenshots below are real captures from the app running on a device.
+These screenshots are fresh captures from the app on a headless Android emulator. Mobile is 411×914dp; tablets are 1280×800dp landscape and 800×1280dp portrait. The Watch and floating-video screenshots show real YouTube playback; separate local-fixture checks verify decoder continuity without relying on a live stream.
 
-## Screenshots
+## Mobile screenshots
 
-| | | |
+| Home | Search with floating video | Watch |
 | :---: | :---: | :---: |
-| ![Home — warm paper](screenshots/home-light.png) | ![Home — dark pine](screenshots/home-dark.png) | ![Watch page](screenshots/watch-dark.png) |
-| *Home — warm paper* | *Home — dark pine* | *Watch page* |
-| ![Breathe session](screenshots/breathe-sheet.png) | ![Meditate timer](screenshots/meditate-sheet.png) | ![Snake](screenshots/game-snake.png) |
-| *Breathe session* | *Meditate timer* | *Snake — swipe to steer* |
-| ![2048](screenshots/game-2048.png) | ![Sudoku](screenshots/game-sudoku.png) | ![Make 24](screenshots/game-make24.png) |
-| *2048* | *Sudoku* | *Make 24* |
+| ![Mobile Home](screenshots/latest/mobile-home.png) | ![Mobile search and floating video](screenshots/latest/mobile-floating-results.png) | ![Mobile watch](screenshots/latest/mobile-watch.png) |
+
+## Tablet screenshots
+
+| Landscape Home | Landscape floating video | Landscape Watch |
+| :---: | :---: | :---: |
+| ![Landscape Home](screenshots/latest/tablet-landscape-home.png) | ![Landscape search and floating video](screenshots/latest/tablet-landscape-floating-results.png) | ![Landscape Watch](screenshots/latest/tablet-landscape-watch.png) |
+
+| Portrait Home | Portrait floating video | Portrait Watch |
+| :---: | :---: | :---: |
+| ![Portrait Home](screenshots/latest/tablet-portrait-home.png) | ![Portrait search and floating video](screenshots/latest/tablet-portrait-floating-results.png) | ![Portrait Watch](screenshots/latest/tablet-portrait-watch.png) |
+
+Home's header, headline, search and shortcuts share one scrolling page. Collapsed video floats above browsing content and never reserves an empty section underneath the results. Landscape tablets use a navigation rail; portrait and compact windows use bottom navigation with equal side margins.
 
 ## What's inside
 
@@ -27,7 +34,7 @@ All screenshots below are real captures from the app running on a device.
 - Quick games (2048, Snake, Sudoku, Make 24) as calm, tap-sized entry points.
 - History, Saved, and Downloads in one grouped library card. No feed, no recommendations,
   no "up next" on Home — that content lives where you looked for it.
-- A fixed, high-contrast search field that stays above the keyboard and the navigation bar.
+- A compact search field inside the Home page scroll, with recent queries and library shortcuts. Search results keep a query editing bar; expanded Watch has no search field.
 
 **Breathe & Meditate**
 - Clock-driven breathing engine: Calm (4 in / 6 out), Box (4·4·4·4), and 4·7·8, with a phase ring,
@@ -45,9 +52,12 @@ All screenshots below are real captures from the app running on a device.
   hints, and a pauseable timer.
 - **Make 24** — fraction-exact arithmetic rounds, every round verified solvable, with hints and undo.
 - Game progress is saved per profile, paused when you leave, and never written in incognito.
-- Background playback keeps a compact control bar above the game; game gestures never touch it.
+- Snake buffers rapid corner turns and uses a frame-synchronized, interpolated movement loop. 2048 commits swipes at the movement threshold and keeps ordered input during its animation. Sudoku selects on the first tap; Make 24 retains its operand tiles through selection changes.
+- Background audio has compact controls; collapsed video is a draggable overlay that keeps its decoder while browsing.
 
 **A proper player**
+- Collapsing Watch retains the browsing context and moves the same video surface into an overlay. It clears system bars, keyboard and navigation without shrinking the page.
+- Android picture-in-picture remains available when leaving expanded Watch on supported devices.
 - Unified Fit/Zoom video geometry for every surface (embedded, fullscreen, popup), honoring pixel
   aspect ratio and rotation — circles stay circles.
 - Single tap for controls, side double-tap for ±10 s, swipe-to-seek with thumbnail previews,
@@ -61,12 +71,12 @@ All screenshots below are real captures from the app running on a device.
 
 **Design**
 - Warm paper / dark pine Material 3 themes that follow the system setting.
-- [Manrope](assets/licenses/manrope_ofl.txt) for type (OFL licensed, bundled), 48 dp touch targets,
+- [Manrope](app/src/main/assets/manrope_ofl.html) for type (OFL licensed, bundled), 48 dp touch targets,
   and layouts that reflow — not clip — at large font sizes and narrow screens.
 
 ## Building
 
-Requirements: JDK 17+, Android SDK. This is a standard Gradle project — open it in Android Studio,
+Requirements: JDK 21 (verified), Android SDK with API 37 installed. This is a standard Gradle project — open it in Android Studio,
 or create `local.properties` with `sdk.dir=/path/to/android-sdk` and build from the command line.
 The ffmpeg-kit AAR is not committed; the first build downloads it from the project's GitHub
 release and verifies a pinned SHA-256 checksum, so a clean clone builds out of the box:

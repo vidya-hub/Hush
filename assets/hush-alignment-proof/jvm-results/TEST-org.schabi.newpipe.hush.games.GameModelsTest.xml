@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.schabi.newpipe.hush.games.GameModelsTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-09-30T15:07:11.946Z" hostname="Vidyas-MacBook-Pro.local" time="0.033">
+  <properties/>
+  <testcase name="snakeQueuesOnlyOneTurnPerTickAndRestoresPaused" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.002"/>
+  <testcase name="sudokuPermutationsRemainUniqueAndCluesCannotChange" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.002"/>
+  <testcase name="generatedMake24RoundsAreAlwaysSolvable" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.025"/>
+  <testcase name="snakeRejectsReverseTurnAndPausesOnWall" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.0"/>
+  <testcase name="moveEventsMatchCommittedBoardAndCannotMutateIt" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.001"/>
+  <testcase name="sudokuUsesAUniqueSolutionAndHintFillsIt" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.0"/>
+  <testcase name="invalid2048MoveDoesNotSpawnAndSaveRestoresUndo" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.001"/>
+  <testcase name="twenty48MergesOnceAndUndoRestoresBoard" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.001"/>
+  <testcase name="make24UsesExactFractionsAndUndoSurvivesSave" classname="org.schabi.newpipe.hush.games.GameModelsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

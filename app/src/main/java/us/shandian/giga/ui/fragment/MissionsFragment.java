@@ -109,6 +109,8 @@ public class MissionsFragment extends Fragment {
 
         // Views
         mEmpty = v.findViewById(R.id.list_empty_view);
+        ((android.widget.ImageView)v.findViewById(R.id.downloads_empty_icon)).setImageDrawable(
+                org.schabi.newpipe.hush.ui.HushIcons.drawable(requireContext(),"download"));
         mList = v.findViewById(R.id.mission_recycler);
 
         // Init layouts managers

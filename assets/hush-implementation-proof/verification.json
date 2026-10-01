@@ -1,0 +1,10 @@
+{
+  "build": "passed",
+  "jvm_tests": 23,
+  "runtime_tests": 4,
+  "narrow_large_text_tests": 2,
+  "wide_landscape_tests": 1,
+  "icon_masters_unchanged": 70,
+  "missing_registered_assets": [],
+  "screenshots": 31
+}

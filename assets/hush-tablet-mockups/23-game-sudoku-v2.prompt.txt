@@ -1,0 +1,1 @@
+Use case: ui-mockup. Edit target Sudoku. Change ONLY primarybuttonlabel New game to New puzzle, preserveeveryotherpixel/layout/9x9board/keypad/controls and16:10canvas. New puzzle textfitsbuttonandisalignedcenter.

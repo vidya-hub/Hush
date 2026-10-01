@@ -104,7 +104,7 @@ public final class HushActionSheet {
             if (action.icon == 0) {
                 icon.setVisibility(View.GONE);
             } else {
-                icon.setImageResource(action.icon);
+                icon.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,action.icon));
             }
             if (action.detail == null || action.detail.length() == 0) {
                 detail.setVisibility(View.GONE);

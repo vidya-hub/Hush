@@ -103,6 +103,68 @@ public class GameModelsTest {
         assertTrue(restored.undo());assertFalse(restored.solved);assertEquals(2,restored.terms.size());
     }
 
+    @Test public void snakeBuffersTwoFastCornerTurnsWithoutDroppingTheSecond() {
+        GameModels.Snake game=new GameModels.Snake(new Random(2));
+        game.food=0;game.paused=false;
+        game.turn(0);game.turn(3);
+        game.tick();assertEquals(0,game.direction);
+        game.tick();assertEquals("Second fast corner swipe must execute on the next step",3,game.direction);
+    }
+
+    @Test public void snakeRejectsReversalAgainstBufferedTurnAndRestoresBothTurns() {
+        var game=new GameModels.Snake(new Random(2));game.food=0;
+        game.turn(0);game.turn(2);game.turn(3);
+        var restored=new GameModels.Snake(new Random(4));restored.load(game.save());
+        restored.paused=false;restored.tick();assertEquals(0,restored.direction);
+        restored.tick();assertEquals(3,restored.direction);
+    }
+    @Test public void snakeCanEnterTheVacatedTailCell() {
+        var game=new GameModels.Snake(new Random(2));game.body.clear();
+        for(int cell:new int[]{20,21,39,38})game.body.add(cell);
+        game.direction=0;game.nextDirection=0;game.food=300;game.paused=false;
+        assertTrue(game.tick());assertTrue(game.alive);assertEquals(Integer.valueOf(20),game.body.peekLast());
+    }
+    @Test public void snakeFullBoardIsAWinAndRestoresWithoutInvalidFoodPlacement() {
+        var game=new GameModels.Snake(new Random(2));game.body.clear();
+        for(int row=0;row<18;row++)for(int col=0;col<18;col++){
+            int cell=row*18+(row%2==0?col:17-col);if(cell!=306)game.body.add(cell);
+        }
+        game.food=306;game.direction=3;game.nextDirection=3;game.paused=false;
+        assertTrue(game.tick());assertTrue(game.won);assertFalse(game.alive);assertTrue(game.paused);
+        var restored=new GameModels.Snake(new Random(3));restored.load(game.save());
+        assertTrue(restored.won);assertEquals(324,restored.body.size());
+    }
+    @Test public void invalidSnakeSaveCannotIntroduceOutOfBoundsOrDuplicateCells() throws Exception {
+        var game=new GameModels.Snake(new Random(2));String initial=game.body.toString();
+        game.load(new org.json.JSONObject().put("body",new org.json.JSONArray("[1,1,800]")));
+        assertEquals(initial,game.body.toString());assertTrue(game.alive);
+    }
+    @Test public void every2048DirectionConservesTilesExceptItsOneSpawnAndUndo() {
+        var random=new Random(21);
+        for(int round=0;round<400;round++){
+            var game=new GameModels.Twenty48(random);
+            for(int i=0;i<16;i++)game.board[i]=random.nextBoolean()?0:1<<(1+random.nextInt(5));
+            int[] before=game.board.clone();int sum=Arrays.stream(before).sum();
+            var result=game.moveDetailed(round%4);
+            if(result.changed){
+                assertEquals(sum+game.board[result.spawnIndex],Arrays.stream(game.board).sum());
+                assertTrue(game.undo());assertArrayEquals(before,game.board);
+            }else assertArrayEquals(before,game.board);
+        }
+    }
+    @Test public void sudokuPauseAndResumeDoNotCountBackgroundTime() {
+        var game=new GameModels.Sudoku(new Random(4));game.resume(1000);
+        game.pause(2100);assertEquals(1100,game.elapsed(10000));
+        game.resume(11000);assertEquals(1600,game.elapsed(11500));game.pause(12000);
+        assertEquals(2100,game.elapsed(20000));
+    }
+    @Test public void make24InvalidDivisionDoesNotChangeTermsOrUndoHistory() {
+        var game=new GameModels.Make24(new Random(2));game.terms.clear();
+        game.terms.add(new GameModels.Make24.Term(3,1,"3"));game.terms.add(new GameModels.Make24.Term(0,1,"0"));
+        assertFalse(game.combine(0,1,3));assertEquals(2,game.terms.size());assertFalse(game.canUndo());
+        assertTrue(game.combine(0,1,0));assertTrue(game.canUndo());assertTrue(game.undo());assertEquals(2,game.terms.size());
+    }
+
     private int countSolutions(final int[] board, final int limit) {
         int selected = -1;
         int bestMask = 0;

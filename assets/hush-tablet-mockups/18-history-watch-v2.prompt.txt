@@ -1,0 +1,1 @@
+Use case: ui-mockup. Edit target History. Preserve all layout and media. Change privacy copy only: heading exactly Incognito off. Subtitle exactly New searches and watched videos are saved in this profile. This is LOCAL PROFILE HISTORY; remove all mention of account. Add back arrow directly left of History title in available header area. Do not add other controls.

@@ -38,7 +38,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
@@ -50,7 +49,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import android.widget.FrameLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 
@@ -72,7 +70,6 @@ import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.search.SearchFragment;
 import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
 import org.schabi.newpipe.player.Player;
-import org.schabi.newpipe.player.PlayerService;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
@@ -128,11 +125,9 @@ public class MainActivity extends AppCompatActivity {
     private int systemRightInset;
     private int imeBottomInset;
     private boolean searchChrome;
-    private com.google.android.material.bottomnavigation.BottomNavigationView bottomNav;
-    private FrameLayout tabsHolder;
-    private boolean bottomNavVisible;
-    @IdRes private int currentTab = R.id.tab_search;
-    private boolean tabsAttached;
+    private org.schabi.newpipe.hush.ui.HushChrome hushChrome;
+    private CharSequence browsingTitle;
+    private boolean hushPlayerExpanded;
 
     /*//////////////////////////////////////////////////////////////////////////
     // Activity's LifeCycle
@@ -171,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
                 .getHeaderView(0));
         toolbarLayoutBinding = mainBinding.toolbarLayout;
         setContentView(mainBinding.getRoot());
+        hushChrome = new org.schabi.newpipe.hush.ui.HushChrome(this,
+                (ViewGroup) mainBinding.fragmentHolder.getParent());
+        hushChrome.restorePosition(savedInstanceState);
         ViewCompat.setOnApplyWindowInsetsListener(mainBinding.getRoot(), (view, insets) -> {
             final Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
                     | WindowInsetsCompat.Type.displayCutout());
@@ -188,14 +186,17 @@ public class MainActivity extends AppCompatActivity {
             toolbar.setPadding(toolbar.getPaddingLeft(), systemTopInset,
                     toolbar.getPaddingRight(), toolbar.getPaddingBottom());
             applySearchChromeInsets();
+            final androidx.core.view.WindowInsetsControllerCompat barsController =
+                    androidx.core.view.WindowCompat.getInsetsController(getWindow(), mainBinding.getRoot());
+            final boolean light = ThemeHelper.isLightThemeSelected(this);
+            barsController.setAppearanceLightStatusBars(light);
+            barsController.setAppearanceLightNavigationBars(light);
             return insets;
         });
 
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             initFragments();
         }
-
-        setupBottomNav();
 
         setSupportActionBar(toolbarLayoutBinding.toolbar);
         try {
@@ -447,40 +448,55 @@ public class MainActivity extends AppCompatActivity {
             if (searchOnly) {
                 actionBar.hide();
             } else {
-                actionBar.setDisplayShowTitleEnabled(false);
-                actionBar.setTitle("");
+                actionBar.setDisplayShowTitleEnabled(true);
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.show();
             }
         }
+        if (!searchOnly && hushChrome != null) hushChrome.navigation(null);
         applySearchChromeInsets();
         mainBinding.getRoot().setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Bottom navigation: Search / Games / Breathe top-level tabs
-    //////////////////////////////////////////////////////////////////////////*/
-
-    private void setupBottomNav() {
-        bottomNav = findViewById(R.id.home_bottom_nav);
-        tabsHolder = findViewById(R.id.fragment_tabs_holder);
-        if (bottomNav == null || tabsHolder == null) {
-            return;
-        }
-        bottomNav.setOnItemSelectedListener(item -> {
-            final int id = item.getItemId();
-            if (id != currentTab) {
-                switchTab(id);
+    public void applySearchChromeInsets() {
+        if (hushChrome != null) hushChrome.insets(systemTopInset, systemBottomInset,
+                systemLeftInset, systemRightInset, imeBottomInset);
+        final int pageBottom = imeBottomInset > 0 ? imeBottomInset : systemBottomInset
+                + (hushChrome == null ? 0 : hushChrome.navigationHeight());
+        applyHolderInsets(R.id.fragment_holder,
+                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()), pageBottom);
+        final View toolbar=toolbarLayoutBinding.getRoot();
+        if(toolbar.getLayoutParams() instanceof ViewGroup.MarginLayoutParams){
+            ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)toolbar.getLayoutParams();
+            int start=systemLeftInset+(hushChrome==null?0:hushChrome.navigationWidth());
+            if(lp.leftMargin!=start || lp.rightMargin!=systemRightInset){
+                lp.leftMargin=start;lp.rightMargin=systemRightInset;toolbar.setLayoutParams(lp);
             }
-            return true;
-        });
-        bottomNav.setSelectedItemId(R.id.tab_search);
-        setBottomNavVisible(true);
+        }
+        // BottomSheetBehavior ignores holder margins. The player applies this inset itself.
+        applyHolderInsets(R.id.fragment_player_holder, 0, 0);
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Picture-in-picture: video keeps playing in a floating window
-    //////////////////////////////////////////////////////////////////////////*/
+    public void setHomeNavigation(final String destination) {
+        if (hushChrome != null) hushChrome.navigation(destination);
+        applySearchChromeInsets();
+    }
+
+    public void openHushDestination(final String destination) {
+        final Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragment_holder);
+        if ("Search".equals(destination)) {
+            if (!(current instanceof SearchFragment)) NavigationHelper.gotoMainFragment(getSupportFragmentManager());
+        } else {
+            final String tag = "hush-top-" + destination;
+            if (current != null && tag.equals(current.getTag())) return;
+            if (getSupportFragmentManager().popBackStackImmediate(tag, 0)) return;
+            final Fragment next = "Games".equals(destination)
+                    ? org.schabi.newpipe.hush.games.GamesFragment.newInstance(null)
+                    : org.schabi.newpipe.fragments.list.search.BreakSessionFragment.newInstance(false);
+            getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                    .replace(R.id.fragment_holder, next, tag).addToBackStack(tag).commit();
+        }
+    }
 
     @Override
     public void onUserLeaveHint() {
@@ -494,14 +510,14 @@ public class MainActivity extends AppCompatActivity {
         if (!isInPictureInPictureMode() && PlayerHolder.getInstance().isPlaying()
                 && !PlayerHolder.getInstance().isBackgroundAudio()) {
             // never enter PiP from a tab other than the watch screen
-            return tabsHolder == null || tabsHolder.getVisibility() != View.VISIBLE;
+            return hushPlayerExpanded;
         }
         return false;
     }
 
     private android.app.PictureInPictureParams buildPipParams() {
-        final Player player = PlayerService.getRunningService() == null ? null
-                : PlayerService.getRunningService().getPlayer();
+        final Player player = org.schabi.newpipe.player.PlayerService.getRunningService() == null ? null
+                : org.schabi.newpipe.player.PlayerService.getRunningService().getPlayer();
         float ratio = player != null && player.getVideoNaturalAspectRatio() > 0
                 ? player.getVideoNaturalAspectRatio() : 16f / 9f;
         ratio = Math.min(2.35f, Math.max(0.42f, ratio));
@@ -511,7 +527,8 @@ public class MainActivity extends AppCompatActivity {
                                 Math.round(ratio * 1000000), 1000000));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && player != null
                 && player.getSurfaceView() != null) {
-            builder.setSourceRectHint(new android.graphics.Rect());
+            final android.graphics.Rect source = new android.graphics.Rect();
+            if (player.getSurfaceView().getGlobalVisibleRect(source)) builder.setSourceRectHint(source);
         }
         return builder.build();
     }
@@ -520,92 +537,37 @@ public class MainActivity extends AppCompatActivity {
     public void onPictureInPictureModeChanged(final boolean isInPictureInPictureMode,
                                               final android.content.res.Configuration newConfig) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
-        final Player player = PlayerService.getRunningService() == null ? null
-                : PlayerService.getRunningService().getPlayer();
+        final Player player = org.schabi.newpipe.player.PlayerService.getRunningService() == null ? null
+                : org.schabi.newpipe.player.PlayerService.getRunningService().getPlayer();
         if (player != null) {
             player.setPipMode(isInPictureInPictureMode);
         }
-        if (!isInPictureInPictureMode && bottomNav != null) {
+        if (!isInPictureInPictureMode) {
             applySearchChromeInsets();
         }
     }
 
-    /**
-     * Switches between the three top-level tabs. Games and Breathe live in their
-     * own containers inside {@code fragment_tabs_holder}, so switching is a pure
-     * visibility change and every tab keeps its state.
-     */
-    public void switchTab(@IdRes final int tabId) {
-        if (tabId != R.id.tab_search && tabId != R.id.tab_games
-                && tabId != R.id.tab_breathe) {
-            return;
-        }
-        currentTab = tabId;
-        final FragmentManager fm = getSupportFragmentManager();
-        // drop any detail screens stacked above home (watch page, library, single game)
-        if (fm.getBackStackEntryCount() > 1) {
-            fm.popBackStackImmediate(NavigationHelper.SEARCH_FRAGMENT_TAG, 0);
-        }
-        final boolean search = tabId == R.id.tab_search;
-        if (!search && !tabsAttached) {
-            tabsAttached = true;
-            fm.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.tabs_games_container,
-                            org.schabi.newpipe.hush.games.GamesFragment.newTabInstance())
-                    .add(R.id.tabs_breathe_container,
-                            org.schabi.newpipe.fragments.list.search.BreakSessionFragment
-                                    .newTabInstance())
-                    .commitNow();
-        }
-        if (tabsAttached) {
-            final View games = findViewById(R.id.tabs_games_container);
-            final View breathe = findViewById(R.id.tabs_breathe_container);
-            if (games != null) {
-                games.setVisibility(tabId == R.id.tab_games ? View.VISIBLE : View.GONE);
-            }
-            if (breathe != null) {
-                breathe.setVisibility(tabId == R.id.tab_breathe ? View.VISIBLE : View.GONE);
-            }
-        }
-        tabsHolder.setVisibility(search ? View.GONE : View.VISIBLE);
-        setBottomNavVisible(true);
-    }
+    public org.schabi.newpipe.hush.ui.HushChrome getHushChrome() { return hushChrome; }
 
-    /** The bar only appears on the three top-level tabs. */
-    public void setBottomNavVisible(final boolean visible) {
-        bottomNavVisible = visible;
-        if (bottomNav != null) {
-            bottomNav.setVisibility(visible ? View.VISIBLE : View.GONE);
-            bottomNav.setPadding(0, 0, 0, visible ? systemBottomInset : 0);
+    public void setPlayerExpanded(final boolean expanded) {
+        final ActionBar bar = getSupportActionBar();
+        if (expanded && !hushPlayerExpanded && bar != null) { browsingTitle = bar.getTitle(); bar.setTitle(""); }
+        hushPlayerExpanded = expanded;
+        hushChrome.expanded(expanded);
+        if (!expanded) {
+            final Fragment page = getSupportFragmentManager().findFragmentById(R.id.fragment_holder);
+            if (page instanceof SearchFragment) ((SearchFragment) page).refreshHushChrome();
+            else if (page instanceof org.schabi.newpipe.hush.games.GamesFragment) {
+                setSearchChrome(true); setHomeNavigation(((org.schabi.newpipe.hush.games.GamesFragment)page).isHub() ? "Games" : null);
+            } else if (page instanceof org.schabi.newpipe.fragments.list.search.BreakSessionFragment) {
+                setSearchChrome(true); setHomeNavigation("Breathe");
+            } else { setSearchChrome(false); if (bar != null) {
+                if (page instanceof org.schabi.newpipe.local.library.SavedLibraryFragment) bar.setTitle(R.string.library_saved);
+                else if (page instanceof org.schabi.newpipe.local.library.HistoryLibraryFragment) bar.setTitle(R.string.action_history);
+                else if (browsingTitle != null) bar.setTitle(browsingTitle);
+            } }
         }
         applySearchChromeInsets();
-    }
-
-    public boolean isBottomNavVisible() {
-        return bottomNavVisible;
-    }
-
-    private int bottomNavHeight() {
-        if (bottomNav == null || !bottomNavVisible) {
-            return 0;
-        }
-        return bottomNav.getHeight() > 0
-                ? bottomNav.getHeight() + systemBottomInset
-                : (int) (64 * getResources().getDisplayMetrics().density) + systemBottomInset;
-    }
-
-    private void applySearchChromeInsets() {
-        final int pageBottom = imeBottomInset > 0 ? imeBottomInset : systemBottomInset;
-        final int bar = bottomNavHeight();
-        applyHolderInsets(R.id.fragment_holder,
-                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()),
-                Math.max(pageBottom, bar));
-        applyHolderInsets(R.id.fragment_tabs_holder,
-                systemTopInset + (searchChrome ? 0 : resolveActionBarSize()),
-                Math.max(pageBottom, bar));
-        // BottomSheetBehavior ignores holder margins. The player applies this inset itself.
-        applyHolderInsets(R.id.fragment_player_holder, 0, 0);
     }
 
     private void applyHolderInsets(final int viewId, final int top, final int bottom) {
@@ -614,11 +576,11 @@ public class MainActivity extends AppCompatActivity {
             final ViewGroup.MarginLayoutParams params =
                     (ViewGroup.MarginLayoutParams) holder.getLayoutParams();
             if (params.topMargin != top || params.bottomMargin != bottom
-                    || params.leftMargin != systemLeftInset
+                    || params.leftMargin != systemLeftInset + (viewId == R.id.fragment_holder && hushChrome != null ? hushChrome.navigationWidth() : 0)
                     || params.rightMargin != systemRightInset) {
                 params.topMargin = top;
                 params.bottomMargin = bottom;
-                params.leftMargin = systemLeftInset;
+                params.leftMargin = systemLeftInset + (viewId == R.id.fragment_holder && hushChrome != null ? hushChrome.navigationWidth() : 0);
                 params.rightMargin = systemRightInset;
                 holder.setLayoutParams(params);
             }
@@ -635,7 +597,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull final Bundle state) {
+        super.onSaveInstanceState(state);
+        hushChrome.savePosition(state);
+    }
+
+    @Override
     protected void onDestroy() {
+        if (hushChrome != null) hushChrome.dispose();
         super.onDestroy();
         if (!isChangingConfigurations()) {
             StateSaver.clearStateFiles();
@@ -745,19 +714,6 @@ public class MainActivity extends AppCompatActivity {
         // In case bottomSheet is not visible on the screen or collapsed we can assume that the user
         // interacts with a fragment inside fragment_holder so all back presses should be
         // handled by it
-        // On the Games/Breathe tabs, back first closes any open game screen,
-        // then returns to the Search tab instead of leaving the app.
-        if (bottomNavVisible && currentTab != R.id.tab_search) {
-            if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-                super.onBackPressed();
-                return;
-            }
-            if (bottomNav != null) {
-                bottomNav.setSelectedItemId(R.id.tab_search);
-            }
-            return;
-        }
-
         if (bottomSheetHiddenOrCollapsed()) {
             final Fragment fragment = getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_holder);

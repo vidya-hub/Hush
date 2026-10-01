@@ -1,0 +1,612 @@
+{
+  "pages": [
+    {
+      "id": "home",
+      "name": "Home",
+      "mockup": "PipePipeClient/assets/hush-home-alive-concepts/03-pine-editorial-refined.png",
+      "groups": [
+        [
+          "Header",
+          [
+            "hush-mark",
+            "incognito",
+            "more-vertical"
+          ],
+          "Brand at leading edge, privacy and overflow trailing. Profile switching remains reachable in overflow."
+        ],
+        [
+          "Hero and current playback",
+          [
+            "breath-ring",
+            "waveform"
+          ],
+          "Ring is decorative at 44dp. Waveform at 32dp appears only for actual playback and is not a fake loading state."
+        ],
+        [
+          "Search and recent queries",
+          [
+            "search",
+            "history"
+          ],
+          "24dp field-leading search; 18dp recent-query history. No permanent bottom search dock."
+        ],
+        [
+          "Library shortcuts",
+          [
+            "history",
+            "bookmark",
+            "download"
+          ],
+          "Three equal History, Saved and Downloads actions, with 24dp glyphs and visible labels."
+        ],
+        [
+          "Audio-only playback",
+          [
+            "music",
+            "play",
+            "pause",
+            "close",
+            "queue"
+          ],
+          "When actual mode is audio-only, use compact labelled controls above navigation, not a fake video frame. Never coexist with video PiP."
+        ],
+        [
+          "Bottom navigation",
+          [
+            "search",
+            "games",
+            "hush-mark"
+          ],
+          "Search, Games, Breathe in three equal 48dp-or-larger targets; 22dp outer horizontal gutters. Active tab uses a sage capsule and label."
+        ]
+      ],
+      "nav": "Search",
+      "pip": true
+    },
+    {
+      "id": "results",
+      "name": "Submitted search",
+      "mockup": "PipePipeClient/assets/hush-search-player-flow/01-search-results.png",
+      "groups": [
+        [
+          "Editable query toolbar",
+          [
+            "back",
+            "close",
+            "more-vertical"
+          ],
+          "Back leading; clear query within field trailing; overflow outside field. Search stays editable after submission."
+        ],
+        [
+          "Display and filtering",
+          [
+            "list",
+            "grid",
+            "content-filter"
+          ],
+          "List/grid toggle above results; filter only in supported filter menu. Selected display mode announced."
+        ],
+        [
+          "Result rows",
+          [
+            "more-vertical",
+            "live"
+          ],
+          "Overflow trailing each media row. Live icon appears only with verified live metadata. Duration is text."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "watch",
+      "name": "Watch / expanded player",
+      "mockup": "PipePipeClient/assets/hush-search-player-flow/02-watch-page.png",
+      "groups": [
+        [
+          "Player overlay",
+          [
+            "chevron-down",
+            "more-vertical",
+            "pause",
+            "play",
+            "expand",
+            "fullscreen-exit"
+          ],
+          "Collapse upper-left, overflow upper-right, play OR pause center, fullscreen lower-right. Exit-fullscreen replaces enter only in fullscreen."
+        ],
+        [
+          "Media actions",
+          [
+            "bookmark",
+            "bookmark-filled",
+            "headphones",
+            "download",
+            "more-horizontal"
+          ],
+          "Save OR saved, Background, Download and overflow below title/channel. Search and bottom navigation absent."
+        ],
+        [
+          "Details and queue",
+          [
+            "chevron-down",
+            "queue",
+            "more-vertical"
+          ],
+          "Disclosure trailing each section; queue leading title; row overflow trailing. Expanded/collapsed state announced."
+        ],
+        [
+          "Existing player menu",
+          [
+            "share",
+            "pip",
+            "previous",
+            "next",
+            "shuffle",
+            "repeat",
+            "repeat-one",
+            "add",
+            "captions",
+            "speed",
+            "speaker",
+            "mute",
+            "globe",
+            "cast",
+            "sleep-timer",
+            "comments",
+            "comments-off",
+            "brightness",
+            "info",
+            "settings"
+          ],
+          "Retain existing menus and conditional supported actions. Do not put every menu icon on the primary watch toolbar or introduce unavailable services."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "results-pip",
+      "name": "Results after player down-swipe",
+      "mockup": "PipePipeClient/assets/hush-search-player-flow/03-results-floating-video.png",
+      "groups": [
+        [
+          "Restored query and results",
+          [
+            "back",
+            "close",
+            "more-vertical",
+            "list",
+            "grid",
+            "content-filter",
+            "live"
+          ],
+          "Reuse submitted-search components and preserve query, filters and scroll. Only display current mode glyph and supported items."
+        ]
+      ],
+      "nav": null,
+      "pip": true
+    },
+    {
+      "id": "saved",
+      "name": "Saved / populated",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/03-saved-playlists.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "more-vertical"
+          ],
+          "Saved title between back and overflow."
+        ],
+        [
+          "Creation",
+          [
+            "add"
+          ],
+          "24dp leading glyph in labelled New playlist action."
+        ],
+        [
+          "Playlist rows",
+          [
+            "playlist",
+            "chevron-right"
+          ],
+          "32dp mark in 48dp tonal tile leading; chevron trailing. Reuse one mark, actual names/counts, no artificial artwork variations."
+        ],
+        [
+          "Existing management menu",
+          [
+            "edit",
+            "trash",
+            "share"
+          ],
+          "Rename and remove remain in existing actions; share only where supported by the current playlist implementation."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "playlist",
+      "name": "Playlist detail",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/06-playlist-detail.png",
+      "groups": [
+        [
+          "Toolbar and identity",
+          [
+            "back",
+            "more-vertical",
+            "playlist"
+          ],
+          "Back leading, overflow trailing; same playlist mark at 48dp in header."
+        ],
+        [
+          "Playback",
+          [
+            "play",
+            "headphones"
+          ],
+          "Leading glyphs inside labelled Play all and Background actions."
+        ],
+        [
+          "Rows",
+          [
+            "drag",
+            "more-vertical"
+          ],
+          "Reorder at start and overflow at end; 48dp targets. Accessible move-up/down alternative."
+        ],
+        [
+          "Existing playlist actions",
+          [
+            "edit",
+            "trash",
+            "share",
+            "pip",
+            "shuffle"
+          ],
+          "Only expose existing supported operations. Popup playback uses pip, not the expand glyph."
+        ]
+      ],
+      "nav": null,
+      "pip": true
+    },
+    {
+      "id": "profiles",
+      "name": "Profiles sheet",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/05-profiles.png",
+      "groups": [
+        [
+          "Sheet header",
+          [
+            "close"
+          ],
+          "Close at upper-right in 48dp target. Handle is a native rounded line, not an icon asset."
+        ],
+        [
+          "Profile rows",
+          [
+            "profile",
+            "check"
+          ],
+          "Default avatar leading only when no actual avatar/initials; check trailing current profile. Initials remain real text."
+        ],
+        [
+          "Creation and deletion",
+          [
+            "add",
+            "trash"
+          ],
+          "Add leading New profile row; delete only in allowed existing profile management flow with confirmation."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "history",
+      "name": "History",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/04-history.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "more-vertical"
+          ],
+          "Visible History title and existing overflow."
+        ],
+        [
+          "Privacy",
+          [
+            "incognito"
+          ],
+          "24dp leading privacy mark; native switch trailing, accurate enabled/disabled helper text."
+        ],
+        [
+          "Watch and search history",
+          [
+            "more-vertical",
+            "history"
+          ],
+          "Watch-row overflow trailing; search-query rows use history leading. Empty-state mark uses history at 48dp."
+        ],
+        [
+          "Clear history",
+          [
+            "trash"
+          ],
+          "24dp leading destructive glyph beside Clear history. Confirm and clear only the active tab under existing rules."
+        ]
+      ],
+      "nav": null,
+      "pip": true
+    },
+    {
+      "id": "games",
+      "name": "Games hub",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/02-games-hub.png",
+      "groups": [
+        [
+          "Game choices",
+          [],
+          "Four native GamePreview boards are illustrations/data, not navigation icons. Keep all four actual models."
+        ],
+        [
+          "Individual game controls",
+          [
+            "back",
+            "pause",
+            "play",
+            "retry",
+            "info"
+          ],
+          "Use only the controls implemented for each game. Back and help in toolbar; pause/resume/restart in labelled action area; board stays clear of PiP."
+        ],
+        [
+          "Game-specific tools",
+          [
+            "undo",
+            "erase",
+            "hint",
+            "notes",
+            "swap"
+          ],
+          "2048 Undo/New game; Sudoku pause/resume, notes, erase, hint, New puzzle; Make24 swap/undo/hint and text-only Skip/Next round. Snake retains gesture/accessibility steering without adding buttons."
+        ],
+        [
+          "Bottom navigation",
+          [
+            "search",
+            "games",
+            "hush-mark"
+          ],
+          "Search, Games, Breathe in three equal 48dp-or-larger targets; 22dp outer horizontal gutters. Active tab uses a sage capsule and label."
+        ]
+      ],
+      "nav": "Games",
+      "pip": true
+    },
+    {
+      "id": "breathe",
+      "name": "Breathe / Meditate",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/01-breathe-setup.png",
+      "groups": [
+        [
+          "Technique identity",
+          [
+            "breath-ring",
+            "chevron-right"
+          ],
+          "32dp decorative technique mark leading the row; 24dp disclosure trailing. Phase ring/timer remains a native animation."
+        ],
+        [
+          "Session states",
+          [
+            "pause",
+            "play",
+            "stop",
+            "retry"
+          ],
+          "Active Pause/End; paused Resume; completed Again. Setup Start breathing remains a labelled text action."
+        ],
+        [
+          "Sound state",
+          [
+            "speaker",
+            "mute"
+          ],
+          "Use in supported sound/volume control presentation; do not replace the native Sound cues switch with an icon-only control."
+        ],
+        [
+          "Bottom navigation",
+          [
+            "search",
+            "games",
+            "hush-mark"
+          ],
+          "Search, Games, Breathe in three equal 48dp-or-larger targets; 22dp outer horizontal gutters. Active tab uses a sage capsule and label."
+        ]
+      ],
+      "nav": "Breathe",
+      "pip": false
+    },
+    {
+      "id": "saved-empty",
+      "name": "Saved / empty",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/07-saved-empty.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "more-vertical"
+          ],
+          "Same Saved toolbar as populated state."
+        ],
+        [
+          "Empty state and creation",
+          [
+            "playlist",
+            "add"
+          ],
+          "48dp decorative empty mark, 24dp leading Create playlist glyph. Loading/error must not render this empty state."
+        ],
+        [
+          "Load error",
+          [
+            "error",
+            "retry"
+          ],
+          "Separate readable error text and labelled Retry action."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "downloads",
+      "name": "Downloads / populated",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/08-downloads.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "more-vertical"
+          ],
+          "Title/back/overflow; no top-level bottom navigation."
+        ],
+        [
+          "File identity",
+          [
+            "file-video",
+            "file-audio",
+            "file-subtitle"
+          ],
+          "32dp glyph in 48dp tonal tile, based on actual media type."
+        ],
+        [
+          "Mission controls",
+          [
+            "pause",
+            "play",
+            "check"
+          ],
+          "Pending pause; paused resume; completed check. Each mission shows real status/progress."
+        ],
+        [
+          "Failure and existing menu",
+          [
+            "error",
+            "retry",
+            "folder",
+            "trash",
+            "share",
+            "info"
+          ],
+          "Failures show readable reason and Retry where possible; menu actions depend on mission support and permissions."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/09-settings.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "search"
+          ],
+          "Settings title; settings search at trailing edge. This search is not YouTube search."
+        ],
+        [
+          "Playback group",
+          [
+            "play",
+            "gestures",
+            "download",
+            "chevron-right"
+          ],
+          "Player, Gestures, Download leading glyphs; row chevrons trailing."
+        ],
+        [
+          "Library group",
+          [
+            "history",
+            "feed",
+            "backup",
+            "chevron-right"
+          ],
+          "History/cache, Feed, Backup; preserve preference destinations."
+        ],
+        [
+          "Appearance, Account, Advanced",
+          [
+            "appearance",
+            "profile",
+            "globe",
+            "content-filter",
+            "settings",
+            "chevron-right"
+          ],
+          "Appearance; Account; Content via globe; Content filter; Advanced. Match existing hierarchy and retain all preferences."
+        ],
+        [
+          "Child settings actions",
+          [
+            "notifications",
+            "folder",
+            "trash",
+            "info"
+          ],
+          "Only existing notification/destination/clear/explanatory controls; no new preference values."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    },
+    {
+      "id": "downloads-empty",
+      "name": "Downloads / empty",
+      "mockup": "PipePipeClient/assets/hush-secondary-screen-review/10-downloads-empty.png",
+      "groups": [
+        [
+          "Toolbar",
+          [
+            "back",
+            "more-vertical"
+          ],
+          "Same Downloads toolbar."
+        ],
+        [
+          "Empty state",
+          [
+            "download"
+          ],
+          "48dp decorative download mark. Surrounding progress ring is a native static decoration, not actual progress."
+        ],
+        [
+          "Creation form",
+          [
+            "folder",
+            "file-video",
+            "file-audio",
+            "file-subtitle",
+            "chevron-down",
+            "error"
+          ],
+          "Retain supported media/quality/destination controls and permission validation. Form is specified; no dedicated raster mockup yet."
+        ]
+      ],
+      "nav": null,
+      "pip": false
+    }
+  ]
+}

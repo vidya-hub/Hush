@@ -73,6 +73,7 @@ public class ChooseTabsFragment extends Fragment {
                               @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
 
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(rootView);
         initButton(rootView);
 
         final RecyclerView listSelectedTabs = rootView.findViewById(R.id.selectedTabs);

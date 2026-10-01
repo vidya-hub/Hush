@@ -185,6 +185,8 @@ public final class VideoDetailFragment
 
     private void onSharedPreferencesChanged(final SharedPreferences sharedPreferences,
                                             final String key) {
+        // SharedPreferences can deliver an already queued notification after unregister/detach.
+        if(!isAdded())return;
         if (getString(R.string.video_tabs_key).equals(key)) {
             final Set<String> videoTabs = getVideoTabs(sharedPreferences);
             showComments = false;
@@ -395,7 +397,8 @@ public final class VideoDetailFragment
     public void onResume() {
         super.onResume();
 
-        if (activity instanceof org.schabi.newpipe.MainActivity) {
+        if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED
+                && activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(false);
             final androidx.appcompat.app.ActionBar bar = activity.getSupportActionBar();
             if (bar != null) {
@@ -473,7 +476,11 @@ public final class VideoDetailFragment
 
     @Override
     public void onDestroyView() {
+        if (activity instanceof org.schabi.newpipe.MainActivity) {
+            ((org.schabi.newpipe.MainActivity)activity).getHushChrome().hideVideo();
+        }
         super.onDestroyView();
+        tabletMetadata=null;metadataOriginalParent=null;
         binding = null;
     }
 
@@ -775,6 +782,17 @@ public final class VideoDetailFragment
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
         super.initViews(rootView, savedInstanceState);
 
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(binding.detailContentRootLayout);
+        binding.detailTitleRootLayout.setPadding(0,binding.detailTitleRootLayout.getPaddingTop(),0,binding.detailTitleRootLayout.getPaddingBottom());
+        android.view.ViewGroup.MarginLayoutParams metadata=(android.view.ViewGroup.MarginLayoutParams)binding.detailRoot.getLayoutParams();
+        metadata.leftMargin=0; metadata.rightMargin=0; binding.detailRoot.setLayoutParams(metadata);
+        binding.detailControlPanel.setPadding(0,binding.detailControlPanel.getPaddingTop(),0,binding.detailControlPanel.getPaddingBottom());
+        if(getResources().getConfiguration().fontScale>1.3f || getResources().getConfiguration().screenWidthDp<360) {
+            binding.detailRoot.setOrientation(android.widget.LinearLayout.VERTICAL);
+            var uploader=(android.widget.LinearLayout.LayoutParams)binding.detailUploaderRootLayout.getLayoutParams();
+            uploader.width=-1; uploader.weight=0; binding.detailUploaderRootLayout.setLayoutParams(uploader);
+        }
+
         pageAdapter = new TabAdapter(getChildFragmentManager());
         binding.viewPager.setAdapter(pageAdapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
@@ -804,8 +822,7 @@ public final class VideoDetailFragment
         super.initListeners();
 
         if (binding.detailSearchEditText != null) {
-            binding.detailSearchEditText.setHint(HistoryRecordManager.isIncognito(requireContext())
-                    ? R.string.history_incognito_search_hint : R.string.hush_search_videos);
+            ((View)binding.detailSearchEditText.getParent()).setVisibility(View.GONE);
         }
 
         binding.detailTitleRootLayout.setOnClickListener(this);
@@ -1266,6 +1283,9 @@ public final class VideoDetailFragment
             tabContentDescriptions.add(R.string.sponsor_block);
         }
 
+        pageAdapter.addFragment(new org.schabi.newpipe.hush.ui.WatchQueueFragment(), "hush-queue");
+        tabIcons.add(R.drawable.ic_list);
+        tabContentDescriptions.add(R.string.title_activity_play_queue);
         pageAdapter.notifyDataSetUpdate();
         binding.viewPager.setVisibility(pageAdapter.getCount() == 0 ? View.GONE : View.VISIBLE);
 
@@ -1290,8 +1310,9 @@ public final class VideoDetailFragment
         for (int i = 0; i < tabIcons.size(); ++i) {
             final TabLayout.Tab tab = binding.tabLayout.getTabAt(i);
             if (tab != null) {
-                tab.setIcon(tabIcons.get(i));
+                tab.setIcon(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,tabIcons.get(i)));
                 tab.setContentDescription(tabContentDescriptions.get(i));
+                if("hush-queue".equals(pageAdapter.getItemTitle(i)))tab.setText(R.string.title_activity_play_queue);
             }
         }
     }
@@ -1646,10 +1667,15 @@ public final class VideoDetailFragment
     }
 
     private void addVideoPlayerView() {
+        if (activity instanceof org.schabi.newpipe.MainActivity
+                && ((org.schabi.newpipe.MainActivity) activity).getHushChrome().isFloating()) return;
         if (!isPlayerAvailable() || getView() == null) {
             return;
         }
 
+        binding.detailThumbnailRootLayout.setScaleX(1f);binding.detailThumbnailRootLayout.setScaleY(1f);
+        binding.detailThumbnailRootLayout.setTranslationX(0f);binding.detailThumbnailRootLayout.setTranslationY(0f);
+        binding.detailThumbnailRootLayout.setClipToOutline(false);
         // Check if viewHolder already contains a child
         if (player.getRootView().getParent() != binding.playerPlaceholder) {
             playerService.removeViewFromParent();
@@ -1658,11 +1684,40 @@ public final class VideoDetailFragment
 
         // Prevent from re-adding a view multiple times
         if (player.getRootView().getParent() == null) {
-            binding.playerPlaceholder.addView(player.getRootView());
+            binding.playerPlaceholder.addView(player.getRootView(),new FrameLayout.LayoutParams(-1,-1));
             if (currentInfo != null) {
                 player.onMarkSeekbarRequested(currentInfo);
             }
         }
+        if(player.getRootView().getParent()==binding.playerPlaceholder)player.getRootView().setLayoutParams(new FrameLayout.LayoutParams(-1,-1));
+        if (bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED) showFloatingPlayer();
+    }
+
+    private void showFloatingPlayer() {
+        if (!(activity instanceof org.schabi.newpipe.MainActivity) || !isPlayerAvailable()) return;
+        final org.schabi.newpipe.MainActivity main = (org.schabi.newpipe.MainActivity) activity;
+        main.setPlayerExpanded(false);
+        activity.findViewById(R.id.fragment_player_holder).setVisibility(View.INVISIBLE);
+        if (!player.videoPlayerSelected()) return;
+        player.hideControls(0, 0);
+        if (player.getVideoTexture() != null) {
+            final View texture = player.getVideoTexture();
+            texture.setScaleX(1f); texture.setScaleY(1f);
+            texture.setTranslationX(0f); texture.setTranslationY(0f);
+            texture.setClipToOutline(false);
+        }
+        main.getHushChrome().showVideo(player.getRootView(),
+                () -> bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED),
+                () -> bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN));
+    }
+
+    private void restoreExpandedPlayer() {
+        if (!(activity instanceof org.schabi.newpipe.MainActivity)) return;
+        final org.schabi.newpipe.MainActivity main = (org.schabi.newpipe.MainActivity) activity;
+        main.getHushChrome().hideVideo();
+        activity.findViewById(R.id.fragment_player_holder).setVisibility(View.VISIBLE);
+        main.setPlayerExpanded(true);
+        if (isPlayerAvailable()) addVideoPlayerView();
     }
 
     private void removeVideoPlayerView() {
@@ -1722,7 +1777,7 @@ public final class VideoDetailFragment
         } else {
             final int windowWidth = binding.getRoot().getWidth() > 0 ? binding.getRoot().getWidth() : metrics.widthPixels;
             // tablets in landscape keep the player pane at 75% of the screen (layout weights 3:1)
-            final int paneWidth = isExpandedWatch() ? Math.round(windowWidth * 0.75f) : windowWidth;
+            final int paneWidth = isExpandedWatch() ? watchPaneWidth() : windowWidth;
             final int windowHeight = binding.getRoot().getHeight() > 0 ? binding.getRoot().getHeight() : metrics.heightPixels;
             final int height = Math.min(Math.round(paneWidth / (16f/9f)), Math.round(windowHeight * 0.65f));
             setHeightThumbnail(height, metrics);
@@ -1746,8 +1801,47 @@ public final class VideoDetailFragment
         if(binding==null || isPlayerAvailable() && player.isFullscreen())return false;
         final float density=getResources().getDisplayMetrics().density;
         final int width=binding.getRoot().getWidth();
-        return (width>0?width/density:getResources().getConfiguration().screenWidthDp)>=840
-                && getResources().getConfiguration().fontScale<=1.3f;
+        return (width>0?width/density:getResources().getConfiguration().screenWidthDp)>=928
+                && getResources().getConfiguration().fontScale<1.5f;
+    }
+
+    private androidx.core.widget.NestedScrollView tabletMetadata;
+    private ViewGroup metadataOriginalParent;
+    private int metadataOriginalIndex;
+    private void updateTabletMetadata(){
+        if(binding==null)return;
+        if(metadataOriginalParent==null){
+            metadataOriginalParent=(ViewGroup)binding.detailContentRootLayout.getParent();
+            metadataOriginalIndex=metadataOriginalParent.indexOfChild(binding.detailContentRootLayout);
+        }
+        boolean split=isExpandedWatch();
+        if(split && tabletMetadata==null){
+            tabletMetadata=new androidx.core.widget.NestedScrollView(requireContext());
+            tabletMetadata.setClipToPadding(false);
+            ((ViewGroup)binding.getRoot()).addView(tabletMetadata,1,new FrameLayout.LayoutParams(-1,-1));
+        }
+        ViewGroup target=split?tabletMetadata:metadataOriginalParent;
+        ViewGroup old=(ViewGroup)binding.detailContentRootLayout.getParent();
+        if(target!=old){
+            old.removeView(binding.detailContentRootLayout);
+            if(split)target.addView(binding.detailContentRootLayout,new FrameLayout.LayoutParams(-1,-2));
+            else {
+                AppBarLayout.LayoutParams restored=new AppBarLayout.LayoutParams(-1,-2);
+                restored.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL);
+                target.addView(binding.detailContentRootLayout,metadataOriginalIndex,restored);
+            }
+        }
+        if(tabletMetadata!=null){
+            tabletMetadata.setVisibility(split?View.VISIBLE:View.GONE);
+            FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)tabletMetadata.getLayoutParams();
+            lp.width=watchPaneWidth();lp.topMargin=playerTopInset+binding.detailThumbnailImageView.getMinimumHeight();
+            lp.leftMargin=org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),32);
+            tabletMetadata.setLayoutParams(lp);
+        }
+    }
+    private int watchPaneWidth(){
+        int available=binding.getRoot().getWidth()-org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),88);
+        return Math.max(org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),560),Math.round(available*0.66f));
     }
 
     private void updateStickyPlayerMode() {
@@ -1757,7 +1851,7 @@ public final class VideoDetailFragment
 
         final SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(requireContext());
-        final boolean enableStickyPlayer = isExpandedWatch() || preferences.getBoolean(
+        final boolean enableStickyPlayer = isPlayerAvailable() && player.isFullscreen() || isExpandedWatch() || preferences.getBoolean(
                 getString(R.string.pin_video_to_top_key), true)
                 && !DeviceUtils.isLandscape(requireContext());
 
@@ -1769,6 +1863,7 @@ public final class VideoDetailFragment
         if (binding.stickyPlayerContainer.getVisibility() != stickyPlayerVisibility) {
             binding.stickyPlayerContainer.setVisibility(stickyPlayerVisibility);
         }
+        updateTabletMetadata();
         updateStickyPlayerLayout(binding.detailThumbnailRootLayout.getHeight());
         applyPlayerTopInset();
     }
@@ -1781,7 +1876,9 @@ public final class VideoDetailFragment
         if (currentParent != null) {
             currentParent.removeView(binding.detailThumbnailRootLayout);
         }
-        targetParent.addView(binding.detailThumbnailRootLayout);
+        targetParent.addView(binding.detailThumbnailRootLayout,new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,targetParent==binding.stickyPlayerContainer
+                ?ViewGroup.LayoutParams.MATCH_PARENT:ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     private void updateStickyPlayerLayout(final int playerHeight) {
@@ -1794,8 +1891,12 @@ public final class VideoDetailFragment
         if (stickyParams != null) {
             final int stickyHeight = stickyPlayerEnabled ? height : 0;
             final int stickyTop = stickyPlayerEnabled ? playerTopInset : 0;
-            final int stickyWidth = isExpandedWatch() ? Math.round(binding.getRoot().getWidth()*.75f) : ViewGroup.LayoutParams.MATCH_PARENT;
+            final int stickyWidth = isExpandedWatch() ? watchPaneWidth() : ViewGroup.LayoutParams.MATCH_PARENT;
             boolean changed = stickyParams.width != stickyWidth || stickyParams.height != stickyHeight;
+            if(stickyParams instanceof FrameLayout.LayoutParams){
+                ((FrameLayout.LayoutParams)stickyParams).leftMargin=isExpandedWatch()
+                        ?org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),32):0;
+            }
             stickyParams.width = stickyWidth;
             stickyParams.height = stickyHeight;
             if (stickyParams instanceof FrameLayout.LayoutParams
@@ -1808,13 +1909,20 @@ public final class VideoDetailFragment
             }
         }
 
+        updateTabletMetadata();
+        boolean split=isExpandedWatch();
+        CoordinatorLayout.LayoutParams tabParams=(CoordinatorLayout.LayoutParams)binding.tabLayout.getLayoutParams();
+        int tabGravity=split?android.view.Gravity.TOP:android.view.Gravity.BOTTOM|android.view.Gravity.CENTER_HORIZONTAL;
+        if(tabParams.gravity!=tabGravity){tabParams.gravity=tabGravity;binding.tabLayout.setLayoutParams(tabParams);}
+        int tabHeight=Math.max(binding.tabLayout.getHeight(),org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),48));
+        binding.viewPager.setPadding(0,split?tabHeight:0,0,split?0:org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),48));
         final ViewGroup.LayoutParams mainContentParams = binding.detailMainContent.getLayoutParams();
         if (mainContentParams instanceof FrameLayout.LayoutParams) {
             final FrameLayout.LayoutParams frameLayoutParams = (FrameLayout.LayoutParams) mainContentParams;
             final int topMargin = isExpandedWatch() ? playerTopInset : stickyPlayerEnabled ? height + playerTopInset : 0;
-            final int start = isExpandedWatch() ? Math.round(binding.getRoot().getWidth()*.75f)
-                    + Math.round(24*getResources().getDisplayMetrics().density) : 0;
-            final int width = isExpandedWatch() ? Math.max(1, binding.getRoot().getWidth() - start)
+            final int start = isExpandedWatch() ? watchPaneWidth()
+                    + Math.round(56*getResources().getDisplayMetrics().density) : 0;
+            final int width = isExpandedWatch() ? Math.max(1, binding.getRoot().getWidth() - start - org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),32))
                     : ViewGroup.LayoutParams.MATCH_PARENT;
             if (frameLayoutParams.getMarginStart() != start || frameLayoutParams.width != width
                     || frameLayoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT
@@ -2689,6 +2797,7 @@ public final class VideoDetailFragment
         final Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
         final int afterDescendants = ViewGroup.FOCUS_AFTER_DESCENDANTS;
         final int blockDescendants = ViewGroup.FOCUS_BLOCK_DESCENDANTS;
+        mainFragment.setImportantForAccessibility(toMain?View.IMPORTANT_FOR_ACCESSIBILITY_AUTO:View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         if (toMain) {
             mainFragment.setDescendantFocusability(afterDescendants);
             toolbar.setDescendantFocusability(afterDescendants);
@@ -2725,12 +2834,7 @@ public final class VideoDetailFragment
     private void manageSpaceAtTheBottom(final boolean showMore) {
         final int peekHeight = miniPlayerPeekHeight();
         final ViewGroup holder = requireActivity().findViewById(R.id.fragment_holder);
-        final int newBottomPadding;
-        if (showMore) {
-            newBottomPadding = 0;
-        } else {
-            newBottomPadding = peekHeight;
-        }
+        final int newBottomPadding = 0;
         if (holder.getPaddingBottom() == newBottomPadding) {
             return;
         }
@@ -2791,6 +2895,11 @@ public final class VideoDetailFragment
                 try {
                     switch (newState) {
                         case BottomSheetBehavior.STATE_HIDDEN:
+                            if (activity instanceof org.schabi.newpipe.MainActivity) {
+                                ((org.schabi.newpipe.MainActivity)activity).getHushChrome().hideVideo();
+                                ((org.schabi.newpipe.MainActivity)activity).setPlayerExpanded(false);
+                            }
+                            bottomSheetLayout.setVisibility(View.VISIBLE);
                             moveFocusToMainFragment(true);
                             manageSpaceAtTheBottom(true);
 
@@ -2798,6 +2907,7 @@ public final class VideoDetailFragment
                             cleanUp();
                             break;
                         case BottomSheetBehavior.STATE_EXPANDED:
+                            restoreExpandedPlayer();
                             moveFocusToMainFragment(false);
                             manageSpaceAtTheBottom(false);
 
@@ -2826,6 +2936,7 @@ public final class VideoDetailFragment
                                 player.pauseBCPlayer();
                             }
                             setOverlayLook(binding.appBarLayout, behavior, 0);
+                            showFloatingPlayer();
                             break;
                         case BottomSheetBehavior.STATE_DRAGGING:
                         case BottomSheetBehavior.STATE_SETTLING:
@@ -2852,6 +2963,12 @@ public final class VideoDetailFragment
                 }
 
             }
+        });
+
+        binding.getRoot().post(() -> {
+            if (binding == null) return;
+            if (bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED) showFloatingPlayer();
+            else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) restoreExpandedPlayer();
         });
 
         // User opened a new page and the player will hide itself
@@ -2909,7 +3026,7 @@ public final class VideoDetailFragment
         final int drawable = playerIsPlaying
                 ? R.drawable.ic_pause
                 : R.drawable.ic_play_arrow;
-        binding.overlayPlayPauseButton.setImageResource(drawable);
+        binding.overlayPlayPauseButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,drawable));
     }
 
     private void setOverlayLook(final AppBarLayout appBar,
@@ -2940,9 +3057,18 @@ public final class VideoDetailFragment
         final View video = isPlayerAvailable() && player.getVideoTexture() != null
                 ? player.getVideoTexture()
                 : binding.detailThumbnailRootLayout;
+        // A transition before the decoder attaches can transform the thumbnail ancestor.
+        // Once the texture is active, only transform that texture; clear the stale ancestor.
+        if(video!=binding.detailThumbnailRootLayout){
+            binding.detailThumbnailRootLayout.setScaleX(1f);binding.detailThumbnailRootLayout.setScaleY(1f);
+            binding.detailThumbnailRootLayout.setTranslationX(0f);binding.detailThumbnailRootLayout.setTranslationY(0f);
+            binding.detailThumbnailRootLayout.setClipToOutline(false);
+        }
         final int width = video.getWidth();
         final int height = video.getHeight();
-        if (width == 0 || height == 0 || (isPlayerAvailable() && player.isFullscreen())) {
+        if (width == 0 || height == 0 || (isPlayerAvailable() && player.isFullscreen())
+                || (activity instanceof org.schabi.newpipe.MainActivity
+                && ((org.schabi.newpipe.MainActivity)activity).getHushChrome().isFloating())) {
             video.setScaleX(1f);
             video.setScaleY(1f);
             video.setTranslationX(0f);

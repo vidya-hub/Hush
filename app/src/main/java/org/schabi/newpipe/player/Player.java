@@ -364,6 +364,7 @@ public final class Player implements
     public float getVideoNaturalAspectRatio() {
         return videoNaturalAspectRatio;
     }
+
     private int videoUnappliedRotation;
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -549,6 +550,7 @@ public final class Player implements
 
     private void initViews(@NonNull final PlayerBinding playerBinding) {
         binding = playerBinding;
+        org.schabi.newpipe.hush.ui.HushIcons.apply(binding.getRoot());
         binding.videoTexture.addOnLayoutChangeListener((view, left, top, right, bottom,
                 oldLeft, oldTop, oldRight, oldBottom) -> updateTextureTransform());
         setupSubtitleView();
@@ -1225,7 +1227,7 @@ public final class Player implements
             binding.primaryControls.getLayoutParams().width
                     = LinearLayout.LayoutParams.MATCH_PARENT;
             binding.secondaryControls.setVisibility(View.INVISIBLE);
-            binding.moreOptionsButton.setImageDrawable(AppCompatResources.getDrawable(context,
+            binding.moreOptionsButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
                     R.drawable.ic_more_vert));
             binding.share.setVisibility(View.VISIBLE);
             binding.switchCommentsVisibility.setVisibility(View.VISIBLE);
@@ -2313,9 +2315,7 @@ public final class Player implements
     }
 
     private void showSystemUIPartially() {
-        if (pipMode) {
-            return; // system UI calls are not allowed inside a PiP window
-        }
+        if (pipMode) return;
         final AppCompatActivity activity = getParentActivity();
         if (isFullscreen && activity != null) {
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -2545,8 +2545,8 @@ public final class Player implements
             binding.switchCommentsVisibility.setVisibility(View.GONE);
         } else {
             binding.switchCommentsVisibility.setVisibility(View.VISIBLE);
-            binding.switchCommentsVisibility.setImageDrawable(isBCPlayerVisible?AppCompatResources.getDrawable(context,
-                    R.drawable.ic_bullet_comment_enabled):AppCompatResources.getDrawable(context,
+            binding.switchCommentsVisibility.setImageDrawable(isBCPlayerVisible?org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
+                    R.drawable.ic_bullet_comment_enabled):org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
                     R.drawable.ic_bullet_comment_disabled));
         }
     }
@@ -2623,8 +2623,8 @@ public final class Player implements
     private void onSwitchBCPlayerVisibilityClicked() {
         isBCPlayerVisible = !isBCPlayerVisible;
         prefs.edit().putBoolean("isBCPlayerVisible", isBCPlayerVisible).apply();
-        binding.switchCommentsVisibility.setImageDrawable(isBCPlayerVisible?AppCompatResources.getDrawable(context,
-                R.drawable.ic_bullet_comment_enabled):AppCompatResources.getDrawable(context,
+        binding.switchCommentsVisibility.setImageDrawable(isBCPlayerVisible?org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
+                R.drawable.ic_bullet_comment_enabled):org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
                 R.drawable.ic_bullet_comment_disabled));
         Log.i(TAG, "BulletCommentPlayer visibility changed to " + isBCPlayerVisible);
         if (isBCPlayerVisible) {
@@ -2669,7 +2669,7 @@ public final class Player implements
         animate(binding.loadingPanel, true, 0);
         animate(binding.surfaceForeground, true, 100);
 
-        binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow);
+        binding.playPauseButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.ic_play_arrow));
         animatePlayButtons(false, 100);
         binding.getRoot().setKeepScreenOn(false);
 
@@ -2707,7 +2707,7 @@ public final class Player implements
 
         animate(binding.playPauseButton, false, 80, AnimationType.SCALE_AND_ALPHA, 0,
                 () -> {
-                    binding.playPauseButton.setImageResource(R.drawable.ic_pause);
+                    binding.playPauseButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.ic_pause));
                     animatePlayButtons(true, 200);
                     if (!isQueueVisible) {
                         binding.playPauseButton.requestFocus();
@@ -2751,7 +2751,7 @@ public final class Player implements
 
             animate(binding.playPauseButton, false, 80, AnimationType.SCALE_AND_ALPHA, 0,
                     () -> {
-                        binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow);
+                        binding.playPauseButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.ic_play_arrow));
                         animatePlayButtons(true, 200);
                         if (!isQueueVisible) {
                             binding.playPauseButton.requestFocus();
@@ -2794,7 +2794,7 @@ public final class Player implements
 
         animate(binding.playPauseButton, false, 0, AnimationType.SCALE_AND_ALPHA, 0,
                 () -> {
-                    binding.playPauseButton.setImageResource(R.drawable.ic_replay);
+                    binding.playPauseButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.ic_replay));
                     animatePlayButtons(true, DEFAULT_CONTROLS_DURATION);
                 });
 
@@ -2950,13 +2950,13 @@ public final class Player implements
                                      @RepeatMode final int repeatMode) {
         switch (repeatMode) {
             case REPEAT_MODE_OFF:
-                imageButton.setImageResource(R.drawable.exo_controls_repeat_off);
+                imageButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.exo_controls_repeat_off));
                 break;
             case REPEAT_MODE_ONE:
-                imageButton.setImageResource(R.drawable.exo_controls_repeat_one);
+                imageButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.exo_controls_repeat_one));
                 break;
             case REPEAT_MODE_ALL:
-                imageButton.setImageResource(R.drawable.exo_controls_repeat_all);
+                imageButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,R.drawable.exo_controls_repeat_all));
                 break;
         }
     }
@@ -3013,7 +3013,7 @@ public final class Player implements
     }
 
     private void setMuteButton(@NonNull final ImageButton button, final boolean isMuted) {
-        button.setImageDrawable(AppCompatResources.getDrawable(context, isMuted
+        button.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context, isMuted
                 ? R.drawable.ic_volume_off : R.drawable.ic_volume_up));
     }
     //endregion
@@ -5043,7 +5043,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         serviceIntent.putExtra("timeInMillis", minutes * 60000);
         activity.startService(serviceIntent);
         binding.sleepTimer.setImageDrawable(
-                AppCompatResources.getDrawable(context, R.drawable.ic_timer));
+                org.schabi.newpipe.hush.ui.HushIcons.drawable(context, R.drawable.ic_timer));
     }
 
     private void onSleepTimerLongClicked() {
@@ -5051,7 +5051,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         final Intent serviceIntent = new Intent(context, SleepTimerService.class);
         serviceIntent.setAction(SleepTimerService.ACTION_STOP_TIMER);
         context.startService(serviceIntent);
-        binding.sleepTimer.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_timer_off));
+        binding.sleepTimer.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context, R.drawable.ic_timer_off));
     }
     //endregion
 
@@ -5104,7 +5104,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
     private void setupScreenRotationButton() {
         binding.screenRotationButton.setVisibility(
                 videoPlayerSelected() ? View.VISIBLE : View.GONE);
-        binding.screenRotationButton.setImageDrawable(AppCompatResources.getDrawable(context,
+        binding.screenRotationButton.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,
                 isFullscreen ? R.drawable.ic_fullscreen_exit
                 : R.drawable.ic_fullscreen));
     }

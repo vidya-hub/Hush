@@ -37,7 +37,10 @@ public final class HistoryLibraryFragment extends BaseFragment {
     private RecyclerView list;
     private TextView empty;
     private View clear;
+    private View header;
+    private ViewGroup historyPage;
     private boolean searchTab;
+    private android.view.MenuItem clearMenu;
     private List<String> searches = Collections.emptyList();
     private List<StreamHistoryEntry> watched = Collections.emptyList();
 
@@ -51,6 +54,9 @@ public final class HistoryLibraryFragment extends BaseFragment {
 
     @Override
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        historyPage = (ViewGroup) rootView;
+        header = rootView.findViewById(R.id.history_header);
         org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(rootView);
         list = rootView.findViewById(R.id.library_list);
         empty = rootView.findViewById(R.id.library_empty);
@@ -58,12 +64,22 @@ public final class HistoryLibraryFragment extends BaseFragment {
         records = new HistoryRecordManager(activity);
         final SwitchCompat incognito = rootView.findViewById(R.id.history_incognito);
         incognito.setChecked(HistoryRecordManager.isIncognito(activity));
+        final TextView summary=rootView.findViewById(R.id.history_privacy_summary);
+        summary.setText(incognito.isChecked()?R.string.history_incognito_summary:R.string.hush_history_recording);
         incognito.setOnCheckedChangeListener((button, enabled) -> {
             PreferenceManager.getDefaultSharedPreferences(requireContext()).edit()
                     .putBoolean(HistoryRecordManager.INCOGNITO_KEY, enabled).apply();
             if (!enabled) GameStateStore.clearIncognito();
+            summary.setText(enabled?R.string.history_incognito_summary:R.string.hush_history_recording);
         });
         final TabLayout tabs = rootView.findViewById(R.id.history_tabs);
+        final float fontScale = getResources().getConfiguration().fontScale;
+        if (fontScale > 1.3f) {
+            final ViewGroup.LayoutParams tabLayout = tabs.getLayoutParams();
+            tabLayout.height = org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),
+                    (float) Math.ceil(48 * fontScale));
+            tabs.setLayoutParams(tabLayout);
+        }
         tabs.addTab(tabs.newTab().setText(R.string.history_watch_tab));
         tabs.addTab(tabs.newTab().setText(R.string.history_search_tab));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -133,9 +149,60 @@ public final class HistoryLibraryFragment extends BaseFragment {
         }
         empty.setVisibility(rows.isEmpty() ? View.VISIBLE : View.GONE);
         if (clear != null) {
-            clear.setVisibility(rows.isEmpty() ? View.GONE : View.VISIBLE);
+            clear.setVisibility(View.GONE);
         }
-        list.setAdapter(new HistoryAdapter(rows));
+        if (clearMenu != null) {
+            clearMenu.setVisible(!rows.isEmpty());
+        }
+        final boolean scrollHeader = (getResources().getConfiguration().fontScale > 1.3f
+                    || getResources().getConfiguration().screenHeightDp < 480);
+        list.setAdapter(null);
+        if (header.getParent() instanceof ViewGroup) {
+            ((ViewGroup) header.getParent()).removeView(header);
+        }
+        if (scrollHeader) {
+            header.setLayoutParams(new RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            final RecyclerView.Adapter<RecyclerView.ViewHolder> heading =
+                    new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(
+                        @NonNull final ViewGroup parent, final int type) {
+                    return new RecyclerView.ViewHolder(header) { };
+                }
+                @Override public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder,
+                                                       final int position) { }
+                @Override public int getItemCount() { return 1; }
+            };
+            list.setAdapter(new androidx.recyclerview.widget.ConcatAdapter(heading,
+                    new HistoryAdapter(rows), new RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+                @NonNull @Override public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int type){
+                    TextView message=new TextView(parent.getContext());message.setText(empty.getText());message.setTextSize(16);
+                    int padding=org.schabi.newpipe.hush.ui.HushUi.dp(parent.getContext(),24);
+                    message.setPadding(padding,padding,padding,padding);
+                    return new RecyclerView.ViewHolder(message){};
+                }
+                @Override public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder,int position){}
+                @Override public int getItemCount(){return rows.isEmpty()?1:0;}
+            }));
+            empty.setVisibility(View.GONE);
+        } else {
+            historyPage.addView(header, 0, new android.widget.LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            list.setAdapter(new HistoryAdapter(rows));
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull final android.view.Menu menu,
+                                    @NonNull final android.view.MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        clearMenu = menu.add(R.string.history_clear);
+        clearMenu.setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
+        clearMenu.setVisible(searchTab ? !searches.isEmpty() : !watched.isEmpty());
+        clearMenu.setOnMenuItemClickListener(item -> {
+            if (clear != null) clear.performClick();
+            return true;
+        });
     }
 
     private void openSearch(final String query) {
@@ -175,13 +242,17 @@ public final class HistoryLibraryFragment extends BaseFragment {
                 };
             }
             return new RecyclerView.ViewHolder(inflater.inflate(
-                    R.layout.list_stream_item, parent, false)) {
+                    (getResources().getConfiguration().fontScale > 1.3f
+                            || getResources().getConfiguration().screenWidthDp < 360
+                            ? R.layout.list_stream_grid_item : R.layout.list_stream_item), parent, false)) {
             };
         }
 
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder,
                                      final int position) {
+            org.schabi.newpipe.hush.ui.HushIcons.apply(holder.itemView);
+            holder.itemView.setPadding(0, holder.itemView.getPaddingTop(), 0, holder.itemView.getPaddingBottom());
             final Object row = rows.get(position);
             if (row instanceof String) {
                 final String query = (String) row;

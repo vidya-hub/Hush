@@ -25,9 +25,10 @@ import org.schabi.newpipe.hush.ui.HushUi;
 import org.schabi.newpipe.hush.ui.GamePreview;
 import org.schabi.newpipe.databinding.FragmentSearchBinding;
 
-/** The resting Home content. Search and playback remain outside this scrolling view. */
+/** The resting Home content. Search scrolls with the page; floating video overlays it. */
 final class HomeDashboard {
     interface Actions {
+        void search(String query);
         void breathe();
         void meditate();
         void game(String game);
@@ -64,98 +65,102 @@ final class HomeDashboard {
 
     static void styleSearch(final FragmentSearchBinding binding, final Context context) {
         final HomeDashboard palette = new HomeDashboard(context, null);
-        final int fill = palette.dark ? 0xFFF6F5F2 : palette.pine;
-        final int foreground = palette.dark ? palette.pine : 0xFFF6F5F2;
-        binding.homeSearchGroup.setBackground(palette.shape(fill, 32, 0));
+        final int fill = palette.card;
+        final int foreground = palette.ink;
+        binding.homeSearchGroup.setBackground(palette.shape(fill, 16, palette.border));
         binding.homeSearchEditText.setTextColor(foreground);
-        binding.homeSearchEditText.setHintTextColor(foreground);
+        binding.homeSearchEditText.setHintTextColor(palette.muted);
         binding.homeSearchLeading.setImageTintList(ColorStateList.valueOf(foreground));
         binding.homeSearchClear.setImageTintList(ColorStateList.valueOf(foreground));
         binding.homeViewToggle.setImageTintList(ColorStateList.valueOf(foreground));
     }
 
     private View create() {
-        final LinearLayout root = vertical();
-        root.setPadding(dp(20), dp(20), dp(20), dp(28));
-        final LinearLayout games = vertical();
-        final LinearLayout personal = vertical();
-        personal.addView(heading(R.string.hush_take_break, 0));
-        personal.addView(breakCard(), fullTop(12));
-
-        final boolean largeText = context.getResources().getConfiguration().fontScale > 1.3f;
-        final LinearLayout gameHeading = largeText ? vertical() : horizontal();
-        gameHeading.setGravity(Gravity.CENTER_VERTICAL);
-        gameHeading.addView(heading(R.string.hush_quick_games, 0),
-                new LinearLayout.LayoutParams(largeText ? -1 : 0, ViewGroup.LayoutParams.WRAP_CONTENT,
-                        largeText ? 0 : 1));
-        final TextView all = text(R.string.hush_all_games, 14, dark ? 0xFFCBE3D4 : pine, true);
-        all.setGravity(Gravity.CENTER);
-        all.setMinHeight(dp(48));
-        all.setOnClickListener(v -> actions.allGames());
-        gameHeading.addView(all);
-        games.addView(gameHeading, fullTop(0));
-
-        final boolean stacked = context.getResources().getConfiguration().screenWidthDp < 360
-                || context.getResources().getConfiguration().fontScale > 1.2f;
-        if (stacked) {
-            games.addView(gameCard(R.string.hush_game_2048, R.string.hush_game_2048_hint,
-                    "2  4\n  2  8", "2048"), fullTop(8));
-            games.addView(gameCard(R.string.hush_game_snake, R.string.hush_game_snake_hint,
-                    "· · ●\n■ ■ ■", "snake"), fullTop(12));
-        } else {
-            final LinearLayout row = horizontal();
-            final LinearLayout.LayoutParams first = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            first.setMarginEnd(dp(6));
-            row.addView(gameCard(R.string.hush_game_2048, R.string.hush_game_2048_hint,
-                    "2  4\n2  8", "2048"), first);
-            final LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            second.setMarginStart(dp(6));
-            row.addView(gameCard(R.string.hush_game_snake, R.string.hush_game_snake_hint,
-                    "· ●\n■■■", "snake"), second);
-            games.addView(row, fullTop(8));
-        }
-        games.addView(gameCard(R.string.hush_game_sudoku, R.string.hush_game_sudoku_hint,
-                "1 2 3\n4 5 6\n7 8 9", "sudoku"), fullTop(12));
-
-        final LinearLayout librarySection = vertical();
-        librarySection.addView(heading(R.string.hush_your_library, 0));
-        final LinearLayout library = vertical();
-        library.setBackground(shape(card, 20, border));
-        library.addView(libraryCell(R.drawable.ic_hush_history, R.string.action_history,
-                R.string.hush_library_history_hint, actions::history));
-        library.addView(divider(), new LinearLayout.LayoutParams(-1, dp(1)));
-        library.addView(libraryCell(R.drawable.ic_hush_saved, R.string.library_saved,
-                R.string.hush_library_saved_hint, actions::saved));
-        library.addView(divider(), new LinearLayout.LayoutParams(-1, dp(1)));
-        library.addView(libraryCell(R.drawable.ic_hush_download, R.string.downloads,
-                R.string.hush_library_downloads_hint, actions::downloads));
-        librarySection.addView(library, fullTop(12));
-        // Same children, reparented only when the measured window crosses a breakpoint.
-        final android.widget.FrameLayout adaptive = new android.widget.FrameLayout(context) {
-            boolean wide;
-            int previous = -1;
-            @Override protected void onMeasure(int w, int h) {
-                int width = MeasureSpec.getSize(w);
-                boolean next = width >= dp(840) && getResources().getConfiguration().fontScale <= 1.3f;
-                if (previous != width || next != wide) {
-                    previous = width; wide = next;
-                    detach(personal); detach(games); detach(librarySection);
-                    removeAllViews(); detach(root); root.removeAllViews();
-                    int gutter = width >= dp(840) ? 32 : width >= dp(600) ? 24 : 20;
-                    root.setPadding(dp(gutter), dp(20), dp(gutter), dp(28));
-                    if (wide) {
-                        personal.addView(librarySection, fullTop(24));
-                        root.addView(new HushUi.Panes(context, personal, games), fullTop(0));
-                    } else {
-                        root.addView(personal, fullTop(0)); root.addView(games, fullTop(24));
-                        root.addView(librarySection, fullTop(24));
-                    }
-                    addView(new HushUi.Bounded(context, root, 1120), new android.widget.FrameLayout.LayoutParams(-1,-2));
-                }
-                super.onMeasure(w,h);
-            }
+        final android.widget.FrameLayout searchAnchor=new android.widget.FrameLayout(context);
+        searchAnchor.setTag("home-search-anchor");
+        final LinearLayout recents=horizontal();
+        recents.setTag("home-recent-searches");
+        final LinearLayout playing=vertical();
+        final TextView playingTitle=text(R.string.unknown_content,21,ink,true);
+        playingTitle.setMaxLines(2);playingTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        final LinearLayout playingHeader=horizontal();playingHeader.setGravity(Gravity.CENTER_VERTICAL);
+        playingHeader.addView(text(R.string.hush_now_playing,12,muted,false));
+        final android.widget.ImageView waveform=new android.widget.ImageView(context);
+        waveform.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,"waveform"));
+        waveform.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        LinearLayout.LayoutParams waveLayout=new LinearLayout.LayoutParams(dp(36),dp(20));waveLayout.setMarginStart(dp(12));
+        playingHeader.addView(waveform,waveLayout);playing.addView(playingHeader);
+        playing.addView(playingTitle,fullTop(8));
+        final org.schabi.newpipe.player.helper.PlayerHolder holder=org.schabi.newpipe.player.helper.PlayerHolder.getInstance();
+        final Runnable playback=()->{
+            final org.schabi.newpipe.player.playqueue.PlayQueue queue=holder.getPlayQueue();
+            final org.schabi.newpipe.player.playqueue.PlayQueueItem item=queue==null?null:queue.getItem();
+            playing.setVisibility(item!=null && !holder.isBackgroundAudio()?View.VISIBLE:View.GONE);
+            if(item!=null)playingTitle.setText(item.getTitle());
+            waveform.setVisibility(holder.isPlaying()?View.VISIBLE:View.GONE);
         };
-        return adaptive;
+        final LinearLayout root=new LinearLayout(context) {
+            private final io.reactivex.rxjava3.disposables.CompositeDisposable subscriptions=new io.reactivex.rxjava3.disposables.CompositeDisposable();
+            private final Runnable observer=()->post(playback);
+            @Override protected void onAttachedToWindow(){
+                super.onAttachedToWindow();holder.addUiObserver(observer);playback.run();
+                subscriptions.add(new org.schabi.newpipe.local.history.HistoryRecordManager(context).getCompleteSearchHistory()
+                    .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                    .subscribe(queries->{
+                        recents.removeAllViews();
+                        if(org.schabi.newpipe.local.history.HistoryRecordManager.isIncognito(context))return;
+                        for(String query:queries.subList(0,Math.min(queries.size(),2))){
+                            MaterialButton chip=new MaterialButton(context);chip.setText(query);
+                            chip.setIcon(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,"history"));
+                            HushUi.style(chip,false);chip.setIconSize(dp(18));chip.setMaxLines(1);
+                            chip.setOnClickListener(v->actions.search(query));
+                            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-2,-2);lp.setMarginEnd(dp(8));recents.addView(chip,lp);
+                        }
+                    },error->recents.removeAllViews()));
+            }
+            @Override protected void onDetachedFromWindow(){subscriptions.clear();holder.removeUiObserver(observer);removeCallbacks(observer);super.onDetachedFromWindow();}
+        };
+        root.setOrientation(LinearLayout.VERTICAL);root.setGravity(Gravity.CENTER_VERTICAL);root.setPadding(dp(22),dp(32),dp(22),dp(32));
+        final LinearLayout hero=vertical(), searchGroup=vertical();
+        HushUi.bindContentWidth(root,560,1064);
+        android.widget.ImageView ring=new android.widget.ImageView(context);
+        ring.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,"breath-ring"));
+        ring.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        hero.addView(ring,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        TextView headline=text(R.string.hush_home_headline,40,ink,false);headline.setLetterSpacing(-0.035f);
+        root.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{
+            float size=r-l>=dp(600)?40:32;
+            if(Math.abs(headline.getTextSize()/context.getResources().getDisplayMetrics().scaledDensity-size)>0.1f)headline.setTextSize(size);
+        });
+        hero.addView(headline,fullTop(20));searchGroup.addView(searchAnchor,fullTop(0));
+        android.widget.HorizontalScrollView recentScroll=new android.widget.HorizontalScrollView(context);
+        recentScroll.setHorizontalScrollBarEnabled(false);recentScroll.addView(recents);searchGroup.addView(recentScroll,fullTop(12));
+        final LinearLayout shortcuts=horizontal();
+        shortcuts.setTag("home-library-shortcuts");
+        int[] titles={R.string.action_history,R.string.library_saved,R.string.downloads};
+        String[] icons={"history","bookmark","download"};Runnable[] callbacks={actions::history,actions::saved,actions::downloads};
+        boolean stacked=context.getResources().getConfiguration().fontScale>1.4f;
+        if(stacked)shortcuts.setOrientation(LinearLayout.VERTICAL);
+        for(int i=0;i<3;i++){
+            MaterialButton button=new MaterialButton(context);button.setText(titles[i]);button.setIcon(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,icons[i]));
+            HushUi.style(button,false);button.setIconGravity(MaterialButton.ICON_GRAVITY_TOP);button.setTextSize(13);button.setPadding(dp(8),dp(12),dp(8),dp(12));
+            button.setMinHeight(dp(84));button.setMinimumHeight(dp(84));
+            Runnable action=callbacks[i];button.setOnClickListener(v->action.run());
+            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(stacked?-1:0,-2,stacked?0:1);
+            if(i>0){if(stacked)lp.topMargin=dp(8);else lp.setMarginStart(dp(8));}shortcuts.addView(button,lp);
+        }
+        searchGroup.addView(shortcuts,fullTop(20));searchGroup.addView(playing,fullTop(28));
+        final org.schabi.newpipe.hush.ui.CompactPlaybackBar audio=new org.schabi.newpipe.hush.ui.CompactPlaybackBar(context);
+        searchGroup.addView(audio,fullTop(24));
+        HushUi.Bounded heroBound=new HushUi.Bounded(context,hero,560);
+        root.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->heroBound.setMaxDp(
+                r-l-root.getPaddingLeft()-root.getPaddingRight()>=dp(840)
+                && context.getResources().getConfiguration().fontScale<1.5f?480:560));
+        HushUi.Panes panes=new HushUi.Panes(context,heroBound,
+                new HushUi.Bounded(context,searchGroup,560));
+        panes.setBreakpointDp(840);
+        root.addView(new HushUi.Bounded(context,panes,1120));
+        return root;
     }
 
     private static void detach(View view) {

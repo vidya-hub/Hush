@@ -96,6 +96,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
     private PublishSubject<Long> debouncedSaveSignal;
     private CompositeDisposable disposables;
+    private final CompositeDisposable tabletSubscriptions=new CompositeDisposable();
 
     private ActivityResultLauncher<String[]> filePickerLauncher;
 
@@ -165,7 +166,25 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              @Nullable final ViewGroup container,
                              @Nullable final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_playlist, container, false);
+        View content=inflater.inflate(R.layout.fragment_playlist, container, false);
+        if(getParentFragment() instanceof org.schabi.newpipe.local.library.SavedLibraryFragment)return content;
+        org.schabi.newpipe.hush.ui.SettingsPanes panes=new org.schabi.newpipe.hush.ui.SettingsPanes(requireContext());
+        panes.setCompactDetail(true);
+        android.widget.ScrollView selector=new android.widget.ScrollView(requireContext());
+        android.widget.LinearLayout rows=new android.widget.LinearLayout(requireContext());rows.setOrientation(android.widget.LinearLayout.VERTICAL);
+        selector.addView(rows);panes.addView(selector);panes.addView(content);
+        tabletSubscriptions.add(playlistManager.getPlaylists().observeOn(AndroidSchedulers.mainThread()).subscribe(entries->{
+            rows.removeAllViews();
+            for(var entry:entries){
+                com.google.android.material.button.MaterialButton row=new com.google.android.material.button.MaterialButton(requireContext());
+                row.setText(entry.name);org.schabi.newpipe.hush.ui.HushUi.style(row,entry.uid==playlistId);
+                row.setIcon(org.schabi.newpipe.hush.ui.HushIcons.drawable(requireContext(),"playlist"));
+                row.setOnClickListener(v->NavigationHelper.openLocalPlaylistFragment(getParentFragmentManager(),entry.uid,entry.name));
+                android.widget.LinearLayout.LayoutParams lp=new android.widget.LinearLayout.LayoutParams(-1,-2);
+                lp.topMargin=org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),12);rows.addView(row,lp);
+            }
+        },error->{}));
+        return panes;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -174,7 +193,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
     @Override
     public void setTitle(final String title) {
-        super.setTitle(title);
+        if(!(getParentFragment() instanceof org.schabi.newpipe.local.library.SavedLibraryFragment))super.setTitle(title);
 
         if (headerBinding != null) {
             headerBinding.playlistTitleView.setText(title);
@@ -241,9 +260,24 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
         super.initViews(rootView, savedInstanceState);
         itemListAdapter.setUseItemHandle(true);
+        // The library host already supplies the page gutters; avoid a second inset.
+        itemsList.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> {
+            android.view.ViewParent parent=view.getParent();
+            boolean hosted=false;
+            while(parent instanceof android.view.View) {
+                if(parent instanceof org.schabi.newpipe.hush.ui.SettingsPanes) {hosted=true;break;}
+                parent=parent.getParent();
+            }
+            int side=hosted?0:org.schabi.newpipe.hush.ui.HushUi.contentSide(view,r-l);
+            if(view.getPaddingLeft()!=side || view.getPaddingRight()!=side)
+                view.post(() -> view.setPadding(side,view.getPaddingTop(),side,view.getPaddingBottom()));
+        });
         setTitle(name);
         setupTouchListeners(rootView);
     }
+
+    @Override
+    protected boolean forceUseListLayout() { return true; }
 
     @Override
     protected ViewBinding getListHeader() {
@@ -252,6 +286,16 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         playlistControlBinding = headerBinding.playlistControl;
 
         headerBinding.playlistTitleView.setSelected(true);
+        org.schabi.newpipe.hush.ui.HushIcons.apply(headerBinding.getRoot());
+        final android.widget.LinearLayout actions = headerBinding.getRoot().findViewById(R.id.playlist_primary_actions);
+        if (getResources().getConfiguration().fontScale > 1.3f) {
+            actions.setOrientation(android.widget.LinearLayout.VERTICAL);
+            for (int i=0;i<actions.getChildCount();i++) {
+                android.widget.LinearLayout.LayoutParams p = new android.widget.LinearLayout.LayoutParams(-1,-2);
+                if(i>0)p.topMargin=org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),8);
+                actions.getChildAt(i).setLayoutParams(p);
+            }
+        }
 
         return headerBinding;
     }
@@ -390,6 +434,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
     @Override
     public void onDestroyView() {
+        tabletSubscriptions.clear();
         super.onDestroyView();
 
         if(Objects.requireNonNull(activity.getSupportActionBar()).getCustomView() != null){

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.schabi.newpipe.hush.ui.FloatingBoundsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-30T15:07:11.980Z" hostname="Vidyas-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="narrowWindowsAndSideCutoutsNeverOverflow" classname="org.schabi.newpipe.hush.ui.FloatingBoundsTest" time="0.0"/>
+  <testcase name="keyboardReplacesSystemBottomRatherThanAddingToIt" classname="org.schabi.newpipe.hush.ui.FloatingBoundsTest" time="0.0"/>
+  <testcase name="leavesNavigationAndGestureAreaClear" classname="org.schabi.newpipe.hush.ui.FloatingBoundsTest" time="0.0"/>
+  <testcase name="draggingClampsEveryEdge" classname="org.schabi.newpipe.hush.ui.FloatingBoundsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

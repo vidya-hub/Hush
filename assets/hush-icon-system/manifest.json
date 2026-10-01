@@ -1,0 +1,1688 @@
+{
+  "mode": "built-in imagegen",
+  "execution": "One icon per tool call, sequential; no sprite sheet or batch generation.",
+  "icons": [
+    {
+      "number": 1,
+      "id": "hush-mark",
+      "subject": "A single lowercase h, rounded geometric sans-serif, solid silhouette; only this one letter",
+      "usage": "Home brand; Breathe navigation",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/hush-mark.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/hush-mark.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          355,
+          209,
+          900,
+          1082
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "cc25dbd5f745d75378dfe68c777768a03a7d04b089d45ae00560298d2ba939cf"
+    },
+    {
+      "number": 2,
+      "id": "search",
+      "subject": "Magnifying glass: circular ring and short diagonal handle toward bottom right",
+      "usage": "Home field/nav; results; Settings search",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/search.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/search.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          269,
+          289,
+          984,
+          1006
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "92ed8af0c34513a18f0afe69d7613956cf9ff86b56cb165b2470e29a7594fa9f"
+    },
+    {
+      "number": 3,
+      "id": "games",
+      "subject": "Outline game controller, D-pad on left and two round buttons on right",
+      "usage": "Games navigation",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/games.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/games.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          91,
+          306,
+          1163,
+          1003
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "f5947d35cb6607b280ea5e0f3bd5669cb6a5eeb8fd344df226924c19b050bea1"
+    },
+    {
+      "number": 4,
+      "id": "incognito",
+      "subject": "Simple eye-mask silhouette with two transparent eye holes; no hat",
+      "usage": "Home privacy; History privacy",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/incognito.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/incognito.prompt.txt",
+      "metrics": {
+        "width": 1536,
+        "height": 1024,
+        "bounds": [
+          241,
+          319,
+          1295,
+          706
+        ],
+        "alpha_extrema": [
+          0,
+          254
+        ]
+      },
+      "sha256": "929519976c54ea1c3b92dcc9d22f0e553b61c9f871d2f4a8e67fd14a8aa38994"
+    },
+    {
+      "number": 5,
+      "id": "more-vertical",
+      "subject": "Exactly three small solid circles evenly spaced vertically",
+      "usage": "Toolbars and media-row overflow",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/more-vertical.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/more-vertical.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          561,
+          391,
+          692,
+          865
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "9557439af55e95e1d39bea9f0169bd2e2d8405d00513f750853353bdd900d5c6"
+    },
+    {
+      "number": 6,
+      "id": "more-horizontal",
+      "subject": "Exactly three small solid circles evenly spaced horizontally",
+      "usage": "Watch action overflow",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/more-horizontal.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/more-horizontal.prompt.txt",
+      "metrics": {
+        "width": 1774,
+        "height": 887,
+        "bounds": [
+          615,
+          379,
+          1159,
+          509
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "67496e230deae8769610d917b2475e392564c0d3534e26272f962b30ac1ebbb9"
+    },
+    {
+      "number": 7,
+      "id": "history",
+      "subject": "Counterclockwise curved arrow around a simple clock face",
+      "usage": "Recent queries; History shortcut; History/cache setting",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/history.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/history.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          248,
+          213,
+          1060,
+          1036
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "7a1601b43278326b25e270851c0d358c77eed5bfeaed3caff8be5869377e1eff"
+    },
+    {
+      "number": 8,
+      "id": "bookmark",
+      "subject": "Outline bookmark ribbon with a V-shaped cutout at bottom",
+      "usage": "Saved shortcut; watch Save",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/bookmark.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/bookmark.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          310,
+          229,
+          944,
+          1046
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "54b25a20356325f89a4fde124ba3f9af3414a0f86793b6a236f8ccc850a4c3a3"
+    },
+    {
+      "number": 9,
+      "id": "bookmark-filled",
+      "subject": "Solid bookmark ribbon with a V-shaped cutout at bottom",
+      "usage": "Watch already-saved state",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/bookmark-filled.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/bookmark-filled.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          427,
+          350,
+          828,
+          903
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "4d2131b722cc2e30081322f982dcb2aa2159981e4c51239a8730f50cba9e8da0"
+    },
+    {
+      "number": 10,
+      "id": "download",
+      "subject": "Downward arrow ending above an open shallow U-shaped tray",
+      "usage": "Home Downloads; watch Download; downloads empty; settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/download.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/download.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          241,
+          243,
+          1013,
+          1022
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "254f50d8bb303f2ad468840c4ef36494d6d46ff80dc97404463c406c9264e02c"
+    },
+    {
+      "number": 11,
+      "id": "back",
+      "subject": "Horizontal arrow pointing left, straight shaft and simple two-line arrowhead",
+      "usage": "Subpage toolbars; search results",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/back.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/back.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          289,
+          440,
+          986,
+          838
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "c03d6d0e61e4d8bbf02f8d07236fb40defaf58453a7c611a55405141bccbe08d"
+    },
+    {
+      "number": 12,
+      "id": "chevron-right",
+      "subject": "Single right-pointing chevron",
+      "usage": "Playlist rows; technique row; Settings rows",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/chevron-right.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/chevron-right.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          473,
+          347,
+          797,
+          907
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "2955c5e7277141a456488b236332e9a2eb12dcb30ba5610f55495af04ceb0a36"
+    },
+    {
+      "number": 13,
+      "id": "chevron-down",
+      "subject": "Single downward-pointing chevron",
+      "usage": "Watch collapse; Description and Queue disclosure",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/chevron-down.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/chevron-down.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          320,
+          479,
+          935,
+          829
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "c6ac0784d45fbad9f54712b27059353919d3f787e238d6d5e753c011f825fad7"
+    },
+    {
+      "number": 14,
+      "id": "close",
+      "subject": "Two diagonal lines crossing to form a symmetrical X",
+      "usage": "Clear query; close video; dismiss profile sheet",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/close.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/close.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          309,
+          323,
+          945,
+          953
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "34c81120d9cba38c10c57788e61a743e673f3e0bcbfa83dc11047f905e8fa8b9"
+    },
+    {
+      "number": 15,
+      "id": "play",
+      "subject": "Single solid right-pointing triangle with subtly rounded vertices",
+      "usage": "Video paused; Play all; download resume",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/play.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/play.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          359,
+          317,
+          902,
+          942
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "c2e861209a0f1adebe33fa670561f7bfeaa240aef608d8c67254070e673f4d2c"
+    },
+    {
+      "number": 16,
+      "id": "pause",
+      "subject": "Two parallel solid vertical bars with softly rounded corners",
+      "usage": "Playing video; download pause; active session pause",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/pause.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/pause.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          438,
+          402,
+          818,
+          852
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "15b9ec0b9690a0875430ae42a532e741d3a1970beff4655e23ccfff2dfd77259"
+    },
+    {
+      "number": 17,
+      "id": "expand",
+      "subject": "Four separate right-angle corner brackets pointing outward, no central shape",
+      "usage": "Floating-video expand; fullscreen entry",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/expand.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/expand.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          211,
+          239,
+          1043,
+          1015
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "7c15ef613381b6c2751355c4c2d55aa3636bdc20a0fbd249ddb7e606336120ba"
+    },
+    {
+      "number": 18,
+      "id": "fullscreen-exit",
+      "subject": "Four separate right-angle brackets pointing inward",
+      "usage": "Fullscreen exit",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/fullscreen-exit.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/fullscreen-exit.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          302,
+          329,
+          952,
+          925
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "b660d903a0bf6ee1e490e02e3f29a5c79d9538ba98781570328338c28b0038c4"
+    },
+    {
+      "number": 19,
+      "id": "headphones",
+      "subject": "Outline over-ear headphones with arch and two ear cups",
+      "usage": "Background audio; player settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/headphones.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/headphones.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          214,
+          252,
+          1040,
+          1002
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "70666b1e572b3f30899a731b7e17a584e6850e317b978bd6aec360714623042f"
+    },
+    {
+      "number": 20,
+      "id": "playlist",
+      "subject": "Three horizontal list lines plus a small right-pointing play triangle on the right",
+      "usage": "Saved rows and empty state; playlist detail header",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/playlist.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/playlist.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          233,
+          449,
+          1021,
+          858
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "38511458a9301a8381e338ed157a15a0fa60d7dc56a116494e7e9b26917b7354"
+    },
+    {
+      "number": 21,
+      "id": "add",
+      "subject": "Plus sign with equally long horizontal and vertical strokes",
+      "usage": "New playlist; New profile; add to playlist",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/add.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/add.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          307,
+          313,
+          947,
+          941
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "9c4adcde679c2e914fa62f0186a4e2463a6b80872480b9dfc748cba83cf1aa20"
+    },
+    {
+      "number": 22,
+      "id": "check",
+      "subject": "Simple checkmark with short left arm and longer rising right arm",
+      "usage": "Current profile; completed download; selected options",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/check.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/check.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          279,
+          360,
+          1024,
+          919
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "6b0bba3f26a2e99edb80322a858d814419da87b49336b3e1cb1054033394d6ca"
+    },
+    {
+      "number": 23,
+      "id": "profile",
+      "subject": "Outline circular head above rounded shoulder arc, no enclosing circle",
+      "usage": "Default avatar; Account; profile entry",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/profile.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/profile.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          283,
+          260,
+          968,
+          1015
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "aaa49f809a52ea05a27e7850016d01cb07e06592eb066017bb9a60efb2735bc7"
+    },
+    {
+      "number": 24,
+      "id": "drag",
+      "subject": "Exactly six small filled dots in two columns and three rows",
+      "usage": "Playlist reorder grip",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/drag.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/drag.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          460,
+          391,
+          794,
+          867
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "fb37b9c86012b2ad8db16b2eeb1c92ce7055dfd7fc85dbc3283cbcc5b52fefda"
+    },
+    {
+      "number": 25,
+      "id": "trash",
+      "subject": "Outline wastebasket with lid and two inner vertical lines",
+      "usage": "Clear history; remove/delete confirmation",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/trash.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/trash.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          271,
+          241,
+          983,
+          1015
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "8972c6eab8215d8aa11b32512c6d6cae8459313f49f0fd39e2626569c074322b"
+    },
+    {
+      "number": 26,
+      "id": "edit",
+      "subject": "Simple diagonal outline pencil with visible pointed nib",
+      "usage": "Rename playlist; rename profile where supported",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/edit.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/edit.prompt.txt",
+      "metrics": {
+        "width": 1284,
+        "height": 1225,
+        "bounds": [
+          204,
+          189,
+          1103,
+          1048
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "3d13d92ad1b623aa05c9f977cb0c23b70f6bdb9881f905435732a0017d91003d"
+    },
+    {
+      "number": 27,
+      "id": "retry",
+      "subject": "Single clockwise circular arrow with one arrowhead",
+      "usage": "Retry load/download; restart game/session",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/retry.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/retry.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          241,
+          246,
+          1042,
+          1015
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "cfd811f3a47419df940e1356837478c92aeb9f0d3fbba037cbbff5514e7321b5"
+    },
+    {
+      "number": 28,
+      "id": "speaker",
+      "subject": "Speaker silhouette with two curved sound-wave strokes",
+      "usage": "Enabled sound cues; volume",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/speaker.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/speaker.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          265,
+          342,
+          998,
+          940
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "c49041d6a43209a9b90b400936e5a7ca35e4c44ebe27e437ae9bca2163662179"
+    },
+    {
+      "number": 29,
+      "id": "mute",
+      "subject": "Speaker silhouette crossed by one diagonal slash, no waves",
+      "usage": "Muted video; sound cues disabled",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/mute.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/mute.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          222,
+          222,
+          1032,
+          1033
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "2f655830bb10962ccdff6408c82af01560a111370813e46b3e438c39c4153c72"
+    },
+    {
+      "number": 30,
+      "id": "settings",
+      "subject": "Outline cog with six evenly spaced teeth and hollow circular center",
+      "usage": "Player/settings menu; Advanced settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/settings.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/settings.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          252,
+          260,
+          1002,
+          1029
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "398cfa242ab2ad460e8dccd4cd1db2c5900c7b7a639e98ad1c43d8c7d0c3ab2e"
+    },
+    {
+      "number": 31,
+      "id": "gestures",
+      "subject": "Outline hand with one extended index finger tapping, one small arc over fingertip",
+      "usage": "Gesture settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/gestures.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/gestures.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          275,
+          171,
+          1007,
+          1103
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "259378a46a5608d38fb18aaed044149f9b95b082ae40f25c28d69eab6948842f"
+    },
+    {
+      "number": 32,
+      "id": "feed",
+      "subject": "Outline rectangular feed panel with two horizontal content lines",
+      "usage": "Feed settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/feed.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/feed.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          213,
+          326,
+          1041,
+          953
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "75505d0536dde016a828685b0738ef445726c6b49b523bf92ac5f85d4b72c605"
+    },
+    {
+      "number": 33,
+      "id": "backup",
+      "subject": "Outline database cylinder with three stacked levels",
+      "usage": "Backup settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/backup.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/backup.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          305,
+          268,
+          949,
+          1013
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "bfa817b099d55c6769b793eaff1c2c3394cda2b1f4a92feec7f39ca5ff2d9d4d"
+    },
+    {
+      "number": 34,
+      "id": "appearance",
+      "subject": "Simple sun: hollow center circle and eight short radial rays",
+      "usage": "Appearance settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/appearance.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/appearance.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          215,
+          221,
+          1040,
+          1035
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "6bee7fc70ea9be5a410d4ba836b7c30e77cd9e0afafce72435c38b70f5e171ee"
+    },
+    {
+      "number": 35,
+      "id": "content-filter",
+      "subject": "Outline funnel tapering to a short stem",
+      "usage": "Content-filter settings; supported search filters",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/content-filter.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/content-filter.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          234,
+          301,
+          1020,
+          996
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "256e5c9baa0ad37af3274b7a0c89a92edb81b05895acd234d21494326b46d00d"
+    },
+    {
+      "number": 36,
+      "id": "list",
+      "subject": "Three short solid bullets at left and three horizontal strokes at right",
+      "usage": "Results list view",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/list.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/list.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          303,
+          434,
+          951,
+          847
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "adc180cb6d6dc35e02db22fc7f336297b71fe749cba35f6b8040f28129da6428"
+    },
+    {
+      "number": 37,
+      "id": "grid",
+      "subject": "Four identical rounded-square outlines in a two-by-two grid",
+      "usage": "Results grid view",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/grid.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/grid.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          338,
+          360,
+          916,
+          934
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "d7f36c69c2913511b5a46363ba51a73a6f2be2b3c342c278b3efca3f83b64de8"
+    },
+    {
+      "number": 38,
+      "id": "share",
+      "subject": "Three hollow circles connected by two diagonal strokes, one left and two right",
+      "usage": "Existing watch/player Share menu",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/share.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/share.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          258,
+          276,
+          993,
+          1021
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "3952b36142f2eec24e72ab786fcf8957cfcc29c810d041e94946e3edf6b7b53a"
+    },
+    {
+      "number": 39,
+      "id": "queue",
+      "subject": "Three horizontal strokes of equal width with tiny square bullets at left",
+      "usage": "Watch Queue; player queue",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/queue.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/queue.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          330,
+          469,
+          932,
+          875
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "bd553cda05a139bca2c091fee1de2365b39bfe94a7609f358588f31340840933"
+    },
+    {
+      "number": 40,
+      "id": "shuffle",
+      "subject": "Two crossing directional arrows flowing from left to right",
+      "usage": "Player queue shuffle",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/shuffle.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/shuffle.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          208,
+          354,
+          1048,
+          922
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "9586d00994ef797777b70dc856667bfdf86b1cc6900c3ca4cd6c998a373d03a3"
+    },
+    {
+      "number": 41,
+      "id": "repeat",
+      "subject": "Two opposing horizontal arrows joined by rounded end curves",
+      "usage": "Repeat all; repeat off uses state treatment",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/repeat.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/repeat.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          259,
+          369,
+          996,
+          912
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "84d652f6da192f7c253fbb55d8615a04bc303576412b158fd6b82a40db3dc281"
+    },
+    {
+      "number": 42,
+      "id": "repeat-one",
+      "subject": "Two opposing arrows joined by rounded end curves surrounding a single numeral 1",
+      "usage": "Repeat one state",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/repeat-one.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/repeat-one.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          222,
+          217,
+          1033,
+          1037
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "158ecad466f9486e1f241d51249c3cb4933585828ca35086065b5cb79d819ca4"
+    },
+    {
+      "number": 43,
+      "id": "stop",
+      "subject": "Single solid square with slightly rounded corners",
+      "usage": "End breathing/meditation; supported stop actions",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/stop.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/stop.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          409,
+          425,
+          846,
+          861
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "1dda705b56b62fe4e46ef55409a32e3880003287fca8b790e9c3e432f621a3db"
+    },
+    {
+      "number": 44,
+      "id": "info",
+      "subject": "Small lowercase i centered inside a thin circular outline",
+      "usage": "Description/info; supported explanatory menus",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/info.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/info.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          247,
+          258,
+          1004,
+          1018
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "37388f877f120773c02e91e691330b6e3df758022d67e1e9b91409f35f6b9323"
+    },
+    {
+      "number": 45,
+      "id": "error",
+      "subject": "Outline triangle with upright exclamation mark inside",
+      "usage": "Load/download failure",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/error.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/error.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          177,
+          266,
+          1076,
+          1023
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "64d43f4f9364b77e483cc1f34ff9efe9dbe54ff99edcbdc5421dc1efd371a953"
+    },
+    {
+      "number": 46,
+      "id": "folder",
+      "subject": "Outline file folder with small top-left tab",
+      "usage": "Download destination; open supported file directory",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/folder.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/folder.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          245,
+          341,
+          1010,
+          937
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "f9a16912589170fcb42345e44f5286f66e70492dd0669d5abcdd5fa906e7b453"
+    },
+    {
+      "number": 47,
+      "id": "file-video",
+      "subject": "Outline document with folded top-right corner and small video-camera symbol centered inside",
+      "usage": "Video download file",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-video.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-video.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          314,
+          240,
+          940,
+          1039
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "a13c1bdffb82db76f06ac6a86701eb9ad5aea96329192fa713392218d5b965e3"
+    },
+    {
+      "number": 48,
+      "id": "file-audio",
+      "subject": "Outline document with folded top-right corner and one musical eighth note inside",
+      "usage": "Audio download file",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-audio.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-audio.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          325,
+          266,
+          929,
+          1016
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "d01bb1563baac093756e5ba4ec5b0a152dfb13b3d4c73054d093e93e9013fb68"
+    },
+    {
+      "number": 49,
+      "id": "file-subtitle",
+      "subject": "Outline document with folded top-right corner and two short text lines inside",
+      "usage": "Subtitle download file",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-subtitle.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/file-subtitle.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          314,
+          238,
+          940,
+          1016
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "8d450d6ecdf51be77db5a8ceabe42a5e01ce05bd8cca27702a324a777fc645d3"
+    },
+    {
+      "number": 50,
+      "id": "live",
+      "subject": "Small solid central dot with two symmetrical curved broadcast waves on each side",
+      "usage": "Live result badge only for live streams",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/live.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/live.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          238,
+          378,
+          1015,
+          875
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "53419803e15c77c8dea8b7eea300437819def3747a5171a533c8cde7ddf229dd"
+    },
+    {
+      "number": 51,
+      "id": "waveform",
+      "subject": "Seven rounded vertical bars, short at ends, progressively taller to middle",
+      "usage": "Home actual now-playing ornament",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/waveform.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/waveform.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          207,
+          400,
+          1047,
+          854
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "6b5a4838f25e6bd35189cc8201384b6836759f1422e6bb5cf6846b8cc0c268f7"
+    },
+    {
+      "number": 52,
+      "id": "breath-ring",
+      "subject": "One near-complete circular open ring with rounded ends and a small gap upper right",
+      "usage": "Home decorative motif; Breathe technique mark",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/breath-ring.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/breath-ring.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          183,
+          197,
+          1071,
+          1089
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "7bcea71034474230062b692da27ced934d18edd92da3c171dbc914c52ffca3f6"
+    },
+    {
+      "number": 53,
+      "id": "pip",
+      "subject": "Outline rectangular screen with one smaller filled rectangle in lower-right corner",
+      "usage": "Existing popup/PiP menu action",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/pip.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/pip.prompt.txt",
+      "metrics": {
+        "width": 1536,
+        "height": 1024,
+        "bounds": [
+          411,
+          268,
+          1125,
+          757
+        ],
+        "alpha_extrema": [
+          0,
+          254
+        ]
+      },
+      "sha256": "a863f9887ff725f22f8524d5fafaf3a5eae9ce786469249f44459b07e4c884f2"
+    },
+    {
+      "number": 54,
+      "id": "previous",
+      "subject": "Solid left-pointing triangle beside a thin vertical stop bar on left",
+      "usage": "Existing previous track control",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/previous.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/previous.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          390,
+          382,
+          876,
+          883
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "03d8a5409678819ce0530d99cf7e2f5c46505fdeeb1e7174c0f6738634969452"
+    },
+    {
+      "number": 55,
+      "id": "next",
+      "subject": "Solid right-pointing triangle beside a thin vertical stop bar on right",
+      "usage": "Existing next track control",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/next.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/next.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          387,
+          399,
+          882,
+          867
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "173b41d182b82192dd187d7635431d5f096c116a60f74e0d0040e6572ce2836a"
+    },
+    {
+      "number": 56,
+      "id": "captions",
+      "subject": "Outline rounded rectangle containing exactly two letters CC",
+      "usage": "Player subtitles/captions",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/captions.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/captions.prompt.txt",
+      "metrics": {
+        "width": 1448,
+        "height": 1086,
+        "bounds": [
+          322,
+          285,
+          1126,
+          810
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "dc5af46f5c9a0f7a4186b47bfeeca2823cd148e258b38c4a2828282a96b93e75"
+    },
+    {
+      "number": 57,
+      "id": "speed",
+      "subject": "Outline semicircular speedometer with diagonal needle and two short tick marks",
+      "usage": "Player playback-speed menu",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/speed.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/speed.prompt.txt",
+      "metrics": {
+        "width": 1536,
+        "height": 1024,
+        "bounds": [
+          391,
+          262,
+          1144,
+          749
+        ],
+        "alpha_extrema": [
+          0,
+          254
+        ]
+      },
+      "sha256": "b7127c4fdde4742893d0f0ddf84bea2349c819b646add8e9d05e7cb89dde77b2"
+    },
+    {
+      "number": 58,
+      "id": "globe",
+      "subject": "Outline globe with circular boundary, central vertical ellipse and horizontal equator",
+      "usage": "Open in browser; Content/language settings",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/globe.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/globe.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          179,
+          186,
+          1075,
+          1082
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "09cd80090463c2c745537fff51770afc7abeeb78c2a6bd0c23a34b03c3270ed2"
+    },
+    {
+      "number": 59,
+      "id": "cast",
+      "subject": "Outline rectangular screen with three quarter-circle broadcast arcs in bottom-left",
+      "usage": "Existing external-player/cast action",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/cast.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/cast.prompt.txt",
+      "metrics": {
+        "width": 1536,
+        "height": 1024,
+        "bounds": [
+          413,
+          229,
+          1124,
+          765
+        ],
+        "alpha_extrema": [
+          0,
+          254
+        ]
+      },
+      "sha256": "047ad17da36ec33f03e27c6a6cdb2f22d363512673a814277023f64667d9ce1a"
+    },
+    {
+      "number": 60,
+      "id": "sleep-timer",
+      "subject": "Outline alarm-free circular clock with two hands and tiny crescent moon at upper right",
+      "usage": "Existing sleep-timer menu",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/sleep-timer.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/sleep-timer.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          294,
+          275,
+          982,
+          1021
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "86e8c78955066096f64fff1026bc59896082a00e1b1da053820f3cc85fd0c02e"
+    },
+    {
+      "number": 61,
+      "id": "comments",
+      "subject": "Outline rounded speech bubble with short lower-left tail and two horizontal lines",
+      "usage": "Existing comments/bullet-comments enabled",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/comments.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/comments.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          273,
+          306,
+          981,
+          972
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "5ef99101e4e460bc48575fd7b5eb49bf7e6becdcd4ebb5763791b252029cd2c9"
+    },
+    {
+      "number": 62,
+      "id": "comments-off",
+      "subject": "Outline speech bubble with one diagonal slash across it",
+      "usage": "Existing bullet-comments disabled",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/comments-off.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/comments-off.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          265,
+          262,
+          1005,
+          999
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "39443277ff2df9c6729b0460a6e1c173db8a7615adf9a942979059820892bf1a"
+    },
+    {
+      "number": 63,
+      "id": "brightness",
+      "subject": "Hollow sun with eight short rays, slightly larger hollow center",
+      "usage": "Existing player brightness gesture indicator",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/brightness.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/brightness.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          177,
+          192,
+          1077,
+          1074
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "6e53027ca21718cc7d4d5f8e7f32406d78b186f066585a6a4205a79311febd12"
+    },
+    {
+      "number": 64,
+      "id": "notifications",
+      "subject": "Outline bell with curved dome, flat rim and tiny clapper",
+      "usage": "Existing Feed/notification settings subpage",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/notifications.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/notifications.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          265,
+          227,
+          988,
+          1034
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "976d296f913e0040dbb829190ece19dd520876bbccd4a7ec1ac96432140ef640"
+    },
+    {
+      "number": 65,
+      "id": "undo",
+      "subject": "A curved backward arrow pointing left, turning over itself in one smooth arc",
+      "usage": "2048 and Make24 Undo",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/undo.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/undo.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          257,
+          263,
+          1013,
+          978
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "4f631e5fab8afaade60853f83281227e3c3c7f5c5e1a0dd6dd5d856d37158635"
+    },
+    {
+      "number": 66,
+      "id": "erase",
+      "subject": "Outline diagonal eraser with a divided cap and flat erased baseline",
+      "usage": "Sudoku Erase",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/erase.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/erase.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          251,
+          267,
+          1036,
+          1008
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "ad18a167e88da68a20f6ccbe519af77207619fe4d0e96f218137b93042c3fa99"
+    },
+    {
+      "number": 67,
+      "id": "hint",
+      "subject": "Outline light bulb with short flat base and two short outward rays",
+      "usage": "Sudoku and Make24 Hint",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/hint.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/hint.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          248,
+          288,
+          1005,
+          962
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "a7bb2b2b1b699d3c1f25997d93d7622f44d0893290358e9a5707b63db1d6803e"
+    },
+    {
+      "number": 68,
+      "id": "notes",
+      "subject": "Outline pencil above two tiny separate dot marks, distinct from a plain rename pencil",
+      "usage": "Sudoku pencil-notes mode",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/notes.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/notes.prompt.txt",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          314,
+          299,
+          960,
+          957
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "sha256": "a29a22478b72a58b6ce251b543fb1afa156fb619f9fbd79b62d73d3cbb7e9d02"
+    },
+    {
+      "number": 69,
+      "id": "swap",
+      "subject": "Two parallel horizontal arrows pointing in opposite directions, upper rightward and lower leftward",
+      "usage": "Make24 swap selected operands",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/swap.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/swap.prompt.txt",
+      "sha256": "847eb21984b6c41848f001d2ab51cbedf1b573ecd0cd6470c5e7214577c1bad0",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          220,
+          377,
+          1036,
+          940
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "number": 70,
+      "id": "music",
+      "subject": "A single outline musical eighth note with circular notehead",
+      "usage": "Existing audio-only compact playback identity",
+      "file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/music.png",
+      "status": "generated",
+      "prompt_file": "/Users/vidyasagar/ProjectSpace/debyt/PipePipe/PipePipeClient/assets/hush-icon-system/music.prompt.txt",
+      "sha256": "8a79a8113969b80bb4435b271d73793058ba5f0d925017623e849bd4f73bf9c2",
+      "metrics": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          389,
+          307,
+          901,
+          995
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      }
+    }
+  ],
+  "generated_count": 70,
+  "total_count": 70
+}

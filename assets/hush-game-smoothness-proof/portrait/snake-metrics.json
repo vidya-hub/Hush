@@ -1,0 +1,7 @@
+{
+  "layoutPassesDuringMovement": 0,
+  "frames": 46,
+  "p95TotalMs": 300.810871,
+  "maxTotalMs": 492.928171,
+  "p95DrawMs": 0.556167
+}

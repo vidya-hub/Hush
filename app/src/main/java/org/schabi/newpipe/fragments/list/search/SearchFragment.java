@@ -426,6 +426,8 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
 
         if (centeredSearch && activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(true);
+            ((org.schabi.newpipe.MainActivity) activity).setHomeNavigation(showingResults ? null : "Search");
+            updateProfileLabel();
             updateIncognitoHint();
             refreshNowPlaying();
             searchBinding.homeSpacer.post(() -> {
@@ -507,6 +509,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
     @Override
     protected void initViews(final View rootView, final Bundle savedInstanceState) {
         super.initViews(rootView, savedInstanceState);
+        infoListAdapter.setPageHasGutter(true);
 
         centeredSearch = !channelSearchMode && searchBinding.homeSearchEditText != null;
         final RecyclerView suggestionRecycler = centeredSearch
@@ -541,12 +544,41 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             searchFilter = searchToolbarContainer.findViewById(R.id.toolbar_search_filter);
             searchToolbarContainer.setVisibility(View.GONE);
             searchFilter.setVisibility(View.GONE);
+            searchBinding.profileButton.setOnClickListener(v -> showProfileDialog());
             searchBinding.homeIncognito.setOnClickListener(v -> toggleIncognito());
             searchBinding.homeSuggestionsRetry.setOnClickListener(v -> initSuggestionObserver());
             searchBinding.homeMenu.setOnClickListener(this::showHomeMenu);
+            searchBinding.homeContent.removeAllViews();
+            searchBinding.homeContent.setPadding(0, 0, 0, 0);
+            searchBinding.homeContent.setGravity(android.view.Gravity.TOP);
+            ((ViewGroup)searchBinding.homeHeader.getParent()).removeView(searchBinding.homeHeader);
+            searchBinding.homeContent.addView(searchBinding.homeHeader,
+                    new android.widget.LinearLayout.LayoutParams(-1, -2));
+            searchBinding.homeContent.addView(HomeDashboard.build(activity,
+                    new HomeDashboard.Actions() {
+                        @Override public void search(final String query) { submitSearch(query); }
+                        @Override public void breathe() { openBreakScreen(false); }
+                        @Override public void meditate() { openBreakScreen(true); }
+                        @Override public void game(final String game) { openGame(game); }
+                        @Override public void allGames() { openGame(null); }
+                        @Override public void history() { openLibrary(
+                                new org.schabi.newpipe.local.library.HistoryLibraryFragment()); }
+                        @Override public void saved() { openLibrary(
+                                new org.schabi.newpipe.local.library.SavedLibraryFragment()); }
+                        @Override public void downloads() {
+                            NavigationHelper.openDownloads(activity);
+                        }
+                    }));
+            searchBinding.profileButton.setVisibility(View.GONE);
+            ((ViewGroup)searchBinding.homeIncognito.getParent()).removeView(searchBinding.homeIncognito);
+            searchBinding.homeHeader.addView(searchBinding.homeIncognito,
+                    searchBinding.homeHeader.indexOfChild(searchBinding.homeMenu),
+                    new android.widget.LinearLayout.LayoutParams(org.schabi.newpipe.hush.ui.HushUi.dp(activity,48),org.schabi.newpipe.hush.ui.HushUi.dp(activity,48)));
             HomeDashboard.styleSearch(searchBinding, activity);
             searchBinding.getRoot().addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
-                if (r-l != or-ol) updateAdaptiveSearchWidth(r-l);
+                if (r-l != or-ol) v.post(() -> {
+                    if (searchBinding != null) updateAdaptiveSearchWidth(searchBinding.getRoot().getWidth());
+                });
             });
             searchBinding.getRoot().post(() -> { if(searchBinding!=null)updateAdaptiveSearchWidth(searchBinding.getRoot().getWidth()); });
             searchBinding.homeSpacer.setAlpha(0f);
@@ -571,9 +603,11 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                     searchBinding.nowPlayingBar.setVisibility(View.GONE);
                 }
             });
+            updateProfileLabel();
             applySearchChrome(false);
             return;
         }
+        searchBinding.profileButton.setVisibility(View.GONE);
         searchEditText = searchToolbarContainer.findViewById(R.id.toolbar_search_edit_text);
         searchClear = searchToolbarContainer.findViewById(R.id.toolbar_search_clear);
         searchFilter = searchToolbarContainer.findViewById(R.id.toolbar_search_filter);
@@ -682,6 +716,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         if (centeredSearch) {
             if (activity instanceof org.schabi.newpipe.MainActivity) {
                 ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(true);
+            ((org.schabi.newpipe.MainActivity) activity).setHomeNavigation(showingResults ? null : "Search");
             }
             return;
         }
@@ -996,6 +1031,11 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         showingResults = results;
+        searchBinding.homeHeader.setVisibility(results ? View.GONE : View.VISIBLE);
+        if (searchBinding.homeHeader.getTag() == null) {
+            org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(searchBinding.homeHeader,560,1064);
+            searchBinding.homeHeader.setTag("page-gutters");
+        }
         searchBinding.homeViewToggle.setVisibility(results ? View.VISIBLE : View.GONE);
         updateViewToggleIcon();
         final ViewGroup.MarginLayoutParams clearLp =
@@ -1009,13 +1049,12 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         searchBinding.homeSearchEditText.setLayoutParams(fieldLp);
         updateHomeContentVisibility();
         searchBinding.resultsContainer.setVisibility(results ? View.VISIBLE : View.GONE);
-        searchBinding.homeSearchLeading.setImageResource(
-                results ? R.drawable.ic_arrow_back : R.drawable.ic_search);
+        searchBinding.homeSearchLeading.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,results ? "back" : "search"));
         searchBinding.homeSearchLeading.setContentDescription(
                 getString(results ? R.string.back : R.string.search));
         if (activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity) activity).setSearchChrome(true);
-            ((org.schabi.newpipe.MainActivity) activity).setBottomNavVisible(!results);
+            ((org.schabi.newpipe.MainActivity) activity).setHomeNavigation(showingResults ? null : "Search");
         }
         refreshNowPlaying();
     }
@@ -1025,15 +1064,19 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         final boolean hasQuery = !TextUtils.isEmpty(searchEditText.getText().toString().trim());
-        final boolean bareHome = !showingResults && !hasQuery;
+        final ViewGroup target = !showingResults && !hasQuery
+                ? searchBinding.homeContent.findViewWithTag("home-search-anchor") : searchBinding.homeColumn;
+        if (target != null && searchBinding.homeSearchDock.getParent() != target) {
+            ((ViewGroup)searchBinding.homeSearchDock.getParent()).removeView(searchBinding.homeSearchDock);
+            if (target == searchBinding.homeColumn) target.addView(searchBinding.homeSearchDock, 1,
+                    new android.widget.LinearLayout.LayoutParams(-1,-2));
+            else target.addView(searchBinding.homeSearchDock,new android.widget.FrameLayout.LayoutParams(-1,-2));
+            updateAdaptiveSearchWidth(searchBinding.getRoot().getWidth());
+        }
         searchBinding.homeSuggestionsList.setVisibility(
                 !showingResults && hasQuery ? View.VISIBLE : View.GONE);
-        searchBinding.homeSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
-        searchBinding.homeCenterSpacer.setVisibility(bareHome ? View.VISIBLE : View.GONE);
-        searchBinding.homeRecentRow.setVisibility(bareHome
-                && !HistoryRecordManager.isIncognito(requireContext())
-                && searchBinding.homeRecentChips.getChildCount() > 0
-                ? View.VISIBLE : View.GONE);
+        searchBinding.homeSpacer.setVisibility(
+                !showingResults && !hasQuery ? View.VISIBLE : View.GONE);
         final ViewGroup.MarginLayoutParams field = (ViewGroup.MarginLayoutParams)
                 searchBinding.homeSearchEditText.getLayoutParams();
         field.setMarginEnd(org.schabi.newpipe.hush.ui.HushUi.dp(requireContext(),
@@ -1073,7 +1116,14 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
     }
 
     private void updateProfileLabel() {
-        // profile views left the home header; the sheet keeps its own photo/monogram
+        if (searchBinding == null || activity == null) {
+            return;
+        }
+        final ProfileStore.Profile active = ProfileStore.getActive(activity);
+        searchBinding.profileName.setText(active.name);
+        searchBinding.profileButton.setContentDescription(active.name);
+        searchBinding.profileMonogram.setText(monogram(active.name));
+        showProfilePhoto(searchBinding.profilePhoto, searchBinding.profileMonogram, active.id);
     }
 
     private static String monogram(final String name) {
@@ -1087,19 +1137,14 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         if (activity == null) {
             return;
         }
-        final android.app.Dialog dialog = new android.app.Dialog(activity);
+        final androidx.appcompat.app.AppCompatDialog dialog = new androidx.appcompat.app.AppCompatDialog(activity);
         final View sheet = LayoutInflater.from(activity).inflate(R.layout.sheet_profiles, null);
         dialog.setContentView(sheet);
-        if (dialog.getWindow() != null) {
-            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(
-                    android.graphics.Color.TRANSPARENT));
-            dialog.getWindow().setGravity(android.view.Gravity.CENTER);
-            dialog.getWindow().setLayout(
-                    (int) (320 * activity.getResources().getDisplayMetrics().density),
-                    android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
+        dialog.setOnShowListener(shown -> styleProfileDialog(dialog));
+        dialog.setOnDismissListener(shown -> { if(activity instanceof org.schabi.newpipe.MainActivity) ((org.schabi.newpipe.MainActivity)activity).getHushChrome().suppressVideo(false); });
+        if(activity instanceof org.schabi.newpipe.MainActivity) ((org.schabi.newpipe.MainActivity)activity).getHushChrome().suppressVideo(true);
         sheet.setBackgroundResource(R.drawable.bg_profile_dialog);
-        final android.widget.GridLayout list = sheet.findViewById(R.id.profile_sheet_list);
+        final android.widget.LinearLayout list = sheet.findViewById(R.id.profile_sheet_list);
         final View createRow = sheet.findViewById(R.id.profile_sheet_create);
         final EditText nameInput = sheet.findViewById(R.id.profile_sheet_name);
         final String activeId = ProfileStore.getActive(activity).id;
@@ -1129,17 +1174,24 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 dialog.dismiss();
                 return true;
             });
-            list.addView(cell);
+            final ImageView selected=cell.findViewById(R.id.profile_cell_selected);
+            selected.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,"check"));
+            selected.setVisibility(profile.id.equals(activeId)?View.VISIBLE:View.INVISIBLE);
+            cell.setContentDescription(profile.name+(profile.id.equals(activeId)?", "+getString(R.string.hush_current_profile):""));
+            android.widget.LinearLayout.LayoutParams row = new android.widget.LinearLayout.LayoutParams(-1,-2);
+            if (list.getChildCount() > 0) row.topMargin = org.schabi.newpipe.hush.ui.HushUi.dp(activity,8);
+            list.addView(cell,row);
         }
         sheet.findViewById(R.id.profile_sheet_new).setOnClickListener(v -> {
             createRow.setVisibility(View.VISIBLE);
+            sheet.findViewById(R.id.profile_sheet_create_button).setVisibility(View.VISIBLE);
             nameInput.requestFocus();
             KeyboardUtil.showKeyboard(activity, nameInput);
         });
         sheet.findViewById(R.id.profile_sheet_create_button).setOnClickListener(v -> {
             final String name = nameInput.getText().toString().trim();
             if (name.isEmpty() || activity == null) {
-                return;
+                nameInput.setError(getString(R.string.hush_profile_name_required));return;
             }
             try {
                 final ProfileStore.Profile created = ProfileStore.create(activity, name);
@@ -1151,10 +1203,18 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             }
         });
         final View deleteButton = sheet.findViewById(R.id.profile_sheet_delete);
-        deleteButton.setVisibility(ProfileStore.canDelete(activity) ? View.VISIBLE : View.GONE);
+        deleteButton.setVisibility(View.VISIBLE);
+        deleteButton.setEnabled(ProfileStore.canDelete(activity));
         deleteButton.setOnClickListener(v -> {
             dialog.dismiss();
             confirmDeleteProfile();
+        });
+        sheet.findViewById(R.id.profile_sheet_close).setOnClickListener(v -> dialog.dismiss());
+        org.schabi.newpipe.hush.ui.HushIcons.apply(sheet);
+        nameInput.setOnEditorActionListener((v,action,event)->{
+            if(action==android.view.inputmethod.EditorInfo.IME_ACTION_DONE){
+                sheet.findViewById(R.id.profile_sheet_create_button).performClick();return true;
+            }return false;
         });
         dialog.show();
     }
@@ -1195,23 +1255,31 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         }
     }
 
-    private void styleProfileSheet(final BottomSheetDialog dialog) {
-        final View sheet = dialog.findViewById(
-                com.google.android.material.R.id.design_bottom_sheet);
-        if (sheet == null || activity == null) {
-            return;
-        }
-        final android.util.TypedValue value = new android.util.TypedValue();
-        activity.getTheme().resolveAttribute(
-                com.google.android.material.R.attr.colorSurfaceContainerLow, value, true);
-        final float radius = 28f * activity.getResources().getDisplayMetrics().density;
-        final MaterialShapeDrawable background = new MaterialShapeDrawable(
-                ShapeAppearanceModel.builder()
-                        .setTopLeftCornerSize(radius)
-                        .setTopRightCornerSize(radius)
-                        .build());
-        background.setFillColor(ColorStateList.valueOf(value.data));
-        sheet.setBackground(background);
+    private void styleProfileDialog(final androidx.appcompat.app.AppCompatDialog dialog) {
+        android.view.Window window=dialog.getWindow();
+        if(window==null || activity==null)return;
+        window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+        window.setGravity(android.view.Gravity.CENTER);
+        window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        View host=activity.findViewById(R.id.fragment_holder);
+        int width=host.getRootView().getWidth();
+        int gutter=org.schabi.newpipe.hush.ui.HushUi.dp(activity,24);
+        window.setLayout(Math.min(org.schabi.newpipe.hush.ui.HushUi.dp(activity,520),width-2*gutter),-2);
+        View decor=window.getDecorView();
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(decor,(v,insets)->{
+            int safe=insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars()
+                    | androidx.core.view.WindowInsetsCompat.Type.ime()).top
+                    + insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars()
+                    | androidx.core.view.WindowInsetsCompat.Type.ime()).bottom;
+            View content=decor.findViewById(android.R.id.content);
+            if(content!=null){
+                int max=Math.max(org.schabi.newpipe.hush.ui.HushUi.dp(activity,120),host.getRootView().getHeight()-safe-2*gutter);
+                ViewGroup.LayoutParams lp=content.getLayoutParams();
+                lp.height=safe>org.schabi.newpipe.hush.ui.HushUi.dp(activity,120)?max:ViewGroup.LayoutParams.WRAP_CONTENT;
+                content.setLayoutParams(lp);
+            }
+            return insets;
+        });
     }
 
 
@@ -1224,7 +1292,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             searchBinding.nowPlayingBar.setVisibility(View.GONE);
             return;
         }
-        searchBinding.nowPlayingBar.setVisibility(View.VISIBLE);
+        searchBinding.nowPlayingBar.setVisibility(View.GONE); // Home owns the in-flow audio card.
         final PlayQueue queue = holder.getPlayQueue();
         final PlayQueueItem item = queue == null ? null : queue.getItem();
         if (item != null) {
@@ -1236,8 +1304,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         } else {
             searchBinding.nowPlayingTitle.setText(R.string.unknown_content);
         }
-        searchBinding.nowPlayingToggle.setImageResource(
-                holder.isPlaying() ? R.drawable.ic_pause : R.drawable.ic_play_arrow);
+        searchBinding.nowPlayingToggle.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,holder.isPlaying() ? "pause" : "play"));
     }
 
     private boolean isMiniPlayerShowing() {
@@ -1245,7 +1312,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return false;
         }
         final View holder = activity.findViewById(R.id.fragment_player_holder);
-        if (holder == null) {
+        if (holder == null || holder.getVisibility() != View.VISIBLE) {
             return false;
         }
         try {
@@ -1276,11 +1343,10 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
             return;
         }
         final boolean incognito = HistoryRecordManager.isIncognito(activity);
+            View recentSearches = getView() == null ? null : getView().findViewWithTag("home-recent-searches");
+            if (recentSearches != null) recentSearches.setVisibility(incognito ? View.GONE : View.VISIBLE);
         final java.util.ArrayList<org.schabi.newpipe.util.HushActionSheet.Action> actions =
                 new java.util.ArrayList<>();
-        actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
-                R.drawable.ic_hush_profile, getString(R.string.profile_dialog_title),
-                ProfileStore.getActive(activity).name, false, this::showProfileDialog));
         actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
                 R.drawable.ic_history, getString(R.string.action_history), null, false,
                 () -> openLibrary(new org.schabi.newpipe.local.library.HistoryLibraryFragment())));
@@ -1296,6 +1362,8 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
                 R.drawable.ic_info_outline, getString(R.string.tab_about), null, false,
                 () -> NavigationHelper.openAbout(activity)));
+        actions.add(new org.schabi.newpipe.util.HushActionSheet.Action(
+                R.drawable.ic_hush_profile, getString(R.string.profile_switch_title), null, false, this::showProfileDialog));
         org.schabi.newpipe.util.HushActionSheet.show(activity, getString(R.string.more_options),
                 null, actions);
     }
@@ -1314,64 +1382,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         openLibrary(GamesFragment.newInstance(game));
     }
 
-    /** Tappable recent searches under the hero field; the standard search-first pattern. */
-    private void renderRecentChips() {
-        if (searchBinding == null || activity == null) {
-            return;
-        }
-        final LinearLayout chips = searchBinding.homeRecentChips;
-        chips.removeAllViews();
-        historyRecordManager.getCompleteSearchHistory()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(searches -> {
-                            if (searchBinding == null) {
-                                return;
-                            }
-                            int added = 0;
-                            final java.util.Set<String> seen = new java.util.HashSet<>();
-                            for (final String query : searches) {
-                                if (TextUtils.isEmpty(query) || added >= 6) {
-                                    continue;
-                                }
-                                if (!seen.add(query.trim().toLowerCase(Locale.getDefault()))) {
-                                    continue;
-                                }
-                                chips.addView(recentChip(query), new LinearLayout.LayoutParams(
-                                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                                added++;
-                            }
-                            updateHomeContentVisibility();
-                        },
-                        error -> Log.w(TAG, "Could not load recent searches", error));
-    }
-
-    private TextView recentChip(final String query) {
-        final TextView chip = new TextView(activity);
-        chip.setText(query);
-        chip.setMaxLines(1);
-        chip.setEllipsize(TextUtils.TruncateAt.END);
-        chip.setTextSize(15);
-        chip.setTextColor(org.schabi.newpipe.hush.ui.HushUi.color(activity,
-                com.google.android.material.R.attr.colorOnSurface));
-        chip.setBackgroundResource(R.drawable.bg_recent_chip);
-        chip.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                R.drawable.ic_history, 0, 0, 0);
-        chip.setCompoundDrawablePadding(org.schabi.newpipe.hush.ui.HushUi.dp(activity, 6));
-        final int pad = org.schabi.newpipe.hush.ui.HushUi.dp(activity, 12);
-        chip.setPadding(pad + org.schabi.newpipe.hush.ui.HushUi.dp(activity, 4), pad / 2,
-                pad, pad / 2);
-        chip.setClickable(true);
-        chip.setFocusable(true);
-        chip.setContentDescription(getString(R.string.search));
-        chip.setOnClickListener(v -> {
-            searchEditText.setText(query);
-            submitSearch(query);
-        });
-        return chip;
-    }
-
     private void updateIncognitoHint() {
         if (centeredSearch && searchEditText != null && activity != null) {
             final boolean incognito = HistoryRecordManager.isIncognito(activity);
@@ -1379,6 +1389,9 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                     ? R.string.history_incognito_search_hint : R.string.search_youtube);
             if (searchBinding != null) {
                 searchBinding.homeIncognito.setSelected(incognito);
+                searchBinding.homeIncognito.setBackground(org.schabi.newpipe.hush.ui.HushUi.shape(activity,
+                        incognito ? org.schabi.newpipe.hush.ui.HushUi.color(activity,
+                        com.google.android.material.R.attr.colorPrimaryContainer) : 0, 24, 0));
                 searchBinding.homeIncognito.setImageTintList(
                         android.content.res.ColorStateList.valueOf(
                                 org.schabi.newpipe.hush.ui.HushUi.color(activity, incognito
@@ -1386,7 +1399,6 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                                         : com.google.android.material.R.attr.colorOnSurfaceVariant)));
                 searchBinding.homeIncognito.setContentDescription(getString(incognito
                         ? R.string.home_incognito_on : R.string.home_incognito_off));
-                renderRecentChips();
             }
         }
     }
@@ -1422,6 +1434,8 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
                 .commit();
     }
 
+    public void refreshHushChrome() { applySearchChrome(showingResults); }
+
     public void submitSearch(final String query) {
         search(query);
     }
@@ -1449,11 +1463,18 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
     }
 
     private void updateAdaptiveSearchWidth(final int width) {
+        if (searchBinding != null && activity != null) {
+            final boolean compact = getResources().getConfiguration().fontScale > 1.3f
+                    && getResources().getConfiguration().screenWidthDp < 360;
+            searchBinding.homeBrand.setVisibility(compact ? View.GONE : View.VISIBLE);
+        }
+
         if(searchBinding==null || width<=0)return;
         final int gutter=org.schabi.newpipe.hush.ui.HushUi.dp(activity,
-                width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,840)?32:width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,600)?24:20);
+                width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,840)?32:width>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,600)?24:22);
         final int content=Math.min(width-2*gutter,org.schabi.newpipe.hush.ui.HushUi.dp(activity,1120));
-        final int dockSide=Math.max(gutter,(width-org.schabi.newpipe.hush.ui.HushUi.dp(activity,720))/2);
+        final int dockSide=searchBinding.homeSearchDock.getParent()==searchBinding.homeColumn
+                ? Math.max(gutter,(width-org.schabi.newpipe.hush.ui.HushUi.dp(activity,720))/2) : 0;
         final View dockView=searchBinding.homeSearchDock;
         if (dockView.getPaddingLeft()!=dockSide || dockView.getPaddingRight()!=dockSide) {
             dockView.setPadding(dockSide, dockView.getPaddingTop(), dockSide, dockView.getPaddingBottom());
@@ -1462,8 +1483,8 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         searchBinding.homeSuggestionsList.setPadding((width-content)/2,0,(width-content)/2,0);
         if (itemsList!=null && itemsList.getLayoutManager() instanceof androidx.recyclerview.widget.GridLayoutManager) {
             final androidx.recyclerview.widget.GridLayoutManager manager=(androidx.recyclerview.widget.GridLayoutManager)itemsList.getLayoutManager();
-            int count=content>=org.schabi.newpipe.hush.ui.HushUi.dp(activity,560)
-                    && getResources().getConfiguration().fontScale<=1.3f?2:1;
+            int count=org.schabi.newpipe.hush.ui.TabletLayout.mediaColumns(
+                    content/getResources().getDisplayMetrics().density,getResources().getConfiguration().fontScale);
             if(manager.getSpanCount()!=count){manager.setSpanCount(count);manager.setSpanSizeLookup(infoListAdapter.getSpanSizeLookup(count));}
         }
     }
@@ -1474,8 +1495,7 @@ public class SearchFragment extends BaseListFragment<SearchInfo, ListExtractor.I
         }
         final boolean grid = PreferenceManager.getDefaultSharedPreferences(activity)
                 .getBoolean(getString(R.string.grid_layout_enabled_key), true);
-        searchBinding.homeViewToggle.setImageResource(
-                grid ? R.drawable.ic_view_list : R.drawable.ic_grid_view);
+        searchBinding.homeViewToggle.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(activity,grid ? "list" : "grid"));
     }
 
     @Override

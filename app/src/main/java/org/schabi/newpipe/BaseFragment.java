@@ -63,6 +63,7 @@ public abstract class BaseFragment extends Fragment {
         }
         initViews(rootView, savedInstanceState);
         initListeners();
+        org.schabi.newpipe.hush.ui.HushIcons.apply(rootView);
     }
 
     @Override

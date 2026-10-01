@@ -210,8 +210,10 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
 
         Utility.FileType type = Utility.getFileType(item.mission.kind, item.mission.storage.getName());
 
-        h.icon.setImageResource(Utility.getIconForFileType(type));
+        h.icon.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(mContext,
+                type == Utility.FileType.MUSIC ? "file-audio" : type == Utility.FileType.SUBTITLE ? "file-subtitle" : "file-video"));
         h.name.setText(item.mission.storage.getName());
+        h.refreshInlineAction();
 
         h.progress.setColors(
                 org.schabi.newpipe.util.ThemeHelper.resolveColorFromAttr(
@@ -256,6 +258,7 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
     private void updateProgress(ViewHolderItem h) {
         if (h == null || h.item == null || h.item.mission instanceof FinishedMission) return;
 
+        h.refreshInlineAction();
         DownloadMission mission = (DownloadMission) h.item.mission;
         double done = mission.done;
         long length = mission.getLength();
@@ -897,6 +900,7 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
 
         TextView status;
         ImageView icon;
+        android.widget.ImageButton inlineAction;
         TextView name;
         TextView size;
         TextView date;
@@ -950,6 +954,7 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
             source = menu.findItem(R.id.source);
             checksum = menu.findItem(R.id.checksum);
 
+            inlineAction=itemView.findViewById(R.id.hush_mission_action);
             itemView.setHapticFeedbackEnabled(true);
 
             itemView.setOnClickListener(v -> {
@@ -964,7 +969,22 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
             });
         }
 
-        private void showPopupMenu() {
+        private void refreshInlineAction(){
+            if(inlineAction==null || item==null)return;
+            configureActions();
+            MenuItem available=retry.isVisible()?retry:pause.isVisible()?pause:start.isVisible()?start:null;
+            boolean completed=item.mission instanceof FinishedMission;
+            inlineAction.setVisibility(available!=null || completed?View.VISIBLE:View.GONE);
+            if(available==null && !completed)return;
+            String icon=completed?"check":available==pause?"pause":available==retry?"retry":"play";
+            inlineAction.setImageDrawable(org.schabi.newpipe.hush.ui.HushIcons.drawable(mContext,icon));
+            inlineAction.setContentDescription(completed?mContext.getString(R.string.hush_open_download):available.getTitle());
+            inlineAction.setOnClickListener(v->{if(completed)viewWithFileProvider(item.mission);
+                else handlePopupItem(this,available);refreshInlineAction();});
+        }
+        private void showPopupMenu(){configureActions();popupMenu.show();}
+        private void configureActions() {
+
             retry.setVisible(false);
             cancel.setVisible(false);
             start.setVisible(false);
@@ -1019,7 +1039,6 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
                 source.setVisible(true);
             }
 
-            popupMenu.show();
         }
 
         private PopupMenu buildPopup(final View button) {

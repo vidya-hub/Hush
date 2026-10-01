@@ -1,0 +1,21 @@
+<resources>
+    <string name="hush_home_headline">YouTube, with\nroom to pause.</string>
+    <string name="hush_now_playing">Now playing</string>
+    <string name="hush_download_guide">Save a video for later using Download on the watch page.</string>
+    <string name="hush_history_recording">Your searches and watched videos are saved in this profile.</string>
+    <string name="hush_current_profile">Current profile</string>
+    <string name="hush_nav_games">Games</string>
+    <item type="id" name="hush_nav_search"/>
+    <item type="id" name="hush_nav_games"/>
+    <item type="id" name="hush_nav_breathe"/>
+    <item type="id" name="hush_floating_video"/>
+    <item type="id" name="hush_floating_expand"/>
+    <item type="id" name="hush_floating_close"/>
+    <item type="id" name="hush_playlist_detail"/>
+    <string name="hush_queue_empty">Your playback queue is empty.</string>
+    <string name="hush_open_download">Open downloaded file</string>
+    <string name="hush_profile_name_required">Enter a profile name.</string>
+    <string name="hush_audio_only">Audio only</string>
+    <item type="id" name="hush_floating_audio_fallback" />
+    <string name="hush_playing_background">Playing in background</string>
+</resources>

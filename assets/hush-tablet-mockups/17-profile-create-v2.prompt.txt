@@ -1,0 +1,1 @@
+Use case: ui-mockup. Edit targetProfilecreation. Preservewholeportrait10:16canvasmodal andallhomecontent. Correct ONLY nativekeyboardletters: top row q w e r t y u i o p, middle a s d f g h j k l, bottom shift z x c v b n m backspace; exactlyeachkeyonce. Bottomrow?123 comma spaceperiod enter. Replaceerroneousvintoprowwitht. KeepCreatevisibleabovekeyboard. Nootherchanges.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-09-30T15:07:11.944Z" hostname="Vidyas-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="boxCyclesThroughFourPhases" classname="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" time="0.0"/>
+  <testcase name="restoredSessionStaysPaused" classname="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" time="0.0"/>
+  <testcase name="boxEndsAtRequestedMinuteEvenMidCycle" classname="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" time="0.001"/>
+  <testcase name="pauseFreezesClockUntilResumed" classname="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" time="0.0"/>
+  <testcase name="calmMovesFromInhaleToExhaleAndEndsOnCycleBoundary" classname="org.schabi.newpipe.fragments.list.search.BreathingSessionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

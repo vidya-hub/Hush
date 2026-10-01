@@ -1,0 +1,1351 @@
+{
+  "mode": "built-in imagegen",
+  "generation": "one screen per call",
+  "reference_windows": {
+    "landscape": "1280x800dp",
+    "portrait": "800x1280dp",
+    "compact": "600x900dp"
+  },
+  "assets": [
+    {
+      "id": "01-home-landscape",
+      "group": "Home",
+      "orientation": "landscape",
+      "brief": "Idle two-column home",
+      "status": "selected",
+      "file": "01-home-landscape.png",
+      "prompt_file": "01-home-landscape-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-0f268eb9-1989-4374-bbc0-d41356b6b2d6.png",
+      "sha256": "1db9e17f11e0acd3a1700b0eb922402bd963753888eb323f30a370e42f06d376",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "01-home-landscape.prompt.txt",
+        "01-home-landscape-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Anchor revised to16:10 and lowercase h Breathe glyph. Compact search/library group; no fake feed.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 landscape idle",
+      "scenario": "standard",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "more-vertical",
+        "breath-ring",
+        "history",
+        "bookmark",
+        "download",
+        "play",
+        "pause",
+        "queue",
+        "close",
+        "music",
+        "expand",
+        "waveform"
+      ]
+    },
+    {
+      "id": "02-home-portrait",
+      "group": "Home",
+      "orientation": "portrait",
+      "brief": "Idle home. Reflow the reference to an 800x1280dp portrait tablet window. Complete 10:16 portrait canvas. No side rail. Header Hush with privacy and overflow. A centered 560dp column with small ring, exact two-line headline YouTube, with / room to pause. Compact Search YouTube field, lofi girl and jazz recent chips, three equal History Saved Downloads shortcuts. Bottom centered navigation only Search Games Breathe with equal outer margins, Search selected and lowercase h Breathe glyph. No now-playing, media, invented feed or empty decorative card.",
+      "status": "selected",
+      "file": "02-home-portrait.png",
+      "prompt_file": "02-home-portrait-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-7308fbf3-6b6c-44c8-b8b4-a22b66222f4f.png",
+      "sha256": "4807ad7a5701d50cd4a67d9aab40090d399410d02b1760a6bd83cb0b546f7c37",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "02-home-portrait.prompt.txt",
+        "02-home-portrait-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Bottom bar revised into one centered bounded group with equal margins and three destinations.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 portrait idle",
+      "scenario": "standard",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "more-vertical",
+        "breath-ring",
+        "history",
+        "bookmark",
+        "download",
+        "play",
+        "pause",
+        "queue",
+        "close",
+        "music",
+        "expand",
+        "waveform"
+      ]
+    },
+    {
+      "id": "03-home-floating",
+      "group": "Home",
+      "orientation": "landscape",
+      "brief": "Same landscape home and rail, with actual-playing state illustrated. Add small Now playing label and title lofi hip hop radio below shortcuts. ONE 16:9 floating video 300dp wide at lower-right in free space, with warm evening study-room thumbnail, expand upper-left, close upper-right, pause centered. No bottom player strip. Keep search, shortcuts and rail uncovered.",
+      "status": "selected",
+      "file": "03-home-floating.png",
+      "prompt_file": "03-home-floating.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-0f131e56-eb88-4214-a6cd-eb4eac9a9236.png",
+      "sha256": "e3c2e8b9b3818e2b4a7e682d6d26b6629457a1f256cbade1a68f3fb6bcaebaf4",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "03-home-floating.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Single warm study video floats over Home; navigation/search remain clear. Implementation width300dp governs raster approximation.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 floating video",
+      "scenario": "floating-video",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "more-vertical",
+        "breath-ring",
+        "history",
+        "bookmark",
+        "download",
+        "play",
+        "pause",
+        "queue",
+        "close",
+        "music",
+        "expand",
+        "waveform"
+      ]
+    },
+    {
+      "id": "04-home-audio",
+      "group": "Home",
+      "orientation": "landscape",
+      "brief": "Landscape home with AUDIO ONLY state, no video frame anywhere. A bounded compact audio card below search and shortcuts: tiny square artwork, label Now playing, title lofi hip hop radio, subtitle Audio only, pause, queue and close controls. Same rail Search selected. Do not show a floating video or fullscreen icon; no fake playing-video thumbnail.",
+      "status": "selected",
+      "file": "04-home-audio.png",
+      "prompt_file": "04-home-audio-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-1b0cac40-af44-46e6-9658-3a85fc19c4ae.png",
+      "sha256": "c31ba92b28f93b1210f7b6d8e69304953457b7d5412928ff46a638f70e35e005",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "04-home-audio.prompt.txt",
+        "04-home-audio-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Audio card reordered after recent queries and shortcuts; no video/fullscreen affordance.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 audio only",
+      "scenario": "audio-only",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "more-vertical",
+        "breath-ring",
+        "history",
+        "bookmark",
+        "download",
+        "play",
+        "pause",
+        "queue",
+        "close",
+        "music",
+        "expand",
+        "waveform"
+      ]
+    },
+    {
+      "id": "05-search-landscape-floating",
+      "group": "Search",
+      "orientation": "landscape",
+      "brief": "Landscape submitted search. Same three-destination rail with Search selected. Header compact editable query lofi, back, clear, filter and overflow controls. Main content grid of six landscape 16:9 media thumbnails in three columns and two rows; restrained two-line titles, uploader, duration or Live badge, per-item overflow. Illustrative titles Lofi study radio, Rainy night jazz, Quiet piano, Evening focus, Soft beats, Morning ambience. One 16:9 floating player lower-right occupying reserved safe area, pause expand close, not covering row menus. No hero headline.",
+      "status": "selected",
+      "file": "05-search-landscape-floating.png",
+      "prompt_file": "05-search-landscape-floating-v3.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-c7febdbf-a83e-4795-8e0d-7a1651a709fa.png",
+      "sha256": "7d359a20f13e8f0e67e42fd31367c239b29d0bdbf1734a69599b4bcd8623ef3d",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "05-search-landscape-floating.prompt.txt",
+        "05-search-landscape-floating-v2.prompt.txt",
+        "05-search-landscape-floating-v3.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Wide player strip replaced by true16:9 PiP; duplicate header removed; metadata clearance revised.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Search \u00b7 landscape results + floating video",
+      "scenario": "floating-video",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "content-filter",
+        "more-vertical",
+        "list",
+        "grid",
+        "live",
+        "expand",
+        "play",
+        "pause"
+      ]
+    },
+    {
+      "id": "06-search-portrait",
+      "group": "Search",
+      "orientation": "portrait",
+      "brief": "Portrait submitted search 800x1280dp. Query header lofi with back clear filter, two-column 16:9 media grid, four complete cards with readable two-line titles and uploader/duration. No home hero. This is a results subpage: no bottom navigation and no rail, explicit back to home. No video currently playing.",
+      "status": "selected",
+      "file": "06-search-portrait.png",
+      "prompt_file": "06-search-portrait-v3.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-938851dd-306f-44c2-b876-856624b947c1.png",
+      "sha256": "1fd73d6ff3ef976bfe8f1bcdb18813f1d5307572a5492ac920944ab73118997e",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "06-search-portrait.prompt.txt",
+        "06-search-portrait-v2.prompt.txt",
+        "06-search-portrait-v3.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Portrait grid rebuilt with landscape16:9 thumbnails, complete toolbar and row menus.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Search \u00b7 portrait results",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "content-filter",
+        "more-vertical",
+        "list",
+        "grid",
+        "live",
+        "expand",
+        "play",
+        "pause"
+      ]
+    },
+    {
+      "id": "07-search-keyboard",
+      "group": "Search",
+      "orientation": "compact",
+      "brief": "Query-editing screen in a 600x900dp narrow window, portrait2:3 canvas. Header back, editable query lofi girl, clear control. Suggestions lofi girl radio, lofi girl study, lofi girl jazz in a single column. Realistic Android dark QWERTY keyboard occupying lower third; visible field above keyboard and cursor. No bottom navigation while keyboard open, no PiP over keyboard, no hero. Empty space must not become invented recommendations.",
+      "status": "selected",
+      "file": "07-search-keyboard.png",
+      "prompt_file": "07-search-keyboard.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-9c13aae8-a1e8-4d97-8c2f-9bf1ea6c7520.png",
+      "sha256": "e8b6d9ddd753e970024aab90261de4e4db296b78dee0a5d3f791b1a5116aa666",
+      "pixel_dimensions": [
+        1024,
+        1536
+      ],
+      "prompt_history": [
+        "07-search-keyboard.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Focused query/suggestions remain above illustrative native QWERTY keyboard; bottomnav hidden.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Search \u00b7 keyboard editing",
+      "scenario": "keyboard",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "content-filter",
+        "more-vertical",
+        "list",
+        "grid",
+        "live",
+        "expand",
+        "play",
+        "pause"
+      ]
+    },
+    {
+      "id": "08-search-empty",
+      "group": "Search",
+      "orientation": "landscape",
+      "brief": "Landscape search results with query quiet comet orchestra and Search rail. No results. Bounded centered empty state magnifier, exact heading No results found, copy Try another search., outlined Edit search button. Keep query header editable and visible. No fake media, no live player, no error banner (this is successful empty results).",
+      "status": "selected",
+      "file": "08-search-empty.png",
+      "prompt_file": "08-search-empty.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-1ea49f0c-87d0-44ea-984e-f3d15d83785e.png",
+      "sha256": "e01f21895b8ba9d19567d3b90fa1c61beb6fc1ddc9b4a12a18b6dc2c6fc679cc",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "08-search-empty.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Successful no-results state with editable query and Edit search; no failure banner.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Search \u00b7 no results",
+      "scenario": "empty",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "content-filter",
+        "more-vertical",
+        "list",
+        "grid",
+        "live",
+        "expand",
+        "play",
+        "pause"
+      ]
+    },
+    {
+      "id": "09-watch-landscape",
+      "group": "Playback",
+      "orientation": "landscape",
+      "brief": "Expanded landscape watch, complete 1280x800dp canvas16:10. NO rail, NO bottom navigation, NO search field. Back top-left and overflow top-right. Wide left pane about 760dp: single large16:9 video illustration of warm study-room animation with visible play/pause seekbar elapsed10:24 /1:02:00, fullscreen control; below title Quiet evening study mix, channel Lofi Studio avatar and subscribers, views and Save Background Download more actions. Right pane320dp with tabs Up next / Queue, Auto-enqueuing switch, three related rows with16:9 thumbnails and titles Rainy night jazz, Soft piano, Evening focus. No duplicate video or PiP. Refined hierarchy, exact aligned columns, all actions fully within canvas.",
+      "status": "selected",
+      "file": "09-watch-landscape.png",
+      "prompt_file": "09-watch-landscape-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-f44f467f-6e46-458b-9103-5106f2fd742b.png",
+      "sha256": "3e7fa3b03c3a25697988d5fb035eb0cca0a3c8096453f70b4973f900b0b75eb4",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "09-watch-landscape.prompt.txt",
+        "09-watch-landscape-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Background restored alongside Save/Download/More; one video, related/queue pane, no search/nav.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Watch \u00b7 landscape panes",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "chevron-down",
+        "play",
+        "pause",
+        "expand",
+        "fullscreen-exit",
+        "bookmark",
+        "bookmark-filled",
+        "headphones",
+        "download",
+        "more-horizontal",
+        "queue",
+        "captions",
+        "speed",
+        "settings",
+        "share",
+        "pip"
+      ]
+    },
+    {
+      "id": "10-watch-portrait",
+      "group": "Playback",
+      "orientation": "portrait",
+      "brief": "Portrait expanded watch800x1280dp. NO rail, bottom navigation or search. Back and overflow header; one full-width16:9 playing video illustration, seekbar controls, title Quiet evening study mix, channel metadata, Save Background Download actions. Below content tabs Up next Queue Info, compact two related rows and auto-enqueuing switch. Allow screen content scrolling. No tiny landscape two-pane squeeze.",
+      "status": "selected",
+      "file": "10-watch-portrait.png",
+      "prompt_file": "10-watch-portrait.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-039f2f11-61d3-450f-a49e-dae102bd85b5.png",
+      "sha256": "3d4426f70ee5b3af2267b95299d92403ecbbdb31453f1222e60d205d225d136d",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "10-watch-portrait.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "One portrait video then metadata/actions and Up next/Queue/Info; no landscape panes squeezed into portrait.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Watch \u00b7 portrait",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "chevron-down",
+        "play",
+        "pause",
+        "expand",
+        "fullscreen-exit",
+        "bookmark",
+        "bookmark-filled",
+        "headphones",
+        "download",
+        "more-horizontal",
+        "queue",
+        "captions",
+        "speed",
+        "settings",
+        "share",
+        "pip"
+      ]
+    },
+    {
+      "id": "11-playback-collapsed",
+      "group": "Playback",
+      "orientation": "landscape",
+      "brief": "Landscape browsing saved playlist contents after video was dragged down. Search rail persists, title Saved with breadcrumb Quiet evenings. Readable playlist track list and per-row overflow. ONE floating16:9 video300dp wide lower-right in a visibly reserved blank area; expand close pause. No expanded player duplicate, no bottom player strip, no search field in the video itself. Browsing context and selection remain visible.",
+      "status": "selected",
+      "file": "11-playback-collapsed.png",
+      "prompt_file": "11-playback-collapsed.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-bf091f29-2fc0-4edd-8207-7ec0cff941a7.png",
+      "sha256": "7812923789ac605f566e8813636763c12a34b5c53cf03ece448a58c91d1015a4",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "11-playback-collapsed.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Saved context retained beneath one floating video. Exact overlay control positions follow playback contract.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Playback \u00b7 collapsed over Saved",
+      "scenario": "floating-video",
+      "icon_ids": [
+        "back",
+        "chevron-down",
+        "play",
+        "pause",
+        "expand",
+        "fullscreen-exit",
+        "bookmark",
+        "bookmark-filled",
+        "headphones",
+        "download",
+        "more-horizontal",
+        "queue",
+        "captions",
+        "speed",
+        "settings",
+        "share",
+        "pip"
+      ]
+    },
+    {
+      "id": "12-watch-fullscreen",
+      "group": "Playback",
+      "orientation": "landscape",
+      "brief": "Landscape FULLSCREEN playback. Entire16:10 screen used for the same warm animated study scene; original16:9 video letterboxed subtly within16:10, no distortion. Only translucent controls: back, title Quiet evening study mix, pause center, bottom seekbar10:24 /1:02:00, captions, quality, speed and exit fullscreen. No search, rail, bottom navigation, unrelated content, floating video, device frame or status strip in immersive mode.",
+      "status": "selected",
+      "file": "12-watch-fullscreen.png",
+      "prompt_file": "12-watch-fullscreen.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-18939963-49ee-4797-a487-e4cddcd3eef1.png",
+      "sha256": "03cdaa8ce93a0738efd8866dc4fba7d630fd2d85d6c710eb36dcfbdba8386e1c",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "12-watch-fullscreen.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Immersive16:9 video letterboxed in16:10 with overlay controls; no browsing chrome.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Watch \u00b7 fullscreen",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "chevron-down",
+        "play",
+        "pause",
+        "expand",
+        "fullscreen-exit",
+        "bookmark",
+        "bookmark-filled",
+        "headphones",
+        "download",
+        "more-horizontal",
+        "queue",
+        "captions",
+        "speed",
+        "settings",
+        "share",
+        "pip"
+      ]
+    },
+    {
+      "id": "13-saved-populated",
+      "group": "Library",
+      "orientation": "landscape",
+      "brief": "Landscape Saved with Search rail and master/detail layout. Header Saved, New playlist action. Left bounded280dp playlist list Quiet evenings selected, Piano notes, Study sessions with real-looking counts. Right heading Quiet evenings, 12 videos, actions Play all Background Popup. Four readable rows with16:9 thumbnail, title uploader duration and reorder grip. No sidebar destinations beyond Search Games Breathe; playlist names are list content. No search bar.",
+      "status": "selected",
+      "file": "13-saved-populated.png",
+      "prompt_file": "13-saved-populated-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-698a3261-b888-4d52-8f44-80838dd338c2.png",
+      "sha256": "f2cd13cf2472af04bf4549f0a6f8c64e5e386cb12dcb914f843cddd04fa94a66",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "13-saved-populated.prompt.txt",
+        "13-saved-populated-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Popup restored; master/detail list and four accessible reorder rows.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Saved \u00b7 populated master/detail",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "playlist",
+        "add",
+        "edit",
+        "trash",
+        "drag",
+        "play",
+        "headphones",
+        "pip",
+        "more-vertical",
+        "bookmark"
+      ]
+    },
+    {
+      "id": "14-saved-empty",
+      "group": "Library",
+      "orientation": "portrait",
+      "brief": "Portrait Saved empty subpage, back header and overflow. No rail or bottom navigation. Centered restrained playlist glyph, heading No saved playlists yet, copy Create a playlist to keep videos together., Create playlist button. No sample populated list, no fake counts, no PiP. Empty guidance fits bounded width.",
+      "status": "selected",
+      "file": "14-saved-empty.png",
+      "prompt_file": "14-saved-empty.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-3345c509-e57a-4281-9ab1-8b2d1e1c72b4.png",
+      "sha256": "cba60156369ae3a3e569280afdb5ded0f5c39c374ba395e20f933616b42f184a",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "14-saved-empty.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Empty library guidance and Create playlist; no illustrative playlists presented as actual data.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Saved \u00b7 empty",
+      "scenario": "empty",
+      "icon_ids": [
+        "back",
+        "playlist",
+        "add",
+        "edit",
+        "trash",
+        "drag",
+        "play",
+        "headphones",
+        "pip",
+        "more-vertical",
+        "bookmark"
+      ]
+    },
+    {
+      "id": "15-playlist-detail",
+      "group": "Library",
+      "orientation": "landscape",
+      "brief": "Landscape playlist detail with Search rail. Back breadcrumb Saved / Quiet evenings. Left280dp list of playlists with selected Quiet evenings. Right wrapping long title Quiet evenings \u2014 piano and rain for winding down, count12 videos, Play all Background Popup buttons with icons beside text. List rows readable thumbnail title uploader duration and48dp reorder grips at consistent trailing edge. Show four rows, no extra social features, no search.",
+      "status": "selected",
+      "file": "15-playlist-detail.png",
+      "prompt_file": "15-playlist-detail.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-2207010b-4274-4446-b3af-730526b63a75.png",
+      "sha256": "5092b673da483c2f61aa3ed39d9e224d64ac4b5808861f780adfe4da56292439",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "15-playlist-detail.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Long playlist title wraps; all playback modes and reorder grips retained.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Playlist \u00b7 long title and reorder",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "playlist",
+        "add",
+        "edit",
+        "trash",
+        "drag",
+        "play",
+        "headphones",
+        "pip",
+        "more-vertical",
+        "bookmark"
+      ]
+    },
+    {
+      "id": "16-profile-switch",
+      "group": "Profiles",
+      "orientation": "landscape",
+      "brief": "Landscape home dimmed behind centered bounded520dp profile modal. Keep underlying Search rail dimmed and noninteractive. Modal title Profiles and48dp close share one row. Three actual-style profiles Personal selected with check, Focus, Guest with rounded monograms and names. New profile and Delete actions below; clear current selection. No fake account-login or premium labels, no floating video while modal open. Modal body scrollable if more profiles.",
+      "status": "selected",
+      "file": "16-profile-switch.png",
+      "prompt_file": "16-profile-switch.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-54519748-d422-4d52-8d90-f00a8917179e.png",
+      "sha256": "8564c155de9b7ab8b2e00115d98772b32e575fa719173718987bd2583479ffd4",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "16-profile-switch.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Centered profile modal with aligned monograms, current check and protected Delete state.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Profiles \u00b7 switching",
+      "scenario": "standard",
+      "icon_ids": [
+        "profile",
+        "check",
+        "add",
+        "trash",
+        "close"
+      ]
+    },
+    {
+      "id": "17-profile-create",
+      "group": "Profiles",
+      "orientation": "portrait",
+      "brief": "Portrait home dimmed behind bounded profile creation modal above a realistic dark Android QWERTY keyboard. Modal title Profiles with close. Existing Personal profile row above outlined Profile name field containing Reading, keyboard focus/cursor, Create button fully visible above keyboard. No added form fields, avatar uploader, email or password. Bottom navigation suppressed by keyboard. No PiP while modal open.",
+      "status": "selected",
+      "file": "17-profile-create.png",
+      "prompt_file": "17-profile-create-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-5bea6028-3c66-4e56-837a-fe4bf5b984c8.png",
+      "sha256": "d8ec736a94293cdcf77710048ac53e3e504b797dcfe859286f3ee0ac44792ac2",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "17-profile-create.prompt.txt",
+        "17-profile-create-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Creation controls remain above IME; keyboard letter order corrected individually.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Profiles \u00b7 creation with keyboard",
+      "scenario": "keyboard",
+      "icon_ids": [
+        "profile",
+        "check",
+        "add",
+        "trash",
+        "close"
+      ]
+    },
+    {
+      "id": "18-history-watch",
+      "group": "History",
+      "orientation": "landscape",
+      "brief": "Landscape History with Search rail. Header History, overflow includes clear action icon but no destructive button dominating. Privacy control Incognito off and concise recording explanation. Tabs Watch history selected / Search history. Wide readable list of four rows with16:9 thumbnail, wrappingtitle,uploader,duration/resume progress and more menu. Titles Quiet evening study mix, Rainy night jazz, Soft piano, Evening focus. Balanced widths rather than enormous stretched thumbnails. No search field.",
+      "status": "selected",
+      "file": "18-history-watch.png",
+      "prompt_file": "18-history-watch-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-44299c7b-70bc-475e-8eae-87422b73217e.png",
+      "sha256": "d725e1aa16e8c985c20a5b1d5b6dba986213fdce65db804fd264748abcedd24b",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "18-history-watch.prompt.txt",
+        "18-history-watch-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Privacy copy corrected from account to local profile; readable watch rows and scoped overflow.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "History \u00b7 landscape watch history",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "history",
+        "incognito",
+        "more-vertical",
+        "trash",
+        "close"
+      ]
+    },
+    {
+      "id": "19-history-search-private",
+      "group": "History",
+      "orientation": "portrait",
+      "brief": "Portrait History subpage no rail or bottom bar. Title History back overflow. Incognito switch ON, explanation New searches and watched videos are not saved in this profile. Tabs Watch history / Search history with Search history selected. Existing query rows lofi girl, jazz, piano each history icon and readable text. Small note Existing history is still available. No pretend deletion or fake empty state when earlier records exist.",
+      "status": "selected",
+      "file": "19-history-search-private.png",
+      "prompt_file": "19-history-search-private.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-40030620-49b1-4c23-8c03-c595b557ae41.png",
+      "sha256": "91217c4227334f5ec05ae24785e39c5ae4e9036e7c4505e0afc417ad9c4a1b74",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "19-history-search-private.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Incognito on stops new records without deleting existing search history.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "History \u00b7 portrait incognito search history",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "history",
+        "incognito",
+        "more-vertical",
+        "trash",
+        "close"
+      ]
+    },
+    {
+      "id": "20-games-hub",
+      "group": "Games",
+      "orientation": "landscape",
+      "brief": "Landscape Games hub. Same rail Games selected, title Games with short copy Take a small break. Main compact two-by-two grid in row-major order2048,Snake,Sudoku,Make24. Each card has meaningful miniature game preview (number tiles, snakegrid, sudoku grid, arithmeticnumberchips), title, concise description, Play action. No arbitrary illustrated app badges, scoreboard social feed or currency. Equal card padding, consistent preview alignment.",
+      "status": "selected",
+      "file": "20-games-hub.png",
+      "prompt_file": "20-games-hub-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-e7fbd69d-9198-43cc-b9b9-039b72124f65.png",
+      "sha256": "962ef9eb8bdcd01c0243c66c23bcd46c98815e59a71b072cd988555779c15856",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "20-games-hub.prompt.txt",
+        "20-games-hub-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Four native game previews; invalid repeated Sudoku clues corrected to sparse valid clues.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Games \u00b7 hub",
+      "scenario": "standard",
+      "icon_ids": [
+        "games",
+        "back",
+        "play",
+        "pause",
+        "retry",
+        "undo",
+        "notes",
+        "erase",
+        "hint",
+        "swap"
+      ]
+    },
+    {
+      "id": "21-game-2048",
+      "group": "Games",
+      "orientation": "landscape",
+      "brief": "Landscape2048 detail, Games rail and back/title2048. Left bounded square4x4 gameboard with tiles2,4,8,16,32 in muted sage tones and empty cells. Right boundedtoolscolumn alignedtop board: Score128 and Best256 statcards; Undo,New game buttons and concise instruction Swipe to combine matching tiles. One pause control if needed but no other invented game modes. No floating media covering board.",
+      "status": "selected",
+      "file": "21-game-2048.png",
+      "prompt_file": "21-game-2048.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-d61c2da2-df54-4b54-b582-bf38755865d5.png",
+      "sha256": "35e17e8133c6096ae852b02dee1dbc757082c9890a8330e362652f2c8eb5e4be",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "21-game-2048.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Bounded4x4 board and existing Score/Best/Undo/New game.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "2048 \u00b7 board and tools",
+      "scenario": "standard",
+      "icon_ids": [
+        "games",
+        "back",
+        "play",
+        "pause",
+        "retry",
+        "undo",
+        "notes",
+        "erase",
+        "hint",
+        "swap"
+      ]
+    },
+    {
+      "id": "22-game-snake",
+      "group": "Games",
+      "orientation": "landscape",
+      "brief": "Landscape Snake detail with Games rail and back/title. Left bounded square subtlegrid with visible short sage snake and small amber food. State PAUSED overlay centered title Paused and separately spaced hint Tap to resume. Right Score8 Best24, Resume and New game controls, concise help Swipe to steer. Board and controls equal top baseline. No directional D-pad invented if gesture-controlled. No PiP over board.",
+      "status": "selected",
+      "file": "22-game-snake.png",
+      "prompt_file": "22-game-snake.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-b3ea55f5-c59c-4563-82e2-0fea4d795dbb.png",
+      "sha256": "c5eebc47a05f40b682a0640729b1a96a5c6ee5e8166242ef043e8fc1cdde464a",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "22-game-snake.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Paused overlay has distinct title/hint; side actions reuse existing board resume/restart gestures.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Snake \u00b7 paused",
+      "scenario": "standard",
+      "icon_ids": [
+        "games",
+        "back",
+        "play",
+        "pause",
+        "retry",
+        "undo",
+        "notes",
+        "erase",
+        "hint",
+        "swap"
+      ]
+    },
+    {
+      "id": "23-game-sudoku",
+      "group": "Games",
+      "orientation": "landscape",
+      "brief": "Landscape Sudoku detail with Games rail and back/title. Left bounded legible9x9 grid, stronger3x3 separators, sparse prefilled numbers, one selected cell pale sage. Right difficulty Easy, timer02:14, pause;3x3 keypad1-9; aligned Pencil Erase Hint icon+label buttons; New game below. All glyphs and labels fit, no overlap and no navigation over board. No extra Sudoku modes.",
+      "status": "selected",
+      "file": "23-game-sudoku.png",
+      "prompt_file": "23-game-sudoku-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-b74e45d9-863e-403e-b703-21621ba005f9.png",
+      "sha256": "db4c9fe19b36e3d1b05a22684472bd2246c19991b99a7cbdd61266af297db682",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "23-game-sudoku.prompt.txt",
+        "23-game-sudoku-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Exactly9x9 sparse valid grid and1\u20139 keypad; primary label corrected to New puzzle.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Sudoku \u00b7 board and keypad",
+      "scenario": "standard",
+      "icon_ids": [
+        "games",
+        "back",
+        "play",
+        "pause",
+        "retry",
+        "undo",
+        "notes",
+        "erase",
+        "hint",
+        "swap"
+      ]
+    },
+    {
+      "id": "24-game-make24",
+      "group": "Games",
+      "orientation": "landscape",
+      "brief": "Landscape Make24 detail with Games rail, back/title Make24. Left instruction Use all four numbers to make24., four equal number chips3,4,6,8; operations plus minus multiply divide, two selected numbers sage, a readable expression panel. Right Use every number once guidance, Undo Hint Skip and New game controls. Keep buttons compact aligned, no invented scoring, leaderboard or animated mascots.",
+      "status": "selected",
+      "file": "24-game-make24.png",
+      "prompt_file": "24-game-make24-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-3ba40419-9f41-49bb-b163-8607eb111889.png",
+      "sha256": "b7561ab343d0d80bb6b7e098e38ef936db5fcd9c5e790f7322a49c2c657c21ab",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "24-game-make24.prompt.txt",
+        "24-game-make24-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Swap restored and primary corrected to Next round; partial operand selection avoids false24 success.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Make 24 \u00b7 selected operands",
+      "scenario": "standard",
+      "icon_ids": [
+        "games",
+        "back",
+        "play",
+        "pause",
+        "retry",
+        "undo",
+        "notes",
+        "erase",
+        "hint",
+        "swap"
+      ]
+    },
+    {
+      "id": "25-breathe-setup",
+      "group": "Break",
+      "orientation": "landscape",
+      "brief": "Landscape Breathe with Breathe rail selected. Top mode buttons Breathe selected / Meditate. Left centered restrained sage breathing orb and label Calm \u00b74 in,6 out. Right setup column: pattern Calm \u00b74 in,6 out; Duration chips1 min3 min5 min with3 min selected; Sound cues switch; primary Start breathing button. Balanced columns same top baseline, no clutter or fake medical claims. Use h navigation icon.",
+      "status": "selected",
+      "file": "25-breathe-setup.png",
+      "prompt_file": "25-breathe-setup.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-4c31667b-070b-4e88-9c34-46c3e65ba978.png",
+      "sha256": "7a3a973a703d168bf5a291dd22563bcb8fbe53bef23d4f36d81d33138fc470d0",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "25-breathe-setup.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Setup visual/control panes, current pattern/duration/sound controls.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Breathe \u00b7 setup",
+      "scenario": "standard",
+      "icon_ids": [
+        "hush-mark",
+        "breath-ring",
+        "speaker",
+        "mute",
+        "play",
+        "pause",
+        "stop"
+      ]
+    },
+    {
+      "id": "26-breathe-active",
+      "group": "Break",
+      "orientation": "portrait",
+      "brief": "Portrait active Breathe, bottom navigation Search Games Breathe with Breathe selected and equal margins. Modes Breathe/ Meditate disabled during active session. Center breathing orb, exact phase Breathe in, small phase countdown3, session remaining02:18. Pause and End controls fully above bottom navigation, Sound cues state visible unobtrusively. No pattern/duration change controls implying active-session editing, no search field or fake wellnessmetrics.",
+      "status": "selected",
+      "file": "26-breathe-active.png",
+      "prompt_file": "26-breathe-active.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-496012a0-deb9-42f2-8733-813c73c076b2.png",
+      "sha256": "813f2e5efa2bcfac7b74d7ece688c8ab098813077e063b944c9908c03b0c89c4",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "26-breathe-active.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Active phase/countdown and reachable Pause/End above equal-margin bottomnav.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Breathe \u00b7 active portrait",
+      "scenario": "standard",
+      "icon_ids": [
+        "hush-mark",
+        "breath-ring",
+        "speaker",
+        "mute",
+        "play",
+        "pause",
+        "stop"
+      ]
+    },
+    {
+      "id": "27-meditate-paused",
+      "group": "Break",
+      "orientation": "landscape",
+      "brief": "Landscape meditation PAUSED. Breathe rail selected. Mode Breathe / Meditate selected, modes disabled during current session. Left quiet concentricring timer01:42 and label Paused. Right Duration3 min read-only, Sound cues switch, Resume primary and End secondary controls. Calm understatedlayout, no fake inhaleinstruction for meditation, no health analytics or unused giantcards.",
+      "status": "selected",
+      "file": "27-meditate-paused.png",
+      "prompt_file": "27-meditate-paused.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-b897670f-0b67-4435-81e2-2a5e2941365d.png",
+      "sha256": "76c39fe6a7d777953f5418c264020a23a72d6ed34389a47b8a18839aa1c55531",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "27-meditate-paused.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Paused meditation timer, locked duration/modes, Resume/End.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Meditate \u00b7 paused",
+      "scenario": "standard",
+      "icon_ids": [
+        "hush-mark",
+        "breath-ring",
+        "speaker",
+        "mute",
+        "play",
+        "pause",
+        "stop"
+      ]
+    },
+    {
+      "id": "28-downloads-populated",
+      "group": "Downloads",
+      "orientation": "landscape",
+      "brief": "Landscape Downloads with Search rail, header Downloads back overflow. Main bounded list four missions: Quiet evening study mix downloading42% with progress/speed,pause; Rainy night jazz paused with resume; Soft piano failed with retry/error explanation; Evening focus complete with file size, play and overflow. Typeglyphs video/audio consistent. Group status and controls beside each corresponding row, aligned columns, no huge decorativecards and no unsupportedcloudsync.",
+      "status": "selected",
+      "file": "28-downloads-populated.png",
+      "prompt_file": "28-downloads-populated.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-482d7f3a-6201-4f68-8f3f-694647009e1d.png",
+      "sha256": "f9723ef469c2150411362fa40182f4d6075450097e07fe34926d330eb17a5cfc",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "28-downloads-populated.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Downloading/Paused/Failed/Completed are separate labeled states, each with matching available action.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Downloads \u00b7 mixed mission states",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "download",
+        "file-video",
+        "file-audio",
+        "file-subtitle",
+        "pause",
+        "play",
+        "retry",
+        "error",
+        "check",
+        "folder",
+        "more-vertical"
+      ]
+    },
+    {
+      "id": "29-downloads-empty",
+      "group": "Downloads",
+      "orientation": "portrait",
+      "brief": "Portrait Downloads subpage with back header, no rail or bottom navigation. Center download glyph, exact heading Your downloads will appear here, copy Save a video for later using Download on the watch page. No fake mission, no disabled giantbutton, no PiP. Proper bounded typography with comfortable verticalspace.",
+      "status": "selected",
+      "file": "29-downloads-empty.png",
+      "prompt_file": "29-downloads-empty.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-6fc781ab-ec6a-4dcb-a7cf-0a73b8f60e44.png",
+      "sha256": "fb2916d882e11051d44bc9e50c3aafad6fabb732c97ddb73f04b3a2ba8c0fd90",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "29-downloads-empty.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Bounded empty guidance pointing to existing Watch Download action.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Downloads \u00b7 empty",
+      "scenario": "empty",
+      "icon_ids": [
+        "back",
+        "download",
+        "file-video",
+        "file-audio",
+        "file-subtitle",
+        "pause",
+        "play",
+        "retry",
+        "error",
+        "check",
+        "folder",
+        "more-vertical"
+      ]
+    },
+    {
+      "id": "30-settings-master-detail",
+      "group": "Settings",
+      "orientation": "landscape",
+      "brief": "Landscape Settings with Search rail. Header Settings back search. Left260dp category list Player selected, Gestures, Download, History and cache, Feed, Backup, Appearance, Account, Content, Advanced, each existingoutlineicon. Right preference pane heading Player: Start playback automatically with value Only on Wi-Fi; Auto-enqueue next stream switch; Music Player Mode switch; Sleep Timer15 min; Captions row. Readable labels summaries, switches in one alignedtrailingcolumn. No addedfakepreferences, no search inplayeritself this issettings.",
+      "status": "selected",
+      "file": "30-settings-master-detail.png",
+      "prompt_file": "30-settings-master-detail-v2.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-06157d22-3489-4f23-9ebe-f4a5639f8dca.png",
+      "sha256": "fa4bbaa51b026a07037a88af5182352528e05bb07da2ae84cb6eff163c9c8c78",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "30-settings-master-detail.prompt.txt",
+        "30-settings-master-detail-v2.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Clipped Advanced category corrected; all categories visible; local Backup glyph, aligned preferences.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Settings \u00b7 categories and preferences",
+      "scenario": "standard",
+      "icon_ids": [
+        "back",
+        "search",
+        "headphones",
+        "gestures",
+        "download",
+        "history",
+        "feed",
+        "backup",
+        "appearance",
+        "profile",
+        "globe",
+        "settings"
+      ]
+    },
+    {
+      "id": "31-split-home-keyboard",
+      "group": "Responsive",
+      "orientation": "compact",
+      "brief": "Narrow600x900dp2:3 app-window Home with keyboard open, as if Android split-screen. Singlecolumn no rail. Compact Hush header privacy overflow, reduced hero with exacttagline YouTube, with room to pause., focused Search YouTube field containing jazz, realrecentchips optionalabovekeyboard. DarkQWERTYkeyboard lowerthird. Bottomnavigation hidden whilekeyboardvisible. Visible search and cursor, hero scrolls naturally, no floatingvideo overkeyboard. No second app or hardware frame inimage.",
+      "status": "selected",
+      "file": "31-split-home-keyboard.png",
+      "prompt_file": "31-split-home-keyboard.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-326858e5-feb3-4442-8e95-ae69f8816d88.png",
+      "sha256": "f02157d5c7cec1e0d3bba9b08e002a9ac55e078f5c769caba0d0c7facebbebfe",
+      "pixel_dimensions": [
+        1024,
+        1536
+      ],
+      "prompt_history": [
+        "31-split-home-keyboard.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "600dp window reflow and illustrative IME; query remains visible, bar hidden, scrolling explicit.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 narrow window with keyboard",
+      "scenario": "keyboard",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "history",
+        "incognito",
+        "more-vertical",
+        "hush-mark",
+        "games"
+      ]
+    },
+    {
+      "id": "32-history-large-text",
+      "group": "Responsive",
+      "orientation": "portrait",
+      "brief": "Portrait800x1280dp History at200percent text accessibility. No rail/bottomnavigation. Larger readable back/title History; historyheader privacyandtabs scrollWITH records rather than fixed hugeheader. Show scrolledstate with tabs Watch history / Search history fullytwo-lines no cutoff and a fullwidth16:9thumbnail followedby large wrappingtitle Quiet evening study mix, uploader Lofi Studio and48dp overflow. One complete media row andstartnextrow, safeedges, no microscopicsideby-side text. Demonstrate readable reflow, not merely enlargingwhole screenshot.",
+      "status": "selected",
+      "file": "32-history-large-text.png",
+      "prompt_file": "32-history-large-text.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-83e3833c-cb07-48dd-b8f4-9c9f2da84e6e.png",
+      "sha256": "5887565a9ac1c769e5c63651985ebb3983220be0012e00622879603ff132b2fb",
+      "pixel_dimensions": [
+        992,
+        1586
+      ],
+      "prompt_history": [
+        "32-history-large-text.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "200% text reflow with scrollable header/tabs and stacked media; next thumbnail indicates scrolling.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "History \u00b7 200% text",
+      "scenario": "large-text",
+      "icon_ids": [
+        "back",
+        "search",
+        "close",
+        "history",
+        "incognito",
+        "more-vertical",
+        "hush-mark",
+        "games"
+      ]
+    },
+    {
+      "id": "33-home-landscape-light",
+      "group": "Light",
+      "orientation": "landscape",
+      "brief": "LIGHT theme version of selected landscape idlehome. Preserve exactlayout, rail Search selected, tagline, search,chips andshortcuts. Warmivory#F6F3EBbackground, tonal#EDEAE2surfaces, ink#1C2922, sage#DDEBE0selectedsurface. No darkgradient, no changednavigationorcontent. No playback. Complete16:10canvas.",
+      "status": "selected",
+      "file": "33-home-landscape-light.png",
+      "prompt_file": "33-home-landscape-light.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-29550ea1-931e-4e20-be20-b6bb94368be3.png",
+      "sha256": "6e62ac4c80abb45f2a1f721154e1d521da7d335a1f99dd6d5964259f381438aa",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "33-home-landscape-light.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Selected Home structure retained with warm light colors.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Home \u00b7 landscape light",
+      "scenario": "light-theme",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "history",
+        "bookmark",
+        "download",
+        "breath-ring",
+        "back",
+        "play",
+        "pause",
+        "expand",
+        "headphones",
+        "queue",
+        "more-horizontal"
+      ]
+    },
+    {
+      "id": "34-watch-landscape-light",
+      "group": "Light",
+      "orientation": "landscape",
+      "brief": "LIGHT theme version of selected landscape expandedwatch. Preserveplayerleft, related/queue pane right, actions andreadablemetadata. Warmivory#F6F3EBbackground, ink#1C2922, sagehighlights. No rail,bottomnavigation,search orPiP. Singlevideo warmstudyscene remainscolored, full16:10canvas.",
+      "status": "selected",
+      "file": "34-watch-landscape-light.png",
+      "prompt_file": "34-watch-landscape-light.prompt.txt",
+      "source": "/Users/vidyasagar/.codex/generated_images/01a0f196-a16d-7200-95a5-338f9cee00af/exec-78bf527a-bd64-4d52-8549-4cf1acc9a1e2.png",
+      "sha256": "5f481d1b18ddcc7254175e5666bfe3fac0d5b32f5820da0a3166069c2dba09e4",
+      "pixel_dimensions": [
+        1586,
+        992
+      ],
+      "prompt_history": [
+        "34-watch-landscape-light.prompt.txt"
+      ],
+      "review": {
+        "status": "visually reviewed",
+        "notes": "Selected Watch structure retained with light surfaces and single full-color video.",
+        "implementation_authority": "TABLET_DESIGN_PLAN.md numeric rules and existing icon PNGs"
+      },
+      "title": "Watch \u00b7 landscape light",
+      "scenario": "light-theme",
+      "icon_ids": [
+        "hush-mark",
+        "search",
+        "games",
+        "incognito",
+        "history",
+        "bookmark",
+        "download",
+        "breath-ring",
+        "back",
+        "play",
+        "pause",
+        "expand",
+        "headphones",
+        "queue",
+        "more-horizontal"
+      ]
+    }
+  ],
+  "generation_mode": "built-in imagegen; one separately specified screen per call",
+  "selected_count": 34,
+  "icon_source": "../hush-icon-system/manifest.json",
+  "runtime_validation": {
+    "avd": "Hush_Tablet_API35_Headless",
+    "headless": true,
+    "serial": "emulator-5558",
+    "density": 320,
+    "landscape_dp": [
+      1280,
+      800
+    ],
+    "portrait_dp": [
+      800,
+      1280
+    ],
+    "narrow_dp": [
+      600,
+      900
+    ],
+    "navigation_tests": "landscape4, portrait4, large-text1, narrow1 passed",
+    "playback_test": "failed: real YouTube stream did not start before PiP assertions"
+  }
+}

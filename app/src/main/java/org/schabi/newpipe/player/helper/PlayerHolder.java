@@ -89,6 +89,10 @@ public final class PlayerHolder {
         return player == null ? null : player.getPlayQueue();
     }
 
+    public void selectQueueItem(final org.schabi.newpipe.player.playqueue.PlayQueueItem item) {
+        if (player != null) player.selectQueueItem(item);
+    }
+
     public void rebindHistory() {
         if (player != null) {
             player.rebindHistory();

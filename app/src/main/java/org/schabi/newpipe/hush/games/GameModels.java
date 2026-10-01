@@ -119,6 +119,8 @@ public final class GameModels {
             return false;
         }
 
+        public boolean canUndo() { return undoBoard != null; }
+
         public boolean undo() {
             if (undoBoard == null) return false;
             System.arraycopy(undoBoard, 0, board, 0, 16);
@@ -169,7 +171,8 @@ public final class GameModels {
         public static final int SIZE = 18;
         public final ArrayDeque<Integer> body = new ArrayDeque<>();
         public int direction = 1; // 0 up, 1 right, 2 down, 3 left
-        private boolean turnQueued;
+        private final ArrayDeque<Integer> turns = new ArrayDeque<>(2);
+        public boolean won;
         public int nextDirection = 1;
         public int food;
         public int score;
@@ -190,7 +193,8 @@ public final class GameModels {
             body.add(9 * SIZE + 9);
             direction = 1;
             nextDirection = 1;
-            turnQueued = false;
+            turns.clear();
+            won = false;
             score = 0;
             alive = true;
             paused = true;
@@ -198,16 +202,17 @@ public final class GameModels {
         }
 
         public void turn(final int chosen) {
-            if (turnQueued || chosen < 0 || chosen > 3 || chosen == direction
-                    || (chosen + 2) % 4 == direction) return;
-            nextDirection = chosen;
-            turnQueued = true;
+            int previous = turns.isEmpty() ? direction : turns.peekLast();
+            if (!alive || turns.size() >= 2 || chosen < 0 || chosen > 3
+                    || chosen == previous || (chosen + 2) % 4 == previous) return;
+            turns.addLast(chosen);
+            nextDirection = turns.peekFirst();
         }
 
         public boolean tick() {
             if (!alive || paused) return false;
-            direction = nextDirection;
-            turnQueued = false;
+            direction = turns.isEmpty() ? nextDirection : turns.removeFirst();
+            nextDirection = turns.isEmpty() ? direction : turns.peekFirst();
             final int head = body.peekLast();
             final int row = head / SIZE + (direction == 0 ? -1 : direction == 2 ? 1 : 0);
             final int col = head % SIZE + (direction == 1 ? 1 : direction == 3 ? -1 : 0);
@@ -229,6 +234,7 @@ public final class GameModels {
                 score++;
                 best = Math.max(best, score);
                 if (body.size() == SIZE * SIZE) {
+                    won = true;
                     alive = false;
                     paused = true;
                 } else {
@@ -241,9 +247,14 @@ public final class GameModels {
         }
 
         private void placeFood() {
-            final List<Integer> free = new ArrayList<>();
-            for (int i = 0; i < SIZE * SIZE; i++) if (!body.contains(i)) free.add(i);
-            if (!free.isEmpty()) food = free.get(random.nextInt(free.size()));
+            boolean[] occupied = new boolean[SIZE * SIZE];
+            for (int cell : body) occupied[cell] = true;
+            int free = SIZE * SIZE - body.size();
+            if (free <= 0) return;
+            int chosen = random.nextInt(free);
+            for (int cell = 0; cell < occupied.length; cell++) {
+                if (!occupied[cell] && chosen-- == 0) {food = cell;return;}
+            }
         }
 
         public JSONObject save() {
@@ -254,6 +265,10 @@ public final class GameModels {
                 state.put("body", cells);
                 state.put("direction", direction);
                 state.put("next", nextDirection);
+                JSONArray pending = new JSONArray();
+                for (int turn : turns) pending.put(turn);
+                state.put("turns", pending);
+                state.put("won", won);
                 state.put("food", food);
                 state.put("score", score);
                 state.put("best", best);
@@ -263,16 +278,32 @@ public final class GameModels {
         }
 
         public void load(final JSONObject state) {
+            best = Math.max(best, Math.max(0,state.optInt("best")));
             final JSONArray cells = state.optJSONArray("body");
-            if (cells == null || cells.length() < 3) return;
+            if (cells == null || cells.length() < 3 || cells.length() > SIZE * SIZE) return;
+            boolean[] occupied = new boolean[SIZE * SIZE];
+            int previous = -1;
+            for (int i = 0; i < cells.length(); i++) {
+                int cell = cells.optInt(i,-1);
+                if (cell < 0 || cell >= occupied.length || occupied[cell]
+                        || previous >= 0 && Math.abs(cell / SIZE - previous / SIZE)
+                        + Math.abs(cell % SIZE - previous % SIZE) != 1) return;
+                occupied[cell] = true;previous = cell;
+            }
+            int savedDirection = state.optInt("direction",1);
+            if (savedDirection < 0 || savedDirection > 3) return;
             body.clear();
             for (int i = 0; i < cells.length(); i++) body.add(cells.optInt(i));
-            direction = state.optInt("direction", 1);
-            nextDirection = state.optInt("next", direction);
-            food = state.optInt("food");
-            score = state.optInt("score");
-            best = state.optInt("best");
-            alive = state.optBoolean("alive", true);
+            direction = savedDirection;nextDirection = direction;turns.clear();
+            won = body.size() == SIZE * SIZE;
+            alive = !won && state.optBoolean("alive",true);
+            final JSONArray pending = state.optJSONArray("turns");
+            if (pending != null) {
+                for (int i = 0; i < Math.min(2,pending.length()); i++) turn(pending.optInt(i,-1));
+            } else turn(state.optInt("next",direction));
+            food = state.optInt("food",-1);
+            if (!won && (food < 0 || food >= SIZE * SIZE || occupied[food])) placeFood();
+            score = Math.max(0,state.optInt("score"));best = Math.max(best,score);
             paused = true;
         }
     }
@@ -488,6 +519,8 @@ public final class GameModels {
             solved = terms.size() == 1 && terms.get(0).num == 24 * terms.get(0).den;
             return true;
         }
+
+        public boolean canUndo() { return !history.isEmpty(); }
 
         public boolean undo() {
             if (history.isEmpty()) return false;

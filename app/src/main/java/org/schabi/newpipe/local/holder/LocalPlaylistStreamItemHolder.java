@@ -46,13 +46,16 @@ public class LocalPlaylistStreamItemHolder extends LocalItemHolder {
 
     public LocalPlaylistStreamItemHolder(final LocalItemBuilder infoItemBuilder,
                                          final ViewGroup parent) {
-        this(infoItemBuilder, R.layout.list_stream_playlist_item, parent);
+        this(infoItemBuilder, parent.getResources().getConfiguration().fontScale > 1.3f
+                || parent.getResources().getConfiguration().screenWidthDp < 360
+                ? R.layout.hush_accessible_playlist_item : R.layout.list_stream_playlist_item, parent);
     }
 
     @Override
     public void updateFromItem(final LocalItem localItem,
                                final HistoryRecordManager historyRecordManager,
                                final DateTimeFormatter dateTimeFormatter) {
+        org.schabi.newpipe.hush.ui.HushIcons.apply(itemView);
         if (!(localItem instanceof PlaylistStreamEntry)) {
             return;
         }

@@ -38,6 +38,24 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
                               @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
         setDivider(null);
+        getListView().setClipToPadding(false);
+        final androidx.recyclerview.widget.RecyclerView list = getListView();
+        list.addItemDecoration(new androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull final android.graphics.Rect outRect,
+                                       @NonNull final View view,
+                                       @NonNull final androidx.recyclerview.widget.RecyclerView parent,
+                                       @NonNull final androidx.recyclerview.widget.RecyclerView.State state) {
+                // Preference rows supply their own 16dp inset; add only the missing gutter.
+                final int side = Math.max(0,
+                        org.schabi.newpipe.hush.ui.HushUi.contentSide(rootView, rootView.getWidth())
+                        - org.schabi.newpipe.hush.ui.HushUi.dp(rootView.getContext(), 16));
+                outRect.set(side, 0, side, 0);
+            }
+        });
+        rootView.addOnLayoutChangeListener((view, l, t, r, b, ol, ot, or, ob) -> {
+            if (r - l != or - ol) list.invalidateItemDecorations();
+        });
         ThemeHelper.setTitleToAppCompatActivity(getActivity(), getPreferenceScreen().getTitle());
     }
 

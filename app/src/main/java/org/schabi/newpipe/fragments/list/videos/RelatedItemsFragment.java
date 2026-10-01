@@ -59,6 +59,12 @@ public class RelatedItemsFragment extends BaseListInfoFragment<InfoItem, Related
         return inflater.inflate(R.layout.fragment_related_items, container, false);
     }
 
+    @Override protected void initViews(final View rootView, final Bundle savedInstanceState) {
+        super.initViews(rootView,savedInstanceState);
+        org.schabi.newpipe.hush.ui.HushUi.bindContentWidth(rootView);
+        infoListAdapter.setPageHasGutter(true);
+    }
+
     @Override
     public void onDestroyView() {
         headerBinding = null;

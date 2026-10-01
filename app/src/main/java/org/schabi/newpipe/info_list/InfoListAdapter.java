@@ -65,6 +65,8 @@ import static org.schabi.newpipe.util.ThemeHelper.shouldUseExperimentalNewUi;
  */
 
 public class InfoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private boolean pageHasGutter;
+    public void setPageHasGutter(boolean value) { pageHasGutter=value; }
     private static final String TAG = InfoListAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -358,10 +360,30 @@ public class InfoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     + "holder = [" + holder.getClass().getSimpleName() + "], "
                     + "position = [" + position + "]");
         }
+        if (pageHasGutter && holder instanceof InfoItemHolder) {
+            View row=holder.itemView;
+            row.setPadding(0,row.getPaddingTop(),0,row.getPaddingBottom());
+        }
         if (holder instanceof InfoItemHolder) {
             ((InfoItemHolder) holder).updateFromItem(
                     // If header is present, offset the items by -1
                     infoItemList.get(hasHeader() ? position - 1 : position), recordManager);
+        }
+    }
+
+    @Override public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (!pageHasGutter || !(holder instanceof InfoItemHolder)) return;
+        View row=holder.itemView;
+        if (row.getParent() instanceof RecyclerView
+                && ((RecyclerView)row.getParent()).getLayoutManager() instanceof GridLayoutManager
+                && row.getLayoutParams() instanceof GridLayoutManager.LayoutParams) {
+            var manager=(GridLayoutManager)((RecyclerView)row.getParent()).getLayoutManager();
+            var lp=(GridLayoutManager.LayoutParams)row.getLayoutParams();
+            int gap=org.schabi.newpipe.hush.ui.HushUi.dp(row.getContext(),6);
+            int start=lp.getSpanIndex()==0?0:gap;
+            int end=lp.getSpanIndex()+lp.getSpanSize()==manager.getSpanCount()?0:gap;
+            row.setPaddingRelative(start,row.getPaddingTop(),end,row.getPaddingBottom());
         }
     }
 

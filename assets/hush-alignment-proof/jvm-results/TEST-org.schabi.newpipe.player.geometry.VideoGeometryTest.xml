@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.schabi.newpipe.player.geometry.VideoGeometryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-09-30T15:07:11.981Z" hostname="Vidyas-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="wideVideoFitsWithoutStretch" classname="org.schabi.newpipe.player.geometry.VideoGeometryTest" time="0.0"/>
+  <testcase name="pixelRatioRotationAndInvalidMetadataAreHandled" classname="org.schabi.newpipe.player.geometry.VideoGeometryTest" time="0.0"/>
+  <testcase name="verticalVideoFitsAndUniformlyCrops" classname="org.schabi.newpipe.player.geometry.VideoGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -20,6 +20,10 @@ final class GameBoards {
     abstract static class Square extends View {
         final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
         final int ink, muted, accent, card, surface, border;
+        private final RectF drawingBounds = new RectF();
+        private final Path clippingPath = new Path();
+        private int clipWidth=-1,clipHeight=-1;
+        private float clipRadius=-1;
         private ValueAnimator celebration;
         private float celebrationProgress = 1;
         void celebrate() {
@@ -68,23 +72,34 @@ final class GameBoards {
         /** Keeps strokes and fills inside the view so a border centered on the edge is not clipped. */
         RectF inner(float stroke) {
             float inset = Math.max(1f, stroke);
-            return new RectF(inset, inset, Math.max(inset + 1, getWidth() - inset),
+            drawingBounds.set(inset, inset, Math.max(inset + 1, getWidth() - inset),
                     Math.max(inset + 1, getHeight() - inset));
+            return drawingBounds;
         }
         void clipRound(Canvas c, float radius) {
             RectF bounds = inner(2f);
-            Path path = new Path();
-            path.addRoundRect(bounds, radius, radius, Path.Direction.CW);
+            if(clipWidth!=getWidth()||clipHeight!=getHeight()||clipRadius!=radius){
+                clipWidth=getWidth();clipHeight=getHeight();clipRadius=radius;
+                clippingPath.reset();clippingPath.addRoundRect(bounds,radius,radius,Path.Direction.CW);
+            }
             c.save();
-            c.clipPath(path);
+            c.clipPath(clippingPath);
         }
         void overlay(Canvas c,String title,String hint) {
             paint.setStyle(Paint.Style.FILL);paint.setColor((surface&0xffffff)|0xda000000);
             c.drawRoundRect(0,0,getWidth(),getHeight(),HushUi.dp(getContext(),20),HushUi.dp(getContext(),20),paint);
             paint.setColor(ink);paint.setTextAlign(Paint.Align.CENTER);paint.setTextSize(getWidth()*.065f);
-            c.drawText(title,getWidth()/2f,getHeight()/2f-8,paint);
+            float titleHeight=paint.descent()-paint.ascent();
+            float titleAscent=paint.ascent();
+            paint.setTextSize(getWidth()*.037f);
+            float hintHeight=paint.descent()-paint.ascent();
+            float hintAscent=paint.ascent();
+            float gap=HushUi.dp(getContext(),8);
+            float top=(getHeight()-titleHeight-gap-hintHeight)/2f;
+            paint.setTextSize(getWidth()*.065f);
+            c.drawText(title,getWidth()/2f,top-titleAscent,paint);
             paint.setColor(muted);paint.setTextSize(getWidth()*.037f);
-            c.drawText(hint,getWidth()/2f,getHeight()/2f+25,paint);
+            c.drawText(hint,getWidth()/2f,top+titleHeight+gap-hintAscent,paint);
         }
     }
     static final class TwentyBoard extends Square {
@@ -92,14 +107,14 @@ final class GameBoards {
         GameModels.Twenty48.MoveResult move;
         ValueAnimator animator;
         float progress=1;
-        Runnable after;
+        Runnable interrupted;
         TwentyBoard(Context c,GameModels.Twenty48 model){super(c);this.model=model;setContentDescription("2048 board. Swipe to move tiles.");}
         boolean animating(){return animator!=null;}
         void settle(){if(animator!=null){ValueAnimator old=animator;animator=null;old.cancel();}move=null;progress=1;invalidate();}
         void animate(GameModels.Twenty48.MoveResult result,Runnable finished){
-            settle();move=result;after=finished;
+            settle();move=result;
             if(!HushUi.motion(getContext())){move=null;invalidate();finished.run();return;}
-            progress=0;animator=ValueAnimator.ofFloat(0,1);animator.setDuration(350);
+            progress=0;animator=ValueAnimator.ofFloat(0,1);animator.setDuration(200);
             animator.setInterpolator(new android.view.animation.LinearInterpolator());
             animator.addUpdateListener(a->{progress=(float)a.getAnimatedValue();invalidate();});
             animator.addListener(new android.animation.AnimatorListenerAdapter(){
@@ -108,15 +123,15 @@ final class GameBoards {
                 }
             });animator.start();
         }
-        @Override protected void onSizeChanged(int w,int h,int oldW,int oldH){super.onSizeChanged(w,h,oldW,oldH);settle();}
+        @Override protected void onSizeChanged(int w,int h,int oldW,int oldH){super.onSizeChanged(w,h,oldW,oldH);settle();if(interrupted!=null)interrupted.run();}
         @Override protected void onDetachedFromWindow(){settle();super.onDetachedFromWindow();}
         @Override protected void onDraw(Canvas c){
             clipRound(c, 20);
             float cell=getWidth()/4f;paint.setStyle(Paint.Style.FILL);paint.setColor(card);
             c.drawRect(0,0,getWidth(),getHeight(),paint);
             for(int i=0;i<16;i++)tile(c,i%4,i/4,0,cell,1);
-            if(move!=null&&progress<130f/350){
-                float fraction=progress*350/130;
+            if(move!=null&&progress<100f/200){
+                float fraction=progress*200/100;
                 for(GameModels.Twenty48.TileMotion motion:move.motions){
                     float x=(motion.from%4)+(motion.to%4-motion.from%4)*fraction;
                     float y=(motion.from/4)+(motion.to/4-motion.from/4)*fraction;
@@ -127,10 +142,10 @@ final class GameBoards {
                     int value=model.board[i];if(value==0)continue;
                     float scale=1;
                     if(move!=null){
-                        if(i==move.spawnIndex){if(progress<240f/350)continue;scale=Math.min(1,(progress*350-240)/110);}
-                        else if(progress<240f/350){
+                        if(i==move.spawnIndex){if(progress<145f/200)continue;scale=Math.min(1,(progress*200-145)/55);}
+                        else if(progress<145f/200){
                             boolean merged=false;for(GameModels.Twenty48.TileMotion motion:move.motions)if(motion.to==i&&motion.merged)merged=true;
-                            if(merged)scale=1+.12f*(float)Math.sin(Math.PI*(progress*350-130)/110);
+                            if(merged)scale=1+.12f*(float)Math.sin(Math.PI*(progress*200-100)/45);
                         }
                     }
                     tile(c,i%4,i/4,value,cell,scale);
@@ -152,37 +167,71 @@ final class GameBoards {
     }
     static final class SnakeBoard extends Square {
         final GameModels.Snake model;
-        List<Integer> previous=new ArrayList<>();
-        long movedAt, foodAt;
+        private final int[] previous = new int[GameModels.Snake.SIZE * GameModels.Snake.SIZE];
+        private final int[] current = new int[previous.length];
+        private final Path grid = new Path();
+        private int length, previousLength;
+        private long foodAt;
+        private boolean motion;
+        float progress=1;
         String title="",hint="";
         float hold;
-        SnakeBoard(Context c,GameModels.Snake model){super(c);this.model=model;setContentDescription("Snake. Swipe to steer, tap to pause or resume, hold while paused to restart.");}
-        void beforeTick(){previous=new ArrayList<>(model.body);}
-        void afterTick(boolean ate){movedAt=SystemClock.elapsedRealtime();if(ate)foodAt=movedAt;invalidate();}
-        @Override protected void onDraw(Canvas c){
-            clipRound(c, 20);
-            paint.setStyle(Paint.Style.FILL);paint.setColor(card);c.drawRect(0,0,getWidth(),getHeight(),paint);
-            RectF bounds=inner(2f);
-            float cell=bounds.width()/(float)GameModels.Snake.SIZE;
-            paint.setColor(border);paint.setStrokeWidth(1);
+        SnakeBoard(Context c,GameModels.Snake model){
+            super(c);this.model=model;snap();
+            setContentDescription("Snake. Swipe to steer, tap to pause or resume, hold while paused to restart.");
+        }
+        void snap(){
+            motion=HushUi.motion(getContext());
+            length=0;for(int cell:model.body)current[length++]=cell;
+            System.arraycopy(current,0,previous,0,length);previousLength=length;progress=1;invalidate();
+        }
+        void beforeTick(){
+            System.arraycopy(current,0,previous,0,length);previousLength=length;
+        }
+        void afterTick(boolean ate){
+            length=0;for(int cell:model.body)current[length++]=cell;
+            // Growth adds a head, not a teleporting extra segment: extend the old tail path.
+            if(length>previousLength){
+                System.arraycopy(previous,0,previous,1,previousLength);
+                previousLength=length;
+            }
+            progress=0;if(ate)foodAt=SystemClock.elapsedRealtime();
+        }
+        @Override protected void onSizeChanged(int w,int h,int oldW,int oldH){
+            super.onSizeChanged(w,h,oldW,oldH);
+            grid.reset();RectF bounds=inner(2f);float cell=bounds.width()/GameModels.Snake.SIZE;
             for(int i=1;i<GameModels.Snake.SIZE;i++){
-                c.drawLine(bounds.left+i*cell,bounds.top,bounds.left+i*cell,bounds.bottom,paint);
-                c.drawLine(bounds.left,bounds.top+i*cell,bounds.right,bounds.top+i*cell,paint);}
-            float foodScale=HushUi.motion(getContext())?1+.25f*(1-Math.min(1,(SystemClock.elapsedRealtime()-foodAt)/160f)):1;
-            paint.setColor(0xffcf9e68);c.drawCircle(bounds.left+(model.food%GameModels.Snake.SIZE+.5f)*cell,
-                    bounds.top+(model.food/GameModels.Snake.SIZE+.5f)*cell,cell*.34f*foodScale,paint);
-            float fraction=!model.alive||model.paused||!HushUi.motion(getContext())?1:Math.min(1,(SystemClock.elapsedRealtime()-movedAt)/170f);
-            List<Integer> body=new ArrayList<>(model.body);paint.setColor(accent);
-            for(int i=0;i<body.size();i++){
-                int position=body.get(i);float x=position%GameModels.Snake.SIZE,y=position/GameModels.Snake.SIZE;
-                if(i<previous.size()&&fraction<1){int old=previous.get(i);x=old%GameModels.Snake.SIZE+(x-old%GameModels.Snake.SIZE)*fraction;
-                    y=old/GameModels.Snake.SIZE+(y-old/GameModels.Snake.SIZE)*fraction;}
-                c.drawRoundRect(new RectF(bounds.left+x*cell+1,bounds.top+y*cell+1,bounds.left+(x+1)*cell-1,bounds.top+(y+1)*cell-1),cell*.24f,cell*.24f,paint);
+                grid.moveTo(bounds.left+i*cell,bounds.top);grid.lineTo(bounds.left+i*cell,bounds.bottom);
+                grid.moveTo(bounds.left,bounds.top+i*cell);grid.lineTo(bounds.right,bounds.top+i*cell);
+            }
+        }
+        @Override protected void onDraw(Canvas c){
+            clipRound(c,20);
+            paint.setStyle(Paint.Style.FILL);paint.setAlpha(255);
+            paint.setColor(card);c.drawRect(0,0,getWidth(),getHeight(),paint);
+            paint.setColor(border);paint.setStrokeWidth(1);paint.setStyle(Paint.Style.STROKE);c.drawPath(grid,paint);
+            paint.setStyle(Paint.Style.FILL);
+            RectF bounds=inner(2f);float cell=bounds.width()/GameModels.Snake.SIZE;
+            float foodScale=motion?1+.25f*(1-Math.min(1,(SystemClock.elapsedRealtime()-foodAt)/160f)):1;
+            if(!model.won){
+                paint.setColor(0xffcf9e68);c.drawCircle(bounds.left+(model.food%GameModels.Snake.SIZE+.5f)*cell,
+                        bounds.top+(model.food/GameModels.Snake.SIZE+.5f)*cell,cell*.34f*foodScale,paint);
+            }
+            float fraction=!model.alive||model.paused||!motion?1:progress;
+            paint.setColor(accent);
+            for(int i=0;i<length;i++){
+                int position=current[i];float x=position%GameModels.Snake.SIZE,y=position/GameModels.Snake.SIZE;
+                if(i<previousLength&&fraction<1){
+                    int old=previous[i];x=old%GameModels.Snake.SIZE+(x-old%GameModels.Snake.SIZE)*fraction;
+                    y=old/GameModels.Snake.SIZE+(y-old/GameModels.Snake.SIZE)*fraction;
+                }
+                c.drawRoundRect(bounds.left+x*cell+1,bounds.top+y*cell+1,
+                        bounds.left+(x+1)*cell-1,bounds.top+(y+1)*cell-1,cell*.24f,cell*.24f,paint);
             }
             if(model.paused||!model.alive){overlay(c,title,hint);
-                if(hold>0){paint.setColor(accent);c.drawRect(getWidth()*.2f,getHeight()*.65f,getWidth()*(.2f+.6f*hold),getHeight()*.65f+6,paint);}}
+                if(hold>0){paint.setColor(accent);c.drawRect(getWidth()*.2f,getHeight()*.65f,
+                        getWidth()*(.2f+.6f*hold),getHeight()*.65f+6,paint);}}
             c.restore();
-            if(!model.paused&&model.alive&&fraction<1)postInvalidateOnAnimation();
         }
     }
     static final class SudokuBoard extends Square {

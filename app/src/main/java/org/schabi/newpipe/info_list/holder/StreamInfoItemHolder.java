@@ -75,6 +75,7 @@ public class StreamInfoItemHolder extends InfoItemHolder {
     @Override
     public void updateFromItem(final InfoItem infoItem,
                                final HistoryRecordManager historyRecordManager) {
+        org.schabi.newpipe.hush.ui.HushIcons.apply(itemView);
         if (!(infoItem instanceof StreamInfoItem)) {
             return;
         }

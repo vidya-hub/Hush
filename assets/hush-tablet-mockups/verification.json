@@ -1,0 +1,18 @@
+{
+  "selected_mockups": 34,
+  "retained_icons": 70,
+  "baseline_screenshots": 146,
+  "links_and_dimensions_errors": [],
+  "apk_sha256": "38780edf958f546f3048d529248e3aaadee7aa4d5d9373d3934bff54c86ed263",
+  "git_head": "582f7c9b13f6a7962867471af439c658ae2dfb40",
+  "runtime_playback": "not verified: stream did not start",
+  "gallery_browser_checks": {
+    "selected_images_loaded": 34,
+    "keyboard_filter_count": 3,
+    "home_filter_count": 4,
+    "reset_count": 34,
+    "enlarge_and_close": "passed"
+  },
+  "headless_boot_completed": true,
+  "headless_runbook": "HEADLESS_EMULATOR.md"
+}

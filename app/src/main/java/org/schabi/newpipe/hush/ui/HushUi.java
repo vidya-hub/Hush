@@ -19,17 +19,32 @@ import com.google.android.material.button.MaterialButton;
 /** Shared presentation primitives. Decisions use the measured app window, never a device model. */
 public final class HushUi {
     private HushUi() { }
-    /** Centers a page column at 1120dp and applies the 20/24/32dp window gutters. */
+    public static int contentSide(View view, int width) {
+        int windowDp = Math.round(width / view.getResources().getDisplayMetrics().density);
+        int gutter = dp(view.getContext(), windowDp >= 840 ? 32 : windowDp >= 600 ? 24 : 22);
+        return Math.max(gutter, (width - dp(view.getContext(), 1120)) / 2);
+    }
+    /** Centers a page column at 1120dp and applies the 22/24/32dp window gutters. */
     public static void bindContentWidth(View root) {
+        bindContentWidth(root, 1120, 1120);
+    }
+    /** Shared page edges for compact columns and packed tablet panes. */
+    public static void bindContentWidth(View root, int compactMaxDp, int expandedMaxDp) {
         root.addOnLayoutChangeListener((view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             int width = right - left;
             if (width <= 0) return;
-            float density = view.getResources().getDisplayMetrics().density;
-            int dpWidth = Math.round(width / density);
-            int gutterDp = dpWidth >= 840 ? 32 : dpWidth >= 600 ? 24 : 20;
-            int side = Math.max(Math.round(gutterDp * density), (width - Math.round(1120 * density)) / 2);
+            int gutter = contentSide(view, width);
+            boolean wide = width >= dp(view.getContext(), 904)
+                    && view.getResources().getConfiguration().fontScale < 1.5f;
+            int side = Math.max(gutter, (width - dp(view.getContext(),
+                    wide ? expandedMaxDp : compactMaxDp)) / 2);
             if (view.getPaddingLeft() != side || view.getPaddingRight() != side) {
-                view.setPadding(side, view.getPaddingTop(), side, view.getPaddingBottom());
+                // Updating padding during layout can clip children before they are remeasured.
+                view.post(() -> {
+                    if (view.getWidth() == width && (view.getPaddingLeft() != side
+                            || view.getPaddingRight() != side))
+                        view.setPadding(side, view.getPaddingTop(), side, view.getPaddingBottom());
+                });
             }
         });
     }
@@ -93,14 +108,16 @@ public final class HushUi {
     }
     /** Centers content and bounds it without hardcoded tablet resource buckets. */
     public static final class Bounded extends FrameLayout {
-        private final int maxDp;
+        private int maxDp;
+        private boolean fillPane;
+        public void setMaxDp(int value){if(maxDp!=value){maxDp=value;requestLayout();}}
         public Bounded(Context c, View content, int maxDp) {
             super(c); this.maxDp = maxDp;
             addView(content, new FrameLayout.LayoutParams(-1, -2, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
         }
         @Override protected void onMeasure(int w, int h) {
             int outer = MeasureSpec.getSize(w);
-            int available = Math.min(outer, dp(getContext(), maxDp));
+            int available = fillPane ? outer : Math.min(outer, dp(getContext(), maxDp));
             View child = getChildAt(0);
             child.measure(MeasureSpec.makeMeasureSpec(available, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
@@ -111,8 +128,11 @@ public final class HushUi {
     public static final class Panes extends LinearLayout {
         private boolean expanded;
         private int breakpointDp = 840;
+        private int gapDp = 24;
+        public void setGapDp(int value) { gapDp=value; previousWidth=-1; requestLayout(); }
         public void setBreakpointDp(int value) { breakpointDp=value; previousWidth=-1; requestLayout(); }
         private int previousWidth = -1;
+        private int previousFirstMax = -1, previousSecondMax = -1;
         public Panes(Context c, View first, View second) {
             super(c); setOrientation(VERTICAL); setGravity(Gravity.TOP);
             addView(first, new LayoutParams(-1, -2));
@@ -120,15 +140,38 @@ public final class HushUi {
         }
         @Override protected void onMeasure(int w, int h) {
             int width = MeasureSpec.getSize(w);
-            boolean next = (getRootView().getWidth() > 0 ? getRootView().getWidth() : width + dp(getContext(), 40)) >= dp(getContext(), breakpointDp)
-                    && getResources().getConfiguration().fontScale <= 1.3f;
-            if (previousWidth != width || next != expanded) {
+            boolean next = width >= dp(getContext(), breakpointDp)
+                    && getResources().getConfiguration().fontScale < 1.5f;
+            int firstMax = getChildAt(0) instanceof Bounded ? ((Bounded)getChildAt(0)).maxDp : 0;
+            int secondMax = getChildAt(1) instanceof Bounded ? ((Bounded)getChildAt(1)).maxDp : 0;
+            if (previousWidth != width || next != expanded
+                    || firstMax != previousFirstMax || secondMax != previousSecondMax) {
+                previousFirstMax = firstMax; previousSecondMax = secondMax;
                 expanded = next; previousWidth = width;
                 setOrientation(expanded ? HORIZONTAL : VERTICAL);
                 for (int i = 0; i < 2; i++) {
-                    LayoutParams lp = new LayoutParams(expanded ? 0 : -1, -2, expanded ? 1 : 0);
-                    if (i == 1) { lp.topMargin = expanded ? 0 : dp(getContext(), 24);
-                        lp.setMarginStart(expanded ? dp(getContext(), 24) : 0); }
+                    View child = getChildAt(i);
+                    boolean boundedPair = getChildAt(0) instanceof Bounded
+                            && getChildAt(1) instanceof Bounded;
+                    int paneWidth = expanded ? 0 : -1;
+                    float weight = expanded ? 1 : 0;
+                    if (boundedPair) {
+                        Bounded first = (Bounded) getChildAt(0);
+                        Bounded second = (Bounded) getChildAt(1);
+                        ((Bounded) child).fillPane = true;
+                        if (expanded) {
+                            int available = width - dp(getContext(), gapDp);
+                            int total = first.maxDp + second.maxDp;
+                            int firstWidth = Math.min(dp(getContext(), first.maxDp),
+                                    Math.round(available * first.maxDp / (float) total));
+                            paneWidth = i == 0 ? firstWidth : Math.min(
+                                    dp(getContext(), second.maxDp), available - firstWidth);
+                            weight = 0;
+                        }
+                    }
+                    LayoutParams lp = new LayoutParams(paneWidth, -2, weight);
+                    if (i == 1) { lp.topMargin = expanded ? 0 : dp(getContext(), gapDp);
+                        lp.setMarginStart(expanded ? dp(getContext(), gapDp) : 0); }
                     getChildAt(i).setLayoutParams(lp);
                 }
             }

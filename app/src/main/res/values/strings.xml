@@ -137,7 +137,6 @@
 <string name="remote_search_suggestions">Remote search suggestions</string>
 <string name="search_suggestions_count_title">Search suggestions count</string>
 <string name="search_suggestions_count_summary">Number of past search suggestions to display</string>
-    <string name="profile_dialog_title">Profiles</string>
 <string name="profile_default_name">Personal</string>
 <string name="profile_switch_title">Profiles</string>
 <string name="profile_new">New profile</string>
@@ -1158,8 +1157,6 @@
     <string name="hush_breathe_or_meditate">Breathe or meditate</string>
     <string name="hush_breathe">Breathe</string>
     <string name="hush_meditate">Meditate</string>
-    <string name="nav_games">Games</string>
-    <string name="nav_breathe">Breathe</string>
     <string name="hush_quick_games">Quick games</string>
     <string name="hush_all_games">All games</string>
     <string name="hush_your_library">Your library</string>
