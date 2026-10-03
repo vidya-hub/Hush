@@ -12,7 +12,10 @@ def cmd(*args):return subprocess.check_output([adb,'-s',serial,*args],text=True)
 size=cmd('shell','wm','size');density=cmd('shell','wm','density');font=cmd('shell','settings','get','system','font_scale').strip()
 results=[]
 try:
- cmd('install','-r',str(repo/'app/build/outputs/apk/debug/Hush_5.3.1-arm64-v8a-debug.apk'))
+ metadata_path=repo/'app/build/outputs/apk/debug/output-metadata.json'
+ metadata=json.loads(metadata_path.read_text())
+ arm64=next(item for item in metadata['elements'] if any(f.get('value')=='arm64-v8a' for f in item['filters']))
+ cmd('install','-r',str(metadata_path.parent/arm64['outputFile']))
  cmd('install','-r',str(repo/'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'))
  for name,pixels,dpi in [('tablet-landscape','2560x1600','320'),('tablet-portrait','1600x2560','320'),('mobile','1080x2400','420')]:
   cmd('shell','am','force-stop',pkg);cmd('shell','wm','size',pixels);cmd('shell','wm','density',dpi);cmd('shell','settings','put','system','font_scale','1.0')

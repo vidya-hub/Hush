@@ -36,6 +36,18 @@ This only works while every rule below is followed.
    verified build to spot environment drift. Do not "fix" mismatches by
    tweaking random Gradle settings.
 
+## Next release: 1.0.3
+
+Continues the published `v1.0.2` version sequence with `baseVersionCode = 4`:
+401 (armeabi-v7a), 402 (x86), 403 (x86_64), and 404 (arm64-v8a/universal).
+Keep the existing signing certificate. Local APKs are release candidates until
+the matching tag and binaries are published.
+
+The earlier local 5.3.1 build mistakenly retained the upstream version code
+110804. Android will reject 1.0.3 as an ordinary update to that local build;
+export its data before any uninstall/reinstall. Published Hush 1.0.2 uses
+301–304 and can update normally to this release.
+
 ## Release checklist
 
 1. Bump `baseVersionCode` and `appVersionName` in `app/build.gradle`

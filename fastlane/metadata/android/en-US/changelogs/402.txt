@@ -1,0 +1,3 @@
+Responsive mobile and tablet layouts with full-page browsing and floating video.
+Smoother Snake, 2048, Sudoku and Make 24 gameplay.
+Correct Breathe Start, Pause and Resume controls.
