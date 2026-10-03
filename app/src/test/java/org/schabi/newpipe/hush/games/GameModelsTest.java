@@ -28,7 +28,7 @@ public class GameModelsTest {
         assertFalse(game.undo());
     }
 
-    @Test public void snakeRejectsReverseTurnAndPausesOnWall() {
+    @Test public void snakeRejectsReverseTurnAndWrapsAcrossWall() {
         final GameModels.Snake game = new GameModels.Snake(new Random(2));
         game.turn(3);
         assertEquals(1, game.nextDirection);
@@ -41,8 +41,9 @@ public class GameModelsTest {
         game.food = 200;
         game.paused = false;
         for (int i = 0; i < 8; i++) game.tick();
-        assertFalse(game.alive);
-        assertTrue(game.paused);
+        assertTrue(game.alive);
+        assertFalse(game.paused);
+        assertEquals(0, (int) game.body.peekLast());
     }
 
     @Test public void sudokuUsesAUniqueSolutionAndHintFillsIt() {
@@ -198,5 +199,31 @@ public class GameModelsTest {
             if (found >= limit) break;
         }
         return found;
+    }
+    @Test public void snakeWrapsEveryEdgeAndRestoresWrappedBody() {
+        int size=GameModels.Snake.SIZE;
+        for(int direction=0;direction<4;direction++){
+            var game=new GameModels.Snake(new Random(7));game.body.clear();
+            int head=direction==0?8:direction==1?8*size+size-1:direction==2?(size-1)*size+8:8*size;
+            int step=direction==0?-size:direction==1?1:direction==2?size:-1;
+            game.body.add(head-2*step);game.body.add(head-step);game.body.add(head);
+            game.direction=direction;game.nextDirection=direction;game.food=2;game.paused=false;
+            int expected=direction==0?(size-1)*size+8:direction==1?8*size:direction==2?8:8*size+size-1;
+            assertTrue(game.tick());assertEquals(expected,(int)game.body.peekLast());
+            assertTrue(game.alive);assertFalse(game.paused);
+            var restored=new GameModels.Snake(new Random(8));restored.load(game.save());
+            assertEquals(game.body.toString(),restored.body.toString());assertTrue(restored.paused);
+        }
+    }
+    @Test public void snakeWrappingCanEatAndStillDetectsSelfCollision() {
+        var game=new GameModels.Snake(new Random(3));game.body.clear();
+        game.body.add(15);game.body.add(16);game.body.add(17);
+        game.direction=1;game.nextDirection=1;game.food=0;game.paused=false;
+        assertTrue(game.tick());assertEquals(1,game.score);assertEquals(4,game.body.size());
+        game.food=200;
+        // Explicit seam collision: the wrapped destination is occupied by a non-tail segment.
+        game.body.clear();game.body.add(1);game.body.add(0);game.body.add(18);game.body.add(35);game.body.add(17);
+        game.direction=1;game.nextDirection=1;game.paused=false;game.alive=true;
+        assertFalse(game.tick());assertFalse(game.alive);assertTrue(game.paused);
     }
 }

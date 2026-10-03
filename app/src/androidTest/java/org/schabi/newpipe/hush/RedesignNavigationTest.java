@@ -42,6 +42,18 @@ public class RedesignNavigationTest {
             for(int i=0;i<shortcuts.getChildCount();i++){
                 android.widget.TextView shortcut=(android.widget.TextView)shortcuts.getChildAt(i);
                 assertEquals("Library labels fit without broken words",1,shortcut.getLineCount());
+                assertTrue("Library labels have their full text width",shortcut.getPaint().measureText(shortcut.getText().toString())
+                    <=shortcut.getWidth()-shortcut.getPaddingLeft()-shortcut.getPaddingRight());
+                var button=(com.google.android.material.button.MaterialButton)shortcut;
+                assertEquals("Consistent icon-to-label gap",org.schabi.newpipe.hush.ui.HushUi.dp(activity,8),button.getIconPadding());
+                if(i>0){
+                    View previous=shortcuts.getChildAt(i-1);
+                    assertEquals("Shortcut heights align",previous.getHeight(),shortcut.getHeight());
+                    if(((android.widget.LinearLayout)shortcuts).getOrientation()==android.widget.LinearLayout.HORIZONTAL){
+                        assertTrue(Math.abs(previous.getWidth()-shortcut.getWidth())<=1);
+                        assertEquals("Equal shortcut gutters",org.schabi.newpipe.hush.ui.HushUi.dp(activity,8),shortcut.getLeft()-previous.getRight());
+                    }
+                }
             }
             activity.findViewById(R.id.hush_nav_games).performClick();
         });settle();capture("games");

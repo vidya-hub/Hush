@@ -80,6 +80,8 @@ final class HomeDashboard {
         searchAnchor.setTag("home-search-anchor");
         final LinearLayout recents=horizontal();
         recents.setTag("home-recent-searches");
+        final android.widget.HorizontalScrollView recentScroll=new android.widget.HorizontalScrollView(context);
+        recentScroll.setVisibility(View.GONE);
         final LinearLayout playing=vertical();
         final TextView playingTitle=text(R.string.unknown_content,21,ink,true);
         playingTitle.setMaxLines(2);playingTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
@@ -108,6 +110,7 @@ final class HomeDashboard {
                     .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
                     .subscribe(queries->{
                         recents.removeAllViews();
+                        recentScroll.setVisibility(View.GONE);
                         if(org.schabi.newpipe.local.history.HistoryRecordManager.isIncognito(context))return;
                         for(String query:queries.subList(0,Math.min(queries.size(),2))){
                             MaterialButton chip=new MaterialButton(context);chip.setText(query);
@@ -116,7 +119,8 @@ final class HomeDashboard {
                             chip.setOnClickListener(v->actions.search(query));
                             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-2,-2);lp.setMarginEnd(dp(8));recents.addView(chip,lp);
                         }
-                    },error->recents.removeAllViews()));
+                        recentScroll.setVisibility(recents.getChildCount()==0?View.GONE:View.VISIBLE);
+                    },error->{recents.removeAllViews();recentScroll.setVisibility(View.GONE);}));
             }
             @Override protected void onDetachedFromWindow(){subscriptions.clear();holder.removeUiObserver(observer);removeCallbacks(observer);super.onDetachedFromWindow();}
         };
@@ -133,9 +137,30 @@ final class HomeDashboard {
             if(Math.abs(headline.getTextSize()/context.getResources().getDisplayMetrics().scaledDensity-size)>0.1f)headline.setTextSize(size);
         });
         hero.addView(headline,fullTop(20));searchGroup.addView(searchAnchor,fullTop(0));
-        android.widget.HorizontalScrollView recentScroll=new android.widget.HorizontalScrollView(context);
         recentScroll.setHorizontalScrollBarEnabled(false);recentScroll.addView(recents);searchGroup.addView(recentScroll,fullTop(12));
-        final LinearLayout shortcuts=horizontal();
+        final LinearLayout shortcuts=new LinearLayout(context){
+            @Override protected void onMeasure(int widthSpec,int heightSpec){
+                int available=MeasureSpec.getSize(widthSpec);
+                int minimum=0;
+                for(int i=0;i<getChildCount();i++){
+                    MaterialButton button=(MaterialButton)getChildAt(i);
+                    minimum=Math.max(minimum,(int)Math.ceil(button.getPaint().measureText(button.getText().toString()))+dp(24));
+                }
+                boolean stack=getResources().getConfiguration().fontScale>1.4f
+                        || available<minimum*3+dp(16);
+                setOrientation(stack?VERTICAL:HORIZONTAL);
+                for(int i=0;i<getChildCount();i++){
+                    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)getChildAt(i).getLayoutParams();
+                    int width=stack?LayoutParams.MATCH_PARENT:0;float weight=stack?0:1;
+                    int top=stack&&i>0?dp(8):0,start=!stack&&i>0?dp(8):0;
+                    if(lp.width!=width||lp.weight!=weight||lp.topMargin!=top||lp.getMarginStart()!=start){
+                        lp.width=width;lp.weight=weight;lp.topMargin=top;lp.setMarginStart(start);
+                        getChildAt(i).setLayoutParams(lp);
+                    }
+                }
+                super.onMeasure(widthSpec,heightSpec);
+            }
+        };
         shortcuts.setTag("home-library-shortcuts");
         int[] titles={R.string.action_history,R.string.library_saved,R.string.downloads};
         String[] icons={"history","bookmark","download"};Runnable[] callbacks={actions::history,actions::saved,actions::downloads};
@@ -143,13 +168,16 @@ final class HomeDashboard {
         if(stacked)shortcuts.setOrientation(LinearLayout.VERTICAL);
         for(int i=0;i<3;i++){
             MaterialButton button=new MaterialButton(context);button.setText(titles[i]);button.setIcon(org.schabi.newpipe.hush.ui.HushIcons.drawable(context,icons[i]));
-            HushUi.style(button,false);button.setIconGravity(MaterialButton.ICON_GRAVITY_TOP);button.setTextSize(13);button.setPadding(dp(8),dp(12),dp(8),dp(12));
+            HushUi.style(button,false);button.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_TOP);
+            button.setIconSize(dp(24));button.setIconPadding(dp(8));button.setGravity(Gravity.CENTER);
+            button.setTextSize(13);button.setIncludeFontPadding(false);button.setMaxLines(1);
+            button.setPadding(dp(8),dp(12),dp(8),dp(12));
             button.setMinHeight(dp(84));button.setMinimumHeight(dp(84));
             Runnable action=callbacks[i];button.setOnClickListener(v->action.run());
             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(stacked?-1:0,-2,stacked?0:1);
             if(i>0){if(stacked)lp.topMargin=dp(8);else lp.setMarginStart(dp(8));}shortcuts.addView(button,lp);
         }
-        searchGroup.addView(shortcuts,fullTop(20));searchGroup.addView(playing,fullTop(28));
+        searchGroup.addView(shortcuts,fullTop(16));searchGroup.addView(playing,fullTop(28));
         final org.schabi.newpipe.hush.ui.CompactPlaybackBar audio=new org.schabi.newpipe.hush.ui.CompactPlaybackBar(context);
         searchGroup.addView(audio,fullTop(24));
         HushUi.Bounded heroBound=new HushUi.Bounded(context,hero,560);

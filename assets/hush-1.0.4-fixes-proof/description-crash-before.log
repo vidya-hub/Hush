@@ -1,0 +1,98 @@
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest:
+INSTRUMENTATION_STATUS: test=repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.IllegalStateException: Fragment already added: DescriptionFragment{6a9910b} (e94248ed-6255-4614-bf29-84712d3a6fb8 id=0x1 tag=android:switcher:1:-1724546052)
+	at androidx.fragment.app.FragmentStore.addFragment(FragmentStore.java:93)
+	at androidx.fragment.app.FragmentManager.addFragment(FragmentManager.java:1733)
+	at androidx.fragment.app.BackStackRecord.executeOps(BackStackRecord.java:389)
+	at androidx.fragment.app.FragmentManager.executeOps(FragmentManager.java:2280)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2165)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:2109)
+	at androidx.fragment.app.FragmentManager.execSingleAction(FragmentManager.java:2002)
+	at androidx.fragment.app.BackStackRecord.commitNowAllowingStateLoss(BackStackRecord.java:323)
+	at androidx.fragment.app.FragmentPagerAdapter.finishUpdate(FragmentPagerAdapter.java:249)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest.lambda$repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce$2(TabAdapterRegressionTest.java:65)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2612)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: stream=
+Error in repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce(org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest):
+java.lang.IllegalStateException: Fragment already added: DescriptionFragment{6a9910b} (e94248ed-6255-4614-bf29-84712d3a6fb8 id=0x1 tag=android:switcher:1:-1724546052)
+	at androidx.fragment.app.FragmentStore.addFragment(FragmentStore.java:93)
+	at androidx.fragment.app.FragmentManager.addFragment(FragmentManager.java:1733)
+	at androidx.fragment.app.BackStackRecord.executeOps(BackStackRecord.java:389)
+	at androidx.fragment.app.FragmentManager.executeOps(FragmentManager.java:2280)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2165)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:2109)
+	at androidx.fragment.app.FragmentManager.execSingleAction(FragmentManager.java:2002)
+	at androidx.fragment.app.BackStackRecord.commitNowAllowingStateLoss(BackStackRecord.java:323)
+	at androidx.fragment.app.FragmentPagerAdapter.finishUpdate(FragmentPagerAdapter.java:249)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest.lambda$repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce$2(TabAdapterRegressionTest.java:65)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2612)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: test=repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 1.471
+There was 1 failure:
+1) repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce(org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest)
+java.lang.IllegalStateException: Fragment already added: DescriptionFragment{6a9910b} (e94248ed-6255-4614-bf29-84712d3a6fb8 id=0x1 tag=android:switcher:1:-1724546052)
+	at androidx.fragment.app.FragmentStore.addFragment(FragmentStore.java:93)
+	at androidx.fragment.app.FragmentManager.addFragment(FragmentManager.java:1733)
+	at androidx.fragment.app.BackStackRecord.executeOps(BackStackRecord.java:389)
+	at androidx.fragment.app.FragmentManager.executeOps(FragmentManager.java:2280)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2165)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:2109)
+	at androidx.fragment.app.FragmentManager.execSingleAction(FragmentManager.java:2002)
+	at androidx.fragment.app.BackStackRecord.commitNowAllowingStateLoss(BackStackRecord.java:323)
+	at androidx.fragment.app.FragmentPagerAdapter.finishUpdate(FragmentPagerAdapter.java:249)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest.lambda$repeatedInstantiationDuringTabRefreshAddsDescriptionOnlyOnce$2(TabAdapterRegressionTest.java:65)
+	at org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2612)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

@@ -1,0 +1,3 @@
+Fix the duplicate description-tab crash when opening or refreshing YouTube playback.
+Snake wraps across all four board edges with smooth motion and saved-round support.
+Tighter Home shortcut spacing with aligned icons and labels, and stacked cards for narrow or large-text windows.

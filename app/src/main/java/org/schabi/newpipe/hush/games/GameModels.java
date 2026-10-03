@@ -214,13 +214,8 @@ public final class GameModels {
             direction = turns.isEmpty() ? nextDirection : turns.removeFirst();
             nextDirection = turns.isEmpty() ? direction : turns.peekFirst();
             final int head = body.peekLast();
-            final int row = head / SIZE + (direction == 0 ? -1 : direction == 2 ? 1 : 0);
-            final int col = head % SIZE + (direction == 1 ? 1 : direction == 3 ? -1 : 0);
-            if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
-                alive = false;
-                paused = true;
-                return false;
-            }
+            final int row = (head / SIZE + (direction == 0 ? -1 : direction == 2 ? 1 : 0) + SIZE) % SIZE;
+            final int col = (head % SIZE + (direction == 1 ? 1 : direction == 3 ? -1 : 0) + SIZE) % SIZE;
             final int next = row * SIZE + col;
             final boolean eats = next == food;
             final int tail = body.peekFirst();
@@ -244,6 +239,11 @@ public final class GameModels {
                 body.removeFirst();
             }
             return true;
+        }
+
+        private static int wrappedDistance(int first, int second) {
+            int distance = Math.abs(first - second);
+            return Math.min(distance, SIZE - distance);
         }
 
         private void placeFood() {
@@ -286,8 +286,8 @@ public final class GameModels {
             for (int i = 0; i < cells.length(); i++) {
                 int cell = cells.optInt(i,-1);
                 if (cell < 0 || cell >= occupied.length || occupied[cell]
-                        || previous >= 0 && Math.abs(cell / SIZE - previous / SIZE)
-                        + Math.abs(cell % SIZE - previous % SIZE) != 1) return;
+                        || previous >= 0 && wrappedDistance(cell / SIZE, previous / SIZE)
+                        + wrappedDistance(cell % SIZE, previous % SIZE) != 1) return;
                 occupied[cell] = true;previous = cell;
             }
             int savedDirection = state.optInt("direction",1);

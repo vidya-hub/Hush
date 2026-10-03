@@ -1,0 +1,18 @@
+[
+  {
+    "window": "mobile",
+    "passed": true
+  },
+  {
+    "window": "tablet-landscape",
+    "passed": true
+  },
+  {
+    "window": "tablet-portrait",
+    "passed": true
+  },
+  {
+    "window": "mobile-large-text",
+    "passed": true
+  }
+]

@@ -181,4 +181,18 @@ public class GameSmoothnessTest {
         }finally{bitmap.recycle();}
     }
     private void touch(View view,long time,int action,float x,float y){MotionEvent event=MotionEvent.obtain(time,time,action,x,y,0);view.dispatchTouchEvent(event);event.recycle();}
+    @Test public void snakeCrossesTheEdgeWithoutAnimatingThroughTheBoard() throws Exception {
+        var snake=(GameScreens.SnakeScreen)open("snake");
+        ui(()->{
+            snake.reset();snake.model.body.clear();
+            snake.model.body.add(9*18+15);snake.model.body.add(9*18+16);snake.model.body.add(9*18+17);
+            snake.model.food=0;snake.start();
+            assertTrue(snake.model.alive);assertFalse(snake.model.paused);
+            assertEquals(9*18,(int)snake.model.body.peekLast());
+            assertEquals(17.5f,GameBoards.SnakeBoard.interpolateEdge(17,0,.5f),.001f);
+            assertEquals(-.5f,GameBoards.SnakeBoard.interpolateEdge(0,17,.5f),.001f);
+            snake.pause();
+        });
+        capture("snake-wrapped");
+    }
 }

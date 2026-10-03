@@ -11,11 +11,17 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TabAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
     private final FragmentManager fragmentManager;
+    // FragmentPagerAdapter finds committed fragments by tag, but pending adds are invisible.
+    // A tab requested twice during one populate pass must reuse its pending instance.
+    private final Map<Long, Object> pendingItems = new HashMap<>();
+    private boolean finishingUpdate;
 
     public TabAdapter(final FragmentManager fm) {
         // if changed to BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT => crash if enqueueing stream in
@@ -23,6 +29,30 @@ public class TabAdapter extends FragmentPagerAdapter {
         // "Cannot setMaxLifecycle for Fragment not attached to FragmentManager"
         super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);
         this.fragmentManager = fm;
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
+        final long id = getItemId(position);
+        final Object pending = pendingItems.get(id);
+        if (pending != null) return pending;
+        final Object item = super.instantiateItem(container, position);
+        pendingItems.put(id, item);
+        return item;
+    }
+
+    @Override
+    public void finishUpdate(@NonNull final ViewGroup container) {
+        // Fragment lifecycle callbacks can reenter ViewPager while this commit is executing.
+        if (finishingUpdate) return;
+        finishingUpdate = true;
+        try {
+            super.finishUpdate(container);
+        } finally {
+            finishingUpdate = false;
+            pendingItems.clear();
+        }
     }
 
     @NonNull

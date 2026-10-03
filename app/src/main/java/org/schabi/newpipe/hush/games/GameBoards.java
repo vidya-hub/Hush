@@ -222,16 +222,30 @@ final class GameBoards {
             for(int i=0;i<length;i++){
                 int position=current[i];float x=position%GameModels.Snake.SIZE,y=position/GameModels.Snake.SIZE;
                 if(i<previousLength&&fraction<1){
-                    int old=previous[i];x=old%GameModels.Snake.SIZE+(x-old%GameModels.Snake.SIZE)*fraction;
-                    y=old/GameModels.Snake.SIZE+(y-old/GameModels.Snake.SIZE)*fraction;
+                    int old=previous[i];x=interpolateEdge(old%GameModels.Snake.SIZE,x,fraction);
+                    y=interpolateEdge(old/GameModels.Snake.SIZE,y,fraction);
                 }
-                c.drawRoundRect(bounds.left+x*cell+1,bounds.top+y*cell+1,
-                        bounds.left+(x+1)*cell-1,bounds.top+(y+1)*cell-1,cell*.24f,cell*.24f,paint);
+                drawSegment(c,bounds,cell,x,y);
+                // Draw the clipped continuation at the opposite edge, never across the board.
+                if(x<0)drawSegment(c,bounds,cell,x+GameModels.Snake.SIZE,y);
+                else if(x>GameModels.Snake.SIZE-1)drawSegment(c,bounds,cell,x-GameModels.Snake.SIZE,y);
+                if(y<0)drawSegment(c,bounds,cell,x,y+GameModels.Snake.SIZE);
+                else if(y>GameModels.Snake.SIZE-1)drawSegment(c,bounds,cell,x,y-GameModels.Snake.SIZE);
             }
             if(model.paused||!model.alive){overlay(c,title,hint);
                 if(hold>0){paint.setColor(accent);c.drawRect(getWidth()*.2f,getHeight()*.65f,
                         getWidth()*(.2f+.6f*hold),getHeight()*.65f+6,paint);}}
             c.restore();
+        }
+        static float interpolateEdge(float from,float to,float fraction){
+            float delta=to-from;
+            if(delta>GameModels.Snake.SIZE/2f)delta-=GameModels.Snake.SIZE;
+            else if(delta<-GameModels.Snake.SIZE/2f)delta+=GameModels.Snake.SIZE;
+            return from+delta*fraction;
+        }
+        private void drawSegment(Canvas canvas,RectF bounds,float cell,float x,float y){
+            canvas.drawRoundRect(bounds.left+x*cell+1,bounds.top+y*cell+1,
+                    bounds.left+(x+1)*cell-1,bounds.top+(y+1)*cell-1,cell*.24f,cell*.24f,paint);
         }
     }
     static final class SudokuBoard extends Square {
