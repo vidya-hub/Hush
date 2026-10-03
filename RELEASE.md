@@ -36,15 +36,15 @@ This only works while every rule below is followed.
    verified build to spot environment drift. Do not "fix" mismatches by
    tweaking random Gradle settings.
 
-## Next release: 1.0.4
+## Next release: 1.0.5
 
-Continues the published `v1.0.2` version sequence with `baseVersionCode = 5`:
-501 (armeabi-v7a), 502 (x86), 503 (x86_64), and 504 (arm64-v8a/universal).
+Continues the published `v1.0.2` version sequence with `baseVersionCode = 6`:
+601 (armeabi-v7a), 602 (x86), 603 (x86_64), and 604 (arm64-v8a/universal).
 Keep the existing signing certificate. Local APKs are release candidates until
 the matching tag and binaries are published.
 
 The earlier local 5.3.1 build mistakenly retained the upstream version code
-110804. Android will reject 1.0.4 as an ordinary update to that local build;
+110804. Android will reject 1.0.5 as an ordinary update to that local build;
 export its data before any uninstall/reinstall. Published Hush 1.0.2 uses
 301–304 and can update normally to this release.
 

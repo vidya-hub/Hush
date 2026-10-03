@@ -1,0 +1,4 @@
+Fix the Watch description-tab crash after interrupted fragment updates.
+Batch tab replacement, coordinate additions/removals, and defer refreshes during attachment.
+Remove stale restored tabs and prevent replaying a partially executed transaction.
+Verified on Android 16 with video changes, rotation, activity recreation and floating playback.

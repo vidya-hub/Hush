@@ -9,6 +9,9 @@ a full-featured, gesture-driven player stays one tap away.
 
 These screenshots are fresh captures from the app on a headless Android emulator. Mobile is 411×914dp; tablets are 1280×800dp landscape and 800×1280dp portrait. The Watch and floating-video screenshots show real YouTube playback; separate local-fixture checks verify decoder continuity without relying on a live stream.
 
+Hush 1.0.5 fixes the interrupted Watch-tab transaction crash reported in 1.0.4.
+See [the diagnosis and Android 16 verification](FIXES_1_0_5.md).
+
 ## Mobile screenshots
 
 | Home | Search with floating video | Watch |

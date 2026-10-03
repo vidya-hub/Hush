@@ -1,0 +1,47 @@
+[
+  {
+    "file": "Hush_1.0.5-universal-release.apk",
+    "version": "1.0.5",
+    "versionCode": 604,
+    "size": 66860893,
+    "sha256": "af3df03f20efbc9bf98491d200d01d7d0ef1986708f19f22d95db874c697e5fc",
+    "certificateSha256": "9f01305295f8808bcda3c7eeea8f7593a9898441e65db787ded6d7bfad7a239d",
+    "packageName": "com.vidsagar.hush"
+  },
+  {
+    "file": "Hush_1.0.5-armeabi-v7a-release.apk",
+    "version": "1.0.5",
+    "versionCode": 601,
+    "size": 41496714,
+    "sha256": "9705ee973b47960fc21e72504c45801ebfa1ff644e1ae90894a4d96564f08c34",
+    "certificateSha256": "9f01305295f8808bcda3c7eeea8f7593a9898441e65db787ded6d7bfad7a239d",
+    "packageName": "com.vidsagar.hush"
+  },
+  {
+    "file": "Hush_1.0.5-x86_64-release.apk",
+    "version": "1.0.5",
+    "versionCode": 603,
+    "size": 42309818,
+    "sha256": "ff1d314418653271a44d38513c844ff12a61a1f94d90c373a51c5bf57b4bbd7e",
+    "certificateSha256": "9f01305295f8808bcda3c7eeea8f7593a9898441e65db787ded6d7bfad7a239d",
+    "packageName": "com.vidsagar.hush"
+  },
+  {
+    "file": "Hush_1.0.5-x86-release.apk",
+    "version": "1.0.5",
+    "versionCode": 602,
+    "size": 41789022,
+    "sha256": "f35ee6e5998b2fae8ed4cd72a819d72afcf2480b80cab9022fe0fa876996b142",
+    "certificateSha256": "9f01305295f8808bcda3c7eeea8f7593a9898441e65db787ded6d7bfad7a239d",
+    "packageName": "com.vidsagar.hush"
+  },
+  {
+    "file": "Hush_1.0.5-arm64-v8a-release.apk",
+    "version": "1.0.5",
+    "versionCode": 604,
+    "size": 41767034,
+    "sha256": "f6f58090e760c61fb33a985eee5e4fc0728b1a7a3efe0bc1d4a56b90862891f0",
+    "certificateSha256": "9f01305295f8808bcda3c7eeea8f7593a9898441e65db787ded6d7bfad7a239d",
+    "packageName": "com.vidsagar.hush"
+  }
+]

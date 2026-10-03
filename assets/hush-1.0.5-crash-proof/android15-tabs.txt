@@ -1,0 +1,6 @@
+
+org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest:......
+
+Time: 9.153
+
+OK (6 tests)

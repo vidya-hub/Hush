@@ -25,6 +25,11 @@ across the board.
 
 ## YouTube playback crash
 
+**Superseded by [1.0.5](FIXES_1_0_5.md).** The pending-instance cache below
+covered duplicate instantiation, but the user subsequently reproduced a
+transaction-replay crash in 1.0.4. The broader lifecycle fix and Android 16
+validation are documented in the follow-up.
+
 The user report's `Fragment already added: DescriptionFragment` was reproduced
 by requesting the description tab twice before `finishUpdate` commits it.
 `FragmentPagerAdapter` cannot find a pending add by its stable tag. TabAdapter

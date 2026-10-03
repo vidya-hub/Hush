@@ -1,0 +1,7 @@
+
+org.schabi.newpipe.hush.TabletLocalPlaybackTest:.
+org.schabi.newpipe.hush.RedesignPlaybackTest:.
+
+Time: 38.435
+
+OK (2 tests)

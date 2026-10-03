@@ -1,0 +1,13 @@
+{
+  "version": "1.0.5",
+  "versionCode": 604,
+  "androidVersion": 16,
+  "api": 36,
+  "device": "headless Pixel Tablet emulator-5560",
+  "descriptionSelected": true,
+  "playbackState": "PLAYING",
+  "observedPlaybackPosition": [
+    "1:40"
+  ],
+  "matchingFragmentCrashLogEntries": 0
+}

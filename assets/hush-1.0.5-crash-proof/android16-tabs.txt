@@ -1,0 +1,7 @@
+
+org.schabi.newpipe.fragments.detail.TabAdapterRegressionTest:......
+org.schabi.newpipe.fragments.detail.WatchTabsLifecycleTest:.
+
+Time: 21.069
+
+OK (7 tests)

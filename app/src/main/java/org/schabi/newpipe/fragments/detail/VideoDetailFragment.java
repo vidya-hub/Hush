@@ -479,6 +479,9 @@ public final class VideoDetailFragment
         if (activity instanceof org.schabi.newpipe.MainActivity) {
             ((org.schabi.newpipe.MainActivity)activity).getHushChrome().hideVideo();
         }
+        if (pageAdapter != null) {
+            pageAdapter.dispose();
+        }
         super.onDestroyView();
         tabletMetadata=null;metadataOriginalParent=null;
         binding = null;
@@ -796,6 +799,11 @@ public final class VideoDetailFragment
         pageAdapter = new TabAdapter(getChildFragmentManager());
         binding.viewPager.setAdapter(pageAdapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
+        pageAdapter.setTabsChangedListener(() -> {
+            binding.viewPager.setVisibility(pageAdapter.getCount() == 0 ? View.GONE : View.VISIBLE);
+            updateTabIconsAndContentDescriptions();
+            updateTabLayoutVisibility();
+        });
         updateStickyPlayerMode();
 
         binding.detailThumbnailRootLayout.requestFocus();
@@ -1236,57 +1244,37 @@ public final class VideoDetailFragment
         if (pageAdapter.getCount() != 0) {
             selectedTabTag = pageAdapter.getItemTitle(binding.viewPager.getCurrentItem());
         }
-        pageAdapter.clearAllItems();
-        tabIcons.clear();
-        tabContentDescriptions.clear();
-
-        if (shouldShowComments()) {
-            try {
-                pageAdapter.addFragment(
-                        EmptyFragment.newInstance(false), COMMENTS_TAB_TAG);
+        pageAdapter.beginUpdates();
+        try {
+            pageAdapter.clearAllItems();
+            tabIcons.clear();
+            tabContentDescriptions.clear();
+            if (shouldShowComments()) {
+                pageAdapter.addFragment(EmptyFragment.newInstance(false), COMMENTS_TAB_TAG);
                 tabIcons.add(R.drawable.ic_comment);
                 tabContentDescriptions.add(R.string.comments_tab_description);
-            } catch (final Exception e) {
-                if (DEBUG) {
-                    Log.e(TAG, "initTabs() error adding comments tab", e);
-                }
             }
-        }
-
-        if (showRelatedItems && binding.relatedItemsLayout == null) {
-            // temp empty fragment. will be updated in handleResult
-            try {
+            if (showRelatedItems && binding.relatedItemsLayout == null) {
                 pageAdapter.addFragment(EmptyFragment.newInstance(false), RELATED_TAB_TAG);
                 tabIcons.add(R.drawable.ic_art_track);
                 tabContentDescriptions.add(R.string.related_items_tab_description);
-            } catch (IllegalStateException e) {
-                // Fragment already added
-                Log.e(TAG, "initTabs() error adding related tab", e);
             }
-        }
-
-        if (showDescription) {
-            // temp empty fragment. will be updated in handleResult
-            try {
+            if (showDescription) {
                 pageAdapter.addFragment(EmptyFragment.newInstance(false), DESCRIPTION_TAB_TAG);
                 tabIcons.add(R.drawable.ic_description);
                 tabContentDescriptions.add(R.string.description_tab_description);
-            } catch (IllegalStateException e) {
-                // Fragment already added
-                Log.e(TAG, "initTabs() error adding description tab", e);
             }
+            if (shouldShowSponsorBlock()) {
+                pageAdapter.addFragment(EmptyFragment.newInstance(false), SPONSOR_BLOCK_TAB_TAG);
+                tabIcons.add(R.drawable.ic_sponsor_block_enable);
+                tabContentDescriptions.add(R.string.sponsor_block);
+            }
+            pageAdapter.addFragment(new org.schabi.newpipe.hush.ui.WatchQueueFragment(), "hush-queue");
+            tabIcons.add(R.drawable.ic_list);
+            tabContentDescriptions.add(R.string.title_activity_play_queue);
+        } finally {
+            pageAdapter.endUpdates();
         }
-        if (shouldShowSponsorBlock()) {
-            // temp empty fragment. will be updated in handleResult
-            pageAdapter.addFragment(EmptyFragment.newInstance(false), SPONSOR_BLOCK_TAB_TAG);
-            tabIcons.add(R.drawable.ic_sponsor_block_enable);
-            tabContentDescriptions.add(R.string.sponsor_block);
-        }
-
-        pageAdapter.addFragment(new org.schabi.newpipe.hush.ui.WatchQueueFragment(), "hush-queue");
-        tabIcons.add(R.drawable.ic_list);
-        tabContentDescriptions.add(R.string.title_activity_play_queue);
-        pageAdapter.notifyDataSetUpdate();
         binding.viewPager.setVisibility(pageAdapter.getCount() == 0 ? View.GONE : View.VISIBLE);
 
         if (pageAdapter.getCount() >= 2) {
@@ -1318,79 +1306,83 @@ public final class VideoDetailFragment
     }
 
     private void updateTabs(@NonNull final StreamInfo info) {
-        if (info.isRoundPlayStream() || (showRelatedItems && info.isSupportRelatedItems())) {
-            try {
-                if (binding.relatedItemsLayout == null) { // phone
-                    pageAdapter.updateItem(RELATED_TAB_TAG, RelatedItemsFragment.getInstance(info));
-                } else { // tablet + TV
-                    getChildFragmentManager().beginTransaction()
-                            .replace(R.id.relatedItemsLayout, RelatedItemsFragment.getInstance(info))
-                            .commitAllowingStateLoss();
-                    binding.relatedItemsLayout.setVisibility(
-                            isPlayerAvailable() && player.isFullscreen() ? View.GONE : View.VISIBLE);
+        pageAdapter.beginUpdates();
+        try {
+            if (info.isRoundPlayStream() || (showRelatedItems && info.isSupportRelatedItems())) {
+                try {
+                    if (binding.relatedItemsLayout == null) { // phone
+                        pageAdapter.updateItem(RELATED_TAB_TAG, RelatedItemsFragment.getInstance(info));
+                    } else { // tablet + TV
+                        getChildFragmentManager().beginTransaction()
+                                .replace(R.id.relatedItemsLayout, RelatedItemsFragment.getInstance(info))
+                                .commitAllowingStateLoss();
+                        binding.relatedItemsLayout.setVisibility(
+                                isPlayerAvailable() && player.isFullscreen() ? View.GONE : View.VISIBLE);
+                    }
+                } catch (IllegalStateException e) {
+                    // Fragment already added
+                    Log.e(TAG, "updateTabs() error updating related tab", e);
                 }
-            } catch (IllegalStateException e) {
-                // Fragment already added
-                Log.e(TAG, "updateTabs() error updating related tab", e);
             }
-        }
-        if (!info.isSupportRelatedItems()){
-            int index = pageAdapter.getItemPositionByTitle(RELATED_TAB_TAG);
-            if(index != -1){
-                pageAdapter.removeItem(index);
-                tabIcons.remove(Integer.valueOf(R.drawable.ic_art_track));
-                tabContentDescriptions.remove(Integer.valueOf(R.string.related_items_tab_description));
-            }
-        }
-
-        if(!info.isSupportComments() || !shouldShowComments()){
-            int index = pageAdapter.getItemPositionByTitle(COMMENTS_TAB_TAG);
-            if(index != -1){
-                pageAdapter.removeItem(index);
-                tabIcons.remove(Integer.valueOf(R.drawable.ic_comment));
-                tabContentDescriptions.remove(Integer.valueOf(R.string.comments_tab_description));
-            }
-        } else{
-            int index = pageAdapter.getItemPositionByTitle(COMMENTS_TAB_TAG);
-            if (index == -1 || !(pageAdapter.getItem(index) instanceof CommentsFragmentContainer)) {
-                pageAdapter.updateItem(COMMENTS_TAB_TAG, CommentsFragmentContainer.getInstance(serviceId, url, title));
-            } else {
-                Fragment existing = pageAdapter.getItem(index);
-                ((CommentsFragmentContainer) existing).update(serviceId, url, title);
-            }
-        }
-
-        if (showDescription) {
-            pageAdapter.updateItem(DESCRIPTION_TAB_TAG, new DescriptionFragment(info));
-        }
-
-        if (shouldShowSponsorBlock()) {
-            final boolean isLiveStream = info.getStreamType() == StreamType.LIVE_STREAM;
-            if (isLiveStream) {
-                // exclude for live streams or BiliBili multi-part videos
-                int index = pageAdapter.getItemPositionByTitle(SPONSOR_BLOCK_TAB_TAG);
+            if (!info.isSupportRelatedItems()){
+                int index = pageAdapter.getItemPositionByTitle(RELATED_TAB_TAG);
                 if(index != -1){
                     pageAdapter.removeItem(index);
-                    tabIcons.remove(Integer.valueOf(R.drawable.ic_sponsor_block_enable));
-                    tabContentDescriptions.remove(Integer.valueOf(R.string.sponsor_block));
+                    tabIcons.remove(Integer.valueOf(R.drawable.ic_art_track));
+                    tabContentDescriptions.remove(Integer.valueOf(R.string.related_items_tab_description));
                 }
-            } else {
-                final SponsorBlockFragment sponsorBlockFragment = new SponsorBlockFragment(info);
-                sponsorBlockFragment.setListener(this);
-
-                pageAdapter.updateItem(SPONSOR_BLOCK_TAB_TAG, sponsorBlockFragment);
-
-                if (currentSponsorBlockMode == null) {
-                    currentSponsorBlockMode = SponsorBlockMode.ENABLED;
-                }
-                sponsorBlockFragment.setSponsorBlockMode(currentSponsorBlockMode);
             }
-        }
 
+            if(!info.isSupportComments() || !shouldShowComments()){
+                int index = pageAdapter.getItemPositionByTitle(COMMENTS_TAB_TAG);
+                if(index != -1){
+                    pageAdapter.removeItem(index);
+                    tabIcons.remove(Integer.valueOf(R.drawable.ic_comment));
+                    tabContentDescriptions.remove(Integer.valueOf(R.string.comments_tab_description));
+                }
+            } else{
+                int index = pageAdapter.getItemPositionByTitle(COMMENTS_TAB_TAG);
+                if (index == -1 || !(pageAdapter.getItem(index) instanceof CommentsFragmentContainer)) {
+                    pageAdapter.updateItem(COMMENTS_TAB_TAG, CommentsFragmentContainer.getInstance(serviceId, url, title));
+                } else {
+                    Fragment existing = pageAdapter.getItem(index);
+                    ((CommentsFragmentContainer) existing).update(serviceId, url, title);
+                }
+            }
+
+            if (showDescription) {
+                pageAdapter.updateItem(DESCRIPTION_TAB_TAG, new DescriptionFragment(info));
+            }
+
+            if (shouldShowSponsorBlock()) {
+                final boolean isLiveStream = info.getStreamType() == StreamType.LIVE_STREAM;
+                if (isLiveStream) {
+                    // exclude for live streams or BiliBili multi-part videos
+                    int index = pageAdapter.getItemPositionByTitle(SPONSOR_BLOCK_TAB_TAG);
+                    if(index != -1){
+                        pageAdapter.removeItem(index);
+                        tabIcons.remove(Integer.valueOf(R.drawable.ic_sponsor_block_enable));
+                        tabContentDescriptions.remove(Integer.valueOf(R.string.sponsor_block));
+                    }
+                } else {
+                    final SponsorBlockFragment sponsorBlockFragment = new SponsorBlockFragment(info);
+                    sponsorBlockFragment.setListener(this);
+
+                    pageAdapter.updateItem(SPONSOR_BLOCK_TAB_TAG, sponsorBlockFragment);
+
+                    if (currentSponsorBlockMode == null) {
+                        currentSponsorBlockMode = SponsorBlockMode.ENABLED;
+                    }
+                    sponsorBlockFragment.setSponsorBlockMode(currentSponsorBlockMode);
+                }
+            }
+
+        } finally {
+            pageAdapter.endUpdates();
+        }
         binding.viewPager.setVisibility(pageAdapter.getCount() == 0 ? View.GONE : View.VISIBLE);
         // make sure the tab layout is visible
         updateTabLayoutVisibility();
-        pageAdapter.notifyDataSetUpdate();
         updateTabIconsAndContentDescriptions();
     }
 
